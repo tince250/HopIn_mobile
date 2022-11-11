@@ -30,13 +30,8 @@
     <string name="regPlates">reg plates: </string>
     <string name="modelExmp">Ford mustang</string>
     <string name="logOutBtn">Log out</string>
-
-
-
-
-
-
-
-
-
+    <string name="inbox_nav">Inbox</string>
+    <string name="home_nav">Home</string>
+    <string name="profile_nav">Profile</string>
+    <string name="history_nav">History</string>
 </resources>
