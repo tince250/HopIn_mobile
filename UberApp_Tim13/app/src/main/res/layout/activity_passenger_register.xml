@@ -4,13 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".PassengerRegisterActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        tools:layout_editor_absoluteX="188dp"
-        tools:layout_editor_absoluteY="348dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginHorizontal="40dp"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="@string/registerTitle"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:hint="@string/inputName"
+            android:inputType="textPersonName"
+            android:padding="10sp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/editTextSurName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppinsbold"
+            android:hint="@string/inputSurname"
+            android:inputType="textPersonName"
+            android:padding="10sp"
+            android:textSize="16sp" />
+        />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppinsbold"
+            android:hint="@string/inputEmail"
+            android:inputType="textEmailAddress"
+            android:padding="10sp"
+            android:textSize="16sp" />
+        />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppinsbold"
+            android:hint="@string/inputPassword"
+            android:inputType="textPassword"
+            android:padding="10sp"
+            android:textSize="16sp" />
+        />
+
+        <EditText
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppinsbold"
+            android:hint="@string/confirmPassword"
+            android:inputType="textPassword"
+            android:padding="10sp"
+            android:textSize="16sp" />
+        />
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
