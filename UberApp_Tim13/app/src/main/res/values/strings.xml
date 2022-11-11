@@ -16,4 +16,8 @@
     <string name="inputCity">City</string>
     <string name="inputPhone">Telephone</string>
     <string name="inputAreaNum">+381</string>
+    <string name="inbox_nav">Inbox</string>
+    <string name="home_nav">Home</string>
+    <string name="profile_nav">Profile</string>
+    <string name="history_nav">History</string>
 </resources>
