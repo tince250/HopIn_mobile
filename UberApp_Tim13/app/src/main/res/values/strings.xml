@@ -2,9 +2,12 @@
     <string name="app_name">UberApp_Tim13</string>
     <string name="email">email</string>
     <string name="password">password</string>
-    <string name="loginBtn">LOGIN</string>
+    <string name="loginBtn">Log in</string>
     <string name="welcome">Welcome!</string>
-    <string name="register">REGISTER</string>
-    <string name="accountBtn">ACCOUNT</string>
-    <string name="inboxBtn">INBOX</string>
+    <string name="register">Register</string>
+    <string name="accountBtn">Account</string>
+    <string name="inboxBtn">Inbox</string>
+    <string name="loginTitle">Welcome back!</string>
+    <string name="forgottenPassword">Forgot password?</string>
+    <string name="noAccount">New and wanna hop in?</string>
 </resources>
