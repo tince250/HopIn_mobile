@@ -7,4 +7,8 @@
     <string name="register">REGISTER</string>
     <string name="accountBtn">ACCOUNT</string>
     <string name="inboxBtn">INBOX</string>
+    <string name="inbox_nav">Inbox</string>
+    <string name="home_nav">Home</string>
+    <string name="profile_nav">Profile</string>
+    <string name="history_nav">History</string>
 </resources>
