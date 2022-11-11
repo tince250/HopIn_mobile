@@ -22,7 +22,7 @@
 
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -152,7 +152,7 @@
 
     </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,6 +164,8 @@
             android:paddingVertical="5sp"
             android:text="@string/register"
             android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/solid_blue"
             />
 
 
