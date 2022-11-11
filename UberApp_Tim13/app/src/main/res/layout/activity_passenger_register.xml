@@ -9,10 +9,10 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/registerLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="60dp"
 
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,7 @@
 
         <EditText
             android:id="@+id/editTextName"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
@@ -47,7 +47,7 @@
 
         <EditText
             android:id="@+id/editTextSurName"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -57,11 +57,11 @@
             android:inputType="textPersonName"
             android:padding="10sp"
             android:textSize="16sp" />
-        />
+
 
         <EditText
             android:id="@+id/editTextEmail"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -71,11 +71,11 @@
             android:inputType="textEmailAddress"
             android:padding="10sp"
             android:textSize="16sp" />
-        />
+
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -85,11 +85,11 @@
             android:inputType="textPassword"
             android:padding="10sp"
             android:textSize="16sp" />
-        />
+
 
         <EditText
             android:id="@+id/editTextConfirmPassword"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -99,7 +99,73 @@
             android:inputType="textPassword"
             android:padding="10sp"
             android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppinsbold"
+            android:hint="@string/inputCity"
+            android:inputType="text"
+            android:padding="10sp"
+            android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:id="@+id/telephoneLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editTextAreaNum"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/inputAreaNum"
+            android:fontFamily="@font/poppinsbold"
+            android:background="@drawable/border"
+            android:backgroundTint="#D9D9D9"
+            android:paddingHorizontal="10sp"
+            />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/border"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/poppinsbold"
+            android:hint="@string/inputPhone"
+            android:padding="10sp"
+            android:textSize="16sp" />
         />
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/poppinsbold"
+            android:paddingHorizontal="25sp"
+            android:paddingVertical="5sp"
+            android:text="@string/register"
+            android:textSize="16sp"
+            />
+
 
     </LinearLayout>
 
