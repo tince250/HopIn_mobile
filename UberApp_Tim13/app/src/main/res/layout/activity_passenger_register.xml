@@ -127,11 +127,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/editTextAreaNum"
+        <Spinner
+            android:id="@+id/spinnerAreaNum"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="@string/inputAreaNum"
             android:fontFamily="@font/poppinsbold"
             android:background="@drawable/border"
             android:backgroundTint="#D9D9D9"
@@ -166,6 +165,7 @@
             android:textSize="16sp"
             android:textAllCaps="false"
             android:backgroundTint="@color/solid_blue"
+            android:textColor="@color/white"
             />
 
 
