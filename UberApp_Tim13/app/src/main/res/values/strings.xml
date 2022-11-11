@@ -1,11 +1,42 @@
 <resources>
     <string name="app_name">UberApp_Tim13</string>
-    <string name="email">email</string>
+    <string name="email">email: </string>
+    <string name="emailExmp">example@gmail.com </string>
     <string name="password">password</string>
     <string name="loginBtn">LOGIN</string>
     <string name="welcome">Welcome!</string>
     <string name="register">REGISTER</string>
     <string name="accountBtn">ACCOUNT</string>
     <string name="inboxBtn">INBOX</string>
+    <string name="driver">driver</string>
     <string name="driverAccountTitle">Account</string>
+    <string name="driverAccountName">Nikola Savic</string>
+    <string name="accountSettingsBtn">Account settings</string>
+    <string name="statisticsBtn">Statistics</string>
+    <string name="reportsBtn">Reports</string>\
+    <string name="contactInfo">Contact info  </string>
+    <string name="telephone">phone number: </string>
+    <string name="telephoneExmp">0633324561</string>
+    <string name="locationInfo">Location info</string>
+    <string name="city">city: </string>
+    <string name="street">street: </string>
+    <string name="cityExmp">Novi Sad</string>
+    <string name="houseNumber">house number: </string>
+    <string name="streetExmp">Bulevar oslobodjenja</string>
+    <string name="houseNumberExmp">5/1</string>
+    <string name="vehicleInfo">Vehicle info</string>
+    <string name="model">model: </string>
+    <string name="regPlatesExmp">K61-A-435</string>
+    <string name="regPlates">reg plates: </string>
+    <string name="modelExmp">Ford mustang</string>
+    <string name="logOutBtn">Log out</string>
+
+
+
+
+
+
+
+
+
 </resources>
