@@ -16,6 +16,7 @@ public class DriverAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Account");
         setContentView(R.layout.activity_driver_account);
 
         /*final Button button = (Button) findViewById(R.id.statisticsBtn);

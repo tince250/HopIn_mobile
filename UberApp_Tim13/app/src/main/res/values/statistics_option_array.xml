@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="area_number_options">
+    <string-array name="statistic_options">
         <item>+381</item>
         <item>+387</item>
         <item>+382</item>
