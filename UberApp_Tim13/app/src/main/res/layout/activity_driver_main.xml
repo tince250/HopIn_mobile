@@ -54,7 +54,8 @@
             app:cornerRadius="10dp"
             app:icon="@drawable/ic_car"
             app:iconGravity="textStart"
-            app:iconSize="25dp" />
+            app:iconSize="25dp"
+            app:iconTint="@color/white"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_set_dest"
