@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/driver"
                     android:backgroundTint="@color/gray"
-                    android:text="@string/changePassword"
+                    android:text="@string/accountSettingsTitle"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppinsbold"
                     android:textFontWeight="700"

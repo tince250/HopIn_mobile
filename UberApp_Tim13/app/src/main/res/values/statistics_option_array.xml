@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="statistic_options">
-        <item>+381</item>
-        <item>+387</item>
-        <item>+382</item>
-        <item>+383</item>
+        <item>Distance traveled</item>
+        <item>Earnings</item>
+        <item>Rejected rides</item>
+        <item>Accepted rides</item>
     </string-array>
 </resources>

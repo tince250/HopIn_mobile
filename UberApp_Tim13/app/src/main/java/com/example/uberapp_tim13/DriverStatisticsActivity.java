@@ -1,6 +1,8 @@
 package com.example.uberapp_tim13;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +14,10 @@ public class DriverStatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Statistics");
         ActionBar actionBar = getSupportActionBar();
-
-        // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        setSpinner();
+
         setContentView(R.layout.activity_driver_statistics);
     }
 
@@ -46,6 +49,14 @@ public class DriverStatisticsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void setSpinner() {
+        Spinner areaNumSpinner = findViewById(R.id.spinnerStatisticsOptions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.statistic_options));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        areaNumSpinner.setAdapter(adapter);
     }
 
 }

@@ -30,16 +30,21 @@
             android:paddingEnd="0dp"
             android:paddingTop="40dp"/>
 
-        <!--<Spinner
-            android:id="@+id/spinnerAreaNum"
+        <Spinner
+            android:id="@+id/spinnerStatisticsOptions"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:fontFamily="@font/poppinsbold"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsregular"
             android:background="@drawable/border"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
             android:paddingHorizontal="10sp"
-            />-->
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            />
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Distance traveld"
@@ -49,7 +54,7 @@
             android:layout_marginTop="20dp"
             android:paddingHorizontal="10sp"
             android:paddingStart="20dp"
-            android:paddingEnd="20dp"/>
+            android:paddingEnd="20dp"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
