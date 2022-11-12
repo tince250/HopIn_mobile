@@ -78,6 +78,10 @@ public class PassengerMainActivity extends AppCompatActivity{
         return true;
     }
 
+    public void addStops(View v) {
+        Toast.makeText(this, "add stops dialog should pop up", Toast.LENGTH_LONG);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();

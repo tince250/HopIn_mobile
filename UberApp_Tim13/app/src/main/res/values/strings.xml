@@ -25,5 +25,10 @@
     <string name="current_ride">Current ride</string>
     <string name="set_destination">Set destination</string>
     <string name="live">live</string>
+    <string name="tell_us">Tell us about the ride:</string>
+    <string name="pick_up">Pick up location</string>
+    <string name="where_to">Where to?</string>
+    <string name="pick_up_time">Pick up time</string>
+    <string name="add_stops">add in-between stops</string>
 </resources>
 
