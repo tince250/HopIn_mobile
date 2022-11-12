@@ -6,9 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".DriverAccountActivity">
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/ksks"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/accountView">
 
         <LinearLayout
             android:id="@+id/accountLinearLayout"
@@ -21,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <!--<TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/driverAccountTitle"
@@ -30,7 +36,7 @@
                 android:paddingStart="20sp"
                 android:paddingVertical="15sp"
                 android:textColor="@color/black"
-                android:background="@drawable/title_border"/>
+                android:background="@drawable/title_border"/>-->
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -115,14 +121,14 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:text="@string/statisticsBtn"
                         android:backgroundTint="@color/gray"
-                        android:fontFamily="@font/poppinsbold"
-                        android:textSize="14sp"
-                        android:textAllCaps="false"
                         android:drawableLeft="@drawable/statistics"
+                        android:fontFamily="@font/poppinsbold"
+                        android:onClick="onClickStatistics"
+                        android:text="@string/statisticsBtn"
+                        android:textAllCaps="false"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="14sp" />
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -442,6 +448,7 @@
         </LinearLayout>
 
     </ScrollView>
+    </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

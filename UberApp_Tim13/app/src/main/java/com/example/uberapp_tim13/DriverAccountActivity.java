@@ -3,10 +3,14 @@ package com.example.uberapp_tim13;
 import static android.app.PendingIntent.getActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.uberapp_tim13.fragments.DriverStatisticsFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
@@ -18,14 +22,10 @@ public class DriverAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Account");
         setContentView(R.layout.activity_driver_account);
+    }
 
-        /*final Button button = (Button) findViewById(R.id.statisticsBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                FragmentTransition.to(DriverStatisticsFragment.newInstance(), this, false, R.id.statisticsLayout);
-            }
-        });*/
-        //FragmentTransition.to(DriverStatisticsFragment.newInstance(), this, false, R.id.accountLinearLayout);
+    public void onClickStatistics(View v){
+        startActivity(new Intent(DriverAccountActivity.this, DriverStatisticsActivity.class));
     }
 
     @Override

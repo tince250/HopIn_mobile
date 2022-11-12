@@ -31,13 +31,8 @@
     <string name="modelExmp">Ford mustang</string>
     <string name="logOutBtn">Log out</string>
     <string name="registerTitle">Create account</string>
-    <string name="inputName">Name</string>
-    <string name="inputSurname">Surname</string>
-    <string name="inputEmail">Email</string>
     <string name="inputPassword">Password</string>
     <string name="confirmPassword">Confirm password</string>
-    <string name="inputCity">City</string>
-    <string name="inputPhone">Telephone</string>
     <string name="inputAreaNum">+381</string>
     <string name="inbox_nav">Inbox</string>
     <string name="home_nav">Home</string>
