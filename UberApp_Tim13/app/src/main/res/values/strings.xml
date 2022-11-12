@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UberApp_Tim13</string>
+    <string name="app_name">HopIn</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="loginBtn">LOGIN</string>
@@ -24,5 +24,6 @@
     <string name="aroundYou">Around you</string>
     <string name="current_ride">Current ride</string>
     <string name="set_destination">Set destination</string>
+    <string name="live">live</string>
 </resources>
 

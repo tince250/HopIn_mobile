@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/liveRide"
+        android:title=""
+        app:showAsAction="always"
+        android:actionLayout="@layout/current_ride_button_bar">
+    </item>
+</menu>
