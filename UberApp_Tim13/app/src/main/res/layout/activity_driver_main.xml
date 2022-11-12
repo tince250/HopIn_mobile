@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:text="@string/aroundYou"
             android:fontFamily="@font/poppinsbold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/map_card"
@@ -49,12 +50,11 @@
             android:textAllCaps="false"
             android:layout_marginTop="20dp"
             android:textSize="16dp"
-            android:padding="15dp"
+            android:paddingVertical="15dp"
             app:cornerRadius="10dp"
             app:icon="@drawable/ic_car"
             app:iconGravity="textStart"
-            app:iconSize="25dp"
-            app:iconPadding="2dp"/>
+            app:iconSize="25dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_set_dest"
@@ -69,12 +69,12 @@
             app:iconTint="@color/white"
             android:layout_marginTop="10dp"
             android:textSize="16dp"
-            android:padding="15dp"
+            android:paddingVertical="15dp"
             app:cornerRadius="10dp"
             app:icon="@drawable/ic_location_pin"
             app:iconGravity="textStart"
             app:iconSize="25dp"
-            app:iconPadding="2dp"
+            app:iconPadding="4dp"
             />
     </RelativeLayout>
 
