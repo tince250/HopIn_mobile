@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.tools.BottomNavBarHandler;
+
 public class DriverMainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,8 @@ public class DriverMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
         setTitle(R.string.home_nav);
+
+        BottomNavBarHandler.setBottomNavigationBar(findViewById(R.id.bottomNavigationView), this);
     }
 
     @Override
