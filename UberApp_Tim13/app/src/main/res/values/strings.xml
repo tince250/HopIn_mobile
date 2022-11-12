@@ -34,4 +34,12 @@
     <string name="home_nav">Home</string>
     <string name="profile_nav">Profile</string>
     <string name="history_nav">History</string>
+    <string name="driverStatisticsTitle">Statistics</string>
+    <string name="day">DAY</string>
+    <string name="month">MONTH</string>
+    <string name="year">YEAR</string>
+    <string name="driverStatisticsName">Hey, Nikola</string>
+    <string name="youWorked">You worked</string>
+    <string name="hours">56h</string>
+    <string name="total">Total</string>
 </resources>
