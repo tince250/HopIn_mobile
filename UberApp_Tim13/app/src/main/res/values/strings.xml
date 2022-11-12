@@ -11,4 +11,5 @@
     <string name="home_nav">Home</string>
     <string name="profile_nav">Profile</string>
     <string name="history_nav">History</string>
+    <string name="active">active</string>
 </resources>
