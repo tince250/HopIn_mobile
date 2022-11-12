@@ -96,6 +96,7 @@
                     app:iconSize="25dp"
                     app:iconTint="@color/blue"
                     android:onClick="onClickSettings"
+                    android:clickable="true"
                     />
 
                 <LinearLayout
