@@ -20,4 +20,9 @@
     <string name="home_nav">Home</string>
     <string name="profile_nav">Profile</string>
     <string name="history_nav">History</string>
+    <string name="active">active</string>
+    <string name="aroundYou">Around you</string>
+    <string name="current_ride">Current ride</string>
+    <string name="set_destination">Set destination</string>
 </resources>
+
