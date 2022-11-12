@@ -24,7 +24,7 @@ public class DriverAccountActivity extends AppCompatActivity {
                 FragmentTransition.to(DriverStatisticsFragment.newInstance(), this, false, R.id.statisticsLayout);
             }
         });*/
-        FragmentTransition.to(DriverStatisticsFragment.newInstance(), this, false, R.id.statisticsLayout);
+        //FragmentTransition.to(DriverStatisticsFragment.newInstance(), this, false, R.id.accountLinearLayout);
     }
 
     @Override
