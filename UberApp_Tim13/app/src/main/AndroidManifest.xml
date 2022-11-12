@@ -63,6 +63,14 @@
                 android:value=".DriverAccountActivity" />
         </activity>
         <activity
+            android:name=".DriverAccountSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".DriverAccountActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DriverAccountActivity" />
+        </activity>
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

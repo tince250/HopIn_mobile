@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/statisticsLayout"
@@ -19,31 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/title_border"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/back"
-                android:paddingTop="24sp"
-                android:paddingLeft="10sp"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/accountSettingsTitle"
-                android:fontFamily="@font/poppinsbold"
-                android:textSize="16sp"
-                android:paddingStart="10sp"
-                android:paddingEnd="0dp"
-                android:paddingVertical="15sp"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -186,7 +158,7 @@
                     android:background="@drawable/border"
                     android:layout_marginStart="40dp"
                     android:fontFamily="@font/poppinsbold"
-                    android:hint="@string/inputPhone"
+                    android:text="@string/inputPhone"
                     android:padding="10sp"
                     android:textSize="16sp" />
                 />
@@ -206,35 +178,7 @@
                 android:padding="10sp"
                 android:textSize="16sp" />
 
-            <!--<Button
-                android:id="@+id/changePasswordBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="@string/changePassword"
-                android:backgroundTint="@color/gray"
-                android:fontFamily="@font/poppinsbold"
-                android:textSize="14sp"
-                android:textAllCaps="false"
-                android:drawableLeft="@drawable/settings"
-                android:textColor="@color/black"
-                />-->
 
-            <!--<Button
-                android:id="@+id/changePaymentInfoBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:text="@string/changePaymentInfo"
-                android:backgroundTint="@color/gray"
-                android:fontFamily="@font/poppinsbold"
-                android:textSize="14sp"
-                android:textAllCaps="false"
-                android:drawableLeft="@drawable/settings"
-                android:textColor="@color/black"
-                />-->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/changePasswordBtn"
@@ -295,12 +239,6 @@
             android:textColor="@color/white"/>
 
 
-
     </LinearLayout>
 
-    </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--app:layout_constraintBottoom_toBottomof="@id/driverAvatarSettings"
-                        app:layout_constraintEnd_toEndOf="@id/driverAvatarSettings"-->

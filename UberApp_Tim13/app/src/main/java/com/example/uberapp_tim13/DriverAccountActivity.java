@@ -28,6 +28,10 @@ public class DriverAccountActivity extends AppCompatActivity {
         startActivity(new Intent(DriverAccountActivity.this, DriverStatisticsActivity.class));
     }
 
+    public void onClickSettings(View v){
+        startActivity(new Intent(DriverAccountActivity.this, DriverAccountSettingsActivity.class));
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
