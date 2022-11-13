@@ -9,6 +9,6 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_ride_history);
+        setContentView(R.layout.driver_history_list);
     }
 }

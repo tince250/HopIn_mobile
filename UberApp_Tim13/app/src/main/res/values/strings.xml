@@ -20,4 +20,11 @@
     <string name="home_nav">Home</string>
     <string name="profile_nav">Profile</string>
     <string name="history_nav">History</string>
+    <string name="acceptanceRidePickUp">Pick up location: Vladimira Rolovica 3, Backa Palanka</string>
+    <string name="acceptanceRideDestination">Destination: Bulevar oslobodjenja 88, Novi Sad</string>
+    <string name="acceptanceRideDuration">Duration: 45min</string>
+    <string name="acceptanceRideDistance">Distance: 1.2km</string>
+    <string name="acceptanceRidePassengers">Passengers: 1</string>
+    <string name="acceptanceRidePrice">Price(RSD): 300</string>
+    <string name="rideDate">Date: 15.12.2021.</string>
 </resources>
