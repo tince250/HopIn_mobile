@@ -92,4 +92,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
+    <string name="totalKm">120km</string>
+    <string name="avgKm">30km</string>
+    <string name="average">average</string>
 </resources>

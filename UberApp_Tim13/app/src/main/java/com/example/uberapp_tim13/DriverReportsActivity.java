@@ -33,7 +33,7 @@ public class DriverReportsActivity extends AppCompatActivity {
 
         MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
-        //builder.setTheme(R.style.CustomThemeOverlay_MaterialCalendar_Fullscreen);
+        builder.setTheme(R.style.CustomThemeOverlay_MaterialCalendar_Fullscreen);
         builder.setCalendarConstraints(constraintsBuilder.build());
         MaterialDatePicker picker = builder.build();
 
