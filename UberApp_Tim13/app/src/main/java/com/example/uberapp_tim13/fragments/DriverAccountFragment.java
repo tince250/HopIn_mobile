@@ -48,13 +48,13 @@ public class DriverAccountFragment extends Fragment {
     }
 
     private void fitFragmentToRole(View view) {
+        MaterialButton button = view.findViewById(R.id.statisticsBtn);
         switch (Globals.userRole) {
             case "driver":
                 view.findViewById(R.id.payment_info_card).setVisibility(View.GONE);
-                MaterialButton buttonStat = view.findViewById(R.id.statisticsBtn);
-                buttonStat.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.statistics));
-                buttonStat.setText("Statistics");
-                buttonStat.setOnClickListener(new View.OnClickListener() {
+                button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.statistics));
+                button.setText("Statistics");
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(getActivity(), DriverStatisticsActivity.class));
@@ -63,10 +63,9 @@ public class DriverAccountFragment extends Fragment {
                 break;
             case "passenger":
                 view.findViewById(R.id.vehicle_info_card).setVisibility(View.GONE);
-                MaterialButton buttonRep = view.findViewById(R.id.statisticsBtn);
-                buttonRep.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.reports));
-                buttonRep.setText("Reports");
-                buttonRep.setOnClickListener(new View.OnClickListener() {
+                button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.reports));
+                button.setText("Reports");
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
