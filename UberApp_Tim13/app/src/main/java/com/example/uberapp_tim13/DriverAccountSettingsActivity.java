@@ -25,7 +25,7 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_driver_acc_settings);
-        FragmentTransition.to(DriverAccountSettingsFragment.newInstance(), this, true, R.id.driver_acc_sett_fl);
+        FragmentTransition.to(DriverAccountSettingsFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
     }
 
     public void switchToChangePassword(View view) {
@@ -36,7 +36,7 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
 
     public void switchToPaymentInfo(View view) {
         setTitle("Payment info");
-        FragmentTransition.to(PaymentInfoFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
+        FragmentTransition.to(PaymentInfoFragment.newInstance(), this, true, R.id.driver_acc_sett_fl);
         overridePendingTransition(0, 0);
     }
 
