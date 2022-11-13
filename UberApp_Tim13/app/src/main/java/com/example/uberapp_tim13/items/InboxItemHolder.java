@@ -13,7 +13,7 @@ public class InboxItemHolder extends RecyclerView.ViewHolder {
 
     ImageView userImage;
     TextView name, displayMess, dateTime;
-
+    View coloredMargin;
 
     public InboxItemHolder(@NonNull View itemView) {
         super(itemView);
@@ -21,5 +21,6 @@ public class InboxItemHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.name);
         displayMess = itemView.findViewById(R.id.displayMessage);
         dateTime = itemView.findViewById(R.id.dateTime);
+        coloredMargin = itemView.findViewById(R.id.colored_margin);
     }
 }

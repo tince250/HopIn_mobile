@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim13.R;
@@ -34,6 +35,17 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
         holder.displayMess.setText(item.getDisplayMessage());
         holder.dateTime.setText(item.getDateTime());
         holder.userImage.setImageResource(item.getImage());
+        switch (item.getType()) {
+            case "support":
+                holder.coloredMargin.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), R.color.orange));
+                break;
+            case "ride":
+                holder.coloredMargin.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), R.color.dark_blue));
+                break;
+            case "panic":
+                holder.coloredMargin.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), R.color.red));
+                break;
+        }
     }
 
     @Override

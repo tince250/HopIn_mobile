@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.InboxAdapter;
@@ -34,7 +36,16 @@ public class DriverInboxFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new InboxAdapter(view.getContext(), Mockap.getInboxItems()));
 
+        setSpinner(view);
         return view;
+    }
+
+    private void setSpinner(View view) {
+        Spinner inboxSpinner = view.findViewById(R.id.spinner_inbox);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
+                android.R.layout.simple_spinner_item, view.getResources().getStringArray(R.array.inbox_filter));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inboxSpinner.setAdapter(adapter);
     }
 
 }
