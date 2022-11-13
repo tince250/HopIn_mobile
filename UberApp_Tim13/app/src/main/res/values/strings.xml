@@ -85,4 +85,8 @@
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
     <string name="routeStops">Stops: Stara Pazova</string>
+    <string name="reportsGreeting">Hey, Grace</string>
+    <string name="reportsSubtitle">Here are your stats:</string>
+    <string name="chooseDate">Choose date</string>
+    <string name="endDate">End date:</string>
 </resources>

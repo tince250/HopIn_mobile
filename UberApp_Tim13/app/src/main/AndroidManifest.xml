@@ -13,12 +13,12 @@
         android:theme="@style/Theme.UberApp_Tim13"
         tools:targetApi="31">
         <activity
-            android:name=".FavoriteRoutesActivity"
+            android:name=".PassengerReportsActivity"
             android:exported="true"
-            android:parentActivityName=".PassengerMainActivity">
+            android:parentActivityName=".PassengerAccountActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PassengerMainActivity"/>
+                android:value=".PassengerAccountActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +26,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FavoriteRoutesActivity"
+            android:exported="true"
+            android:parentActivityName=".PassengerMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PassengerMainActivity" />
+
+
+        </activity>
+        <activity
             android:name=".DriverAccountActivity"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -100,11 +110,14 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
 
             <meta-data
                 android:name="android.app.lib_name"

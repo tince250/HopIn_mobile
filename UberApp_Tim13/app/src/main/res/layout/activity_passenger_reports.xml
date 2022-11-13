@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="30dp">
+
+    <TextView
+        android:id="@+id/reportsGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reportsGreeting"
+        android:fontFamily="@font/poppinsbold"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textFontWeight="700"
+        android:drawableRight="@drawable/ic_hand"
+        android:drawablePadding="5dp"/>
+
+    <TextView
+        android:id="@+id/reportsSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reportsSubtitle"
+        android:fontFamily="@font/poppinsbold"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="30dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerPasengerReportsFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsregular"
+            android:background="@drawable/border"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginVertical="20dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            />
+
+        <LinearLayout android:layout_height="50dp" android:layout_width="match_parent">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dateRangeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/gray"
+                android:text="@string/chooseDate"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppinsbold"
+                android:textFontWeight="700"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="14sp"
+                app:cornerRadius="10dp"/>
+
+            <TextView
+                android:id="@+id/dateRangeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppinsbold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/passengerReportsResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
