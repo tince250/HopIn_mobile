@@ -3,6 +3,7 @@
     <string name="email">email: </string>
     <string name="next">Next</string>
     <string name="live">Live</string>
+    <string name="panic">PANIC</string>
     <string name="emailExmp">example@gmail.com </string>
     <string name="password">password</string>
     <string name="loginBtn">Log in</string>
@@ -10,7 +11,7 @@
     <string name="register">Register</string>
     <string name="accountBtn">Account</string>
     <string name="inboxBtn">Inbox</string>
-    <string name="driver">driver</string>
+    <string name="driver">Driver</string>
     <string name="driverAccountTitle">Account</string>
     <string name="driverAccountName">Nikola Savic</string>
     <string name="accountSettingsBtn">Account settings</string>
@@ -92,4 +93,7 @@
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
     <string name="routeStops">Stops: Stara Pazova</string>
+    <string name="timeExmp">00:05:45</string>
+    <string name="start">Start</string>
+    <string name="finish">Finish</string>
 </resources>

@@ -38,6 +38,7 @@ public class PassengerMainActivity extends AppCompatActivity{
         startActivity(new Intent(PassengerMainActivity.this, PassengerInboxActivity.class));
     }
 
+
     // Sets event listeners for the bottom nav bar
     public void setBottomNavigationBar() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -74,6 +75,7 @@ public class PassengerMainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "go to current ride", Toast.LENGTH_LONG);
+                startActivity(new Intent(PassengerMainActivity.this, CurrentRideActivity.class));
             }
         });
         return true;
