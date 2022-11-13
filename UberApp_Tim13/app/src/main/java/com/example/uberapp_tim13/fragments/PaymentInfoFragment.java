@@ -11,16 +11,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
 
-public class ChangePasswordFragment extends Fragment {
-
-    public static ChangePasswordFragment newInstance() {
-        return new ChangePasswordFragment();
+public class PaymentInfoFragment extends Fragment {
+    public static PaymentInfoFragment newInstance() {
+        return new PaymentInfoFragment();
     }
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_password_change, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_info, container, false);
 
         return view;
     }

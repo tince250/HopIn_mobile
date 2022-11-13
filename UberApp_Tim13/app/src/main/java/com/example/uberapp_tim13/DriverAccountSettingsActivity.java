@@ -11,6 +11,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uberapp_tim13.fragments.ChangePasswordFragment;
+import com.example.uberapp_tim13.fragments.DriverAccountSettingsFragment;
+import com.example.uberapp_tim13.fragments.PaymentInfoFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
 public class DriverAccountSettingsActivity extends AppCompatActivity {
@@ -23,13 +25,19 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_driver_acc_settings);
-
-        setSpinner();
+        FragmentTransition.to(DriverAccountSettingsFragment.newInstance(), this, true, R.id.driver_acc_sett_fl);
     }
 
     public void switchToChangePassword(View view) {
-        Toast.makeText(this, "click", Toast.LENGTH_LONG);
-        FragmentTransition.to(ChangePasswordFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
+        setTitle("Change password");
+        FragmentTransition.to(ChangePasswordFragment.newInstance(), this, true, R.id.driver_acc_sett_fl);
+        overridePendingTransition(0, 0);
+    }
+
+    public void switchToPaymentInfo(View view) {
+        setTitle("Payment info");
+        FragmentTransition.to(PaymentInfoFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -60,14 +68,6 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    private void setSpinner() {
-        Spinner areaNumSpinner = findViewById(R.id.spinnerAreaNumSettings);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.area_number_options));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        areaNumSpinner.setAdapter(adapter);
     }
 
 }
