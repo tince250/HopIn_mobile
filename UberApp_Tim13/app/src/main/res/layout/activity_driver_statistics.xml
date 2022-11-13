@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/white"
+    >
+
+    <LinearLayout
+        android:id="@+id/statisticsLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textViewDriverName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/driverStatisticsName"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:paddingTop="40dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerStatisticsOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsregular"
+            android:background="@drawable/border"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="10sp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            />
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distance traveld"
+            android:fontFamily="@font/poppinsregular"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="10sp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textViewDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="16sp"
+                android:text="@string/day"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/textViewMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="16sp"
+                android:text="@string/month"
+                android:layout_marginHorizontal="30sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/textViewYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="16sp"
+                android:text="@string/year"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewStatType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/youWorked"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/textViewStatTypeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hours"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="41sp"
+            android:textColor="@color/black"
+            android:padding="0dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:fontFamily="@font/poppinsbold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:paddingStart="15sp"
+                android:paddingEnd="0sp"
+                android:layout_gravity="start"
+                />
+
+            <TextView
+                android:id="@+id/textViewTotalValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsbold"
+                android:paddingStart="15sp"
+                android:textAlignment="textEnd"
+                android:paddingEnd="15sp"
+                android:text="@string/hours"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/graph_stats"
+            android:layout_marginTop="35dp"/>
+
+
+        <!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".PassengerMainActivity">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </FrameLayout>
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottomAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                app:contentInsetStart="0dp">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@id/bottomNavigationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/bottom_nav_menu"
+                    app:itemIconSize="30dp"
+                    app:itemIconTint="@color/bottom_nav_item"/>
+
+            </com.google.android.material.bottomappbar.BottomAppBar>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
