@@ -22,13 +22,6 @@
 
         </activity>
         <activity
-            android:name=".DriverAccountActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".AcceptanceRideActivity"
             android:exported="false">
             <meta-data
@@ -93,7 +86,7 @@
         <activity
             android:name=".DriverAccountSettingsActivity"
             android:exported="false"
-            android:parentActivityName=".DriverAccountActivity">
+            android:parentActivityName=".DriverMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DriverAccountActivity" />
