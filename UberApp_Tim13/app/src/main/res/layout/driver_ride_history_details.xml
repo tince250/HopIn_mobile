@@ -225,7 +225,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:src="@drawable/ic_calendar"
+            android:src="@drawable/ic_passenger"
             android:adjustViewBounds="true"/>
 
     </androidx.cardview.widget.CardView>

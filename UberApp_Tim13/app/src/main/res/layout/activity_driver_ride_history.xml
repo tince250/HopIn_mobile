@@ -4,8 +4,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/list"
+    <FrameLayout
+        android:id="@+id/listRideHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
