@@ -10,12 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:backgroundTint="@color/light_gray">
+        android:backgroundTint="@color/gray">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             app:cardCornerRadius="10dp"
             app:contentPadding="15dp"
             android:backgroundTint="@color/white">
@@ -90,7 +92,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <!--<androidx.appcompat.widget.AppCompatButton
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:backgroundTint="@color/blue"
@@ -103,12 +105,34 @@
             android:textAllCaps="false"
             android:fontFamily="@font/poppinsbold"
             android:textSize="16sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"/>-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            android:layout_gravity="center"
+
+            android:text="@string/next"
+            android:textSize="16sp"
+            android:onClick="onClickNext"
+            android:fontFamily="@font/poppinsbold"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textAllCaps="false"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="5dp"
+            android:paddingHorizontal="25sp"
+            android:paddingVertical="5sp"
+            app:cornerRadius="10dp"
+            />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
             android:src="@drawable/map"
             android:scaleType="fitXY" />
