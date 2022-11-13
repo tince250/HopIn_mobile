@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_border"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:paddingTop="24sp"
+                android:paddingLeft="10sp"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/current_ride"
+                android:fontFamily="@font/poppinsbold"
+                android:textSize="16sp"
+                android:paddingStart="10sp"
+                android:paddingEnd="0dp"
+                android:paddingVertical="15sp"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:src="@drawable/map_route"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <View
+                    android:id="@+id/colored_margin"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="10dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:cardCornerRadius="25dp"
+                        android:id="@+id/imageCardTime"
+                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:elevation="0dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/clock"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/current_time"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/imageCardTime"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textFontWeight="700"
+                        android:text="@string/timeExmp"
+                        android:fontFamily="@font/poppinsbold"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <View
+                    android:id="@id/colored_margin"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/orange" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:cardCornerRadius="25dp"
+                        android:id="@+id/imageCard"
+                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:elevation="0dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/wheel"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/current_driver"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/imageCard"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textFontWeight="700"
+                        android:text="@string/driver"
+                        android:fontFamily="@font/poppinsbold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/displayMessage"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/imageCard"
+                        android:layout_below="@id/current_driver"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_gray"
+                        android:text="Information about driver"/>
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/dots"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_set_dest"
+                android:layout_width="110dp"
+                android:layout_height="120dp"
+                android:backgroundTint="@color/red"
+                android:text="@string/panic"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:textSize="16sp"
+                android:paddingVertical="15dp"
+                app:cornerRadius="80dp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppinsbold"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/startBtn"
+                    android:layout_width="110dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="@color/dark_gray"
+                    android:paddingVertical="15dp"
+                    android:text="@string/start"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textFontWeight="700"
+                    android:textSize="14sp"
+                    app:cornerRadius="10dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/finishBtn"
+                    android:layout_width="110dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="@color/blue"
+                    android:paddingVertical="15dp"
+                    android:text="@string/finish"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textFontWeight="700"
+                    android:textSize="14sp"
+                    app:cornerRadius="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

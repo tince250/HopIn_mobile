@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">UberApp_Tim13</string>
+    <string name="app_name">HopIn</string>
     <string name="email">email: </string>
+    <string name="next">Next</string>
+    <string name="live">Live</string>
+    <string name="panic">PANIC</string>
     <string name="emailExmp">example@gmail.com </string>
     <string name="password">password</string>
     <string name="loginBtn">Log in</string>
@@ -8,7 +11,7 @@
     <string name="register">Register</string>
     <string name="accountBtn">Account</string>
     <string name="inboxBtn">Inbox</string>
-    <string name="driver">driver</string>
+    <string name="driver">Driver</string>
     <string name="driverAccountTitle">Account</string>
     <string name="driverAccountName">Nikola Savic</string>
     <string name="accountSettingsBtn">account settings</string>
@@ -65,6 +68,11 @@
     <string name="aroundYou">Around you</string>
     <string name="current_ride">Current ride</string>
     <string name="set_destination">Set destination</string>
+    <string name="tell_us">Tell us about the ride:</string>
+    <string name="pick_up">Pick up location</string>
+    <string name="where_to">Where to?</string>
+    <string name="pick_up_time">Pick up time</string>
+    <string name="add_stops">add in-between stops</string>
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
     <string name="passwordSettings">Password settings</string>
@@ -85,6 +93,12 @@
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
     <string name="routeStops">Stops: Stara Pazova</string>
+    <string name="timeExmp">00:05:45</string>
+    <string name="start">Start</string>
+    <string name="finish">Finish</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
     <string name="reportsGreeting">Hey, Grace</string>
     <string name="reportsSubtitle">Here are your stats:</string>
     <string name="chooseDate">Choose date</string>
@@ -92,8 +106,6 @@
     <string name="card">card:</string>
     <string name="cardType">card type:</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search">Search</string>
     <string name="totalKm">120km</string>
     <string name="avgKm">30km</string>
     <string name="average">average</string>
