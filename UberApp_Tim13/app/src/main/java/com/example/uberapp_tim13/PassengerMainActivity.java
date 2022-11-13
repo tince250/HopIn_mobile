@@ -30,6 +30,10 @@ public class PassengerMainActivity extends AppCompatActivity{
         setBottomNavigationBar();
     }
 
+    public void onClickNext(View v){
+        startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
+    }
+
     public void openAccountPage() {
         startActivity(new Intent(PassengerMainActivity.this, PassengerAccountActivity.class));
     }
