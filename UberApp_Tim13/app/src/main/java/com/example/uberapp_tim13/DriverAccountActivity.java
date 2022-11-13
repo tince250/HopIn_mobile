@@ -1,49 +1,41 @@
 package com.example.uberapp_tim13;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import static android.app.PendingIntent.getActivity;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.fragments.DriverStatisticsFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class PassengerMainActivity extends AppCompatActivity{
+public class DriverAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_passenger_main);
-        setTitle("Home");
+        setTitle("Account");
+        setContentView(R.layout.activity_driver_acc_settings);
 
         setBottomNavigationBar();
     }
 
-    public void onClickNext(View v){
-        startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
+    public void onClickStatistics(View v){
+        startActivity(new Intent(DriverAccountActivity.this, DriverStatisticsActivity.class));
     }
 
-    public void openAccountPage() {
-        startActivity(new Intent(PassengerMainActivity.this, PassengerAccountActivity.class));
+    public void onClickSettings(View v){
+        startActivity(new Intent(DriverAccountActivity.this, DriverAccountSettingsActivity.class));
     }
 
-    public void openInboxPage(View v) {
-        startActivity(new Intent(PassengerMainActivity.this, PassengerInboxActivity.class));
-    }
-
-
-    // Sets event listeners for the bottom nav bar
     public void setBottomNavigationBar() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -65,28 +57,7 @@ public class PassengerMainActivity extends AppCompatActivity{
             }
             return true;
         });
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.passenger_upper_menu, menu);
-
-        MenuItem switchItem = menu.findItem(R.id.liveRide);
-        switchItem.setActionView(R.layout.current_ride_button_bar);
-        final Button liveBtn = (Button) menu.findItem(R.id.liveRide).getActionView().findViewById(R.id.currentRideBarBtn);
-        liveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "go to current ride", Toast.LENGTH_LONG);
-                startActivity(new Intent(PassengerMainActivity.this, CurrentRideActivity.class));
-            }
-        });
-        return true;
-    }
-
-    public void addStops(View v) {
-        Toast.makeText(this, "add stops dialog should pop up", Toast.LENGTH_LONG);
+        bottomNavigationView.setSelectedItemId(R.id.nav_profile);
     }
 
     @Override
