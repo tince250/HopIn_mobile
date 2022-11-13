@@ -85,4 +85,6 @@
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
     <string name="routeStops">Stops: Stara Pazova</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
