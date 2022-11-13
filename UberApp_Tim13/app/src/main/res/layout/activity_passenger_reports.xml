@@ -79,13 +79,51 @@
 
     </LinearLayout>
 
-
-
-    <FrameLayout
-        android:id="@+id/passengerReportsResults"
+    <TextView
+        android:id="@+id/totalTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="total"
+        android:textSize="16sp"
+        android:textColor="@color/dark_gray"
+        android:textFontWeight="700"
+        android:gravity="center"/>
 
+    <TextView
+        android:id="@+id/calculatedTotalTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="56km"
+        android:textSize="41sp"
+        android:textColor="#337D98"
+        android:textFontWeight="700"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/averageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="average"
+        android:textSize="16sp"
+        android:textColor="@color/dark_gray"
+        android:textFontWeight="700"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/calculatedAverageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="30km"
+        android:textSize="31sp"
+        android:textColor="@color/orange"
+        android:textFontWeight="700"
+        android:gravity="center"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/graph_stats"
+        android:layout_marginTop="35dp"/>
 
 
 </LinearLayout>

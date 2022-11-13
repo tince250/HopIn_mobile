@@ -24,10 +24,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".FavoriteRoutesActivity"
-            android:exported="true"
+            android:exported="false"
             android:parentActivityName=".PassengerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -109,7 +110,7 @@
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="false">
 
             <!--
             <intent-filter>
