@@ -7,6 +7,17 @@
     <string name="register">Register</string>
     <string name="accountBtn">Account</string>
     <string name="inboxBtn">Inbox</string>
+    <string name="accountBtn">ACCOUNT</string>
+    <string name="inboxBtn">INBOX</string>
+    <string name="registerTitle">Create account</string>
+    <string name="inputName">Name</string>
+    <string name="inputSurname">Surname</string>
+    <string name="inputEmail">Email</string>
+    <string name="inputPassword">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="inputCity">City</string>
+    <string name="inputPhone">Telephone</string>
+    <string name="inputAreaNum">+381</string>
     <string name="inbox_nav">Inbox</string>
     <string name="home_nav">Home</string>
     <string name="profile_nav">Profile</string>
@@ -14,4 +25,10 @@
     <string name="loginTitle">Welcome back!</string>
     <string name="forgottenPassword">Forgot password?</string>
     <string name="noAccount">New and wanna hop in?</string>
+    <string name="active">active</string>
+    <string name="aroundYou">Around you</string>
+    <string name="current_ride">Current ride</string>
+    <string name="set_destination">Set destination</string>
 </resources>
+
+
