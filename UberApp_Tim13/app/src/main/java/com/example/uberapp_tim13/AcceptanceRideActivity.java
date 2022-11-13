@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.fragments.AcceptanceRideFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
+
 public class AcceptanceRideActivity extends AppCompatActivity {
 
     @Override
@@ -19,9 +22,11 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Ride offer");
         setContentView(R.layout.activity_acceptance_ride);
+
+        FragmentTransition.to(AcceptanceRideFragment.newInstance(), this, false, R.id.list);
     }
 
-    public void onClickDecline(View v){
+    /*public void onClickDecline(View v){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Why have you declined a ride?");
 
@@ -45,6 +50,6 @@ public class AcceptanceRideActivity extends AppCompatActivity {
 
 // create and show the alert dialog
         AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
-    }
+        alertDialog.show();*/
+    //}
 }
