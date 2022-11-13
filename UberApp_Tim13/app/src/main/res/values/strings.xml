@@ -30,6 +30,8 @@
     <string name="regPlates">reg plates: </string>
     <string name="modelExmp">Ford mustang</string>
     <string name="logOutBtn">Log out</string>
+    <string name="slogan">Safe. Quick. Pleasant.</string>
+    <string name="company_name">HopIn.</string>
     <string name="registerTitle">Create account</string>
     <string name="inputPassword">Password</string>
     <string name="confirmPassword">Confirm password</string>
@@ -82,5 +84,3 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
 </resources>
-
-
