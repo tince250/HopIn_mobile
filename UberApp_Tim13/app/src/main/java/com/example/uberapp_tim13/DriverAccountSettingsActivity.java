@@ -16,9 +16,13 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        setSpinner();
+        setContentView(R.layout.activity_driver_acc_settings);
 
-        setContentView(R.layout.activity_driver_statistics);
+        Spinner areaNumSpinner = findViewById(R.id.spinnerAreaNumSettings);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.area_number_options));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        areaNumSpinner.setAdapter(adapter);
     }
 
     @Override
