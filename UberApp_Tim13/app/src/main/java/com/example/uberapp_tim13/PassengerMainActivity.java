@@ -17,6 +17,9 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.fragments.DriverHomeFragment;
+import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PassengerMainActivity extends AppCompatActivity{
@@ -26,6 +29,8 @@ public class PassengerMainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
+
+        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passenger_fl);
 
         setBottomNavigationBar();
     }
