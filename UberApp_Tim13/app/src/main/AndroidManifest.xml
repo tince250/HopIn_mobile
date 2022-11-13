@@ -86,7 +86,7 @@
         <activity
             android:name=".DriverAccountSettingsActivity"
             android:exported="false"
-            android:parentActivityName=".DriverAccountActivity">
+            android:parentActivityName=".DriverMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DriverAccountActivity" />

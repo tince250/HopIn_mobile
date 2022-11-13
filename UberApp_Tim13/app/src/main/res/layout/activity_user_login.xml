@@ -58,19 +58,20 @@
             android:padding="10sp"
             android:textSize="16sp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
-            android:background="@drawable/button"
+            android:backgroundTint="@color/dark_blue"
             android:fontFamily="@font/poppinsbold"
             android:paddingHorizontal="25sp"
             android:paddingVertical="5sp"
             android:text="@string/loginBtn"
             android:textSize="16sp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/textViewForgottenPassword"

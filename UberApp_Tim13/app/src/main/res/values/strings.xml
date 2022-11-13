@@ -55,8 +55,8 @@
     <string name="inputCity">City</string>
     <string name="inputPhone">Telephone</string>
     <string name="inputCCard">Credit Card</string>
-    <string name="changePassword">Change password</string>
-    <string name="changePaymentInfo">Change payment info</string>
+    <string name="changePassword">change password</string>
+    <string name="changePaymentInfo">change payment info</string>
     <string name="save">Save</string>
     <string name="loginTitle">Welcome back!</string>
     <string name="forgottenPassword">Forgot password?</string>
