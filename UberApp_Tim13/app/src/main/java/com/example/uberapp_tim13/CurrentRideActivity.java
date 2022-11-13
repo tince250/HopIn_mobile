@@ -2,6 +2,7 @@ package com.example.uberapp_tim13;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CurrentRideActivity extends AppCompatActivity {
@@ -9,7 +10,10 @@ public class CurrentRideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_current_ride);
+        setTitle("Statistics");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_current_ride);
     }
 
     @Override
