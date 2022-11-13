@@ -89,4 +89,7 @@
     <string name="reportsSubtitle">Here are your stats:</string>
     <string name="chooseDate">Choose date</string>
     <string name="endDate">End date:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
 </resources>
