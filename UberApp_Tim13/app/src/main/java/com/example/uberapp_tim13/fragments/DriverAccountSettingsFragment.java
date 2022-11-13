@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.DriverAccountSettingsActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.UserLoginActivity;
+import com.example.uberapp_tim13.tools.Globals;
 
 public class DriverAccountSettingsFragment extends Fragment {
     public static DriverAccountSettingsFragment newInstance() {
@@ -23,6 +25,7 @@ public class DriverAccountSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_settings, container, false);
+        fitFragmentToRole(view);
         setSpinner(view);
 
         return view;
@@ -34,5 +37,16 @@ public class DriverAccountSettingsFragment extends Fragment {
                 android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.area_number_options));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaNumSpinner.setAdapter(adapter);
+    }
+
+    private void fitFragmentToRole(View view) {
+        switch (Globals.userRole) {
+            case "driver":
+                view.findViewById(R.id.changePayInfoBtn).setVisibility(View.GONE);
+                break;
+            case "passenger":
+                view.findViewById(R.id.changePayInfoBtn).setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }
