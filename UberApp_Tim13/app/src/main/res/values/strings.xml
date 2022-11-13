@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">HopIn</string>
-    <string name="email">email</string>
-    <string name="app_name">UberApp_Tim13</string>
     <string name="email">email: </string>
+    <string name="next">Next</string>
+    <string name="live">Live</string>
     <string name="emailExmp">example@gmail.com </string>
     <string name="password">password</string>
     <string name="loginBtn">Log in</string>
@@ -67,7 +67,6 @@
     <string name="aroundYou">Around you</string>
     <string name="current_ride">Current ride</string>
     <string name="set_destination">Set destination</string>
-    <string name="live">live</string>
     <string name="tell_us">Tell us about the ride:</string>
     <string name="pick_up">Pick up location</string>
     <string name="where_to">Where to?</string>
