@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.DriverAccountSettingsActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.UserLoginActivity;
+import com.example.uberapp_tim13.tools.Globals;
 
 public class DriverAccountFragment extends Fragment {
     public static DriverAccountFragment newInstance() {
@@ -21,6 +23,8 @@ public class DriverAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_driver_account, container, false);
+
+        fitFragmentToRole(view);
 
         view.findViewById(R.id.accountSettingBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,5 +41,17 @@ public class DriverAccountFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void fitFragmentToRole(View view) {
+        switch (Globals.userRole) {
+            case "driver":
+                view.findViewById(R.id.payment_info_card).setVisibility(View.GONE);
+                break;
+            case "passenger":
+                view.findViewById(R.id.vehicle_info_card).setVisibility(View.GONE);
+                break;
+        }
+        ((TextView) view.findViewById(R.id.user_role)).setText(Globals.userRole);
     }
 }
