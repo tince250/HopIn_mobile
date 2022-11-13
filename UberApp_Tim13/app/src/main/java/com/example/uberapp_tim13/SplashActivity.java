@@ -44,7 +44,7 @@ public class SplashActivity extends Activity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, DriverAccountActivity.class));
+                startActivity(new Intent(SplashActivity.this, DriverMainActivity.class));
                 finish();
             }
         }, SPLASH_TIME_OUT);
