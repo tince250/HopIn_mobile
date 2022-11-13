@@ -18,11 +18,7 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_driver_acc_settings);
 
-        Spinner areaNumSpinner = findViewById(R.id.spinnerAreaNumSettings);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.area_number_options));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        areaNumSpinner.setAdapter(adapter);
+        setSpinner();
     }
 
     @Override

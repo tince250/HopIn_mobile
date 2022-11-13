@@ -60,5 +60,10 @@
     <string name="aroundYou">Around you</string>
     <string name="current_ride">Current ride</string>
     <string name="set_destination">Set destination</string>
+    <string name="oldPassword">Old password</string>
+    <string name="newPassword">New password</string>
+    <string name="confirmPassword">Confirm password</string>
+
+
 </resources>
 

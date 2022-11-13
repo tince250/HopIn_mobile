@@ -15,13 +15,10 @@ public class DriverStatisticsActivity extends AppCompatActivity {
         setTitle("Statistics");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_driver_statistics);
 
-        Spinner areaNumSpinner = findViewById(R.id.spinnerStatisticsOptions);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.statistic_options));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        areaNumSpinner.setAdapter(adapter);
+        setSpinner();
     }
 
     @Override
@@ -52,5 +49,13 @@ public class DriverStatisticsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void setSpinner() {
+        Spinner areaNumSpinner = findViewById(R.id.spinnerAreaNumSettings);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.area_number_options));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        areaNumSpinner.setAdapter(adapter);
     }
 }
