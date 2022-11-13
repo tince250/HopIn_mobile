@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DriverInboxFragment"
+    android:padding="15dp">
+
+    <EditText
+        android:id="@+id/search_edit_text"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        android:drawableEnd="@drawable/ic_search"
+        android:drawableTint="@color/dark_gray"
+        android:drawablePadding="5dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/cutom_input"
+        android:layout_alignParentStart="true"
+        android:hint="@string/search"/>
+
+    <Spinner
+        android:id="@+id/spinner_inbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/search_edit_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:foregroundTint="@color/dark_gray"
+        android:padding="6dp"
+        android:background="@drawable/custom_spinner" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inboxRW"
+        android:layout_below="@id/search_edit_text"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

@@ -96,4 +96,7 @@
     <string name="timeExmp">00:05:45</string>
     <string name="start">Start</string>
     <string name="finish">Finish</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
 </resources>

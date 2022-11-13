@@ -9,6 +9,11 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.fragments.DriverHomeFragment;
+import com.example.uberapp_tim13.fragments.DriverInboxFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class DriverMainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +21,10 @@ public class DriverMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
         setTitle(R.string.home_nav);
+
+        FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driver_fl);
+
+        setBottomNavigationBar();
     }
 
     @Override
@@ -36,6 +45,35 @@ public class DriverMainActivity extends AppCompatActivity {
             }
         });
 
+
         return true;
+    }
+
+    public void setBottomNavigationBar() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            //redirection to other activities/fragments
+            switch (item.getItemId()) {
+                case R.id.nav_inbox:
+                    setTitle("Inbox");
+                    FragmentTransition.to(DriverInboxFragment.newInstance(), this, true, R.id.driver_fl);
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.nav_home:
+                    setTitle("Home");
+                    FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driver_fl);
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.nav_profile:
+                    Toast.makeText(this, "profile", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.nav_history:
+                    Toast.makeText(this, "history", Toast.LENGTH_LONG).show();
+                    break;
+            }
+            return true;
+        });
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
     }
 }
