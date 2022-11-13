@@ -2,15 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.UberApp_Tim13" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/lighter_blue</item>
+        <item name="colorPrimaryVariant">@color/lighter_blue</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/poppinsregular</item>
+        <item name="android:includeFontPadding">false</item>
+
+    </style>
+
+    <style name="switchStyleNight">
+        <item name="android:colorControlActivated">@color/green</item>
     </style>
 </resources>
