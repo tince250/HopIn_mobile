@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wanna go for a ride?"
+            android:text="@string/acceptanceRideTitle"
             android:layout_gravity="center"
             android:layout_marginVertical="15dp"
             android:fontFamily="@font/poppinsbold"
@@ -51,14 +51,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_location_pin"
-                android:layout_gravity="center_vertical"/>
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
 
             <TextView
                 android:id="@+id/textViewPickUpLocation"
@@ -66,7 +60,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/poppinsbold"
-                android:text="Vladimira Rolovica 3, Backa Palanka"
+                app:drawableLeftCompat="@drawable/ic_location_pin"
+                android:drawablePadding="2dp"
+                android:text="@string/acceptanceRidePickUp"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -76,23 +72,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_location_pin"
-                android:layout_gravity="center"/>
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
 
             <TextView
                 android:id="@+id/textViewDestination"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                app:drawableLeftCompat="@drawable/ic_location_pin"
+                android:drawablePadding="2dp"
                 android:fontFamily="@font/poppinsbold"
                 android:layout_gravity="center"
-                android:text="Bulevar Oslobodjenja 60, Novi Sad"
+                android:text="@string/acceptanceRideDestination"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -103,22 +95,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_location_pin"
-                android:layout_gravity="center"/>
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
 
             <TextView
                 android:id="@+id/textViewDistance"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                app:drawableLeftCompat="@drawable/ic_baseline_route_24"
+                android:drawablePadding="2dp"
                 android:fontFamily="@font/poppinsbold"
-                android:text="1.2km"
+                android:text="@string/acceptanceRideDistance"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -129,21 +117,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_car" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
 
             <TextView
                 android:id="@+id/textViewDuration"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
+                android:drawablePadding="2dp"
+                
                 android:fontFamily="@font/poppinsbold"
-                android:text="Duration: 0h 45min"
+                android:text="@string/acceptanceRideDuration"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -153,21 +139,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_car" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
 
             <TextView
                 android:id="@+id/textViewPassengers"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                app:drawableLeftCompat="@drawable/ic_baseline_airline_seat_recline_extra_24"
+                android:drawablePadding="2dp"
                 android:fontFamily="@font/poppinsbold"
-                android:text="Passengers: 1"
+                android:text="@string/acceptanceRidePassengers"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -177,13 +160,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_car" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
 
             <TextView
                 android:id="@+id/textViewPrice"
@@ -191,7 +169,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppinsbold"
-                android:text="Price(RSD): 300"
+                android:text="@string/acceptanceRidePrice"
+                app:drawableLeftCompat="@drawable/ic_baseline_attach_money_24"
+                android:drawablePadding="2dp"
                 android:textColor="@color/dark_blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -213,7 +193,7 @@
                 android:layout_marginHorizontal="5dp"
                 android:backgroundTint="@color/green"
                 android:paddingVertical="15dp"
-                android:text="Accept"
+                android:text="@string/accept"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textFontWeight="700"
@@ -225,7 +205,8 @@
                 android:layout_width="110dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/red"
-                android:text="Decline"
+                android:text="@string/decline"
+                android:onClick="onClickDecline"
                 android:textColor="@color/white"
                 android:textFontWeight="700"
                 android:textAllCaps="false"
@@ -239,26 +220,4 @@
 
     </LinearLayout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBarDriver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            app:contentInsetStart="0dp">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@id/bottomNavigationView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_nav_menu"
-                app:itemIconSize="30dp"
-                app:itemIconTint="@color/bottom_nav_item"/>
-
-        </com.google.android.material.bottomappbar.BottomAppBar>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
