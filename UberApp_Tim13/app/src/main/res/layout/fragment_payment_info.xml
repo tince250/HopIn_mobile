@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_border"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:paddingTop="24sp"
+                android:paddingLeft="10sp"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/paymentInfo"
+                android:fontFamily="@font/poppinsbold"
+                android:textSize="16sp"
+                android:paddingStart="10sp"
+                android:paddingEnd="0dp"
+                android:paddingVertical="15sp"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="35dp"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ccard_second"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"/>
+
+            <EditText
+                android:id="@+id/editTextNameOnCard"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppinsbold"
+                android:hint="@string/nameOnCard"
+                android:inputType="textPassword"
+                android:padding="10sp"
+                android:textSize="16sp"
+                android:layout_marginTop="40dp"/>
+
+            <EditText
+                android:id="@+id/editTextCardNumber"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppinsbold"
+                android:hint="@string/cardNumber"
+                android:inputType="textPassword"
+                android:padding="10sp"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextDD"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/poppinsbold"
+                    android:hint="@string/MM"
+                    android:inputType="textPassword"
+                    android:padding="10sp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"/>
+
+                <EditText
+                    android:id="@+id/editTextYY"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/poppinsbold"
+                    android:hint="@string/YY"
+                    android:inputType="textPassword"
+                    android:padding="10sp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"/>
+
+                <EditText
+                    android:id="@+id/editTextCVC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/poppinsbold"
+                    android:hint="@string/CVC"
+                    android:inputType="textPassword"
+                    android:padding="10sp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/solid_blue"
+            android:background="@drawable/button"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="45dp"
+            android:paddingHorizontal="25sp"
+            android:paddingVertical="5sp"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
