@@ -7,8 +7,8 @@
     <string name="register">Register</string>
     <string name="accountBtn">Account</string>
     <string name="inboxBtn">Inbox</string>
-    <string name="accountBtn">ACCOUNT</string>
-    <string name="inboxBtn">INBOX</string>
+    <string name="slogan">Safe. Quick. Pleasant.</string>
+    <string name="company_name">HopIn.</string>
     <string name="registerTitle">Create account</string>
     <string name="inputName">Name</string>
     <string name="inputSurname">Surname</string>
@@ -40,5 +40,3 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
 </resources>
-
-
