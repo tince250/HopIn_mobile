@@ -62,7 +62,13 @@
     <string name="set_destination">Set destination</string>
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
-    <string name="confirmPassword">Confirm password</string>
+    <string name="passwordSettings">Password settings</string>
+    <string name="paymentInfo">Payment info</string>
+    <string name="nameOnCard">Name on card</string>
+    <string name="cardNumber">Card number</string>
+    <string name="MM">MM</string>
+    <string name="YY">YY</string>
+    <string name="CVC">CVC</string>
 
 
 </resources>
