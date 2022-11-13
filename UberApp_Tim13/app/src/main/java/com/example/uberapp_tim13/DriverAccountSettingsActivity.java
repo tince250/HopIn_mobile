@@ -1,11 +1,17 @@
 package com.example.uberapp_tim13;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.uberapp_tim13.fragments.ChangePasswordFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
 
 public class DriverAccountSettingsActivity extends AppCompatActivity {
     @Override
@@ -19,6 +25,11 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driver_acc_settings);
 
         setSpinner();
+    }
+
+    public void switchToChangePassword(View view) {
+        Toast.makeText(this, "click", Toast.LENGTH_LONG);
+        FragmentTransition.to(ChangePasswordFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
     }
 
     @Override
