@@ -14,6 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/poppinsregular</item>
         <item name="android:includeFontPadding">false</item>
+        <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
+        <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
 
     </style>
 
@@ -24,5 +27,11 @@
     <!-- Driver upper bar switch theme. -->
     <style name="switchStyle">
         <item name="android:colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen"
+        parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnSurface">@color/dark_blue</item>
     </style>
 </resources>
