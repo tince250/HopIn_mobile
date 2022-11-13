@@ -23,7 +23,7 @@ public class DriverAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Account");
-        setContentView(R.layout.activity_driver_account);
+        setContentView(R.layout.activity_driver_acc_settings);
 
         setBottomNavigationBar();
     }
