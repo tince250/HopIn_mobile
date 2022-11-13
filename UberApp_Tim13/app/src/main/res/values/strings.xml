@@ -11,9 +11,9 @@
     <string name="driver">driver</string>
     <string name="driverAccountTitle">Account</string>
     <string name="driverAccountName">Nikola Savic</string>
-    <string name="accountSettingsBtn">Account settings</string>
-    <string name="statisticsBtn">Statistics</string>
-    <string name="reportsBtn">Reports</string>\
+    <string name="accountSettingsBtn">account settings</string>
+    <string name="statisticsBtn">statistics</string>
+    <string name="reportsBtn">reports</string>\
     <string name="contactInfo">Contact info  </string>
     <string name="telephone">phone number: </string>
     <string name="telephoneExmp">0633324561</string>
@@ -48,7 +48,7 @@
     <string name="youWorked">You worked</string>
     <string name="hours">56h</string>
     <string name="total">Total</string>
-    <string name="accountSettingsTitle">Account settings</string>
+    <string name="accountSettingsTitle">account settings</string>
     <string name="inputName">Name</string>
     <string name="inputSurname">Surname</string>
     <string name="inputEmail">Email</string>
