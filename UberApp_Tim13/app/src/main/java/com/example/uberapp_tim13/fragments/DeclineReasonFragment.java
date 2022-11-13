@@ -7,23 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.tools.FragmentTransition;
 
-public class AcceptanceRideFragment extends Fragment {
-    public static AcceptanceRideFragment newInstance() {
-        return new AcceptanceRideFragment();
+public class DeclineReasonFragment extends Fragment {
+    public static DeclineReasonFragment newInstance() {
+        return new DeclineReasonFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_acceptance_ride, container, false);
+        View view = inflater.inflate(R.layout.dialog_decline_reason, container, false);
+        Spinner areaNumSpinner = view.findViewById(R.id.spinnerDeclineReason);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.decline_reason_options));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        areaNumSpinner.setAdapter(adapter);
         return view;
     }
 
@@ -51,6 +52,4 @@ public class AcceptanceRideFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-
 }

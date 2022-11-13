@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="decline_reason_options">
+        <item>Passengers not absent</item>
+        <item>Health problems</item>
+        <item>My baby is home alone</item>
+    </string-array>
+</resources>

@@ -85,4 +85,6 @@
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
     <string name="routeStops">Stops: Stara Pazova</string>
+    <string name="declineReason">Decline reason</string>
+    <string name="submit">Submit</string>
 </resources>

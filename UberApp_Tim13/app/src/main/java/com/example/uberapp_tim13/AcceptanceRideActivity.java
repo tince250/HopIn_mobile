@@ -2,6 +2,7 @@ package com.example.uberapp_tim13;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.fragments.AcceptanceRideFragment;
+import com.example.uberapp_tim13.fragments.DeclineReasonFragment;
+import com.example.uberapp_tim13.fragments.FavoriteRouteFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
 public class AcceptanceRideActivity extends AppCompatActivity {
@@ -23,9 +26,17 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         setTitle("Ride offer");
         setContentView(R.layout.activity_acceptance_ride);
 
-        FragmentTransition.to(AcceptanceRideFragment.newInstance(), this, false, R.id.list);
+        FragmentTransition.to(AcceptanceRideFragment.newInstance(), this, true, R.id.list);
     }
 
+    public void onClickDecline(View v) {
+        /*FragmentTransaction fragmentTransaction = this
+                .getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.list, DeclineReasonFragment.newInstance());
+        fragmentTransaction.commit();
+    }*/
+        FragmentTransition.to(DeclineReasonFragment.newInstance(), this, false, R.id.list);
+    }
     /*public void onClickDecline(View v){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Why have you declined a ride?");

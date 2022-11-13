@@ -178,7 +178,7 @@
             android:layout_gravity="center_vertical">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_current_ride"
+                android:id="@+id/acceptBtn"
                 android:layout_width="110dp"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
@@ -194,7 +194,7 @@
                 app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_set_dest"
+                android:id="@+id/declineBtn"
                 android:layout_width="110dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/red"
