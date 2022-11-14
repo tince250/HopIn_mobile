@@ -1,5 +1,6 @@
 package com.example.uberapp_tim13.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.uberapp_tim13.ChatActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.InboxAdapter;
+import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Mockap;
 
 
@@ -35,6 +39,18 @@ public class DriverInboxFragment extends Fragment {
         recyclerView = view.findViewById(R.id.inboxRW);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new InboxAdapter(view.getContext(), Mockap.getInboxItems()));
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        startActivity(new Intent(getActivity(), ChatActivity.class));
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
 
         setSpinner(view);
         return view;
