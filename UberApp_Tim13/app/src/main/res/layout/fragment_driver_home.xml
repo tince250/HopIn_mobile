@@ -33,6 +33,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_current_ride"
+        android:onClick="onClickCurrentRide"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_car"
         app:iconGravity="textStart"
