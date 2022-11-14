@@ -223,19 +223,20 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="35dp"
-            android:background="@drawable/button"
             android:backgroundTint="@color/solid_blue"
             android:fontFamily="@font/poppinsbold"
             android:paddingHorizontal="35dp"
-            android:paddingVertical="5sp"
+            android:paddingVertical="10sp"
             android:text="@string/save"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:cornerRadius="10dp"
+            android:textStyle="bold"/>
 
 </LinearLayout>
