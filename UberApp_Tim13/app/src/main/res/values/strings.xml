@@ -117,4 +117,5 @@
     <string name="showDetails">Show details</string>
     <string name="ratingsSubtitle">Ratings</string>
     <string name="passengersSubtitle">Passengers</string>
+    <string name="inconsistent">driver inconsistent</string>
 </resources>

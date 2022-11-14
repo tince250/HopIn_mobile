@@ -2,9 +2,11 @@ package com.example.uberapp_tim13;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -27,6 +29,10 @@ public class DriverMainActivity extends AppCompatActivity {
         FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driver_fl);
 
         setBottomNavigationBar();
+    }
+
+    public void onClickCurrentRide(View v){
+        startActivity(new Intent(DriverMainActivity.this, CurrentRideActivity.class));
     }
 
     @Override

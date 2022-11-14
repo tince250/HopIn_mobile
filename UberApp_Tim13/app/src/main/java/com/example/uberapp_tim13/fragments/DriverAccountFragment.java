@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -74,6 +75,16 @@ public class DriverAccountFragment extends Fragment {
                 });
                 break;
         }
+        fitTextViewsToUser(view);
+    }
+
+    private void fitTextViewsToUser(View view) {
         ((TextView) view.findViewById(R.id.user_role)).setText(Globals.userRole);
+        ((TextView) view.findViewById(R.id.driverName)).setText(Globals.currentUser.getName() + " " + Globals.currentUser.getSurName());
+        ((TextView) view.findViewById(R.id.textViewEmail)).setText(Globals.currentUser.getEmail());
+        ((TextView) view.findViewById(R.id.textViewPhone)).setText(Globals.currentUser.getPhone());
+        ((TextView) view.findViewById(R.id.textViewCity)).setText(Globals.currentUser.getCity());
+        ((TextView) view.findViewById(R.id.textViewStreet)).setText(Globals.currentUser.getStreet());
+        ((TextView) view.findViewById(R.id.textViewStreetNum)).setText(Globals.currentUser.getStreetNum());
     }
 }
