@@ -11,9 +11,12 @@ public class User {
     private String city;
     private String role;
     private String streetNum;
+    private CreditCard card;
 
 
-    public User(int id, String name, String surName, String phone, String email, String password, String address, String city, String role, String houseNum) {
+
+    public User(int id, String name, String surName, String phone, String email, String password,
+                String address, String city, String role, String houseNum, CreditCard card) {
         this.id = id;
         this.name = name;
         this.surName = surName;
@@ -24,6 +27,7 @@ public class User {
         this.city = city;
         this.role = role;
         this.streetNum = houseNum;
+        this.card = card;
     }
 
     public String getRole() {
@@ -64,5 +68,9 @@ public class User {
 
     public String getStreetNum() {
         return streetNum;
+    }
+
+    public CreditCard getCard() {
+        return card;
     }
 }

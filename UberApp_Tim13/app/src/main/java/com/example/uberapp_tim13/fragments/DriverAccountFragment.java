@@ -81,6 +81,8 @@ public class DriverAccountFragment extends Fragment {
                 button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.heart_solid));
                 button.setIconTint(ColorStateList.valueOf(getResources().getColor(R.color.red)));
                 button.setText("routes");
+                ((TextView) view.findViewById(R.id.textViewCard)).setText("**** **** *** " + Globals.currentUser.getCard().getNumber().split(" ")[3]);
+                ((TextView) view.findViewById(R.id.textViewCardType)).setText(Globals.currentUser.getCard().getType());
                 break;
         }
         fitTextViewsToUser(view);
