@@ -13,6 +13,7 @@ import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.RideItem;
 import com.example.uberapp_tim13.items.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 
 public class RideHistoryFragment extends ListFragment{
@@ -31,7 +32,12 @@ public class RideHistoryFragment extends ListFragment{
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.driver_fl);
+        if (Globals.userRole == "passenger") {
+            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.passenger_fl);
+        } else {
+            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.driver_fl);
+
+        }
     }
 
     @Override
