@@ -7,20 +7,27 @@ public class User {
     private String phone;
     private String email;
     private String password;
-    private String address;
+    private String street;
     private String city;
     private String role;
+    private String streetNum;
 
-    public User(int id, String name, String surName, String phone, String email, String password, String address, String city, String role) {
+
+    public User(int id, String name, String surName, String phone, String email, String password, String address, String city, String role, String houseNum) {
         this.id = id;
         this.name = name;
         this.surName = surName;
         this.phone = phone;
         this.email = email;
         this.password = password;
-        this.address = address;
+        this.street = address;
         this.city = city;
         this.role = role;
+        this.streetNum = houseNum;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public int getId() {
@@ -47,11 +54,15 @@ public class User {
         return password;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
     public String getCity() {
         return city;
+    }
+
+    public String getStreetNum() {
+        return streetNum;
     }
 }

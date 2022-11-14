@@ -19,8 +19,8 @@ public class Mockap {
 
     public static List<User> getUsers(){
         List<User> users = new ArrayList<User>();
-        users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail,com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger" ));
-        users.add(new User(1, "Zika", "Zikic", "668979414", "mika@gmail,com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver" ));
+        users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" ));
+        users.add(new User(1, "Zika", "Zikic", "668979414", "zika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver", "1"));
 
         return users;
     }
