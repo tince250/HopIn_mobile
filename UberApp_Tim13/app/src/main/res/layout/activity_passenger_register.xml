@@ -151,21 +151,22 @@
 
     </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:background="@drawable/button"
             android:fontFamily="@font/poppinsbold"
             android:paddingHorizontal="25sp"
-            android:paddingVertical="5sp"
+            android:paddingVertical="10sp"
             android:text="@string/register"
             android:textSize="16sp"
             android:textAllCaps="false"
-            android:backgroundTint="@color/solid_blue"
+            android:backgroundTint="@color/dark_blue"
             android:textColor="@color/white"
+            android:textFontWeight="700"
+            app:cornerRadius="10dp"
             />
 
 
