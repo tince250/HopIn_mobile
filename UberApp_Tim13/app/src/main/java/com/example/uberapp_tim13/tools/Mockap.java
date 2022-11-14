@@ -27,4 +27,16 @@ public class Mockap {
         return users;
     }
 
+    public static List<MessageItem> getMessages(){
+        User user = (new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" ));
+        User admin = new User();
+        messages.add(new MessageItem("dobar dan", user, "11:59"));
+        messages.add(new MessageItem("dobar dan1", user, "12:59"));
+        messages.add(new MessageItem("dobar dan2", admin, "13:59"));
+        messages.add(new MessageItem("dobar dan3", user, "14:59"));
+        messages.add(new MessageItem("dobar dan4", admin, "15:59"));
+        messages.add(new MessageItem("dobar dan5", user, "16:59"));
+        return messages;
+    }
+
 }

@@ -12,6 +12,10 @@ public class User {
     private String role;
     private String streetNum;
 
+    public User(){
+        super();
+    }
+
 
     public User(int id, String name, String surName, String phone, String email, String password, String address, String city, String role, String houseNum) {
         this.id = id;

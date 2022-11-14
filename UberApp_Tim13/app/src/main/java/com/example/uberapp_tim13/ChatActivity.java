@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim13.items.ChatAdapter;
+import com.example.uberapp_tim13.tools.Mockap;
 
 public class ChatActivity extends AppCompatActivity {
     private RecyclerView chatRecycler;
@@ -18,7 +19,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         chatRecycler = (RecyclerView) findViewById(R.id.recyclerViewChat);
-        //chatAdapter = new ChatAdapter(this, messageList);
+        chatAdapter = new ChatAdapter(this, Mockap.getMessages());
         chatRecycler.setLayoutManager(new LinearLayoutManager(this));
         chatRecycler.setAdapter(chatAdapter);
     }

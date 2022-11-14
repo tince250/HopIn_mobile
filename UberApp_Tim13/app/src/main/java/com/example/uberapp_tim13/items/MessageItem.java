@@ -4,9 +4,9 @@ public class MessageItem {
 
     private String message;
     private User sender;
-    private long time;
+    private String time;
 
-    public MessageItem(String message, User sender, long time) {
+    public MessageItem(String message, User sender, String time) {
         this.message = message;
         this.sender = sender;
         this.time = time;
@@ -20,7 +20,7 @@ public class MessageItem {
         return sender;
     }
 
-    public long getTime() {
+    public String getTime() {
         return time;
     }
 }
