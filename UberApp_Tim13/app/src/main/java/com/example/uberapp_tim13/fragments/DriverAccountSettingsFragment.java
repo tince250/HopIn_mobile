@@ -54,5 +54,6 @@ public class DriverAccountSettingsFragment extends Fragment {
         ((EditText) view.findViewById(R.id.editTextEmailSettings)).setText(Globals.currentUser.getEmail());
         ((EditText) view.findViewById(R.id.editTextCitySettings)).setText(Globals.currentUser.getCity());
         ((EditText) view.findViewById(R.id.editTextPhoneSettings)).setText(Globals.currentUser.getPhone());
+        ((EditText) view.findViewById(R.id.editTextCCardSettings)).setText("*** **** **** " + Globals.currentUser.getCard().getNumber().split(" ")[3]);
     }
 }
