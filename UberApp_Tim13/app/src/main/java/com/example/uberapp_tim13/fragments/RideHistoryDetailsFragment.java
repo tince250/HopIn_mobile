@@ -16,11 +16,10 @@ import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 
 public class RideHistoryDetailsFragment extends Fragment{
-    public static RideHistoryDetailsFragment newInstance(int ride_num) {
+    public static int rideNum;
+    public static RideHistoryDetailsFragment newInstance(int num) {
         RideHistoryDetailsFragment frag = new RideHistoryDetailsFragment();
-        Bundle args = new Bundle();
-        args.putInt("ride_id", ride_num);
-        frag.setArguments(args);
+        rideNum = num;
         return frag;
     }
 
@@ -30,7 +29,7 @@ public class RideHistoryDetailsFragment extends Fragment{
 
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.listViewReviews);
 
-        RideItem ride = Mockap.getRides().get(getArguments().getInt("ride_id"));
+        RideItem ride = Mockap.getRides().get(rideNum);
         fitFragmentToRole(view, ride);
 
 
@@ -45,6 +44,13 @@ public class RideHistoryDetailsFragment extends Fragment{
         ((TextView)view.findViewById(R.id.textViewPassengers)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view.findViewById(R.id.textViewPrice)).setText("Price(RSD): " + ride.getPrice());
 
+        view.findViewById(R.id.passengerDetails).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getActivity(), "sss", Toast.LENGTH_SHORT).show();
+                FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driver_fl);
+            }
+        });
         /*TextView tt = view.findViewById(R.id.textViewDistance);
         String s = getString(R.string.acceptanceRideDistance, "sss");
         tt.setText(s);*/
