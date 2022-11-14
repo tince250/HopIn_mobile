@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.items.CreditCard;
 import com.example.uberapp_tim13.items.InboxItem;
 import com.example.uberapp_tim13.items.MessageItem;
 import com.example.uberapp_tim13.items.User;
@@ -30,8 +31,12 @@ public class Mockap {
 
     public static List<User> getUsers(){
         List<User> users = new ArrayList<User>();
-        users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" ));
-        users.add(new User(1, "Zika", "Zikic", "668979414", "zika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver", "1"));
+        users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com",
+                "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger",
+                "1", new CreditCard("MasterCard", "111 1111 1111 123", "111", "03", "2022")));
+        users.add(new User(1, "Zika", "Zikic", "668979414", "zika@gmail.com",
+                "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver",
+                "1", new CreditCard("DinaCard", "111 1111 1111 321", "222", "10", "2020")));
 
         return users;
     }

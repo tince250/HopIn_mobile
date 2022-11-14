@@ -175,7 +175,8 @@
                 android:inputType="text"
                 android:padding="10sp"
                 android:text="@string/inputCCard"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:enabled="false"/>
 
 
             <com.google.android.material.button.MaterialButton
