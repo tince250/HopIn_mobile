@@ -155,6 +155,88 @@
 
     </LinearLayout>
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardCornerRadius="5dp"
+        android:elevation="0dp"
+        android:id="@+id/driver_info_card_hist">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/content_driver"
+            >
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:background="@color/orange" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:id="@+id/driverDetails"
+                >
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="25dp"
+                    android:id="@+id/imageCardDriver"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:elevation="0dp"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/wheel"/>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name_driver"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toEndOf="@id/imageCardDriver"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textFontWeight="700"
+                    android:text="Driver: Mark Johnson"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayMessageDriver"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@id/name_driver"
+                    android:layout_toEndOf="@id/imageCardDriver"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_gray"
+                    android:text="Show details"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,6 +244,7 @@
         android:layout_marginHorizontal="10dp"
         app:cardCornerRadius="5dp"
         android:elevation="0dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -215,7 +298,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppinsbold"
                     android:textFontWeight="700"
-                    android:text="Passengers: 1"/>
+                    android:text="Passengers"/>
 
                 <TextView
                     android:layout_width="match_parent"

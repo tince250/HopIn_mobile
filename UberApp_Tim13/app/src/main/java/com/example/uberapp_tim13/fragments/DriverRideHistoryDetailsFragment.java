@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 
 public class DriverRideHistoryDetailsFragment extends Fragment{
     public static DriverRideHistoryDetailsFragment newInstance() {
@@ -18,6 +19,7 @@ public class DriverRideHistoryDetailsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.driver_ride_history_details, container, false);
+        fitFragmentToRole(view);
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.listViewReviews);
 
         /*TextView tt = view.findViewById(R.id.textViewDistance);
@@ -30,5 +32,15 @@ public class DriverRideHistoryDetailsFragment extends Fragment{
             }
         });
         return view;
+    }
+
+    private void fitFragmentToRole(View view) {
+        switch (Globals.userRole) {
+            case "driver":
+                view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
+                break;
+            case "passenger":
+                break;
+        }
     }
 }
