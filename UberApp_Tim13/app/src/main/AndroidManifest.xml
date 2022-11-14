@@ -28,6 +28,19 @@
                 android:parentActivityName=".PassengerMainActivity"/>
 
         </activity>
+        <activity android:name=".ChatActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="">
+
+            </meta-data>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".FavoriteRoutesActivity"
             android:exported="true"
@@ -117,11 +130,11 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
