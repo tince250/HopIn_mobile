@@ -28,8 +28,13 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_warning_amber_24" />
+                            <entry key="outputName" value="ic_baseline_chat_bubble_outline_24" />
+                            <entry key="sourceFile" value="C:\Users\Suncica\Documents\Tina\faks\5.semestar\Uber\UberApp_Tim13" />
+                            <entry key="outputName" value="ic_baseline_arrow_drop_down_24" />
                             <entry key="sourceFile" value="C:\Users\Nemanja\Downloads\heart-solid.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="route_solid" />
+                            <entry key="sourceFile" value="C:\Users\Nemanja\Downloads\route-solid.svg" />
                           </map>
                         </option>
                       </PersistentState>

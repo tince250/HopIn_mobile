@@ -36,8 +36,13 @@
     <string name="slogan">Safe. Quick. Pleasant.</string>
     <string name="company_name">HopIn.</string>
     <string name="registerTitle">Create account</string>
+    <string name="inputName">Name</string>
+    <string name="inputSurname">Surname</string>
+    <string name="inputEmail">Email</string>
     <string name="inputPassword">Password</string>
     <string name="confirmPassword">Confirm password</string>
+    <string name="inputCity">City</string>
+    <string name="inputPhone">Telephone</string>
     <string name="inputAreaNum">+381</string>
     <string name="inbox_nav">Inbox</string>
     <string name="home_nav">Home</string>
@@ -52,11 +57,6 @@
     <string name="hours">56h</string>
     <string name="total">Total</string>
     <string name="accountSettingsTitle">account settings</string>
-    <string name="inputName">Name</string>
-    <string name="inputSurname">Surname</string>
-    <string name="inputEmail">Email</string>
-    <string name="inputCity">City</string>
-    <string name="inputPhone">Telephone</string>
     <string name="inputCCard">Credit Card</string>
     <string name="changePassword">change password</string>
     <string name="changePaymentInfo">change payment info</string>
@@ -109,5 +109,13 @@
     <string name="totalKm">120km</string>
     <string name="avgKm">30km</string>
     <string name="average">average</string>
+    <string name="rideDate">Date: 15.12.2021.</string>
+    <string name="userName">Grace Collins</string>
+    <string name="userEmail">email: grace@gmail.com</string>
+    <string name="userTelephone">contact: +3816572193</string>
+    <string name="driverName">Mark Jackson</string>
+    <string name="showDetails">Show details</string>
+    <string name="ratingsSubtitle">Ratings</string>
+    <string name="passengersSubtitle">Passengers</string>
     <string name="inconsistent">driver inconsistent</string>
 </resources>

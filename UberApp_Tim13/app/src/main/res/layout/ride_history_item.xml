@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/border"
+    android:id="@+id/historyRideCard"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+
+        <ImageView
+            android:id="@+id/icon_car"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_car"
+            app:tint="@color/dark_gray"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/icon_car">
+
+            <TextView
+                android:id="@+id/textViewRoute"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsbold"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:text="@string/routeCities"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/textViewStops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/routeStops"
+                android:textSize="14sp"
+                android:textColor="@color/dark_gray"
+                android:layout_marginTop="-2dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="-5dp"
+            android:layout_marginTop="2dp">
+            <ImageView
+                android:id="@+id/ic_message"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_baseline_chat_bubble_outline_24"
+                app:tint="@color/dark_blue" />
+            <ImageView
+                android:id="@+id/add_to_fav"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_heart"
+                app:tint="@color/gray"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppinsbold"
+        android:text="@string/rideDate"
+        android:textColor="@color/dark_blue"
+        android:textSize="15sp"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:drawablePadding="3dp"
+        android:paddingHorizontal="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewDriver"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppinsbold"
+        android:text="@string/driverName"
+        android:drawableLeft="@drawable/wheel"
+        android:drawablePadding="3dp"
+        android:paddingHorizontal="8dp"
+        android:textColor="@color/dark_blue"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textViewPassengers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppinsbold"
+        android:text="@string/acceptanceRidePassengers"
+        android:drawableLeft="@drawable/ic_passenger"
+        android:drawablePadding="3dp"
+        android:paddingHorizontal="8dp"
+        android:textColor="@color/dark_blue"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppinsbold"
+            android:text="@string/acceptanceRidePrice"
+            android:drawableLeft="@drawable/ic_price"
+            android:paddingHorizontal="8dp"
+            android:drawablePadding="3dp"
+            android:textColor="@color/dark_blue"
+            android:textSize="15sp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/black"
+            android:progressTint="@color/orange"
+            android:rating="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="-25dp"
+            android:layout_marginTop="-5dp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
