@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
@@ -19,4 +20,5 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
     public void switchToHistoryDetails(View v){
         FragmentTransition.to(DriverRideHistoryDetailsFragment.newInstance(), this, false, R.id.listRideHistory);
     }
+
 }
