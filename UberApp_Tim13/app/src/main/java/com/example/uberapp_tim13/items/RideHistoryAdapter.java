@@ -2,12 +2,14 @@ package com.example.uberapp_tim13.items;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.List;
 
@@ -38,12 +40,26 @@ public class RideHistoryAdapter extends RecyclerView.Adapter<RideHolder> {
         holder.stops.setText("Stops: "+ stops);
         holder.date.setText(ride.getStartTime());
         holder.passengers.setText("Passengers: " + ride.getPassengers().size());
-        holder.price.setText("Price (RSD)" + ride.getPrice());
+        holder.price.setText("Price(RSD): " + ride.getPrice());
+        fitFragmentToRole(holder, ride);
     }
 
     @Override
     public int getItemCount() {
         return rides.size();
+    }
+
+
+    private void fitFragmentToRole(RideHolder holder, RideItem ride) {
+        switch (Globals.currentUser.getRole()) {
+            case "driver":
+                holder.addToFavs.setVisibility(View.GONE);
+                holder.driverInfo.setVisibility(View.GONE);
+                break;
+            case "passenger":
+                holder.driverInfo.setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
+                break;
+        }
     }
 }
 

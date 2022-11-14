@@ -19,7 +19,7 @@ public class RideHistoryItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ride_history_item, container, false);
-        fitFragmentToRole(view);
+//        fitFragmentToRole(view);
         view.findViewById(R.id.historyRideCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,17 +27,6 @@ public class RideHistoryItemFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    private void fitFragmentToRole(View view) {
-        switch (Globals.userRole) {
-            case "driver":
-                view.findViewById(R.id.textViewDriver).setVisibility(View.GONE);
-                view.findViewById(R.id.add_to_fav).setVisibility(View.GONE);
-                break;
-            case "passenger":
-                break;
-        }
     }
 
 }

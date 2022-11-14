@@ -46,7 +46,8 @@ public class Mockap {
             firstRideRatings.add(new RatingItem("Very nice ride", 4, users.get(0)));
 
             rides.add(new RideItem(users.get(1), firstRidePassengers, "15.11.2022. 11:30", "15.11.2022. 12:30", "Novi Sad, Kralja Petra 1 ", firstRideStops, "Belgrade, Knez Mihajlova 10", 95, 1200, firstRideRatings));
-            //rides.add(new Ride(1, "Zika", "Zikic", "668979414", "zika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver", "1"));
+            rides.add(new RideItem(users.get(1), firstRidePassengers, "15.11.2022. 11:30", "15.11.2022. 12:30", "Sabac, Kralja Mile 3 ", firstRideStops, "Belgrade, Mihajlova 12", 123, 1250, firstRideRatings));
+//            rides.add(new Ride(1, "Zika", "Zikic", "668979414", "zika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver", "1"));
         }
         return rides;
     }
