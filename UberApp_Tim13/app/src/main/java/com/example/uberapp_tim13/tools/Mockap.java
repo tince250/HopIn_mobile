@@ -1,12 +1,21 @@
 package com.example.uberapp_tim13.tools;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.InboxItem;
 import com.example.uberapp_tim13.items.MessageItem;
 import com.example.uberapp_tim13.items.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+
+import kotlin.collections.UCollectionsKt;
 
 public class Mockap {
     public static List<MessageItem> messages;
@@ -30,12 +39,27 @@ public class Mockap {
     public static List<MessageItem> getMessages(){
         User user = (new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" ));
         User admin = new User();
+        messages = new ArrayList<MessageItem>();
         messages.add(new MessageItem("dobar dan", user, "11:59"));
+        messages.add(new MessageItem("dobar dan", admin, "11:59"));
         messages.add(new MessageItem("dobar dan1", user, "12:59"));
         messages.add(new MessageItem("dobar dan2", admin, "13:59"));
         messages.add(new MessageItem("dobar dan3", user, "14:59"));
         messages.add(new MessageItem("dobar dan4", admin, "15:59"));
         messages.add(new MessageItem("dobar dan5", user, "16:59"));
+        messages.add(new MessageItem("dobar dan3", user, "14:59"));
+        messages.add(new MessageItem("dobar dan4", admin, "15:59"));
+        messages.add(new MessageItem("dobar dan5", user, "16:59"));
+        messages.add(new MessageItem("dobar dan3", user, "14:59"));
+        messages.add(new MessageItem("dobar dan4", admin, "15:59"));
+        messages.add(new MessageItem("dobar dan5", user, "16:59"));
+        messages.add(new MessageItem("dobar dan3", user, "14:59"));
+        messages.add(new MessageItem("dobar dan4", admin, "15:59"));
+        messages.add(new MessageItem("dobar dan5", user, "16:59"));
+        messages.add(new MessageItem("dobar dan7", admin, "15:59"));
+        messages.add(new MessageItem("dobar dan8", user, "16:59"));
+
+        Collections.reverse(messages);
         return messages;
     }
 

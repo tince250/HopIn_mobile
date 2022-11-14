@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
@@ -12,7 +15,9 @@
         android:layout_marginBottom="16dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/textViewIndicator"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:reverseLayout="true"
+        android:paddingTop="80dp"/>
 
     <TextView
         android:id="@+id/textViewIndicator"
@@ -27,15 +32,20 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#e0e0e0"
-        app:layout_constraintBottom_toTopOf="@+id/layoutChatBox" />
+        app:layout_constraintBottom_toTopOf="@+id/layoutChatBox"
+        android:layout_marginHorizontal="20dp"
+        />
 
     <RelativeLayout
         android:id="@+id/layoutChatBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border">
 
 
         <EditText
@@ -45,12 +55,11 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/chatSendBtn"
-            android:background="@android:color/transparent"
             android:hint="Enter Message"
             android:inputType="text"
             android:maxLines="6"
-            tools:ignore="Autofill" />
-
+            tools:ignore="Autofill"/>
+        <!--
         <Button
             android:id="@+id/chatSendBtn"
             android:layout_width="64dp"
@@ -59,7 +68,25 @@
             android:background="?attr/selectableItemBackground"
             android:text="Send"
             android:textSize="10sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" />-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chatSendBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/poppinsbold"
+            android:paddingHorizontal="25sp"
+            android:paddingVertical="5sp"
+            android:text="@string/send"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:onClick="login"
+            android:textStyle="bold"/>
+
 
     </RelativeLayout>
 

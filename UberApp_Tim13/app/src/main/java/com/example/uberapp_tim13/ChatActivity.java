@@ -15,12 +15,15 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Chat");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
         chatRecycler = (RecyclerView) findViewById(R.id.recyclerViewChat);
         chatAdapter = new ChatAdapter(this, Mockap.getMessages());
-        chatRecycler.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        layoutManager.setReverseLayout(true);
+        chatRecycler.setLayoutManager(layoutManager);
         chatRecycler.setAdapter(chatAdapter);
     }
 }

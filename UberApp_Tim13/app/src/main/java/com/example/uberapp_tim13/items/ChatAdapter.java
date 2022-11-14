@@ -88,7 +88,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
         void bind(MessageItem message) {
             messageText.setText(message.getMessage());
-            //timeText.setText(Utils.formatDateTime(message.getTime()));
+            timeText.setText(message.getTime());
         }
     }
 
@@ -106,7 +106,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         void bind(MessageItem message) {
             messageText.setText(message.getMessage());
 
-            //timeText.setText(Utils.formatDateTime(message.getTime()));
+            timeText.setText(message.getTime());
         }
     }
 }
