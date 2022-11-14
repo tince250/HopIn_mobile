@@ -2,10 +2,14 @@ package com.example.uberapp_tim13;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.uberapp_tim13.tools.Globals;
 
 public class DriverStatisticsActivity extends AppCompatActivity {
 
@@ -17,6 +21,8 @@ public class DriverStatisticsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_driver_statistics);
+
+        ((TextView) findViewById(R.id.textViewDriverName)).setText("Hey, " + Globals.currentUser.getName());
 
         setSpinner();
     }
