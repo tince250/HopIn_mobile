@@ -9,7 +9,7 @@
     android:background="@drawable/border"
     android:id="@+id/historyRideCard">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -30,7 +30,8 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/icon_car">
 
             <TextView
                 android:id="@+id/textViewRoute"
@@ -64,8 +65,10 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_baseline_chat_bubble_outline_24"
-            app:tint="@color/dark_blue" />
-    </LinearLayout>
+            app:tint="@color/dark_blue"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
 
 
     <TextView
@@ -96,7 +99,7 @@
         android:textColor="@color/dark_blue"
         android:textSize="15sp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -126,9 +129,11 @@
             android:progressTint="@color/orange"
             android:rating="4"
             android:scaleX="0.6"
-            android:scaleY="0.6" />
+            android:scaleY="0.6"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="-20dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
