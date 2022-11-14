@@ -13,6 +13,10 @@ public class User {
     private String streetNum;
     private CreditCard card;
 
+    public User(){
+        super();
+    }
+
 
 
     public User(int id, String name, String surName, String phone, String email, String password,
