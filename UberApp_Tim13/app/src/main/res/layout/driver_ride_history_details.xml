@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:orientation="vertical"
         android:paddingStart="5dp"
@@ -62,7 +63,9 @@
                     android:fontFamily="@font/poppinsbold"
                     android:text="stops: Stara Pazova"
                     android:textSize="14sp"
-                    android:textColor="@color/dark_gray"/>
+                    android:layout_marginTop="-2dp"
+                    android:textColor="@color/dark_gray"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -75,7 +78,6 @@
             android:text="@string/rideDate"
             android:textColor="@color/dark_blue"
             android:textSize="15sp"
-            android:textStyle="bold"
             android:drawableLeft="@drawable/ic_calendar"
             android:drawablePadding="3dp"
             android:paddingHorizontal="8dp"/>
@@ -103,7 +105,6 @@
             android:text="@string/acceptanceRideDistance"
             android:textColor="@color/dark_blue"
             android:textSize="15sp"
-            android:textStyle="bold"
             android:drawableLeft="@drawable/ic_price"
             android:drawablePadding="3dp"
             android:paddingHorizontal="8dp"/>
@@ -131,7 +132,6 @@
             android:text="@string/acceptanceRidePrice"
             android:textColor="@color/dark_blue"
             android:textSize="15sp"
-            android:textStyle="bold"
             android:drawableLeft="@drawable/ic_price"
             android:drawablePadding="3dp"
             android:paddingHorizontal="8dp"/>
@@ -158,7 +158,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp"
         app:cardCornerRadius="5dp"
         android:elevation="0dp">
@@ -183,7 +183,8 @@
                 android:layout_marginBottom="5dp"
                 android:padding="10dp"
                 android:onClick="switchToPassengerDetails"
-                android:id="@+id/passengerDetails">
+                android:id="@+id/passengerDetails"
+                >
                 <androidx.cardview.widget.CardView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -214,7 +215,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppinsbold"
                     android:textFontWeight="700"
-                    android:text="Passengers"/>
+                    android:text="Passengers: 1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -226,7 +227,8 @@
                     android:fontFamily="@font/poppinsbold"
                     android:textSize="11sp"
                     android:textColor="@color/dark_gray"
-                    android:text="Show details"/>
+                    android:text="Show details"
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
         </LinearLayout>
@@ -240,10 +242,12 @@
         android:id="@+id/commentsSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="10dp">
 
         <TextView
             android:id="@+id/commentsSectionTitle"
@@ -255,7 +259,8 @@
             android:textColor="@color/black"
             android:padding="5dp"
             android:layout_marginLeft="15dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -271,7 +276,8 @@
             android:progressTint="@color/orange"
             android:rating="4"
             android:scaleX="0.6"
-            android:scaleY="0.6"/>
+            android:scaleY="0.6"
+            android:layout_marginRight="-25dp"/>
 
         <FrameLayout
             android:id="@+id/listViewReviews"

@@ -21,12 +21,12 @@ public class DriverRideHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.driver_history_list, container, false);
 
-        /*view.findViewById(R.id.historyRideCard).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.historyRideCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransition.to(DriverRideHistoryDetailsFragment.newInstance(), getActivity(), false, R.id.listRideHistory);
+                FragmentTransition.to(DriverRideHistoryDetailsFragment.newInstance(), getActivity(), true, R.id.listRideHistory);
             }
-        });*/
+        });
         return view;
     }
 

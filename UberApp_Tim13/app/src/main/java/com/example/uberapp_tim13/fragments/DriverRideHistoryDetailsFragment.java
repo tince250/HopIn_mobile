@@ -26,7 +26,7 @@ public class DriverRideHistoryDetailsFragment extends Fragment{
         view.findViewById(R.id.passengerDetails).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransition.to(PassengerDetailsFragment.newInstance(), getActivity(), false, R.id.listRideHistory);
+                FragmentTransition.to(PassengerDetailsFragment.newInstance(), getActivity(), true, R.id.listRideHistory);
             }
         });
         return view;
