@@ -37,6 +37,7 @@ public class DriverAccountFragment extends Fragment {
             }
         });
 
+
         view.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

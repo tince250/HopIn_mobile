@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
+import com.example.uberapp_tim13.fragments.DriverRideHistoryDetailsFragment;
+import com.example.uberapp_tim13.fragments.DriverRideHistoryFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
 public class DriverRideHistoryActivity extends AppCompatActivity {

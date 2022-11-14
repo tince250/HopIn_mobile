@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.fragments;
 
 import androidx.fragment.app.Fragment;
 
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.R;
 
 public class AccountDetailsFragment extends Fragment{
     public static AccountDetailsFragment newInstance() {
