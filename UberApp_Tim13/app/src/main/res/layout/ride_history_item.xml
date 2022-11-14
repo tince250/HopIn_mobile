@@ -8,13 +8,14 @@
     android:layout_marginTop="10dp"
     android:background="@drawable/border"
     android:id="@+id/historyRideCard"
-    android:padding="5dp">
+    android:padding="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        >
 
 
         <ImageView

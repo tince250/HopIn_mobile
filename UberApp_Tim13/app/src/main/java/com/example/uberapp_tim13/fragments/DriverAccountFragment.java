@@ -1,6 +1,7 @@
 package com.example.uberapp_tim13.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.DriverAccountSettingsActivity;
 import com.example.uberapp_tim13.DriverStatisticsActivity;
+import com.example.uberapp_tim13.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.PassengerReportsActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.UserLoginActivity;
@@ -46,6 +48,23 @@ public class DriverAccountFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.statisticsBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (Globals.currentUser.getRole()) {
+                    case "driver":
+                        startActivity(new Intent(getActivity(), DriverStatisticsActivity.class));
+                        break;
+                    case "passenger":
+                        startActivity(new Intent(getActivity(), FavoriteRoutesActivity.class));
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        });
+
         return view;
     }
 
@@ -55,24 +74,13 @@ public class DriverAccountFragment extends Fragment {
             case "driver":
                 view.findViewById(R.id.payment_info_card).setVisibility(View.GONE);
                 button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.statistics));
-                button.setText("Statistics");
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getActivity(), DriverStatisticsActivity.class));
-                    }
-                });
+                button.setText("statistics");
                 break;
             case "passenger":
                 view.findViewById(R.id.vehicle_info_card).setVisibility(View.GONE);
-                button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.reports));
-                button.setText("Reports");
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
-                    }
-                });
+                button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.heart_solid));
+                button.setIconTint(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+                button.setText("routes");
                 break;
         }
         fitTextViewsToUser(view);

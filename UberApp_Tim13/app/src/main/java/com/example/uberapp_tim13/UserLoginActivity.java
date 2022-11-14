@@ -49,7 +49,7 @@ public class UserLoginActivity extends Activity {
 
     }
 
-    public void register(View v) {
+    public void goToRegister(View v) {
         startActivity(new Intent(UserLoginActivity.this, PassengerRegisterActivity.class));
     }
 
