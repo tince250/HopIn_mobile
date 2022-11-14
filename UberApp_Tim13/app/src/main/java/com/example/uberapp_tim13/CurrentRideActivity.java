@@ -32,7 +32,7 @@ public class CurrentRideActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                if (Globals.userRole == "driver") {
+                if (Globals.userRole.equals("driver")) {
                     startActivity(new Intent(this, DriverMainActivity.class));
                     return true;
                 } else {
@@ -74,8 +74,8 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void fitActivityToRole() {
-        TextView name = findViewById(R.id.current_driver);
-        TextView detail = findViewById(R.id.current_driver_details);
+        TextView name = findViewById(R.id.currentUser);
+        TextView detail = findViewById(R.id.currentUserDetails);
         switch (Globals.userRole) {
             case "driver":
                 name.setText("Passengers");
