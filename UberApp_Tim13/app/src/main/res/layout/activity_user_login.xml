@@ -109,7 +109,8 @@
             android:text="@string/register"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:onClick="goToRegister"/>
 
     </LinearLayout>
 
