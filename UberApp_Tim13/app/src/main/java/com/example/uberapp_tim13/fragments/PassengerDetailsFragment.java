@@ -19,7 +19,7 @@ public class PassengerDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_details, container, false);
 //        getActivity().setTitle("Passenger info");
-        FragmentTransition.to(AccountDetailsFragment.newInstance(), getActivity(), false, R.id.listViewAccountDetails);
+        FragmentTransition.to(AccountDetailsFragment.newInstance(), getActivity(), false, R.id.accountDetails);
         return view;
     }
 }

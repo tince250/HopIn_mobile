@@ -14,7 +14,7 @@ public class AccountDetailsFragment extends Fragment{
         return new AccountDetailsFragment();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.account_details, container, false);
+        View view = inflater.inflate(R.layout.account_details_item, container, false);
         return view;
     }
 }

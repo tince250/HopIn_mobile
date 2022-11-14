@@ -110,4 +110,11 @@
     <string name="avgKm">30km</string>
     <string name="average">average</string>
     <string name="rideDate">Date: 15.12.2021.</string>
+    <string name="userName">Grace Collins</string>
+    <string name="userEmail">email: grace@gmail.com</string>
+    <string name="userTelephone">contact: +3816572193</string>
+    <string name="driverName">Mark Jackson</string>
+    <string name="showDetails">Show details</string>
+    <string name="ratingsSubtitle">Ratings</string>
+    <string name="passengersSubtitle">Passengers</string>
 </resources>

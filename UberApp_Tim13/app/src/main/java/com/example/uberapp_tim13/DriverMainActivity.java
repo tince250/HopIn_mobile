@@ -10,7 +10,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.fragments.DriverAccountFragment;
-import com.example.uberapp_tim13.fragments.DriverHistoryFragment;
+import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.fragments.DriverHomeFragment;
 import com.example.uberapp_tim13.fragments.DriverInboxFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
@@ -74,7 +74,7 @@ public class DriverMainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_history:
                     setTitle("History");
-                    FragmentTransition.to(DriverHistoryFragment.newInstance(), this, true, R.id.driver_fl);
+                    FragmentTransition.to(RideHistoryFragment.newInstance(), this, true, R.id.driver_fl);
                     overridePendingTransition(0, 0);
                     break;
             }

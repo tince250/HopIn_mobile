@@ -11,14 +11,14 @@ import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 
-public class DriverRideHistoryDetailsFragment extends Fragment{
-    public static DriverRideHistoryDetailsFragment newInstance() {
-        return new DriverRideHistoryDetailsFragment();
+public class RideHistoryDetailsFragment extends Fragment{
+    public static RideHistoryDetailsFragment newInstance() {
+        return new RideHistoryDetailsFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.driver_ride_history_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_ride_history_details, container, false);
         fitFragmentToRole(view);
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.listViewReviews);
 
@@ -28,7 +28,7 @@ public class DriverRideHistoryDetailsFragment extends Fragment{
         view.findViewById(R.id.passengerDetails).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransition.to(PassengerDetailsFragment.newInstance(), getActivity(), true, R.id.listRideHistory);
+                FragmentTransition.to(PassengerDetailsFragment.newInstance(), getActivity(), true, R.id.rideHistory);
             }
         });
         return view;

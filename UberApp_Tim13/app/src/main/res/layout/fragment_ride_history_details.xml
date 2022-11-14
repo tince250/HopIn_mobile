@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -50,7 +49,7 @@
                     android:fontFamily="@font/poppinsbold"
                     android:gravity="center_vertical"
                     android:paddingTop="5dp"
-                    android:text="Novi Sad -> Belgrade"
+                    android:text="@string/routeCities"
                     android:textColor="@color/dark_blue"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -61,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsbold"
-                    android:text="stops: Stara Pazova"
+                    android:text="@string/routeStops"
                     android:textSize="14sp"
                     android:layout_marginTop="-2dp"
                     android:textColor="@color/dark_gray"
@@ -215,7 +214,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppinsbold"
                     android:textFontWeight="700"
-                    android:text="Driver: Mark Johnson"/>
+                    android:text="@string/driverName"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -227,7 +226,7 @@
                     android:fontFamily="@font/poppinsbold"
                     android:textSize="11sp"
                     android:textColor="@color/dark_gray"
-                    android:text="Show details"
+                    android:text="@string/showDetails"
                     android:textStyle="bold"/>
 
             </RelativeLayout>
@@ -298,7 +297,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppinsbold"
                     android:textFontWeight="700"
-                    android:text="Passengers"/>
+                    android:text="@string/passengersSubtitle"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -310,7 +309,7 @@
                     android:fontFamily="@font/poppinsbold"
                     android:textSize="11sp"
                     android:textColor="@color/dark_gray"
-                    android:text="Show details"
+                    android:text="@string/showDetails"
                     android:textStyle="bold"/>
 
             </RelativeLayout>
@@ -338,7 +337,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/poppinsbold"
-            android:text="Ratings"
+            android:text="@string/ratingsSubtitle"
             android:textColor="@color/black"
             android:padding="5dp"
             android:layout_marginLeft="15dp"
