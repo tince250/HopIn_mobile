@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -74,16 +76,18 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void fitActivityToRole() {
-        TextView name = findViewById(R.id.currentUser);
-        TextView detail = findViewById(R.id.currentUserDetails);
+        LinearLayout startFinishBtns = findViewById(R.id.start_finish_buttons);
+        Button inconsistentBtn = findViewById(R.id.inconsistentBtn);
         switch (Globals.userRole) {
             case "driver":
-                name.setText("Passengers");
-                detail.setText("Details about passengers");
+                findViewById(R.id.driver_details_card).setVisibility(View.GONE);
+                inconsistentBtn.setVisibility(View.GONE);
+                startFinishBtns.setVisibility(View.VISIBLE);
                 break;
             case "passenger":
-                name.setText("Driver");
-                detail.setText("Details about driver");
+                findViewById(R.id.pass_details_card).setVisibility(View.GONE);
+                inconsistentBtn.setVisibility(View.VISIBLE);
+                startFinishBtns.setVisibility(View.GONE);
                 break;
         }
     }
