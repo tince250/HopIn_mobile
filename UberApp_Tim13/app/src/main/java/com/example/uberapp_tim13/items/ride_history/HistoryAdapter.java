@@ -57,7 +57,7 @@ public class HistoryAdapter extends BaseAdapter {
         ((TextView)view_new.findViewById(R.id.textViewPassengers)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view_new.findViewById(R.id.textViewPrice)).setText("Price(RSD): " + ride.getPrice());
 
-//        fitFragmentToRole(view_new, ride);
+        fitFragmentToRole(view_new, ride);
 
         return view_new;
     }

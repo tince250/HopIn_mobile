@@ -31,7 +31,7 @@ public class RideHistoryDetailsFragment extends Fragment{
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.listViewReviews);
 
         RideItem ride = Mockap.getRides().get(getArguments().getInt("ride_id"));
-//        fitFragmentToRole(view, ride);
+        fitFragmentToRole(view, ride);
 
 
         ((TextView)view.findViewById(R.id.textViewRoute)).setText(ride.getPickUpLocation()+" -> "+ride.getDestination());
@@ -63,7 +63,7 @@ public class RideHistoryDetailsFragment extends Fragment{
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view.findViewById(R.id.driver_info_card_hist)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
+                ((TextView)view.findViewById(R.id.name_driver)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
                 break;
         }
     }
