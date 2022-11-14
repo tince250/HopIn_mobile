@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_timeline_24" />
-                            <entry key="sourceFile" value="C:\Users\Nemanja\Downloads\route-solid.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="heart_solid" />
+                            <entry key="sourceFile" value="C:\Users\Suncica\Desktop\heart-solid.svg" />
                           </map>
                         </option>
                       </PersistentState>
