@@ -7,7 +7,8 @@
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
     android:background="@drawable/border"
-    android:id="@+id/historyRideCard">
+    android:id="@+id/historyRideCard"
+    android:padding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +25,8 @@
             android:layout_marginEnd="5dp"
             android:contentDescription="@null"
             android:src="@drawable/ic_car"
-            app:tint="@color/dark_gray"/>
+            app:tint="@color/dark_gray"
+            android:layout_marginTop="5dp"/>
 
         <LinearLayout
             android:layout_width="250dp"
@@ -53,7 +55,9 @@
                 android:fontFamily="@font/poppinsbold"
                 android:text="stops: Stara Pazova"
                 android:textSize="14sp"
-                android:textColor="@color/dark_gray"/>
+                android:textColor="@color/dark_gray"
+                android:layout_marginTop="-2dp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <ImageView
@@ -66,8 +70,7 @@
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_baseline_chat_bubble_outline_24"
             app:tint="@color/dark_blue"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 
@@ -80,7 +83,6 @@
         android:text="@string/rideDate"
         android:textColor="@color/dark_blue"
         android:textSize="15sp"
-        android:textStyle="bold"
         android:drawableLeft="@drawable/ic_calendar"
         android:drawablePadding="3dp"
         android:paddingHorizontal="8dp"/>
@@ -131,7 +133,8 @@
             android:scaleX="0.6"
             android:scaleY="0.6"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="-20dp"/>
+            android:layout_marginRight="-25dp"
+            android:layout_marginTop="-5dp"/>
 
     </RelativeLayout>
 
