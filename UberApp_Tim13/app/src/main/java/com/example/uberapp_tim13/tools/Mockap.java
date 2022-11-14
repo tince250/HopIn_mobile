@@ -2,12 +2,14 @@ package com.example.uberapp_tim13.tools;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.InboxItem;
+import com.example.uberapp_tim13.items.MessageItem;
 import com.example.uberapp_tim13.items.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mockap {
+    public static List<MessageItem> messages;
     public static List<InboxItem> getInboxItems() {
         List<InboxItem> items = new ArrayList<InboxItem>();
         items.add(new InboxItem("HopIn Support", "Your message is received and pending.", "today at 13:40", R.drawable.support, "support"));
@@ -24,4 +26,5 @@ public class Mockap {
 
         return users;
     }
+
 }
