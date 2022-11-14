@@ -24,7 +24,8 @@
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                android:parentActivityName=".PassengerMainActivity"/>
             
         </activity>
         <activity
@@ -59,11 +60,11 @@
         <activity
             android:name=".DriverMainActivity"
             android:exported="true">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -85,11 +86,11 @@
         <activity
             android:name=".PassengerMainActivity"
             android:exported="true">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -111,18 +112,12 @@
         <activity
             android:name=".DriverStatisticsActivity"
             android:exported="false"
-            android:parentActivityName=".DriverAccountActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DriverAccountActivity" />
+            android:parentActivityName=".DriverMainActivity">
         </activity>
         <activity
             android:name=".DriverAccountSettingsActivity"
             android:exported="false"
             android:parentActivityName=".DriverMainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DriverAccountActivity" />
         </activity>
         <activity
             android:name=".SplashActivity"

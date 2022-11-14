@@ -17,6 +17,11 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.fragments.DriverAccountFragment;
+import com.example.uberapp_tim13.fragments.DriverHomeFragment;
+import com.example.uberapp_tim13.fragments.DriverInboxFragment;
+import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PassengerMainActivity extends AppCompatActivity{
@@ -26,6 +31,8 @@ public class PassengerMainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
+
+        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passenger_fl);
 
         setBottomNavigationBar();
     }
@@ -51,13 +58,19 @@ public class PassengerMainActivity extends AppCompatActivity{
             //redirection to other activities/fragments
             switch (item.getItemId()) {
                 case R.id.nav_inbox:
-                    Toast.makeText(this, "inbox", Toast.LENGTH_LONG).show();
+                    setTitle("Inbox");
+                    FragmentTransition.to(DriverInboxFragment.newInstance(), this, true, R.id.passenger_fl);
+                    overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_home:
-                    Toast.makeText(this, "home", Toast.LENGTH_LONG).show();
+                    setTitle("Home");
+                    FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passenger_fl);
+                    overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
-                    Toast.makeText(this, "profile", Toast.LENGTH_LONG).show();
+                    setTitle("Account");
+                    FragmentTransition.to(DriverAccountFragment.newInstance(), this, true, R.id.passenger_fl);
+                    overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_history:
                     Toast.makeText(this, "history", Toast.LENGTH_LONG).show();

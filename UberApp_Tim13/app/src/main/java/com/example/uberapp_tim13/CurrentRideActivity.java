@@ -1,15 +1,46 @@
 package com.example.uberapp_tim13;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.uberapp_tim13.fragments.DriverHomeFragment;
+import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
+import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 
 public class CurrentRideActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_current_ride);
+        setTitle("Current ride");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_current_ride);
+
+        fitActivityToRole();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                if (Globals.userRole == "driver") {
+                    startActivity(new Intent(this, DriverMainActivity.class));
+                    return true;
+                } else {
+                    startActivity(new Intent(this, PassengerMainActivity.class));
+                    return true;
+                }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -40,5 +71,20 @@ public class CurrentRideActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void fitActivityToRole() {
+        TextView name = findViewById(R.id.current_driver);
+        TextView detail = findViewById(R.id.current_driver_details);
+        switch (Globals.userRole) {
+            case "driver":
+                name.setText("Passengers");
+                detail.setText("Details about passengers");
+                break;
+            case "passenger":
+                name.setText("Driver");
+                detail.setText("Details about driver");
+                break;
+        }
     }
 }
