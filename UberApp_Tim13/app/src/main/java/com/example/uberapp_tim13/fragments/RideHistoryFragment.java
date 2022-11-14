@@ -28,7 +28,6 @@ public class RideHistoryFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new RideHistoryAdapter(view.getContext(), Mockap.getRides()));
 
-        FragmentTransition.to(RideHistoryItemFragment.newInstance(), getActivity(), false, R.id.rideHistory);
         return view;
     }
 }
