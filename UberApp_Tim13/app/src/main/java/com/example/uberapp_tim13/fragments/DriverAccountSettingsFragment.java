@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -48,5 +49,10 @@ public class DriverAccountSettingsFragment extends Fragment {
                 view.findViewById(R.id.changePayInfoBtn).setVisibility(View.VISIBLE);
                 break;
         }
+        ((EditText) view.findViewById(R.id.editTextNameSettings)).setText(Globals.currentUser.getName());
+        ((EditText) view.findViewById(R.id.editTextSurnameSettings)).setText(Globals.currentUser.getSurName());
+        ((EditText) view.findViewById(R.id.editTextEmailSettings)).setText(Globals.currentUser.getEmail());
+        ((EditText) view.findViewById(R.id.editTextCitySettings)).setText(Globals.currentUser.getCity());
+        ((EditText) view.findViewById(R.id.editTextPhoneSettings)).setText(Globals.currentUser.getPhone());
     }
 }
