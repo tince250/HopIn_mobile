@@ -42,7 +42,7 @@ public class Mockap {
     }
 
     public static List<MessageItem> getMessages(){
-        User user = (new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" ));
+        User user = (new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" , new CreditCard("DinaCard", "111 1111 1111 321", "222", "10", "2020")));
         User admin = new User();
         messages = new ArrayList<MessageItem>();
         messages.add(new MessageItem("Hello", user, "11:59, 11/11"));
