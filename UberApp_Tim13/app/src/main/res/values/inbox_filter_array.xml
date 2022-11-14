@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="inbox_filter">
+        <item>all</item>
+        <item>support</item>
+        <item>ride</item>
+        <item>panic</item>
+    </string-array>
+
+</resources>

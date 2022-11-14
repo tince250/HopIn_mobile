@@ -1,15 +1,38 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.UberApp_Tim13" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.UberApp_Tim13" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/dark_gray</item>
         <item name="colorPrimaryVariant">@color/lighter_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/orange</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/poppinsregular</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="backgroundTint">@color/light_gray</item>
+        <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
+        <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
+
+    </style>
+
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Driver upper bar switch theme. -->
+    <style name="switchStyle">
+        <item name="android:colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen"
+        parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnSurface">@color/dark_blue</item>
     </style>
 </resources>
