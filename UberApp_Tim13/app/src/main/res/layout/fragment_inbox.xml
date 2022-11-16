@@ -7,7 +7,7 @@
     android:padding="15dp">
 
     <EditText
-        android:id="@+id/search_edit_text"
+        android:id="@+id/searchET"
         android:layout_width="260dp"
         android:layout_height="40dp"
         android:layout_weight="1"
@@ -22,10 +22,10 @@
         android:hint="@string/search"/>
 
     <Spinner
-        android:id="@+id/spinner_inbox"
+        android:id="@+id/spinnerInbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/search_edit_text"
+        android:layout_toEndOf="@id/searchET"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:foregroundTint="@color/dark_gray"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/inboxRW"
-        android:layout_below="@id/search_edit_text"
+        android:layout_below="@id/searchET"
         android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

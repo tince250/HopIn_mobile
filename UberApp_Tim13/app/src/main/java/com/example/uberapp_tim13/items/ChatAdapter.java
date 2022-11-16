@@ -4,10 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim13.R;
@@ -82,8 +80,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
         private RecieveHolder(View itemView) {
             super(itemView);
-            messageText = (TextView) itemView.findViewById(R.id.textViewMessageYou);
-            timeText = (TextView) itemView.findViewById(R.id.textViewTimestampYou);
+            messageText = (TextView) itemView.findViewById(R.id.messageYouTV);
+            timeText = (TextView) itemView.findViewById(R.id.timestampYouTV);
         }
 
         void bind(MessageItem message) {
@@ -99,8 +97,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
         private SendHolder(View itemView) {
             super(itemView);
 
-            messageText = (TextView) itemView.findViewById(R.id.textViewMessageMe);
-            timeText = (TextView) itemView.findViewById(R.id.textViewTimestampMe);
+            messageText = (TextView) itemView.findViewById(R.id.messageMeTV);
+            timeText = (TextView) itemView.findViewById(R.id.timestampMeTV);
         }
 
         void bind(MessageItem message) {

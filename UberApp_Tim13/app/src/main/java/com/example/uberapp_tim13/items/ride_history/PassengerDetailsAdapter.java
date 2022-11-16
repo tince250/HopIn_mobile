@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.RideItem;
 import com.example.uberapp_tim13.items.User;
 import com.example.uberapp_tim13.tools.Mockap;
 
@@ -47,9 +46,9 @@ public class PassengerDetailsAdapter extends BaseAdapter {
             view_new = activity.getLayoutInflater().inflate(R.layout.account_details_item, null);
         }
 
-        ((TextView) view_new.findViewById(R.id.detailsName)).setText(user.getName());
-        ((TextView) view_new.findViewById(R.id.detailsEmail)).setText(user.getEmail());
-        ((TextView) view_new.findViewById(R.id.detailsContact)).setText("+381"+user.getPhone().toString());
+        ((TextView) view_new.findViewById(R.id.detailsNameTV)).setText(user.getName());
+        ((TextView) view_new.findViewById(R.id.detailsEmailTV)).setText(user.getEmail());
+        ((TextView) view_new.findViewById(R.id.detailsContactTV)).setText("+381"+user.getPhone().toString());
 
         return view_new;
     }

@@ -47,15 +47,15 @@ public class HistoryAdapter extends BaseAdapter {
             view_new = activity.getLayoutInflater().inflate(R.layout.ride_history_item, null);
         }
 
-        ((TextView)view_new.findViewById(R.id.textViewRoute)).setText(ride.getPickUpLocation()+" -> "+ride.getDestination());
+        ((TextView)view_new.findViewById(R.id.routeTV)).setText(ride.getPickUpLocation()+" -> "+ride.getDestination());
         String stops = "";
         for (String s : ride.getStops()){
             stops = stops + s +", ";
         }
-        ((TextView)view_new.findViewById(R.id.textViewStops)).setText("Stops: "+ stops);
-        ((TextView)view_new.findViewById(R.id.textViewDate)).setText(ride.getStartTime());
-        ((TextView)view_new.findViewById(R.id.textViewPassengers)).setText("Passengers: " + ride.getPassengers().size());
-        ((TextView)view_new.findViewById(R.id.textViewPrice)).setText("Price(RSD): " + ride.getPrice());
+        ((TextView)view_new.findViewById(R.id.stopsTV)).setText("Stops: "+ stops);
+        ((TextView)view_new.findViewById(R.id.dateTV)).setText(ride.getStartTime());
+        ((TextView)view_new.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
+        ((TextView)view_new.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getPrice());
 
         fitFragmentToRole(view_new, ride);
 
@@ -65,11 +65,11 @@ public class HistoryAdapter extends BaseAdapter {
     private void fitFragmentToRole(View view_new, RideItem ride) {
         switch (Globals.currentUser.getRole()) {
             case "driver":
-                view_new.findViewById(R.id.add_to_fav).setVisibility(View.GONE);
-                view_new.findViewById(R.id.textViewDriver).setVisibility(View.GONE);
+                view_new.findViewById(R.id.addToFavImg).setVisibility(View.GONE);
+                view_new.findViewById(R.id.driverTV).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view_new.findViewById(R.id.textViewDriver)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
+                ((TextView)view_new.findViewById(R.id.driverTV)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
                 break;
         }
     }

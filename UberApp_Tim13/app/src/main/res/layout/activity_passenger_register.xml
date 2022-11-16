@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/registerLayout"
+        android:id="@+id/registerLL"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginHorizontal="60dp"
@@ -22,7 +22,7 @@
 
 
         <TextView
-            android:id="@+id/textViewTitle"
+            android:id="@+id/titleTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -33,7 +33,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/editTextName"
+            android:id="@+id/nameET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -46,7 +46,7 @@
             android:textSize="16sp"/>
 
         <EditText
-            android:id="@+id/editTextSurName"
+            android:id="@+id/surNameET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
 
 
         <EditText
-            android:id="@+id/editTextEmailRegister"
+            android:id="@+id/emailRegisterET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -74,7 +74,7 @@
 
 
         <EditText
-            android:id="@+id/editTextPasswordRegister"
+            android:id="@+id/passwordRegisterET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -88,7 +88,7 @@
 
 
         <EditText
-            android:id="@+id/editTextConfirmPassword"
+            android:id="@+id/confirmPasswordET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -101,7 +101,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextCity"
+            android:id="@+id/cityET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -115,7 +115,7 @@
 
 
     <LinearLayout
-        android:id="@+id/telephoneLayout"
+        android:id="@+id/telephoneLL"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 
@@ -138,7 +138,7 @@
             />
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/phoneET"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@drawable/border"

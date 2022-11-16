@@ -79,20 +79,20 @@ public class AccountFragment extends Fragment {
                 button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.heart_solid));
                 button.setIconTint(ColorStateList.valueOf(getResources().getColor(R.color.red)));
                 button.setText("routes");
-                ((TextView) view.findViewById(R.id.textViewCard)).setText("**** **** *** " + Globals.currentUser.getCard().getNumber().split(" ")[3]);
-                ((TextView) view.findViewById(R.id.textViewCardType)).setText(Globals.currentUser.getCard().getType());
+                ((TextView) view.findViewById(R.id.cardTV)).setText("**** **** *** " + Globals.currentUser.getCard().getNumber().split(" ")[3]);
+                ((TextView) view.findViewById(R.id.cardTypeTV)).setText(Globals.currentUser.getCard().getType());
                 break;
         }
         fitTextViewsToUser(view);
     }
 
     private void fitTextViewsToUser(View view) {
-        ((TextView) view.findViewById(R.id.user_role)).setText(Globals.userRole);
-        ((TextView) view.findViewById(R.id.driverName)).setText(Globals.currentUser.getName() + " " + Globals.currentUser.getSurName());
-        ((TextView) view.findViewById(R.id.textViewEmail)).setText(Globals.currentUser.getEmail());
-        ((TextView) view.findViewById(R.id.textViewPhone)).setText(Globals.currentUser.getPhone());
-        ((TextView) view.findViewById(R.id.textViewCity)).setText(Globals.currentUser.getCity());
-        ((TextView) view.findViewById(R.id.textViewStreet)).setText(Globals.currentUser.getStreet());
-        ((TextView) view.findViewById(R.id.textViewStreetNum)).setText(Globals.currentUser.getStreetNum());
+        ((TextView) view.findViewById(R.id.userRoleTV)).setText(Globals.userRole);
+        ((TextView) view.findViewById(R.id.driverNameTitleTV)).setText(Globals.currentUser.getName() + " " + Globals.currentUser.getSurName());
+        ((TextView) view.findViewById(R.id.emailTV)).setText(Globals.currentUser.getEmail());
+        ((TextView) view.findViewById(R.id.phoneTV)).setText(Globals.currentUser.getPhone());
+        ((TextView) view.findViewById(R.id.cityTV)).setText(Globals.currentUser.getCity());
+        ((TextView) view.findViewById(R.id.streetTV)).setText(Globals.currentUser.getStreet());
+        ((TextView) view.findViewById(R.id.streetNumTV)).setText(Globals.currentUser.getStreetNum());
     }
 }

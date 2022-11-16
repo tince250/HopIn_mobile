@@ -3,21 +3,16 @@ package com.example.uberapp_tim13;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-
-import java.text.DateFormat;
-import java.util.Calendar;
 
 public class DriverReportsActivity extends AppCompatActivity {
 
@@ -29,7 +24,7 @@ public class DriverReportsActivity extends AppCompatActivity {
         setSpinner();
 
         Button button = (Button) findViewById(R.id.dateRangeBtn);
-        TextView textView = (TextView) findViewById(R.id.dateRangeTextView);
+        TextView textView = (TextView) findViewById(R.id.dateRangeTV);
 
         MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();

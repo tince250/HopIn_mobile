@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -27,28 +26,28 @@ public class RideHistoryDetailsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_history_details, container, false);
 
-        FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.listViewReviews);
+        FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.reviewsLV);
 
         RideItem ride = Mockap.getRides().get(rideNum);
         fitFragmentToRole(view, ride);
 
 
-        ((TextView)view.findViewById(R.id.textViewRoute)).setText(ride.getPickUpLocation()+" -> "+ride.getDestination());
+        ((TextView)view.findViewById(R.id.routeTV)).setText(ride.getPickUpLocation()+" -> "+ride.getDestination());
         String stops = "";
         for (String s : ride.getStops()){
             stops = stops + s +", ";
         }
-        ((TextView)view.findViewById(R.id.textViewStops)).setText("Stops: "+ stops);
-        ((TextView)view.findViewById(R.id.textViewStartTime)).setText(ride.getStartTime());
-        ((TextView)view.findViewById(R.id.textViewEndTime)).setText(ride.getEndTime());
-        ((TextView)view.findViewById(R.id.textViewPassengers)).setText("Passengers: " + ride.getPassengers().size());
-        ((TextView)view.findViewById(R.id.textViewPrice)).setText("Price(RSD): " + ride.getPrice());
+        ((TextView)view.findViewById(R.id.stopsTV)).setText("Stops: "+ stops);
+        ((TextView)view.findViewById(R.id.startTimeTV)).setText(ride.getStartTime());
+        ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getEndTime());
+        ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
+        ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getPrice());
 
         view.findViewById(R.id.passengerDetails).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getActivity(), "sss", Toast.LENGTH_SHORT).show();
-                FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driver_fl);
+                FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
             }
         });
         /*TextView tt = view.findViewById(R.id.textViewDistance);
@@ -69,7 +68,7 @@ public class RideHistoryDetailsFragment extends Fragment{
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view.findViewById(R.id.name_driver)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
+                ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
                 break;
         }
     }

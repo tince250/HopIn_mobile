@@ -17,10 +17,10 @@ public class InboxItemHolder extends RecyclerView.ViewHolder {
 
     public InboxItemHolder(@NonNull View itemView) {
         super(itemView);
-        userImage = itemView.findViewById(R.id.inboxImage);
-        name = itemView.findViewById(R.id.name);
-        displayMess = itemView.findViewById(R.id.displayMessage);
-        dateTime = itemView.findViewById(R.id.dateTime);
-        coloredMargin = itemView.findViewById(R.id.colored_margin);
+        userImage = itemView.findViewById(R.id.inboxImg);
+        name = itemView.findViewById(R.id.nameTV);
+        displayMess = itemView.findViewById(R.id.displayMessageTV);
+        dateTime = itemView.findViewById(R.id.dateTimeTV);
+        coloredMargin = itemView.findViewById(R.id.coloredMarginV);
     }
 }

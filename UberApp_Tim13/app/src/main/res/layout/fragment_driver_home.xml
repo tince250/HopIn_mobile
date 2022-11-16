@@ -15,7 +15,7 @@
         android:textColor="@color/black" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/map_card"
+        android:id="@+id/mapCV"
         app:cardCornerRadius="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:elevation="10dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/mapImg"
             app:srcCompat="@drawable/mapa_mockap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_current_ride"
+        android:id="@+id/currentRideBtn"
         android:onClick="onClickCurrentRide"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_car"
@@ -41,7 +41,7 @@
         app:iconTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/map_card"
+        android:layout_below="@id/mapCV"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/green"
         android:paddingVertical="15dp"
@@ -52,7 +52,7 @@
         android:textSize="16dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_set_dest"
+        android:id="@+id/setDestBtn"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_location_pin"
         app:iconGravity="textStart"
@@ -61,7 +61,7 @@
         app:iconTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_current_ride"
+        android:layout_below="@id/currentRideBtn"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/dark_blue"
         android:paddingVertical="15dp"

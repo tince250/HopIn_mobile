@@ -14,6 +14,6 @@ public class FavoriteRoutesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Favorite routes");
         setContentView(R.layout.activity_favorite_routes);
-        FragmentTransition.to(FavoriteRouteFragment.newInstance(), this, false, R.id.list);
+        FragmentTransition.to(FavoriteRouteFragment.newInstance(), this, false, R.id.listFL);
     }
 }

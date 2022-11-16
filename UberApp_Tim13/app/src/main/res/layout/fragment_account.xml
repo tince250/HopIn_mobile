@@ -7,12 +7,12 @@
 
 
     <ScrollView
-        android:id="@+id/accountView"
+        android:id="@+id/accountSV"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/accountLinearLayout"
+            android:id="@+id/accountLL"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -45,7 +45,7 @@
 
 
                     <ImageView
-                        android:id="@+id/driverAvatar"
+                        android:id="@+id/driverAvatarImg"
                         android:layout_width="110dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
@@ -54,7 +54,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/driverName"
+                    android:id="@+id/driverNameTitleTV"
                     android:layout_width="fill_parent"
                     android:layout_height="17sp"
                     android:fontFamily="@font/poppinsbold"
@@ -66,7 +66,7 @@
                     android:textFontWeight="700"/>
 
                 <TextView
-                    android:id="@+id/user_role"
+                    android:id="@+id/userRoleTV"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsbold"
@@ -79,7 +79,7 @@
                     android:id="@+id/accountSettingBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/user_role"
+                    android:layout_below="@id/userRoleTV"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="15dp"
                     android:backgroundTint="@color/gray"
@@ -193,7 +193,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/textViewEmail"
+                        android:id="@+id/emailTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -222,7 +222,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/textViewPhone"
+                        android:id="@+id/phoneTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -276,7 +276,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/textViewCity"
+                        android:id="@+id/cityTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -305,7 +305,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/textViewStreet"
+                        android:id="@+id/streetTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -333,7 +333,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/textViewStreetNum"
+                        android:id="@+id/streetNumTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -392,7 +392,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/textViewVehicleModel"
+                            android:id="@+id/vehicleModelTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
@@ -421,7 +421,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/textViewRegPlates"
+                            android:id="@+id/regPlatesTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
@@ -480,7 +480,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/textViewCard"
+                            android:id="@+id/cardTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
@@ -509,7 +509,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/textViewCardType"
+                            android:id="@+id/cardTypeTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"

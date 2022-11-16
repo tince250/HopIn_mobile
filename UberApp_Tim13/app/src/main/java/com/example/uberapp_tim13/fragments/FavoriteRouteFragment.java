@@ -24,8 +24,8 @@ public class FavoriteRouteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_route, container, false);
-        iconHeart = view.findViewById(R.id.icon_heart);
-        iconRepeat = view.findViewById(R.id.icon_repeat);
+        iconHeart = view.findViewById(R.id.heartImg);
+        iconRepeat = view.findViewById(R.id.repeatImg);
 
         iconHeart.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -53,7 +53,7 @@ public class InboxFragment extends Fragment {
     }
 
     private void setSpinner(View view) {
-        Spinner inboxSpinner = view.findViewById(R.id.spinner_inbox);
+        Spinner inboxSpinner = view.findViewById(R.id.spinnerInbox);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
                 android.R.layout.simple_spinner_item, view.getResources().getStringArray(R.array.inbox_filter));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

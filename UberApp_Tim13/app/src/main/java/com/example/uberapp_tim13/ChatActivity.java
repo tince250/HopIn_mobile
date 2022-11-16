@@ -19,7 +19,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        chatRecycler = (RecyclerView) findViewById(R.id.recyclerViewChat);
+        chatRecycler = (RecyclerView) findViewById(R.id.chatRV);
         chatAdapter = new ChatAdapter(this, Mockap.getMessages());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         layoutManager.setReverseLayout(true);

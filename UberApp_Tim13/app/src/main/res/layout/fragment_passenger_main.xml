@@ -28,7 +28,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tellUsTW"
+                    android:id="@+id/tellUsTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -40,7 +40,7 @@
                     android:paddingVertical="10dp"/>
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/pickUpLocET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -52,7 +52,7 @@
                     android:drawablePadding="7dp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName2"
+                    android:id="@+id/destinationET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -78,7 +78,7 @@
                     app:iconTint="@color/orange" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName3"
+                    android:id="@+id/pickUpTimeET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -92,20 +92,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!--<androidx.appcompat.widget.AppCompatButton
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:backgroundTint="@color/blue"
-            android:background="@drawable/button"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:paddingHorizontal="25sp"
-            android:paddingVertical="5sp"
-            android:text="@string/next"
-            android:textAllCaps="false"
-            android:fontFamily="@font/poppinsbold"
-            android:textSize="16sp"
-            android:textColor="@color/white"/>-->
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextBtn"

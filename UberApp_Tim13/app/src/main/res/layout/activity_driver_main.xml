@@ -7,7 +7,7 @@
     tools:context=".DriverMainActivity">
 
     <FrameLayout
-        android:id="@+id/driver_fl"
+        android:id="@+id/driverFL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomNavigationView"/>

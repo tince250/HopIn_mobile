@@ -15,7 +15,7 @@
 
     </TextView>
     <Switch
-        android:id="@+id/active_switch"
+        android:id="@+id/activeSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"

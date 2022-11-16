@@ -6,14 +6,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.uberapp_tim13.fragments.DriverHomeFragment;
-import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
-import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 
 public class CurrentRideActivity extends AppCompatActivity {
@@ -80,12 +76,12 @@ public class CurrentRideActivity extends AppCompatActivity {
         Button inconsistentBtn = findViewById(R.id.inconsistentBtn);
         switch (Globals.userRole) {
             case "driver":
-                findViewById(R.id.driver_details_card).setVisibility(View.GONE);
+                findViewById(R.id.driverDetailsCardCV).setVisibility(View.GONE);
                 inconsistentBtn.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.VISIBLE);
                 break;
             case "passenger":
-                findViewById(R.id.pass_details_card).setVisibility(View.GONE);
+                findViewById(R.id.passDetailsCardLL).setVisibility(View.GONE);
                 inconsistentBtn.setVisibility(View.VISIBLE);
                 startFinishBtns.setVisibility(View.GONE);
                 break;

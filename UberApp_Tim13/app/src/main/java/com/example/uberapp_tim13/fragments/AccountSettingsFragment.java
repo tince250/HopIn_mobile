@@ -45,11 +45,11 @@ public class AccountSettingsFragment extends Fragment {
                 view.findViewById(R.id.changePayInfoBtn).setVisibility(View.VISIBLE);
                 break;
         }
-        ((EditText) view.findViewById(R.id.editTextNameSettings)).setText(Globals.currentUser.getName());
-        ((EditText) view.findViewById(R.id.editTextSurnameSettings)).setText(Globals.currentUser.getSurName());
-        ((EditText) view.findViewById(R.id.editTextEmailSettings)).setText(Globals.currentUser.getEmail());
-        ((EditText) view.findViewById(R.id.editTextCitySettings)).setText(Globals.currentUser.getCity());
-        ((EditText) view.findViewById(R.id.editTextPhoneSettings)).setText(Globals.currentUser.getPhone());
-        ((EditText) view.findViewById(R.id.editTextCCardSettings)).setText("*** **** **** " + Globals.currentUser.getCard().getNumber().split(" ")[3]);
+        ((EditText) view.findViewById(R.id.nameSettingsET)).setText(Globals.currentUser.getName());
+        ((EditText) view.findViewById(R.id.surnameSettingsET)).setText(Globals.currentUser.getSurName());
+        ((EditText) view.findViewById(R.id.emailSettingsET)).setText(Globals.currentUser.getEmail());
+        ((EditText) view.findViewById(R.id.citySettingsET)).setText(Globals.currentUser.getCity());
+        ((EditText) view.findViewById(R.id.phoneSettingsET)).setText(Globals.currentUser.getPhone());
+        ((EditText) view.findViewById(R.id.ccardSettingsET)).setText("*** **** **** " + Globals.currentUser.getCard().getNumber().split(" ")[3]);
     }
 }

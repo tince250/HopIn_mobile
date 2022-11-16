@@ -17,7 +17,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/detailsName"
+            android:id="@+id/detailsNameTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
@@ -31,8 +31,8 @@
 
 
         <TextView
-            android:id="@+id/detailsEmail"
-            android:layout_below="@id/detailsName"
+            android:id="@+id/detailsEmailTV"
+            android:layout_below="@id/detailsNameTV"
             android:layout_toStartOf="@id/ic_profile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -44,8 +44,8 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/detailsContact"
-            android:layout_below="@id/detailsEmail"
+            android:id="@+id/detailsContactTV"
+            android:layout_below="@id/detailsEmailTV"
             android:layout_toStartOf="@id/ic_profile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

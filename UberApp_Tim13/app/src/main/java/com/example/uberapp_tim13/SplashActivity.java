@@ -20,7 +20,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        TextView slogan = findViewById(R.id.textViewSlogan);
+        TextView slogan = findViewById(R.id.sloganTV);
 
         Animation zoomInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
 
@@ -31,7 +31,7 @@ public class SplashActivity extends Activity {
             }
         }, 3000);
 
-        TextView companyName = findViewById(R.id.textViewCompanyName);
+        TextView companyName = findViewById(R.id.companyNameTV);
 
         companyName.postDelayed(new Runnable() {
             public void run() {

@@ -24,7 +24,7 @@
                 android:layout_marginTop="40dp"/>
 
             <EditText
-                android:id="@+id/editTextNameOnCard"
+                android:id="@+id/nameOnCardET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -37,7 +37,7 @@
                 android:layout_marginTop="40dp"/>
 
             <EditText
-                android:id="@+id/editTextCardNumber"
+                android:id="@+id/cardNumberET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -56,7 +56,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/editTextDD"
+                    android:id="@+id/ddET"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -69,7 +69,7 @@
                     android:layout_marginTop="20dp"/>
 
                 <EditText
-                    android:id="@+id/editTextYY"
+                    android:id="@+id/yyET"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -83,7 +83,7 @@
                     android:layout_marginStart="30dp"/>
 
                 <EditText
-                    android:id="@+id/editTextCVC"
+                    android:id="@+id/ccvET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

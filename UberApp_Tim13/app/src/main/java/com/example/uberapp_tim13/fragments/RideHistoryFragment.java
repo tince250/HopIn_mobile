@@ -1,5 +1,4 @@
 package com.example.uberapp_tim13.fragments;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.RideItem;
 import com.example.uberapp_tim13.items.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
-import com.example.uberapp_tim13.tools.Mockap;
 
 public class RideHistoryFragment extends ListFragment{
     public static RideHistoryFragment newInstance() {
@@ -33,9 +30,9 @@ public class RideHistoryFragment extends ListFragment{
         super.onListItemClick(l, v, position, id);
 
         if (Globals.userRole == "passenger") {
-            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.passenger_fl);
+            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.passengerFL);
         } else {
-            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.driver_fl);
+            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.driverFL);
 
         }
     }

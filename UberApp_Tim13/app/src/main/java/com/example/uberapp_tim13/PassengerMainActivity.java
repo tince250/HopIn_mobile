@@ -25,7 +25,7 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
-        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passenger_fl);
+        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
 
         setBottomNavigationBar();
     }
@@ -44,22 +44,22 @@ public class PassengerMainActivity extends AppCompatActivity{
             switch (item.getItemId()) {
                 case R.id.nav_inbox:
                     setTitle("Inbox");
-                    FragmentTransition.to(InboxFragment.newInstance(), this, true, R.id.passenger_fl);
+                    FragmentTransition.to(InboxFragment.newInstance(), this, true, R.id.passengerFL);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_home:
                     setTitle("Home");
-                    FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passenger_fl);
+                    FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
                     setTitle("Account");
-                    FragmentTransition.to(AccountFragment.newInstance(), this, true, R.id.passenger_fl);
+                    FragmentTransition.to(AccountFragment.newInstance(), this, true, R.id.passengerFL);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_history:
                     setTitle("History");
-                    FragmentTransition.to(RideHistoryFragment.newInstance(), this, true, R.id.passenger_fl);
+                    FragmentTransition.to(RideHistoryFragment.newInstance(), this, true, R.id.passengerFL);
                     overridePendingTransition(0, 0);
                     break;
             }

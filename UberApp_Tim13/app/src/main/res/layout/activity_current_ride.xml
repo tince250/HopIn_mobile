@@ -36,7 +36,7 @@
                     android:orientation="horizontal"
                     android:id="@+id/timerContent">
                     <View
-                        android:id="@+id/blue_margin"
+                        android:id="@+id/blueMarginV"
                         android:layout_width="10dp"
                         android:layout_height="match_parent"
                         android:background="@color/lighter_blue" />
@@ -51,14 +51,14 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             app:cardCornerRadius="25dp"
-                            android:id="@+id/timerCard"
+                            android:id="@+id/timerCardCV"
                             android:layout_marginRight="10dp"
                             android:layout_centerVertical="true"
                             android:elevation="0dp">
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/timerImage"
+                                android:id="@+id/timerImg"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/clock"/>
                         </androidx.cardview.widget.CardView>
@@ -66,11 +66,11 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textViewTimePassed"
+                            android:id="@+id/timePassedTV"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="20dp"
                             android:layout_centerVertical="true"
-                            android:layout_toEndOf="@id/timerCard"
+                            android:layout_toEndOf="@id/timerCardCV"
                             android:textSize="18sp"
                             android:textColor="@color/black"
                             android:textFontWeight="700"
@@ -87,14 +87,14 @@
                 android:layout_marginTop="20dp"
                 app:cardCornerRadius="5dp"
                 android:elevation="0dp"
-                android:id="@+id/pass_details_card">
+                android:id="@+id/passDetailsCardLL">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:id="@+id/content_det_pass">
                     <View
-                        android:id="@+id/colored_margin_det_pass"
+                        android:id="@+id/coloredMarginDetPassV"
                         android:layout_width="10dp"
                         android:layout_height="match_parent"
                         android:background="@color/orange" />
@@ -108,14 +108,14 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:id="@+id/passImageCard"
+                            android:id="@+id/passImageCardCV"
                             android:layout_marginRight="10dp"
                             android:layout_centerVertical="true"
                             android:elevation="0dp">
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/passImage"
+                                android:id="@+id/passImg"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/passenger"/>
                         </androidx.cardview.widget.CardView>
@@ -125,10 +125,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/pass"
+                            android:id="@+id/passTV"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="20dp"
-                            android:layout_toEndOf="@id/passImageCard"
+                            android:layout_toEndOf="@id/passImageCardCV"
                             android:textSize="14sp"
                             android:textColor="@color/black"
                             android:textFontWeight="700"
@@ -138,10 +138,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/passDetails"
+                            android:id="@+id/passDetailsTV"
                             android:layout_marginRight="20dp"
-                            android:layout_below="@id/pass"
-                            android:layout_toEndOf="@id/passImageCard"
+                            android:layout_below="@id/passTV"
+                            android:layout_toEndOf="@id/passImageCardCV"
                             android:textSize="12sp"
                             android:textColor="@color/dark_gray"
                             android:text="Details about passangers"
@@ -158,14 +158,14 @@
                 android:layout_marginTop="20dp"
                 app:cardCornerRadius="5dp"
                 android:elevation="0dp"
-                android:id="@+id/driver_details_card">
+                android:id="@+id/driverDetailsCardCV">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/content">
+                    android:id="@+id/contentLL">
                     <View
-                        android:id="@+id/colored_margin"
+                        android:id="@+id/coloredMarginV"
                         android:layout_width="10dp"
                         android:layout_height="match_parent"
                         android:background="@color/orange" />
@@ -180,14 +180,14 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             app:cardCornerRadius="25dp"
-                            android:id="@+id/wheelImage"
+                            android:id="@+id/wheelImg"
                             android:layout_marginRight="10dp"
                             android:layout_centerVertical="true"
                             android:elevation="0dp">
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/inboxImage"
+                                android:id="@+id/inboxImg"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/wheel"/>
                         </androidx.cardview.widget.CardView>
@@ -197,10 +197,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/currentUser"
+                            android:id="@+id/currentUserTV"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="20dp"
-                            android:layout_toEndOf="@id/wheelImage"
+                            android:layout_toEndOf="@id/wheelImg"
                             android:textSize="14sp"
                             android:textColor="@color/black"
                             android:textFontWeight="700"
@@ -210,10 +210,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/currentUserDetails"
+                            android:id="@+id/currentUserDetailsTV"
                             android:layout_marginRight="20dp"
-                            android:layout_below="@id/currentUser"
-                            android:layout_toEndOf="@id/wheelImage"
+                            android:layout_below="@id/currentUserTV"
+                            android:layout_toEndOf="@id/wheelImg"
                             android:textSize="12sp"
                             android:textColor="@color/dark_gray"
                             android:text="Details about driver"
@@ -225,7 +225,7 @@
             </androidx.cardview.widget.CardView>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_set_dest"
+                android:id="@+id/setDestBtn"
                 android:layout_width="100dp"
                 android:layout_height="110dp"
                 android:backgroundTint="@color/red"

@@ -24,8 +24,8 @@ public class LoginActivity extends Activity {
 
     public void login(View v) {
         List<User> users = Mockap.getUsers();
-        TextView email = findViewById(R.id.editTextEmail);
-        TextView password = (TextView) findViewById(R.id.editTextPassword);
+        TextView email = findViewById(R.id.emailET);
+        TextView password = (TextView) findViewById(R.id.passwordET);
 
         for(User user : users){
             if (email.getText().toString().equals(user.getEmail()) &&

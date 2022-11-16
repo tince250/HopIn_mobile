@@ -2,7 +2,6 @@ package com.example.uberapp_tim13;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,7 +21,7 @@ public class DriverStatisticsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_driver_statistics);
 
-        ((TextView) findViewById(R.id.textViewDriverName)).setText("Hey, " + Globals.currentUser.getName());
+        ((TextView) findViewById(R.id.driverNameTV)).setText("Hey, " + Globals.currentUser.getName());
 
         setSpinner();
     }
