@@ -1,5 +1,6 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
@@ -10,17 +11,20 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.uberapp_tim13.R;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-public class DriverReportsActivity extends AppCompatActivity {
+public class PassengerReportsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Reports");
-        setContentView(R.layout.activity_driver_reports);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_passenger_reports);
         setSpinner();
 
         Button button = (Button) findViewById(R.id.dateRangeBtn);
@@ -47,9 +51,9 @@ public class DriverReportsActivity extends AppCompatActivity {
     }
 
     private void setSpinner() {
-        Spinner areaNumSpinner = findViewById(R.id.spinnerDriverReportsFilter);
+        Spinner areaNumSpinner = findViewById(R.id.spinnerPasengerReportsFilter);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.driver_reports_filter));
+                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.passenger_reports_filter));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaNumSpinner.setAdapter(adapter);
     }

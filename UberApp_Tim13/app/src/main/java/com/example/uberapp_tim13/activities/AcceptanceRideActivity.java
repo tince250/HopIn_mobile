@@ -1,16 +1,14 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.uberapp_tim13.R;
 
 public class AcceptanceRideActivity extends AppCompatActivity {
 

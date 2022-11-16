@@ -11,11 +11,11 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.uberapp_tim13.AccountSettingsActivity;
-import com.example.uberapp_tim13.DriverStatisticsActivity;
-import com.example.uberapp_tim13.FavoriteRoutesActivity;
+import com.example.uberapp_tim13.activities.AccountSettingsActivity;
+import com.example.uberapp_tim13.activities.DriverStatisticsActivity;
+import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.LoginActivity;
+import com.example.uberapp_tim13.activities.LoginActivity;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 

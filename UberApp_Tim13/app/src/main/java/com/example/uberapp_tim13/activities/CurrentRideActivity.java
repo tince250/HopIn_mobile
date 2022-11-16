@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.tools.Globals;
 
 public class CurrentRideActivity extends AppCompatActivity {

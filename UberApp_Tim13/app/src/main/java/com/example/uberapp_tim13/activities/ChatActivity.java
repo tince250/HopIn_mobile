@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import android.os.Bundle;
 
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.ChatAdapter;
 import com.example.uberapp_tim13.tools.Mockap;
 

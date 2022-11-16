@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.fragments.ChangePasswordFragment;
 import com.example.uberapp_tim13.fragments.AccountSettingsFragment;
 import com.example.uberapp_tim13.fragments.PaymentInfoFragment;

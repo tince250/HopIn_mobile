@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.fragments.DriverHomeFragment;

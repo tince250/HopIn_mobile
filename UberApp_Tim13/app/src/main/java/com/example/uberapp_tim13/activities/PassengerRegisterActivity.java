@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.example.uberapp_tim13.R;
 
 public class PassengerRegisterActivity extends Activity {
 

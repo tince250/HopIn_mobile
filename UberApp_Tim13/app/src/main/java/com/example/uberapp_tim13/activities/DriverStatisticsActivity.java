@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.tools.Globals;
 
 public class DriverStatisticsActivity extends AppCompatActivity {

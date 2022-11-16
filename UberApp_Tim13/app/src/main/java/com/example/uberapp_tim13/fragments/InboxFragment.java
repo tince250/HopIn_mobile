@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.uberapp_tim13.ChatActivity;
+import com.example.uberapp_tim13.activities.ChatActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.InboxAdapter;
 import com.example.uberapp_tim13.tools.Mockap;

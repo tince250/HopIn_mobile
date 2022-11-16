@@ -1,9 +1,10 @@
-package com.example.uberapp_tim13;
+package com.example.uberapp_tim13.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.fragments.FavoriteRouteFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
