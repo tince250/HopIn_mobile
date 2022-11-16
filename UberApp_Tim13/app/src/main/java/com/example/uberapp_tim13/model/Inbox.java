@@ -1,13 +1,13 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.model;
 
-public class InboxItem {
+public class Inbox {
     String name;
     String displayMessage;
     String dateTime;
     int image;
     String type;
 
-    public InboxItem(String name, String displayMessage, String dateTime, int image, String type) {
+    public Inbox(String name, String displayMessage, String dateTime, int image, String type) {
         this.name = name;
         this.displayMessage = displayMessage;
         this.dateTime = dateTime;

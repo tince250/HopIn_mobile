@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.adapters.inbox;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,15 +9,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.model.Inbox;
 
 import java.util.List;
 
 public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
 
     Context context;
-    List<InboxItem> items;
+    List<Inbox> items;
 
-    public InboxAdapter(Context context, List<InboxItem> items) {
+    public InboxAdapter(Context context, List<Inbox> items) {
         this.context = context;
         this.items = items;
     }
@@ -30,7 +31,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull InboxItemHolder holder, int position) {
-        InboxItem item = items.get(position);
+        Inbox item = items.get(position);
         holder.name.setText(item.getName());
         holder.displayMess.setText(item.getDisplayMessage());
         holder.dateTime.setText(item.getDateTime());

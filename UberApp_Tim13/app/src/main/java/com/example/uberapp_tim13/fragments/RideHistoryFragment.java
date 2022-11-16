@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.ride_history.HistoryAdapter;
+import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 

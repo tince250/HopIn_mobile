@@ -1,12 +1,12 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.model;
 
-public class RatingItem {
+public class Rating {
 
     private String comment;
     private float grade;
     private User passenger;
 
-    public RatingItem(String comment, float grade, User passenger) {
+    public Rating(String comment, float grade, User passenger) {
         this.comment = comment;
         this.grade = grade;
         this.passenger = passenger;

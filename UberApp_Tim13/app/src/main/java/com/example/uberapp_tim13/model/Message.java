@@ -1,12 +1,12 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.model;
 
-public class MessageItem {
+public class Message {
 
     private String message;
     private User sender;
     private String time;
 
-    public MessageItem(String message, User sender, String time) {
+    public Message(String message, User sender, String time) {
         this.message = message;
         this.sender = sender;
         this.time = time;

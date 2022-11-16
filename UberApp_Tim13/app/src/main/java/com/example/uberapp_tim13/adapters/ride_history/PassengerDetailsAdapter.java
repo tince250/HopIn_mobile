@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13.items.ride_history;
+package com.example.uberapp_tim13.adapters.ride_history;
 
 import android.app.Activity;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.User;
+import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.tools.Mockap;
 
 import java.util.List;

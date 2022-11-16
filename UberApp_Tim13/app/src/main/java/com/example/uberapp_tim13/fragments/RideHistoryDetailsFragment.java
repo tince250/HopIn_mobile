@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.RideItem;
+import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
@@ -28,7 +28,7 @@ public class RideHistoryDetailsFragment extends Fragment{
 
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.reviewsLV);
 
-        RideItem ride = Mockap.getRides().get(rideNum);
+        Ride ride = Mockap.getRides().get(rideNum);
         fitFragmentToRole(view, ride);
 
 
@@ -62,7 +62,7 @@ public class RideHistoryDetailsFragment extends Fragment{
         return view;
     }
 
-    private void fitFragmentToRole(View view, RideItem ride) {
+    private void fitFragmentToRole(View view, Ride ride) {
         switch (Globals.userRole) {
             case "driver":
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.User;
+import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 

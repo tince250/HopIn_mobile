@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.items.ride_history.HistoryAdapter;
 
 public class RideReviewsFragment extends Fragment {
     public static RideReviewsFragment newInstance() {

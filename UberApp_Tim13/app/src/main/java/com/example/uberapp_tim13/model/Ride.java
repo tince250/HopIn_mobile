@@ -1,8 +1,8 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.model;
 
 import java.util.List;
 
-public class RideItem {
+public class Ride {
 
     private User driver;
     private List<User> passengers;
@@ -13,9 +13,9 @@ public class RideItem {
     private String destination;
     private float distance;
     private double price;
-    private List<RatingItem> ratings;
+    private List<Rating> ratings;
 
-    public RideItem(User driver, List<User> passengers, String startTime, String endTime, String pickUpLocation, List<String> stops, String destination, float distance, double price, List<RatingItem> ratings) {
+    public Ride(User driver, List<User> passengers, String startTime, String endTime, String pickUpLocation, List<String> stops, String destination, float distance, double price, List<Rating> ratings) {
         this.driver = driver;
         this.passengers = passengers;
         this.startTime = startTime;
@@ -64,7 +64,7 @@ public class RideItem {
         return price;
     }
 
-    public List<RatingItem> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 }

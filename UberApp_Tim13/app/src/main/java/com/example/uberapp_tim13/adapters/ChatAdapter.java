@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.model.Message;
 
 import java.util.List;
 
@@ -17,9 +18,9 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
     private Context context;
-    private List<MessageItem> messages;
+    private List<Message> messages;
 
-    public ChatAdapter(Context context, List<MessageItem> messages) {
+    public ChatAdapter(Context context, List<Message> messages) {
         this.context = context;
         this.messages = messages;
     }
@@ -32,7 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     // Determines the appropriate ViewType according to the sender of the message.
     @Override
     public int getItemViewType(int position) {
-        MessageItem message = (MessageItem) messages.get(position);
+        Message message = (Message) messages.get(position);
 
         if (message.getSender().getId() != 0) {
             // If the current user is the sender of the message
@@ -62,7 +63,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MessageItem message = (MessageItem) messages.get(position);
+        Message message = (Message) messages.get(position);
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
@@ -84,7 +85,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
             timeText = (TextView) itemView.findViewById(R.id.timestampYouTV);
         }
 
-        void bind(MessageItem message) {
+        void bind(Message message) {
             messageText.setText(message.getMessage());
             timeText.setText(message.getTime());
         }
@@ -101,7 +102,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
             timeText = (TextView) itemView.findViewById(R.id.timestampMeTV);
         }
 
-        void bind(MessageItem message) {
+        void bind(Message message) {
             messageText.setText(message.getMessage());
 
             timeText.setText(message.getTime());

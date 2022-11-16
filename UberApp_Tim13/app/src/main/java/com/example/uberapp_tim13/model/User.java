@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13.items;
+package com.example.uberapp_tim13.model;
 
 public class User {
     private int id;
