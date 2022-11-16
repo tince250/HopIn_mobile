@@ -12,10 +12,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.activities.AccountSettingsActivity;
+import com.example.uberapp_tim13.activities.DriverReportsActivity;
 import com.example.uberapp_tim13.activities.DriverStatisticsActivity;
 import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.activities.LoginActivity;
+import com.example.uberapp_tim13.activities.PassengerReportsActivity;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
@@ -55,6 +57,23 @@ public class AccountFragment extends Fragment {
                         break;
                     case "passenger":
                         startActivity(new Intent(getActivity(), FavoriteRoutesActivity.class));
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        });
+
+        view.findViewById(R.id.reportsBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (Globals.currentUser.getRole()) {
+                    case "driver":
+                        startActivity(new Intent(getActivity(), DriverReportsActivity.class));
+                        break;
+                    case "passenger":
+                        startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
                         break;
                     default:
                         break;
