@@ -25,12 +25,6 @@ public class Mockap {
     public static List<User> users;
     public static List<RideItem> rides;
     public static List<MessageItem> messages;
-    
-    public static List<InboxItem> getInboxItems() {
-        List<InboxItem> items = new ArrayList<InboxItem>();
-        items.add(new InboxItem("HopIn Support", "Your message is received and pending.", "today at 13:40", R.drawable.support, "support"));
-        items.add(new InboxItem("Ride notification", "Passenger ready for pickup.", "yesterday at 7:30", R.drawable.car, "ride"));
-        items.add(new InboxItem("Panic", "Panic crew on their way.", "11.11.2022. 7:30", R.drawable.panic, "panic"));
 
 
     public static List<InboxItem> getInboxItems() {
@@ -45,13 +39,15 @@ public class Mockap {
 
     public static List<User> getUsers(){
 
-        if (users == null){
             users = new ArrayList<User>();
-            users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com", "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger", "1" ));
-            users.add(new User(2, "Zika", "Zikic", "668979414", "zika@gmail.com", "123", "Bulevar Oslobodjenja 2", "Novi Sad", "driver", "2"));
-            users.add(new User(3, "Pika", "Pika", "668979414", "pika@gmail.com", "123", "Bulevar Oslobodjenja 3", "Novi Sad", "passenger", "3" ));
-        }
-        return users;
+            users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com",
+                    "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger",
+                    "1", new CreditCard("MasterCard", "111 1111 1111 123", "111", "03", "2022")));
+            users.add(new User(1, "Zika", "Zikic", "668979414", "zika@gmail.com",
+                    "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver",
+                    "1", new CreditCard("DinaCard", "111 1111 1111 321", "222", "10", "2020")));
+
+            return users;
     }
 
     public static List<RideItem> getRides(){
@@ -72,16 +68,6 @@ public class Mockap {
         return rides;
     }
 
-        List<User> users = new ArrayList<User>();
-        users.add(new User(1, "Mika", "Mikic", "668979414", "mika@gmail.com",
-                "123", "Bulevar Oslobodjenja 1", "Novi Sad", "passenger",
-                "1", new CreditCard("MasterCard", "111 1111 1111 123", "111", "03", "2022")));
-        users.add(new User(1, "Zika", "Zikic", "668979414", "zika@gmail.com",
-                "123", "Bulevar Oslobodjenja 1", "Novi Sad", "driver",
-                "1", new CreditCard("DinaCard", "111 1111 1111 321", "222", "10", "2020")));
-
-        return users;
-    }
 
     public static List<MessageItem> getMessages(){
         if (messages == null) {
