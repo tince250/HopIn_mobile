@@ -1,21 +1,17 @@
 package com.example.uberapp_tim13;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uberapp_tim13.fragments.ChangePasswordFragment;
-import com.example.uberapp_tim13.fragments.DriverAccountSettingsFragment;
+import com.example.uberapp_tim13.fragments.AccountSettingsFragment;
 import com.example.uberapp_tim13.fragments.PaymentInfoFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
-public class DriverAccountSettingsActivity extends AppCompatActivity {
+public class AccountSettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +21,7 @@ public class DriverAccountSettingsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_driver_acc_settings);
-        FragmentTransition.to(DriverAccountSettingsFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
+        FragmentTransition.to(AccountSettingsFragment.newInstance(), this, false, R.id.driver_acc_sett_fl);
     }
 
     public void switchToChangePassword(View view) {

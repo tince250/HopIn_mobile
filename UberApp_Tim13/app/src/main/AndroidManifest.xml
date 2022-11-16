@@ -46,13 +46,6 @@
                 android:value=".PassengerMainActivity"/>
         </activity>
         <activity
-            android:name=".DriverAccountActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".CurrentRideActivity"
             android:exported="false">
             <meta-data
@@ -69,20 +62,6 @@
         <activity
             android:name=".DriverMainActivity"
             android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PassengerInboxActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PassengerAccountActivity"
-            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -112,7 +91,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserLoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -129,7 +108,7 @@
             android:parentActivityName=".DriverMainActivity">
         </activity>
         <activity
-            android:name=".DriverAccountSettingsActivity"
+            android:name=".AccountSettingsActivity"
             android:exported="false"
             android:parentActivityName=".DriverMainActivity">
         </activity>

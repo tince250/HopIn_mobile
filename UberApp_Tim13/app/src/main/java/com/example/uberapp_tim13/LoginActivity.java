@@ -11,11 +11,9 @@ import com.example.uberapp_tim13.items.User;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class UserLoginActivity extends Activity {
+public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +37,9 @@ public class UserLoginActivity extends Activity {
         }
 
         if (Globals.userRole.equals("passenger")) {
-            startActivity(new Intent(UserLoginActivity.this, PassengerMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, PassengerMainActivity.class));
         }else if (Globals.userRole.equals("driver")) {
-            startActivity(new Intent(UserLoginActivity.this, DriverMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, DriverMainActivity.class));
         }else {
             Toast.makeText(this, "Wrong email or password", Toast.LENGTH_LONG);
         }
@@ -50,7 +48,7 @@ public class UserLoginActivity extends Activity {
     }
 
     public void goToRegister(View v) {
-        startActivity(new Intent(UserLoginActivity.this, PassengerRegisterActivity.class));
+        startActivity(new Intent(LoginActivity.this, PassengerRegisterActivity.class));
     }
 
     @Override

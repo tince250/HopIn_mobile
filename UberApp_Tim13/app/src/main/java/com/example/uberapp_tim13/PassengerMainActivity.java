@@ -1,25 +1,17 @@
 package com.example.uberapp_tim13;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.uberapp_tim13.fragments.DriverAccountFragment;
-import com.example.uberapp_tim13.fragments.DriverHomeFragment;
-import com.example.uberapp_tim13.fragments.DriverInboxFragment;
+import com.example.uberapp_tim13.fragments.AccountFragment;
+import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
@@ -42,14 +34,6 @@ public class PassengerMainActivity extends AppCompatActivity{
         startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
     }
 
-    public void openAccountPage() {
-        startActivity(new Intent(PassengerMainActivity.this, PassengerAccountActivity.class));
-    }
-
-    public void openInboxPage(View v) {
-        startActivity(new Intent(PassengerMainActivity.this, PassengerInboxActivity.class));
-    }
-
 
     // Sets event listeners for the bottom nav bar
     public void setBottomNavigationBar() {
@@ -60,7 +44,7 @@ public class PassengerMainActivity extends AppCompatActivity{
             switch (item.getItemId()) {
                 case R.id.nav_inbox:
                     setTitle("Inbox");
-                    FragmentTransition.to(DriverInboxFragment.newInstance(), this, true, R.id.passenger_fl);
+                    FragmentTransition.to(InboxFragment.newInstance(), this, true, R.id.passenger_fl);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_home:
@@ -70,7 +54,7 @@ public class PassengerMainActivity extends AppCompatActivity{
                     break;
                 case R.id.nav_profile:
                     setTitle("Account");
-                    FragmentTransition.to(DriverAccountFragment.newInstance(), this, true, R.id.passenger_fl);
+                    FragmentTransition.to(AccountFragment.newInstance(), this, true, R.id.passenger_fl);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_history:

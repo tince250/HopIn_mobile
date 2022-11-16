@@ -3,8 +3,6 @@ package com.example.uberapp_tim13.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,27 +12,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.uberapp_tim13.ChatActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.items.InboxAdapter;
-import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Mockap;
 
 
-public class DriverInboxFragment extends Fragment {
+public class InboxFragment extends Fragment {
 
     RecyclerView recyclerView;
 
-    public static DriverInboxFragment newInstance() {
-        return new DriverInboxFragment();
+    public static InboxFragment newInstance() {
+        return new InboxFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_driver_inbox, container, false);
+        View view = inflater.inflate(R.layout.fragment_inbox, container, false);
 
         recyclerView = view.findViewById(R.id.inboxRW);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));

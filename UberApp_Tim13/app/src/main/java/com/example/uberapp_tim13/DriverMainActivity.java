@@ -11,10 +11,10 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.uberapp_tim13.fragments.DriverAccountFragment;
+import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.fragments.DriverHomeFragment;
-import com.example.uberapp_tim13.fragments.DriverInboxFragment;
+import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -65,7 +65,7 @@ public class DriverMainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.nav_inbox:
                     setTitle("Inbox");
-                    FragmentTransition.to(DriverInboxFragment.newInstance(), this, true, R.id.driver_fl);
+                    FragmentTransition.to(InboxFragment.newInstance(), this, true, R.id.driver_fl);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_home:
@@ -75,7 +75,7 @@ public class DriverMainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_profile:
                     setTitle("Account");
-                    FragmentTransition.to(DriverAccountFragment.newInstance(), this, true, R.id.driver_fl);
+                    FragmentTransition.to(AccountFragment.newInstance(), this, true, R.id.driver_fl);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_history:

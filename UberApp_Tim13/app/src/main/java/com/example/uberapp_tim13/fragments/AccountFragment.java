@@ -6,37 +6,35 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.uberapp_tim13.DriverAccountSettingsActivity;
+import com.example.uberapp_tim13.AccountSettingsActivity;
 import com.example.uberapp_tim13.DriverStatisticsActivity;
 import com.example.uberapp_tim13.FavoriteRoutesActivity;
-import com.example.uberapp_tim13.PassengerReportsActivity;
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.UserLoginActivity;
+import com.example.uberapp_tim13.LoginActivity;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
-public class DriverAccountFragment extends Fragment {
-    public static DriverAccountFragment newInstance() {
-        return new DriverAccountFragment();
+public class AccountFragment extends Fragment {
+    public static AccountFragment newInstance() {
+        return new AccountFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_driver_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         fitFragmentToRole(view);
 
         view.findViewById(R.id.accountSettingBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DriverAccountSettingsActivity.class));
+                startActivity(new Intent(getActivity(), AccountSettingsActivity.class));
             }
         });
 
@@ -44,7 +42,7 @@ public class DriverAccountFragment extends Fragment {
         view.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), UserLoginActivity.class));
+                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
 
