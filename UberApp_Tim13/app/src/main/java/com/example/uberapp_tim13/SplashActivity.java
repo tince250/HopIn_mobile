@@ -9,8 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,7 +44,7 @@ public class SplashActivity extends Activity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, UserLoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();
             }
         }, SPLASH_TIME_OUT);
