@@ -32,7 +32,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/icon_car"
+                    android:id="@+id/carImg"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
@@ -48,7 +48,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewRoute"
+                        android:id="@+id/routeTV"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -61,7 +61,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/textViewStops"
+                        android:id="@+id/stopsTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
@@ -74,7 +74,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textViewStartTime"
+                android:id="@+id/startTimeTV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -88,7 +88,7 @@
 
 
             <TextView
-                android:id="@+id/textViewEndTime"
+                android:id="@+id/endTimeTV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -101,7 +101,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textViewDistance"
+                android:id="@+id/distanceTV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -115,7 +115,7 @@
 
 
             <TextView
-                android:id="@+id/textViewPassengers"
+                android:id="@+id/passengersTV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -128,7 +128,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textViewPrice"
+                android:id="@+id/priceTV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -142,7 +142,7 @@
 
             <androidx.cardview.widget.CardView
 
-                android:id="@+id/mapAcceptanceRoute"
+                android:id="@+id/mapAcceptanceRouteCV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/content_driver"
+                android:id="@+id/contentDriverLL"
                 >
                 <View
                     android:layout_width="10dp"
@@ -188,13 +188,13 @@
                     android:orientation="vertical"
                     android:layout_marginBottom="5dp"
                     android:padding="10dp"
-                    android:id="@+id/driverDetails"
+                    android:id="@+id/driverDetailsRL"
                     >
                     <androidx.cardview.widget.CardView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         app:cardCornerRadius="25dp"
-                        android:id="@+id/imageCardDriver"
+                        android:id="@+id/driverIC"
                         android:layout_marginRight="10dp"
                         android:layout_centerVertical="true"
                         android:elevation="0dp"
@@ -211,10 +211,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/name_driver"
+                        android:id="@+id/nameDriverTV"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="20dp"
-                        android:layout_toEndOf="@id/imageCardDriver"
+                        android:layout_toEndOf="@id/driverIC"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/poppinsbold"
@@ -224,10 +224,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/displayMessageDriver"
                         android:layout_marginRight="20dp"
-                        android:layout_below="@id/name_driver"
-                        android:layout_toEndOf="@id/imageCardDriver"
+                        android:layout_below="@id/nameDriverTV"
+                        android:layout_toEndOf="@id/driverIC"
                         android:fontFamily="@font/poppinsbold"
                         android:textSize="11sp"
                         android:textColor="@color/dark_gray"
@@ -254,10 +253,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/content"
+                android:id="@+id/contentLL"
                 >
                 <View
-                    android:id="@+id/colored_margin"
+                    android:id="@+id/coloredMarginV"
                     android:layout_width="10dp"
                     android:layout_height="match_parent"
                     android:background="@color/orange" />
@@ -283,7 +282,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/inboxImage"
+                            android:id="@+id/inboxImg"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_passenger"/>
                     </androidx.cardview.widget.CardView>
@@ -293,7 +292,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/name"
+                        android:id="@+id/nameTV"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="20dp"
                         android:layout_toEndOf="@id/imageCard"
@@ -306,9 +305,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/displayMessage"
+                        android:id="@+id/displayMessageTV"
                         android:layout_marginRight="20dp"
-                        android:layout_below="@id/name"
+                        android:layout_below="@id/nameTV"
                         android:layout_toEndOf="@id/imageCard"
                         android:fontFamily="@font/poppinsbold"
                         android:textSize="11sp"
@@ -325,7 +324,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/commentsSection"
+            android:id="@+id/commentsSectionRL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -337,7 +336,7 @@
             android:layout_marginBottom="10dp">
 
             <TextView
-                android:id="@+id/commentsSectionTitle"
+                android:id="@+id/commentsSectionTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -367,7 +366,7 @@
                 android:layout_marginRight="-25dp"/>
 
             <FrameLayout
-                android:id="@+id/listViewReviews"
+                android:id="@+id/reviewsLV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ratingBar">

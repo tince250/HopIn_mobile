@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/edit_profile_picture_button"
+                    android:id="@+id/editProfilePictureBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
@@ -44,7 +44,7 @@
 
 
                     <ImageView
-                        android:id="@+id/driverAvatarSettings"
+                        android:id="@+id/driverAvatarSettingsImg"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_gravity="center"
@@ -66,7 +66,7 @@
 
 
                 <EditText
-                    android:id="@+id/editTextNameSettings"
+                    android:id="@+id/nameSettingsET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -80,7 +80,7 @@
 
 
                 <EditText
-                    android:id="@+id/editTextSurnameSettings"
+                    android:id="@+id/surnameSettingsET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -103,7 +103,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextEmailSettings"
+                android:id="@+id/emailSettingsET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -116,7 +116,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextCitySettings"
+                android:id="@+id/citySettingsET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -129,7 +129,7 @@
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:id="@+id/telephoneLayoutSettings"
+                android:id="@+id/telephoneSettingsLL"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
 
@@ -151,7 +151,7 @@
                     android:paddingHorizontal="10sp" />
 
                 <EditText
-                    android:id="@+id/editTextPhoneSettings"
+                    android:id="@+id/phoneSettingsET"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginStart="40dp"
@@ -165,7 +165,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editTextCCardSettings"
+                android:id="@+id/ccardSettingsET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -183,7 +183,7 @@
                 android:id="@+id/changePasswordBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editTextCCardSettings"
+                android:layout_below="@id/ccardSettingsET"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/gray"
                 android:fontFamily="@font/poppinsbold"

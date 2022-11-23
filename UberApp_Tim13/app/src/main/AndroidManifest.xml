@@ -13,14 +13,14 @@
         android:theme="@style/Theme.UberApp_Tim13"
         tools:targetApi="31">
         <activity
-            android:name=".DriverReportsActivity"
+            android:name=".activities.DriverReportsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PassengerReportsActivity"
+            android:name=".activities.PassengerReportsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -28,7 +28,7 @@
                 android:parentActivityName=".PassengerMainActivity"/>
 
         </activity>
-        <activity android:name=".ChatActivity"
+        <activity android:name=".activities.ChatActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -38,109 +38,73 @@
 
         </activity>
         <activity
-            android:name=".FavoriteRoutesActivity"
+            android:name=".activities.FavoriteRoutesActivity"
             android:exported="true"
-            android:parentActivityName=".PassengerMainActivity">
+            android:parentActivityName=".activities.PassengerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PassengerMainActivity"/>
+                android:value=".activities.PassengerMainActivity"/>
         </activity>
         <activity
-            android:name=".DriverAccountActivity"
+            android:name=".activities.CurrentRideActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CurrentRideActivity"
+            android:name=".activities.AcceptanceRideActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AcceptanceRideActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".DriverMainActivity"
+            android:name=".activities.DriverMainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PassengerInboxActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PassengerAccountActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PassengerMainActivity"
+            android:name=".activities.PassengerMainActivity"
             android:exported="true">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.PassengerRegisterActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.DriverStatisticsActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.DriverMainActivity">
+        </activity>
+        <activity
+            android:name=".activities.AccountSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.DriverMainActivity">
+        </activity>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PassengerRegisterActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UserLoginActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".DriverStatisticsActivity"
-            android:exported="false"
-            android:parentActivityName=".DriverMainActivity">
-        </activity>
-        <activity
-            android:name=".DriverAccountSettingsActivity"
-            android:exported="false"
-            android:parentActivityName=".DriverMainActivity">
-        </activity>
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

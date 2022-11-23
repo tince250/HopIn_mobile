@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".UserLoginActivity">
+    tools:context=".activities.LoginActivity">
 
 
     <LinearLayout
-        android:id="@+id/registerLayout"
+        android:id="@+id/registerLL"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginHorizontal="60dp"
@@ -22,7 +22,7 @@
 
 
         <TextView
-            android:id="@+id/textViewLoginTitle"
+            android:id="@+id/loginTitleTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="255dp"
@@ -33,7 +33,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/emailET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -46,7 +46,7 @@
             android:textSize="16sp"/>
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/passwordET"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -76,7 +76,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textViewForgottenPassword"
+            android:id="@+id/forgottenPasswordTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -89,7 +89,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/textViewNoAccount"
+            android:id="@+id/noAccountTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
@@ -100,7 +100,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/textViewRegister"
+            android:id="@+id/registerTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"

@@ -10,7 +10,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardChatYou"
+        android:id="@+id/chatYouCV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/dark_gray"
@@ -21,13 +21,13 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:id="@+id/layoutCardChatYou"
+            android:id="@+id/chatYouLL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewMessageYou"
+                android:id="@+id/messageYouTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -45,7 +45,7 @@
 
 
     <TextView
-        android:id="@+id/textViewTimestampYou"
+        android:id="@+id/timestampYouTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -53,8 +53,8 @@
         android:fontFamily="@font/poppinsbold"
         android:layout_marginHorizontal="8dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/cardChatYou"
-        app:layout_constraintStart_toStartOf="@+id/cardChatYou" />
+        app:layout_constraintTop_toBottomOf="@+id/chatYouCV"
+        app:layout_constraintStart_toStartOf="@+id/chatYouCV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

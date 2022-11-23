@@ -7,7 +7,7 @@
     >
 
     <LinearLayout
-        android:id="@+id/statisticsLayout"
+        android:id="@+id/statisticsLL"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
@@ -19,7 +19,7 @@
 
 
         <TextView
-            android:id="@+id/textViewDriverName"
+            android:id="@+id/driverNameTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/driverStatisticsName"
@@ -44,17 +44,6 @@
             android:paddingEnd="20dp"
             />
 
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Distance traveld"
-            android:fontFamily="@font/poppinsregular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="10sp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +51,7 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/textViewDay"
+                android:id="@+id/dayTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsregular"
@@ -72,7 +61,7 @@
                 />
 
             <TextView
-                android:id="@+id/textViewMonth"
+                android:id="@+id/monthTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsregular"
@@ -82,7 +71,7 @@
                 android:textColor="@color/black"/>
 
             <TextView
-                android:id="@+id/textViewYear"
+                android:id="@+id/yearTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsregular"
@@ -94,7 +83,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textViewStatType"
+            android:id="@+id/statTypeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/youWorked"
@@ -106,7 +95,7 @@
             />
 
         <TextView
-            android:id="@+id/textViewStatTypeValue"
+            android:id="@+id/statTypeValueTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hours"
@@ -135,7 +124,7 @@
                 />
 
             <TextView
-                android:id="@+id/textViewTotalValue"
+                android:id="@+id/totalValueTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsbold"
@@ -153,45 +142,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/graph_stats"
             android:layout_marginTop="35dp"/>
-
-
-        <!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".PassengerMainActivity">
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </FrameLayout>
-
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@color/white"
-                app:contentInsetStart="0dp">
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@id/bottomNavigationView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:labelVisibilityMode="labeled"
-                    app:menu="@menu/bottom_nav_menu"
-                    app:itemIconSize="30dp"
-                    app:itemIconTint="@color/bottom_nav_item"/>
-
-            </com.google.android.material.bottomappbar.BottomAppBar>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
-
+        
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

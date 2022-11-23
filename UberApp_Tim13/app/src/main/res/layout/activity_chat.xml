@@ -9,18 +9,18 @@
     >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewChat"
+        android:id="@+id/chatRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="16dp"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@+id/textViewIndicator"
+        app:layout_constraintBottom_toTopOf="@+id/indicatorTV"
         app:layout_constraintBottom_toBottomOf="parent"
         app:reverseLayout="true"
         android:paddingTop="90dp"/>
 
     <TextView
-        android:id="@+id/textViewIndicator"
+        android:id="@+id/indicatorTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -32,12 +32,12 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/layoutChatBox"
+        app:layout_constraintBottom_toTopOf="@+id/chatBoxRL"
         android:layout_marginHorizontal="20dp"
         />
 
     <RelativeLayout
-        android:id="@+id/layoutChatBox"
+        android:id="@+id/chatBoxRL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
@@ -50,7 +50,7 @@
 
         <EditText
             android:layout_marginStart="16dp"
-            android:id="@+id/editTextEnterMessage"
+            android:id="@+id/enterMessageET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -59,16 +59,6 @@
             android:inputType="text"
             android:maxLines="6"
             tools:ignore="Autofill"/>
-        <!--
-        <Button
-            android:id="@+id/chatSendBtn"
-            android:layout_width="64dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:background="?attr/selectableItemBackground"
-            android:text="Send"
-            android:textSize="10sp"
-            android:textColor="@color/black" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/chatSendBtn"

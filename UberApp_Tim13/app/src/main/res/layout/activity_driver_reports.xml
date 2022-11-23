@@ -9,7 +9,7 @@
     android:paddingVertical="30dp">
 
     <TextView
-        android:id="@+id/reportsGreeting"
+        android:id="@+id/reportsGreetingTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reportsGreeting"
@@ -22,7 +22,7 @@
         android:drawablePadding="5dp"/>
 
     <TextView
-        android:id="@+id/reportsSubtitle"
+        android:id="@+id/reportsSubtitleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reportsSubtitle"
@@ -70,7 +70,7 @@
                 app:cornerRadius="10dp"/>
 
             <TextView
-                android:id="@+id/dateRangeTextView"
+                android:id="@+id/dateRangeTV"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
@@ -84,7 +84,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/totalTextView"
+        android:id="@+id/totalTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/total"
@@ -94,7 +94,7 @@
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/calculatedTotalTextView"
+        android:id="@+id/calculatedTotalTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/totalKm"
@@ -104,7 +104,7 @@
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/averageTextView"
+        android:id="@+id/averageTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/average"
@@ -114,7 +114,7 @@
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/calculatedAverageTextView"
+        android:id="@+id/calculatedAverageTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/avgKm"

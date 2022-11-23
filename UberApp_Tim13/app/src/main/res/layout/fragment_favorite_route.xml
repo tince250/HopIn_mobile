@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewRoute"
+                android:id="@+id/routeTV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsbold"
@@ -31,7 +31,7 @@
                 />
 
             <TextView
-                android:id="@+id/textViewStops"
+                android:id="@+id/stopsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsbold"
@@ -41,7 +41,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/icon_heart"
+            android:id="@+id/heartImg"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -51,7 +51,7 @@
             app:tint="@color/red"/>
 
         <ImageView
-            android:id="@+id/icon_repeat"
+            android:id="@+id/repeatImg"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
