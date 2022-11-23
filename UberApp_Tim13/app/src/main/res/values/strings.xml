@@ -119,4 +119,12 @@
     <string name="passengersSubtitle">Passengers</string>
     <string name="inconsistent">driver inconsistent</string>
     <string name="send">Send</string>
+    <string name="car">Car</string>
+    <string name="back">Back</string>
+    <string name="van">Van</string>
+    <string name="luxury_car">Luxury Car</string>
+    <string name="special_guests">Any special guests?</string>
+    <string name="riding_with_baby">Riding with a baby</string>
+    <string name="riding_with_pet">Riding with a pet</string>
+    <string name="ride_settings_title">What\'s your vehicle type?</string>
 </resources>
