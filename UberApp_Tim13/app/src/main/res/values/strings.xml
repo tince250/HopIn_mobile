@@ -127,4 +127,6 @@
     <string name="riding_with_baby">Riding with a baby</string>
     <string name="riding_with_pet">Riding with a pet</string>
     <string name="ride_settings_title">What\'s your vehicle type?</string>
+    <string name="invite_others_title">Anyone else riding with you?</string>
+    <string name="invite_sent">Invites will be sent to:</string>
 </resources>
