@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginHorizontal="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="15dp"
     android:background="@drawable/border"
-    android:id="@+id/historyRideCardLL"
+    android:id="@+id/invitedPassengerCardLL"
     android:padding="10dp">
 
     <androidx.cardview.widget.CardView
