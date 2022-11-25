@@ -13,4 +13,5 @@
     <color name="solid_blue">#1E4A5A</color>
     <color name="teal_200">#337d98</color>
     <color name="gray">#E7E7E7</color>
+    <color name="disabled_gray">#B5B5B5</color>
 </resources>
