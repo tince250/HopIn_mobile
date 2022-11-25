@@ -28,6 +28,13 @@ public class RideSettingsFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.nextBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransition.to(InviteOthersFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+            }
+        });
+
         return view;
     }
 }
