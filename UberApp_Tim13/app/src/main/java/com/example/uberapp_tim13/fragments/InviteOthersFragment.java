@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,8 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_invite_others, container, false);
 
+        getActivity().setTitle("Other passengers");
+
         this.addedUsers = new ArrayList<User>();
         this.adapter = new InvitedPassengersAdapter(getActivity(), this.addedUsers);
         listView = (ListView) view.findViewById(R.id.list);
@@ -62,11 +66,21 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                     }
                 }
 
+                if (user == null) {
+                    Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (User u : this.addedUsers) {
+                    if (u.getEmail().equals(email)) {
+                        user = null;
+                        Toast.makeText(getActivity(),"User already added!",Toast.LENGTH_SHORT).show();                    }
+                }
+
                 if (user != null) {
                     addedUsers.add(user);
                     adapter.notifyDataSetChanged();
                 }
-
         }
     }
 

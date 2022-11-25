@@ -16,6 +16,7 @@ public class InvitedPassengersAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<User> users;
+    private TextView pressedName;
 
     public InvitedPassengersAdapter(Activity activity, List<User> users) {
         this.activity = activity;
@@ -46,7 +47,18 @@ public class InvitedPassengersAdapter extends BaseAdapter {
             view_new = activity.getLayoutInflater().inflate(R.layout.invited_passenger_item, null);
         }
 
-        ((TextView)view_new.findViewById(R.id.passengerNameTV)).setText(user.getName() + " " + user.getSurName());
+        this.pressedName = (TextView)view_new.findViewById(R.id.passengerNameTV);
+        this.pressedName.setText(user.getName() + " " + user.getSurName());
+
+        view_new.findViewById(R.id.deleteItemBtn).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                users.remove(i);
+                notifyDataSetChanged();
+            }
+
+        });
 
         return view_new;
     }

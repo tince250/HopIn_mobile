@@ -21,6 +21,8 @@ public class RideSettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_settings, container, false);
 
+        getActivity().setTitle("Ride settings");
+
         view.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
