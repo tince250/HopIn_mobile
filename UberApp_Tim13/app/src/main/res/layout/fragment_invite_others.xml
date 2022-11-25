@@ -13,7 +13,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/ll_border"
             android:orientation="vertical"
@@ -28,7 +28,8 @@
                 android:fontFamily="@font/interbold"
                 android:text="@string/invite_others_title"
                 android:textColor="@color/blue"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textFontWeight="700"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,12 +77,14 @@
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
             android:textSize="18sp"
+            android:textFontWeight="700"
             android:id="@+id/inviteOthersTV"/>
 
 
         <ListView
             android:id="@+id/list"
-            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content" />
 
 

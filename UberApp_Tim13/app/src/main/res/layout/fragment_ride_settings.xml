@@ -46,7 +46,7 @@
                 android:textSize="12sp"
                 app:icon="@drawable/ic_basic_car"
                 app:iconGravity="textTop"
-                app:iconSize="40dp"
+                app:iconSize="30dp"
                 app:iconTint="@color/lighter_blue"
                 app:strokeColor="@color/lighter_blue"
                 app:strokeWidth="2dp" />
@@ -67,7 +67,7 @@
                 android:textSize="12sp"
                 app:icon="@drawable/ic_van"
                 app:iconGravity="textTop"
-                app:iconSize="40dp"
+                app:iconSize="30dp"
                 app:iconTint="@color/disabled_gray"
                 app:strokeColor="@color/disabled_gray"
                 app:strokeWidth="2dp" />
@@ -89,7 +89,7 @@
                 android:textSize="12sp"
                 app:icon="@drawable/ic_luxury"
                 app:iconGravity="textTop"
-                app:iconSize="40dp"
+                app:iconSize="30dp"
                 app:iconTint="@color/disabled_gray"
                 app:strokeColor="@color/disabled_gray"
                 app:strokeWidth="2dp" />
