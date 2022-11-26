@@ -54,12 +54,7 @@
         </activity>
         <activity
             android:name=".activities.AcceptanceRideActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -87,6 +82,7 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -105,11 +101,11 @@
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
