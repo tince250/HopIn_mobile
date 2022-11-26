@@ -54,7 +54,15 @@ public class RideSettingsFragment extends Fragment {
                 FragmentTransition.to(InviteOthersFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
+        
+        vehicleTypeBtnsSetUp(view);
+        babyPetBtnsSetUp(view);
 
+        return view;
+    }
+
+
+    private void vehicleTypeBtnsSetUp(View view) {
         basicCarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +89,9 @@ public class RideSettingsFragment extends Fragment {
                 changeBtnToGray(basicCarBtn);
             }
         });
+    }
 
+    private void babyPetBtnsSetUp(View view) {
         view.findViewById(R.id.babyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,8 +115,6 @@ public class RideSettingsFragment extends Fragment {
                 petClicked = !petClicked;
             }
         });
-
-        return view;
     }
 
     private void changeBtnToBlue(MaterialButton btn) {
