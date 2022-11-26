@@ -49,6 +49,7 @@ public class RideHistoryDetailsFragment extends Fragment{
             public void onClick(View view) {
                 //Toast.makeText(getActivity(), "sss", Toast.LENGTH_SHORT).show();
                 AccountDetailsFragment dialogFragment = AccountDetailsFragment.newInstance(rideNum);
+                //dialogFragment.setWidthPercent()
                 dialogFragment.show(getParentFragmentManager(), "My fragment");
                 //FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
             }

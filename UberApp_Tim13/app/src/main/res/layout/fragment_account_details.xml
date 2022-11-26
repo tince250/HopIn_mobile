@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout android:layout_width="380dp"
     android:layout_height="400dp"
-    android:layout_marginHorizontal="20dp"
+    android:layout_marginHorizontal="40dp"
     android:layout_gravity="center"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Passengers on ride"
+        android:textColor="@color/dark_blue"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textFontWeight="700"
+        android:paddingTop="15dp"/>
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginVertical="5dp"
+        android:dividerHeight="6.0sp"/>
 
 </LinearLayout>

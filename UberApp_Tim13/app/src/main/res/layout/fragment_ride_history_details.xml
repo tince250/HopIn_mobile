@@ -167,7 +167,9 @@
             android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="5dp"
             android:elevation="0dp"
-            android:id="@+id/driver_info_card_hist">
+            android:id="@+id/driver_info_card_hist"
+            app:strokeColor="@color/disabled_gray"
+            app:strokeWidth="2dp">
 
 
             <LinearLayout

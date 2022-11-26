@@ -49,12 +49,12 @@ public class Mockap {
             List<User> firstRidePassengers = new ArrayList<User>();
             firstRidePassengers.add(0, users.get(0));
             firstRidePassengers.add(1, users.get(1));
-            firstRidePassengers.add(users.get(0));
+            /*firstRidePassengers.add(users.get(0));
             firstRidePassengers.add(users.get(1));
             firstRidePassengers.add(users.get(0));
             firstRidePassengers.add(users.get(1));
             firstRidePassengers.add(users.get(0));
-            firstRidePassengers.add(users.get(1));
+            firstRidePassengers.add(users.get(1));*/
             List<String> firstRideStops = new ArrayList<String>();
             firstRideStops.add("Stara Pazova, Kralja Milana 5");
             List<Rating> firstRideRatings = new ArrayList<Rating>();

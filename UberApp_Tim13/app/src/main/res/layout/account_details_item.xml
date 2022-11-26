@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginHorizontal="20dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginVertical="10dp"
     android:background="@drawable/border"
     android:gravity="center"
     app:cardCornerRadius="5dp"
-    >
+    app:strokeColor="@color/disabled_gray"
+    app:strokeWidth="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="5dp">
+
+        <ImageView
+            android:id="@+id/ic_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="15dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_profile"
+            app:tint="@color/dark_gray" />
 
         <TextView
             android:id="@+id/detailsNameTV"
@@ -22,7 +35,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
             android:text="@string/userName"
-            android:layout_toStartOf="@id/ic_profile"
+            android:layout_toEndOf="@id/ic_profile"
             android:textColor="@color/dark_blue"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -33,7 +46,7 @@
         <TextView
             android:id="@+id/detailsEmailTV"
             android:layout_below="@id/detailsNameTV"
-            android:layout_toStartOf="@id/ic_profile"
+            android:layout_toEndOf="@id/ic_profile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
@@ -46,7 +59,7 @@
         <TextView
             android:id="@+id/detailsContactTV"
             android:layout_below="@id/detailsEmailTV"
-            android:layout_toStartOf="@id/ic_profile"
+            android:layout_toEndOf="@id/ic_profile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,20 +70,9 @@
             android:textColor="@color/dark_blue"
             android:textSize="15sp" />
 
-        <ImageView
-            android:id="@+id/ic_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="15dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_profile"
-            app:tint="@color/dark_gray" />
 
     </RelativeLayout>
 
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
