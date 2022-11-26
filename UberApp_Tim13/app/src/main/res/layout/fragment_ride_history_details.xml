@@ -270,7 +270,7 @@
                     android:orientation="vertical"
                     android:layout_marginBottom="5dp"
                     android:padding="10dp"
-                    android:id="@+id/passengerDetails"
+                    android:id="@+id/passengerDetailsRL"
                     >
                     <androidx.cardview.widget.CardView
                         android:layout_width="50dp"

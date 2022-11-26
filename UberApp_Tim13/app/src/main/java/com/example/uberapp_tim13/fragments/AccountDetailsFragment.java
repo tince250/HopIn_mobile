@@ -19,9 +19,9 @@ public class AccountDetailsFragment extends DialogFragment {
     ListView listView;
 
     public static AccountDetailsFragment newInstance(int r) {
-        AccountDetailsFragment frag = new AccountDetailsFragment();
+        AccountDetailsFragment fragment = new AccountDetailsFragment();
         rideNum = r;
-        return frag;
+        return fragment;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

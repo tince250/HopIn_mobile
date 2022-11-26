@@ -44,7 +44,7 @@ public class RideHistoryDetailsFragment extends Fragment{
         ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getPrice());
 
-        view.findViewById(R.id.passengerDetails).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.passengerDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getActivity(), "sss", Toast.LENGTH_SHORT).show();
@@ -52,6 +52,14 @@ public class RideHistoryDetailsFragment extends Fragment{
                 //dialogFragment.setWidthPercent()
                 dialogFragment.show(getParentFragmentManager(), "My fragment");
                 //FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
+            }
+        });
+
+        view.findViewById(R.id.driverDetailsRL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DriverDetailsFragment driverDetailsFragment = DriverDetailsFragment.newInstance(rideNum);
+                driverDetailsFragment.show(getParentFragmentManager(), "My fragment");
             }
         });
         /*TextView tt = view.findViewById(R.id.textViewDistance);

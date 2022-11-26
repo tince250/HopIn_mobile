@@ -135,5 +135,6 @@
     <string name="other">Other</string>
     <string name="enterOther">Enter other reason:</string>
     <string name="submit">Submit</string>
-
+    <string name="passengerDetailsTitle">Passengers on ride</string>
+    <string name="driverDetailsTitle">Driver\'s info</string>
 </resources>
