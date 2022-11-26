@@ -22,7 +22,7 @@
     </TextView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/passengersBtn"
+        android:id="@+id/passengersReasonBtn"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -38,7 +38,7 @@
         android:layout_gravity="center"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/familyBtn"
+        android:id="@+id/familyReasonBtn"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -54,7 +54,7 @@
         android:layout_gravity="center"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/otherBtn"
+        android:id="@+id/otherReasonBtn"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -84,7 +84,7 @@
         android:layout_gravity="center"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/nextBtn"
+        android:id="@+id/submitBtn"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
