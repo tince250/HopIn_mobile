@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
@@ -47,7 +48,9 @@ public class RideHistoryDetailsFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getActivity(), "sss", Toast.LENGTH_SHORT).show();
-                FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
+                AccountDetailsFragment dialogFragment = AccountDetailsFragment.newInstance(rideNum);
+                dialogFragment.show(getParentFragmentManager(), "My fragment");
+                //FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
             }
         });
         /*TextView tt = view.findViewById(R.id.textViewDistance);

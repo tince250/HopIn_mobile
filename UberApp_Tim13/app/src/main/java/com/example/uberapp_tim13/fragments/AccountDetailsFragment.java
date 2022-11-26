@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ListView;
 
 import com.example.uberapp_tim13.R;
@@ -36,16 +37,19 @@ import com.example.uberapp_tim13.adapters.ride_history.PassengerDetailsAdapter;
 
 public class AccountDetailsFragment extends DialogFragment {
     public static int rideNum;
+    ListView listView;
+
     public static AccountDetailsFragment newInstance(int r) {
         AccountDetailsFragment frag = new AccountDetailsFragment();
         rideNum = r;
         return frag;
     }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_details, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.list);
+        listView = (ListView) view.findViewById(android.R.id.list);
         PassengerDetailsAdapter adapter = new PassengerDetailsAdapter(getActivity(), rideNum);
-        listView.setListAdapter(adapter);
+        listView.setAdapter(adapter);
         return view;
     }
 
