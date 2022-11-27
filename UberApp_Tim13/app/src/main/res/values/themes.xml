@@ -35,4 +35,9 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorOnSurface">@color/dark_blue</item>
     </style>
+
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorOnPrimary">@color/blue</item>
+    </style>
 </resources>
