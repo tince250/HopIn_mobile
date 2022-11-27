@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="380dp"
-    android:layout_height="400dp"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="40dp"
     android:layout_gravity="center"
     android:orientation="vertical"
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginVertical="5dp"
-        android:dividerHeight="6.0sp"/>
+        android:layout_marginHorizontal="10dp"
+        android:dividerHeight="10.0sp"/>
 
 </LinearLayout>

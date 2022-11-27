@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
+import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
@@ -48,9 +49,10 @@ public class RideHistoryDetailsFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getActivity(), "sss", Toast.LENGTH_SHORT).show();
-                AccountDetailsFragment dialogFragment = AccountDetailsFragment.newInstance(rideNum);
+                //AccountDetailsFragment dialogFragment = AccountDetailsFragment.newInstance(rideNum);
                 //dialogFragment.setWidthPercent()
-                dialogFragment.show(getParentFragmentManager(), "My fragment");
+               // dialogFragment.show(getParentFragmentManager(), "My fragment");
+                new PassengerDetailsDialog(getActivity(), rideNum).show();
                 //FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
             }
         });
@@ -58,8 +60,9 @@ public class RideHistoryDetailsFragment extends Fragment{
         view.findViewById(R.id.driverDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DriverDetailsFragment driverDetailsFragment = DriverDetailsFragment.newInstance(rideNum);
-                driverDetailsFragment.show(getParentFragmentManager(), "My fragment");
+                new DriverDetailsDialog(getActivity(), rideNum).show();
+                //DriverDetailsDialog driverDetailsDialog = DriverDetailsDialog.newInstance(rideNum);
+                //driverDetailsDialog.show(getParentFragmentManager(), "My fragment");
             }
         });
         /*TextView tt = view.findViewById(R.id.textViewDistance);

@@ -2,13 +2,11 @@ package com.example.uberapp_tim13.fragments;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.ListFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ListView;
 
 import com.example.uberapp_tim13.R;
@@ -25,7 +23,7 @@ public class AccountDetailsFragment extends DialogFragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_account_details, container, false);
+        View view = inflater.inflate(R.layout.dialog_passenger_details, container, false);
         listView = (ListView) view.findViewById(android.R.id.list);
         PassengerDetailsAdapter adapter = new PassengerDetailsAdapter(getActivity(), rideNum);
         listView.setAdapter(adapter);

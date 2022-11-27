@@ -43,7 +43,7 @@ public class PassengerDetailsAdapter extends BaseAdapter {
         View view_new = view;
 
         if (view == null) {
-            view_new = activity.getLayoutInflater().inflate(R.layout.account_details_item, null);
+            view_new = activity.getLayoutInflater().inflate(R.layout.passenger_details_item, null);
         }
 
         ((TextView) view_new.findViewById(R.id.detailsNameTV)).setText(user.getName());
