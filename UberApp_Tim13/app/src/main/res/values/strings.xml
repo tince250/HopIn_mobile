@@ -137,4 +137,6 @@
     <string name="submit">Submit</string>
     <string name="passengerDetailsTitle">Passengers on ride</string>
     <string name="driverDetailsTitle">Driver\'s info</string>
+    <string name="logOutTitle">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
 </resources>

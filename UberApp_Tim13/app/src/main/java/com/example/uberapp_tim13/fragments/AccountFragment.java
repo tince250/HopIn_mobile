@@ -18,6 +18,7 @@ import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.activities.LoginActivity;
 import com.example.uberapp_tim13.activities.PassengerReportsActivity;
+import com.example.uberapp_tim13.dialogs.LogOutDialog;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
@@ -44,7 +45,8 @@ public class AccountFragment extends Fragment {
         view.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                LogOutDialog logOutDialog = new LogOutDialog(getActivity());
+                logOutDialog.show();
             }
         });
 
