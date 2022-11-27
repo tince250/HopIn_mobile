@@ -12,9 +12,11 @@
         android:layout_marginLeft="5dp"
         android:fontFamily="@font/poppinsbold"
         android:text="@string/aroundYou"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textFontWeight="700"/>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/mapCV"
         app:cardCornerRadius="12dp"
         android:layout_width="match_parent"
@@ -29,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/currentRideBtn"

@@ -17,7 +17,7 @@
         android:drawableTint="@color/dark_gray"
         android:drawablePadding="5dp"
         android:paddingHorizontal="10dp"
-        android:background="@drawable/cutom_input"
+        android:background="@drawable/border_light"
         android:layout_alignParentStart="true"
         android:hint="@string/search"/>
 

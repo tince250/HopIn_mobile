@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="15dp"
-    android:background="@drawable/border"
+    android:background="@drawable/border_dark"
     android:id="@+id/invitedPassengerCardLL"
     android:padding="10dp">
 

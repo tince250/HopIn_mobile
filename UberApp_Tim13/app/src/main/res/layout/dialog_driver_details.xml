@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        android:background="@drawable/border"
+        android:background="@drawable/border_dark"
         android:gravity="center"
         app:cardCornerRadius="5dp"
         app:strokeColor="@color/disabled_gray"

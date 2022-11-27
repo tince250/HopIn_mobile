@@ -30,7 +30,8 @@
             android:text="@string/loginTitle"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            />
 
         <EditText
             android:id="@+id/emailET"
@@ -41,9 +42,10 @@
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="10sp"
-            android:background="@drawable/border"
+            android:background="@drawable/border_light"
             android:fontFamily="@font/poppinsregular"
             android:textSize="16sp"/>
+
 
         <EditText
             android:id="@+id/passwordET"
@@ -51,12 +53,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:background="@drawable/border"
+            android:background="@drawable/border_light"
             android:fontFamily="@font/poppinsregular"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10sp"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/loginBtn"
@@ -73,7 +75,8 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:onClick="login"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:cornerRadius="10dp"/>
 
         <TextView
             android:id="@+id/forgottenPasswordTV"
