@@ -2,6 +2,7 @@ package com.example.uberapp_tim13.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,14 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.google.android.material.button.MaterialButton;
 
 public class DeclineReasonDialog extends Dialog implements android.view.View.OnClickListener {
 
     Activity activity;
-    Button passengersReasonBtn;
-    Button familyReasonBtn;
-    Button otherReasonBtn;
-    Button submitBtn;
+    MaterialButton passengersReasonBtn;
+    MaterialButton familyReasonBtn;
+    MaterialButton otherReasonBtn;
+    MaterialButton submitBtn;
     EditText otherReasonET;
 
     public DeclineReasonDialog(Activity activity) {
@@ -58,12 +60,15 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
             switch (v.getId()) {
                 case R.id.passengersReasonBtn:
                     passengersReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
+                    passengersReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
                     break;
                 case R.id.familyReasonBtn:
                     familyReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
+                    familyReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
                     break;
                 case R.id.otherReasonBtn:
                     otherReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
+                    otherReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
                     otherReasonET.setVisibility(View.VISIBLE);
                     break;
                 default:
@@ -77,6 +82,9 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
         passengersReasonBtn.setTextColor(activity.getResources().getColor(R.color.disabled_gray));
         familyReasonBtn.setTextColor(activity.getResources().getColor(R.color.disabled_gray));
         otherReasonBtn.setTextColor(activity.getResources().getColor(R.color.disabled_gray));
+        passengersReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
+        familyReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
+        otherReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
         otherReasonET.setVisibility(View.GONE);
     }
 }

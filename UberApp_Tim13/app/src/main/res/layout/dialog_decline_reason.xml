@@ -35,7 +35,9 @@
         android:textColor="@color/disabled_gray"
         android:textFontWeight="700"
         android:textSize="16sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        app:strokeColor="@color/disabled_gray"
+        app:strokeWidth="2dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/familyReasonBtn"
@@ -51,7 +53,9 @@
         android:textColor="@color/disabled_gray"
         android:textFontWeight="700"
         android:textSize="16sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        app:strokeColor="@color/disabled_gray"
+        app:strokeWidth="2dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/otherReasonBtn"
@@ -67,7 +71,9 @@
         android:textColor="@color/disabled_gray"
         android:textFontWeight="700"
         android:textSize="16sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        app:strokeColor="@color/disabled_gray"
+        app:strokeWidth="2dp" />
 
     <EditText
         android:id="@+id/otherReasonET"
