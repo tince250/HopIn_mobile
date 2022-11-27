@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="40dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/poppinsbold"
+        android:text="@string/driverDetailsTitle"
+        android:textColor="@color/dark_blue"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textFontWeight="700"
+        android:paddingTop="15dp"/>
+
+    <com.google.android.material.card.MaterialCardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        app:cardCornerRadius="5dp"
+        app:strokeColor="@color/disabled_gray"
+        app:strokeWidth="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp">
+
+            <ImageView
+                android:id="@+id/ic_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginLeft="15dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_profile"
+                app:tint="@color/dark_gray" />
+
+            <TextView
+                android:id="@+id/detailsNameTV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_toStartOf="@id/ic_profile"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:drawablePadding="3dp"
+                android:paddingHorizontal="8dp" />
+
+
+            <TextView
+                android:id="@+id/detailsEmailTV"
+                android:layout_below="@id/detailsNameTV"
+                android:layout_toStartOf="@id/ic_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsbold"
+                android:drawablePadding="3dp"
+                android:paddingHorizontal="8dp"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/detailsContactTV"
+                android:layout_below="@id/detailsEmailTV"
+                android:layout_toStartOf="@id/ic_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppinsbold"
+                android:drawablePadding="3dp"
+                android:paddingHorizontal="8dp"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/detailsPlatesTV"
+                android:layout_below="@id/detailsContactTV"
+                android:layout_toStartOf="@id/ic_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsbold"
+                android:drawablePadding="3dp"
+                android:paddingHorizontal="8dp"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/detailsVehicleTV"
+                android:layout_below="@id/detailsPlatesTV"
+                android:layout_toStartOf="@id/ic_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppinsbold"
+                android:drawablePadding="3dp"
+                android:paddingHorizontal="8dp"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

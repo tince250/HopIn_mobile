@@ -129,4 +129,14 @@
     <string name="ride_settings_title">What\'s your vehicle type?</string>
     <string name="invite_others_title">Anyone else riding with you?</string>
     <string name="invite_sent">Invites will be sent to:</string>
+    <string name="declineReasonTitle">Choose reason for declining</string>
+    <string name="reasonPassengers">Passengers haven\'t come</string>
+    <string name="reasonFamily">Family problems</string>
+    <string name="other">Other</string>
+    <string name="enterOther">Enter other reason:</string>
+    <string name="submit">Submit</string>
+    <string name="passengerDetailsTitle">Passengers on ride</string>
+    <string name="driverDetailsTitle">Driver\'s info</string>
+    <string name="logOutTitle">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
 </resources>

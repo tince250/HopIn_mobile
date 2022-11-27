@@ -54,7 +54,8 @@
         </activity>
         <activity
             android:name=".activities.AcceptanceRideActivity"
-            android:exported="false">
+            android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -82,6 +83,7 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
