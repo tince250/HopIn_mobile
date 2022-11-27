@@ -36,7 +36,7 @@ public class PassengerHomeFragment extends Fragment {
                 FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
-        
+
         setTimePicker(view);
         return view;
 

@@ -40,6 +40,7 @@ public class AccountSettingsFragment extends Fragment {
         switch (Globals.userRole) {
             case "driver":
                 view.findViewById(R.id.changePayInfoBtn).setVisibility(View.GONE);
+                view.findViewById(R.id.ccardSettingsET).setVisibility(View.GONE);
                 break;
             case "passenger":
                 view.findViewById(R.id.changePayInfoBtn).setVisibility(View.VISIBLE);
