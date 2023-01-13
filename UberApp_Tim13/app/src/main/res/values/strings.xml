@@ -139,4 +139,8 @@
     <string name="driverDetailsTitle">Driver\'s info</string>
     <string name="logOutTitle">Are you sure you want to log out?</string>
     <string name="cancel">Cancel</string>
+    <string name="oops">Ooops</string>
+    <string name="location_disabled_message">Your Locations seems to be disabled, do you want to enable it? It\'s necessary to enable full map functionalities!</string>
+    <string name="enable">Enable</string>
+    <string name="no">No, thank you</string>
 </resources>
