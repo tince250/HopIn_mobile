@@ -9,8 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestUtils {
     //EXAMPLE: http://192.168.43.73:8080/rs.ftn.reviewer.rest/rest/proizvodi/
-    public static final String SERVICE_API_PATH = "http://192.168.0.11:4321/api/";
+    public static final String SERVICE_API_PATH = "http://192.168.1.105:4321/api/";
     public static final String USER_GET = "user/1";
+    public static final String LOGIN = "user/login";
 
     /*
      * Ovo ce nam sluziti za debug, da vidimo da li zahtevi i odgovoru idu

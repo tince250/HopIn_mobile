@@ -9,13 +9,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.model.User;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 
 import java.util.List;
 
 public class LoginActivity extends Activity {
+
+    private AuthService authService = new AuthService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +28,10 @@ public class LoginActivity extends Activity {
     }
 
     public void login(View v) {
-        List<User> users = Mockap.getUsers();
         TextView email = findViewById(R.id.emailET);
         TextView password = (TextView) findViewById(R.id.passwordET);
 
-        for(User user : users){
-            if (email.getText().toString().equals(user.getEmail()) &&
-                password.getText().toString().equals(user.getPassword())){
-                Globals.currentUser = user;
-                Globals.userRole = user.getRole();
-                break;
-            }
-        }
+        this.authService.login(new CredentialsDTO(email.getText().toString(), password.getText().toString()));
 
         if (Globals.userRole.equals("passenger")) {
             startActivity(new Intent(LoginActivity.this, PassengerMainActivity.class));
