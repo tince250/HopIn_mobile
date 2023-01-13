@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.model.User;
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ import java.util.List;
 public class InvitedPassengersAdapter extends BaseAdapter {
 
     private Activity activity;
-    private List<User> users;
+    private List<UserDTO> users;
     private TextView pressedName;
 
-    public InvitedPassengersAdapter(Activity activity, List<User> users) {
+    public InvitedPassengersAdapter(Activity activity, List<UserDTO> users) {
         this.activity = activity;
         this.users = users;
     }
@@ -40,7 +41,7 @@ public class InvitedPassengersAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        User user = this.users.get(i);
+        UserDTO user = this.users.get(i);
         View view_new = view;
 
         if(view == null) {
@@ -48,7 +49,7 @@ public class InvitedPassengersAdapter extends BaseAdapter {
         }
 
         this.pressedName = (TextView)view_new.findViewById(R.id.passengerNameTV);
-        this.pressedName.setText(user.getName() + " " + user.getSurName());
+        this.pressedName.setText(user.getName() + " " + user.getSurname());
 
         view_new.findViewById(R.id.deleteItemBtn).setOnClickListener(new View.OnClickListener()
         {

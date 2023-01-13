@@ -143,4 +143,5 @@
     <string name="location_disabled_message">Your Locations seems to be disabled, do you want to enable it? It\'s necessary to enable full map functionalities!</string>
     <string name="enable">Enable</string>
     <string name="no">No, thank you</string>
+    <string name="api_key">AIzaSyADf7wmEupGmb08OGVJR1eNhvtvF6KYuiM</string>
 </resources>

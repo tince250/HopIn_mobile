@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.button.MaterialButton;
 
@@ -22,11 +23,15 @@ public class RideSettingsFragment extends Fragment {
 
     private boolean babyClicked = false;
     private boolean petClicked = false;
+    private boolean basicCarClicked = true;
+    private boolean vanClicked = false;
+    private boolean luxuryClicked = false;
     private MaterialButton basicCarBtn;
     private MaterialButton vanBtn;
     private MaterialButton luxuryCarBtn;
     private MaterialButton babyBtn;
     private MaterialButton petBtn;
+    private RideService rideService = new RideService();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +56,7 @@ public class RideSettingsFragment extends Fragment {
         view.findViewById(R.id.nextBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setDataInRide();
                 FragmentTransition.to(InviteOthersFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
@@ -66,6 +72,7 @@ public class RideSettingsFragment extends Fragment {
         basicCarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                basicCarClicked = true;
                 changeBtnToBlue(basicCarBtn);
                 changeBtnToGray(vanBtn);
                 changeBtnToGray(luxuryCarBtn);
@@ -75,6 +82,7 @@ public class RideSettingsFragment extends Fragment {
         view.findViewById(R.id.vanBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                vanClicked = true;
                 changeBtnToBlue(vanBtn);
                 changeBtnToGray(basicCarBtn);
                 changeBtnToGray(luxuryCarBtn);
@@ -84,6 +92,7 @@ public class RideSettingsFragment extends Fragment {
         view.findViewById(R.id.luxuryCarBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                luxuryClicked = true;
                 changeBtnToBlue(luxuryCarBtn);
                 changeBtnToGray(vanBtn);
                 changeBtnToGray(basicCarBtn);
@@ -127,5 +136,24 @@ public class RideSettingsFragment extends Fragment {
         btn.setTextColor(getResources().getColor(R.color.disabled_gray));
         btn.setIconTint(ColorStateList.valueOf(getResources().getColor(R.color.disabled_gray)));
         btn.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.disabled_gray)));
+    }
+
+    private void setDataInRide() {
+        if (babyClicked) {
+            RideService.rideInCreation.setBabyTransport(true);
+        }
+        if (petClicked) {
+            RideService.rideInCreation.setPetTransport(true);
+        }
+
+        if (basicCarClicked) {
+            RideService.rideInCreation.setVehicleType("CAR");
+        }
+        else if (vanClicked) {
+            RideService.rideInCreation.setVehicleType("VAN");
+        } else {
+            RideService.rideInCreation.setVehicleType("LUXURY");
+        }
+
     }
 }
