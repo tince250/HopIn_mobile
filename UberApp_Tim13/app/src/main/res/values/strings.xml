@@ -139,4 +139,5 @@
     <string name="driverDetailsTitle">Driver\'s info</string>
     <string name="logOutTitle">Are you sure you want to log out?</string>
     <string name="cancel">Cancel</string>
+    <string name="api_key">AIzaSyADf7wmEupGmb08OGVJR1eNhvtvF6KYuiM</string>
 </resources>

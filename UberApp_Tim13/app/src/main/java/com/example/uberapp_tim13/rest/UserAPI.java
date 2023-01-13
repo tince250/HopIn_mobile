@@ -11,6 +11,6 @@ public interface UserAPI {
     @GET(RestUtils.USER_GET)
     Call<UserDTO> doGetUser();
 
-    @GET("user?")
+    @GET("user/email?")
     Call<UserDTO> getUserByEmail(@Query("email") String email);
 }
