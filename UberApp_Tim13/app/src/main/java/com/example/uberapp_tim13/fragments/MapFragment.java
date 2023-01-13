@@ -67,15 +67,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        View v = inflater.inflate(R.layout.fragment_map, container, false);
+        createMapFragmentAndInflate();
+        return v;
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-
-        createMapFragmentAndInflate();
 
         // Checking if providers are enabled - dynamic permissions
         boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -250,7 +250,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         }
     }
 
-    private void addMarker(Location location, String type) {
+    public void addMarker(Location location, String type) {
         LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
 
         Marker marker = null;
@@ -263,7 +263,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             case "pickup":
                 marker = pickup;
                 title = "A";
-                current_type = "destination";
                 break;
             case "destination":
                 marker = destination;

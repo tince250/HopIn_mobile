@@ -2,6 +2,8 @@ package com.example.uberapp_tim13.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AddressComponent;
 import com.google.android.libraries.places.api.model.AddressComponents;
@@ -30,20 +33,33 @@ import java.util.List;
 
 public class PassengerHomeFragment extends Fragment {
 
+    private MapFragment mapFragment;
+
     public static PassengerHomeFragment newInstance() {
         return new PassengerHomeFragment();
     }
     EditText pickUpLoc;
     EditText destination;
 
+    boolean isPickup = true;
+
     View.OnClickListener startAutocompleteIntentListener = view -> {
+        isPickup = true;
+        if (view.getId() != R.id.pickUpLocET) {
+            isPickup = false;
+        }
+
         view.setOnClickListener(null);
         startAutocompleteIntent();
     };
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mapFragment = new MapFragment();
+        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
+
         View view = inflater.inflate(R.layout.fragment_passenger_main, container, false);
         pickUpLoc = view.findViewById(R.id.pickUpLocET);
         destination = view.findViewById(R.id.destinationET);
@@ -54,6 +70,7 @@ public class PassengerHomeFragment extends Fragment {
         }
 
         pickUpLoc.setOnClickListener(startAutocompleteIntentListener);
+        destination.setOnClickListener(startAutocompleteIntentListener);
 
         view.findViewById(R.id.nextBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +93,19 @@ public class PassengerHomeFragment extends Fragment {
                         // Write a method to read the address components from the Place
                         // and populate the form with the address components
                         Log.d("AUTO", "Place: " + place.getAddressComponents());
-//                        fillInAddress(place);
+
+                        Location temp = new Location(LocationManager.GPS_PROVIDER);
+                        LatLng latLng = place.getLatLng();
+                        temp.setLatitude(latLng.latitude);
+                        temp.setLongitude(latLng.longitude);
+
+                        String type = "pickup";
+                        if (!isPickup) {
+                            type = "destination";
+                        }
+
+                        mapFragment.addMarker(temp, type);
+                        fillInAddress(place);
                     }
                 } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
                     // The user canceled the operation.
@@ -123,15 +152,12 @@ public class PassengerHomeFragment extends Fragment {
                 }
             }
         }
+        if (isPickup)  {
+            pickUpLoc.setText(address.toString());
+            destination.requestFocus();
+        } else {
+            destination.setText(address.toString());
+        }
 
-        pickUpLoc.setText(address.toString());
-
-        // After filling the form with address components from the Autocomplete
-        // prediction, set cursor focus on the second address line to encourage
-        // entry of sub-premise information such as apartment, unit, or floor number.
-        destination.requestFocus();
-
-        // Add a map for visual confirmation of the address
-//        showMap(place);
     }
 }

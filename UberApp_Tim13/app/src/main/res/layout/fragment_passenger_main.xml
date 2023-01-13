@@ -119,16 +119,13 @@
             app:cornerRadius="10dp"
             />
 
-        <fragment
+        <FrameLayout
             android:id="@+id/map_fragment"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="10dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            class="com.example.uberapp_tim13.fragments.MapFragment"
-            tools:layout="@layout/fragment_map">
-        </fragment>
+            android:adjustViewBounds="true">
+        </FrameLayout>
 
     </LinearLayout>
 
