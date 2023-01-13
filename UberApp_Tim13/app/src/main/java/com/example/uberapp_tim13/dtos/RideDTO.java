@@ -1,12 +1,13 @@
 package com.example.uberapp_tim13.dtos;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class RideDTO {
-	private List<LocationDTO> locations;
-	private List<UserInRideDTO> passengers;
+	private List<LocationDTO> locations = new ArrayList<LocationDTO>();
+	private List<UserInRideDTO> passengers = new ArrayList<UserInRideDTO>();
 	private String vehicleType;
 	private boolean babyTransport;
 	private boolean petTransport;

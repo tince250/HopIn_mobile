@@ -93,7 +93,7 @@
             android:layout_weight="1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/backBtn"
+            android:id="@+id/finishBtn"
             android:layout_gravity="center_horizontal"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
