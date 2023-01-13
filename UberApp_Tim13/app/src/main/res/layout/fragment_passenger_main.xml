@@ -40,7 +40,7 @@
                     android:paddingVertical="10dp"
                     />
 
-                <EditText
+                <com.example.uberapp_tim13.model.AutocompleteEditText
                     android:id="@+id/pickUpLocET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

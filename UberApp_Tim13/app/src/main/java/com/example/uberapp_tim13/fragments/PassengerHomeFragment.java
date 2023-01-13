@@ -15,6 +15,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
@@ -25,6 +26,7 @@ import com.google.android.libraries.places.api.model.AddressComponent;
 import com.google.android.libraries.places.api.model.AddressComponents;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
@@ -34,6 +36,7 @@ import java.util.List;
 public class PassengerHomeFragment extends Fragment {
 
     private MapFragment mapFragment;
+    private PlacesClient placesClient;
 
     public static PassengerHomeFragment newInstance() {
         return new PassengerHomeFragment();
@@ -53,7 +56,6 @@ public class PassengerHomeFragment extends Fragment {
         startAutocompleteIntent();
     };
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +70,8 @@ public class PassengerHomeFragment extends Fragment {
         if (!Places.isInitialized()) {
             Places.initialize(view.getContext(), apiKey);
         }
+
+        placesClient = Places.createClient(getActivity());
 
         pickUpLoc.setOnClickListener(startAutocompleteIntentListener);
         destination.setOnClickListener(startAutocompleteIntentListener);

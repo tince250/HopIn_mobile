@@ -227,23 +227,23 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                 .target(new LatLng(location.getLatitude(), location.getLongitude())).zoom(10).build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(@NonNull LatLng latLng) {
-                Location temp = new Location(LocationManager.GPS_PROVIDER);
-                temp.setLatitude(latLng.latitude);
-                temp.setLongitude(latLng.longitude);
-                addMarker(temp, current_type);
-            }
-        });
-
-        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(getActivity(), marker.getTitle(), Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
+//        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(@NonNull LatLng latLng) {
+//                Location temp = new Location(LocationManager.GPS_PROVIDER);
+//                temp.setLatitude(latLng.latitude);
+//                temp.setLongitude(latLng.longitude);
+//                addMarker(temp, current_type);
+//            }
+//        });
+//
+//        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+//                Toast.makeText(getActivity(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
 
         if (location != null) {
             addMarker(location, "here");
