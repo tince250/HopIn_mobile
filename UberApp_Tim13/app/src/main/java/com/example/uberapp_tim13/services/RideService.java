@@ -13,12 +13,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RideService {
-    public static RideDTO rideInCreation;
+    public static RideDTO rideInCreation = new RideDTO();
     public static RideReturnedDTO returnedRide;
     public static boolean success = false;
 
     public RideService() {
-        this.rideInCreation = new RideDTO();
     }
 
     public void orderRide() {
