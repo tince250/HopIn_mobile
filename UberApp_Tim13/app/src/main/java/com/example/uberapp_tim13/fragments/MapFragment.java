@@ -169,6 +169,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.map_container, mMapFragment).commit();
 
+
         mMapFragment.getMapAsync(this);
     }
 
