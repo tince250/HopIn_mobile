@@ -34,6 +34,7 @@ public class User {
         this.card = card;
     }
 
+
     public String getRole() {
         return role;
     }

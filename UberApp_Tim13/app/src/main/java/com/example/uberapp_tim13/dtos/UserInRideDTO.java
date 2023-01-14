@@ -2,7 +2,9 @@ package com.example.uberapp_tim13.dtos;
 
 import com.example.uberapp_tim13.model.User;
 
-public class UserInRideDTO {
+import java.io.Serializable;
+
+public class UserInRideDTO implements Serializable {
 	private int id;
 	private String email;
 	

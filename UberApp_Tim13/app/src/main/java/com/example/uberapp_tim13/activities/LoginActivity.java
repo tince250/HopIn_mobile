@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
         TextView password = (TextView) findViewById(R.id.passwordET);
 
         Intent intent = new Intent(this, AuthService.class);
-        intent.putExtra("credentials", new CredentialsDTO(email.getText().toString(), password.getText().toString()));
+        intent.putExtra("credentials", new CredentialsDTO("driver@gmail.com", "123"));
         startService(intent);
 
         if (Globals.userRole.equals("S")) {

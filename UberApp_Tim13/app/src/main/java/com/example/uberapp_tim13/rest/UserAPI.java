@@ -10,11 +10,14 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UserAPI {
 
-    @GET(RestUtils.USER_GET)
-    Call<UserDTO> doGetUser(@Header("Authorization") String token);
+    @GET("user/{id}")
+    Call<UserDTO> doGetUser(@Header("Authorization") String token,
+                            @Path("id") int id);
 
     @Headers({
             "User-Agent: Mobile-Android",
@@ -22,4 +25,8 @@ public interface UserAPI {
     })
     @POST(RestUtils.LOGIN)
     Call<TokenDTO> login(@Body CredentialsDTO credentialsDTO);
+
+    @GET("user/email?")
+    Call<UserDTO> getUserByEmail(@Header("Authorization") String token,
+                                 @Query("email") String email);
 }
