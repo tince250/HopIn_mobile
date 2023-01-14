@@ -48,11 +48,17 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
+import ua.naiksoftware.stomp.dto.StompHeader;
+
 
 public class PassengerHomeFragment extends Fragment {
 
 //    private MapFragment mapFragment;
     private PlacesClient placesClient;
+    private StompClient mStompClient;
+
 
     public static PassengerHomeFragment newInstance() {
         return new PassengerHomeFragment();
@@ -77,6 +83,21 @@ public class PassengerHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket");
+        mStompClient.connect();
+
+        mStompClient.topic("ws/topic/test").subscribe(topicMessage -> {
+            Log.d("SOCKET", topicMessage.getPayload());
+        });
+
+        mStompClient.send("ws/send/test", "My first STOMP message!").subscribe();
+
+        // ...
+
+        mStompClient.disconnect();
+
+
 //        mapFragment = new MapFragment();
 //        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
 
