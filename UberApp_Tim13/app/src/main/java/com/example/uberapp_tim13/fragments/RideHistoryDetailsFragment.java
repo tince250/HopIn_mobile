@@ -55,7 +55,7 @@ public class RideHistoryDetailsFragment extends Fragment{
         view.findViewById(R.id.driverDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DriverDetailsDialog(getActivity(), 1).show();
+                new DriverDetailsDialog(getActivity(), ride).show();
                 //DriverDetailsDialog driverDetailsDialog = DriverDetailsDialog.newInstance(rideNum);
                 //driverDetailsDialog.show(getParentFragmentManager(), "My fragment");
             }
@@ -65,10 +65,10 @@ public class RideHistoryDetailsFragment extends Fragment{
 
     private void fitFragmentToRole(View view, RideReturnedDTO ride) {
         switch (Globals.userRole) {
-            case "driver":
+            case "passenger":
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
                 break;
-            case "passenger":
+            case "driver":
                 ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver: " + ride.getDriver().getEmail());
                 break;
         }

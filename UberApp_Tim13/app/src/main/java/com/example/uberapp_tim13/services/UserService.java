@@ -40,7 +40,7 @@ public class UserService extends Service{
                 }
             }
         });
-
+        stopSelf();
         return START_NOT_STICKY;
     }
 
@@ -51,7 +51,7 @@ public class UserService extends Service{
 
             @Override
             public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
-                Log.d("allRides", response.body().toString());
+                Log.d("allDrivers", response.body().toString());
                 sendUserByIdBroadcast(response.body());
             }
 
@@ -64,9 +64,8 @@ public class UserService extends Service{
 
 
     private void sendUserByIdBroadcast(UserDTO user){
-        Intent intent = new Intent("passengerDetailsDialog");
+        Intent intent = new Intent("userDetailsDialog");
         intent.putExtra("userById", user);
-        intent.putExtra("ss", "ikiki");
         Log.d("provera", user.getName());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }

@@ -69,7 +69,7 @@ public class PassengerDetailsDialog extends Dialog {
                     setComponents();
             }
         };
-        LocalBroadcastManager.getInstance(this.activity).registerReceiver(broadcastReceiver, new IntentFilter("passengerDetailsDialog"));
+        LocalBroadcastManager.getInstance(this.activity).registerReceiver(broadcastReceiver, new IntentFilter("userDetailsDialog"));
 
     }
 
