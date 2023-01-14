@@ -84,18 +84,16 @@ public class PassengerHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket");
+        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
         mStompClient.connect();
 
-        mStompClient.topic("ws/topic/test").subscribe(topicMessage -> {
+        mStompClient.topic("/topic/invites/1").subscribe(topicMessage -> {
             Log.d("SOCKET", topicMessage.getPayload());
         });
 
-        mStompClient.send("ws/send/test", "My first STOMP message!").subscribe();
+        mStompClient.send("/ws/send/invite/1", "My first STOMP message!").subscribe();
 
         // ...
-
-        mStompClient.disconnect();
 
 
 //        mapFragment = new MapFragment();
