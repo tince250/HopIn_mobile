@@ -4,14 +4,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
-import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
+import com.example.uberapp_tim13.dtos.reviews.CompleteRideReviewDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 
 import java.util.ArrayList;
@@ -37,16 +35,17 @@ public class ReviewService extends Service {
             public void run() {
                 if (method.equals("calculateRideReviews"))
                     getAllRideReviews(rideId, method);
+                else if (method.equals("getAllReviews"))
+                    getAllRideReviews(rideId, method);
             }
         });
-
+        stopSelf();
         return START_NOT_STICKY;
     }
 
     private void getAllRideReviews(int rideId, String method) {
         Call<ArrayList<CompleteRideReviewDTO>> call = RestUtils.reviewAPI.getAllRideReviews(rideId);
         final ArrayList<CompleteRideReviewDTO>[] reviews = new ArrayList[]{null};
-        Log.d("usao", "jeee");
         call.enqueue(new Callback<ArrayList<CompleteRideReviewDTO>>() {
 
             @Override
@@ -54,6 +53,8 @@ public class ReviewService extends Service {
                 reviews[0] = response.body();
                 Log.d("reviews", response.body().toString());
                 if (method.equals("calculateRideReviews"))
+                    sendAllReviewsCalculationBroadcast(reviews[0]);
+                if (method.equals("getAllReviews"))
                     sendAllReviewsBroadcast(reviews[0]);
             }
 
@@ -65,6 +66,13 @@ public class ReviewService extends Service {
     }
 
     private void sendAllReviewsBroadcast(ArrayList<CompleteRideReviewDTO> reviews){
+        Intent intent = new Intent("rideHistoryDetailsFragment");
+        intent.putExtra("allReviews", reviews);
+        intent.putExtra("allRideReviewsRating", calculateRating(reviews));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void sendAllReviewsCalculationBroadcast(ArrayList<CompleteRideReviewDTO> reviews){
         Intent intent = new Intent("historyAdapter");
         intent.putExtra("allRideReviewsRating", calculateRating(reviews));
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
@@ -83,8 +91,6 @@ public class ReviewService extends Service {
                 rating += review.getVehicleReview().getRating();
             }
         }
-        Log.d("rating", String.valueOf(rating));
-        Log.d("counter", String.valueOf(counter));
         return rating/counter;
     }
 

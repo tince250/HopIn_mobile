@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,24 +15,11 @@ import android.widget.TextView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
-import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.dtos.VehicleDTO;
-import com.example.uberapp_tim13.model.Ride;
-import com.example.uberapp_tim13.rest.RestUtils;
-import com.example.uberapp_tim13.services.DriverService;
+import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
 import com.example.uberapp_tim13.services.ReviewService;
 import com.example.uberapp_tim13.tools.Globals;
-import com.example.uberapp_tim13.tools.Mockap;
 
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HistoryAdapter extends BaseAdapter {
 
@@ -85,7 +70,6 @@ public class HistoryAdapter extends BaseAdapter {
         Intent intent = new Intent(this.activity, ReviewService.class);
         intent.putExtra("method", "calculateRideReviews");
         intent.putExtra("rideId", rideId);
-        Log.d("ovojeid", String.valueOf(rideId));
         this.activity.startService(intent);
 
         View finalView_new = view_new;
@@ -107,7 +91,7 @@ public class HistoryAdapter extends BaseAdapter {
                 view_new.findViewById(R.id.driverTV).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view_new.findViewById(R.id.driverTV)).setText("Driver: " + ride.getDriver().getEmail());
+                ((TextView)view_new.findViewById(R.id.driverTV)).setText(R.string.driver);
                 break;
         }
     }

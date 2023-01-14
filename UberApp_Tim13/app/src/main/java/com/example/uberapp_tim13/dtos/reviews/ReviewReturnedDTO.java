@@ -1,4 +1,6 @@
-package com.example.uberapp_tim13.dtos;
+package com.example.uberapp_tim13.dtos.reviews;
+
+import com.example.uberapp_tim13.dtos.rides.UserInRideDTO;
 
 import java.io.Serializable;
 
