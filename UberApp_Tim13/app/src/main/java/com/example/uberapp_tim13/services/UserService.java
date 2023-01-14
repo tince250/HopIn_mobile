@@ -68,18 +68,18 @@ public class UserService extends Service{
 
     private void getByEmail(String email){
         Call<UserDTO> call = RestUtils.userApi.getUserByEmail("", email);
-        Log.d("userid", String.valueOf(email));
+        Log.d("email", String.valueOf(email));
         call.enqueue(new Callback<UserDTO>() {
 
             @Override
             public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
-                Log.d("allDrivers", response.body().toString());
+                Log.d("EMAIL_REZ", response.body().toString());
                 sendUserByEmailBroadcast(response.body());
             }
 
             @Override
             public void onFailure(Call<UserDTO> call, Throwable t) {
-                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+                Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
     }

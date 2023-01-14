@@ -50,14 +50,14 @@ public class RideReturnedDTO implements Serializable {
 	private String status;
 	@SerializedName("scheduledTime")
 	@Expose
-	private LocalDateTime scheduledTime;
+	private String scheduledTime;
 
 	public RideReturnedDTO() {}
 
 	public RideReturnedDTO(int id, String startTime, String endTime, double totalCost,
 			UserInRideDTO driver, List<UserInRideDTO> passengers, int estimatedTimeInMinutes,
 			String vehicleType, boolean petTransport, boolean babyTransport, RejectionNotice rejection,
-			List<LocationDTO> locations, String status, LocalDateTime scheduledTime) {
+			List<LocationDTO> locations, String status, String scheduledTime) {
 		super();
 		this.id = id;
 		this.startTime = startTime;
@@ -180,11 +180,11 @@ public class RideReturnedDTO implements Serializable {
 		this.rejection = rejection;
 	}
 
-	public LocalDateTime getScheduledTime() {
+	public String getScheduledTime() {
 		return scheduledTime;
 	}
 
-	public void setScheduledTime(LocalDateTime scheduledTime) {
+	public void setScheduledTime(String scheduledTime) {
 		this.scheduledTime = scheduledTime;
 	}
 

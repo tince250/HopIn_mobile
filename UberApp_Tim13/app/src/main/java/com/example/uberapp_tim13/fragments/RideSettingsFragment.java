@@ -72,6 +72,8 @@ public class RideSettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 basicCarClicked = true;
+                vanClicked = false;
+                luxuryClicked = false;
                 changeBtnToBlue(basicCarBtn);
                 changeBtnToGray(vanBtn);
                 changeBtnToGray(luxuryCarBtn);
@@ -81,8 +83,9 @@ public class RideSettingsFragment extends Fragment {
         view.findViewById(R.id.vanBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                basicCarClicked = false;
                 vanClicked = true;
-                changeBtnToBlue(vanBtn);
+                luxuryClicked = false;                changeBtnToBlue(vanBtn);
                 changeBtnToGray(basicCarBtn);
                 changeBtnToGray(luxuryCarBtn);
             }
@@ -91,8 +94,9 @@ public class RideSettingsFragment extends Fragment {
         view.findViewById(R.id.luxuryCarBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                luxuryClicked = true;
-                changeBtnToBlue(luxuryCarBtn);
+                basicCarClicked = false;
+                vanClicked = false;
+                luxuryClicked = true;                changeBtnToBlue(luxuryCarBtn);
                 changeBtnToGray(vanBtn);
                 changeBtnToGray(basicCarBtn);
             }

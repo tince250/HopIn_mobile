@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,10 +70,12 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
             public void onClick(View view) {
                 //TODO: call order ride from rideService
                 setDataInRide();
+                addedUsers.clear();
+                adapter.notifyDataSetChanged();
                 Intent intentRideService = new Intent(getContext(), RideService.class);
                 intentRideService.putExtra("method", "orderRide");
                 requireActivity().startService(intentRideService);
-                FragmentTransition.to(DriverHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
 
@@ -89,23 +92,6 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                 intentUserService.putExtra("method", "getByEmail");
                 intentUserService.putExtra("email", email);
                 requireActivity().startService(intentUserService);
-
-                if (user == null) {
-                    Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                for (UserDTO u : this.addedUsers) {
-                    if (u.getEmail().equals(email)) {
-                        user = null;
-                        Toast.makeText(getActivity(),"User already added!",Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if (user != null) {
-                    addedUsers.add(user);
-                    adapter.notifyDataSetChanged();
-                }
         }
     }
 
@@ -120,9 +106,29 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
-                if (user == null)
-                    user = (UserDTO) extras.get("userByEmail");
+                if (user == null) {
+                    Log.d("REC", extras.get("userByEmail").toString());
 
+                    user = (UserDTO) extras.get("userByEmail");
+                    String email = user.getEmail();
+                    if (user == null) {
+                        Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    for (UserDTO u : addedUsers) {
+                        if (u.getEmail().equals(email)) {
+                            user = null;
+                            Toast.makeText(getActivity(),"User already added!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    if (user != null) {
+                        addedUsers.add(user);
+                        adapter.notifyDataSetChanged();
+                    }
+                    user = null;
+                }
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("inviteOthersFragment"));

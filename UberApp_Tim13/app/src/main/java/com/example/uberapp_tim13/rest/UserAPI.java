@@ -26,7 +26,7 @@ public interface UserAPI {
     @POST(RestUtils.LOGIN)
     Call<TokenDTO> login(@Body CredentialsDTO credentialsDTO);
 
-    @GET("user?")
+    @GET("user/email?")
     Call<UserDTO> getUserByEmail(@Header("Authorization") String token,
                                  @Query("email") String email);
 }

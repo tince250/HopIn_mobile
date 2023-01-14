@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -26,6 +27,7 @@ public class RideService extends Service {
 
     public static RideDTO rideInCreation = new RideDTO();
     public static RideReturnedDTO returnedRide;
+    public static boolean finished = false;
 
     ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -54,8 +56,10 @@ public class RideService extends Service {
 
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response){
+                finished = false;
                 Log.d("PAPAPA", response.body().toString());
                 sendRideByIdBroadcast(response.body());
+                finished = true;
             }
 
             @Override
@@ -67,18 +71,20 @@ public class RideService extends Service {
     }
 
     public void orderRide() {
+        finished = false;
         Call<RideReturnedDTO> call = RestUtils.rideAPI.orderRide(rideInCreation);
         call.enqueue((new Callback<RideReturnedDTO>() {
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                Log.d("REZ", response.body().toString());
-                //TODO: add broadcast sending return body if needed
                 returnedRide = response.body();
+                Log.d("REZ", returnedRide.toString());
+                sendOrderedRideBroadcast(response.body());
             }
 
             @Override
             public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
-                Log.d("REZ", "ERROR");
+                t.printStackTrace();
+                Log.d("REZ", t.getMessage());
             }
         }));
     }
@@ -87,6 +93,13 @@ public class RideService extends Service {
         Log.d("PAPAPA", ride.toString());
         Intent intent = new Intent ("getRideById");
         intent.putExtra("rideById", ride);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void sendOrderedRideBroadcast(RideReturnedDTO ride){
+        Log.d("PAPAPA", ride.toString());
+        Intent intent = new Intent ("orderedRide");
+        intent.putExtra("orderedRide", ride);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
