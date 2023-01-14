@@ -22,6 +22,7 @@ import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.fragments.MapFragment;
+import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.Globals;
@@ -162,8 +163,20 @@ public class CurrentRideActivity extends AppCompatActivity {
             public void onClick(View view) {
                 start.setEnabled(false);
                 timer.setBase(SystemClock.elapsedRealtime());
-                timer.start();
                 finish.setEnabled(true);
+
+                Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(ride.getId());
+                call.enqueue(new Callback<RideReturnedDTO>() {
+                    @Override
+                    public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                        timer.start();
+                    }
+
+                    @Override
+                    public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                        Log.e("error", "Error while trying to start ride.");
+                    }
+                });
             }
         });
 
@@ -171,6 +184,19 @@ public class CurrentRideActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 timer.stop();
+
+                Call<RideReturnedDTO> call = RestUtils.rideAPI.finishRide(ride.getId());
+                call.enqueue(new Callback<RideReturnedDTO>() {
+                    @Override
+                    public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                        Log.e("error", "Error while trying to finish ride.");
+                    }
+                });
             }
         });
         finish.setEnabled(false);

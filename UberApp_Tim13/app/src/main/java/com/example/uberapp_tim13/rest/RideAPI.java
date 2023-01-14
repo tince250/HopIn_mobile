@@ -28,4 +28,10 @@ public interface RideAPI {
     @PUT("ride/{id}/panic")
     Call<PanicRideDTO> panicRide(@Path("id") int rideId, @Body ReasonDTO reason);
 
+    @PUT("ride/{id}/start")
+    Call<RideReturnedDTO> startRide(@Path("id") int rideId);
+
+    @PUT("ride/{id}/end")
+    Call<RideReturnedDTO> finishRide(@Path("id") int rideId);
+
 }

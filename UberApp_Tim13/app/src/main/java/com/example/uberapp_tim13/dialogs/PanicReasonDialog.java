@@ -2,6 +2,8 @@ package com.example.uberapp_tim13.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,12 +31,12 @@ public class PanicReasonDialog extends Dialog {
         super(context);
 
         this.ride = ride;
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setupDialog();
     }
 
     private void setupDialog() {
         setTitle(R.string.why);
-        setCancelable(false);
     }
 
     @Override
