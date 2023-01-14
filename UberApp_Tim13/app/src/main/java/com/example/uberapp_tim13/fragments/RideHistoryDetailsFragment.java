@@ -11,16 +11,17 @@ import androidx.fragment.app.Fragment;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 
 public class RideHistoryDetailsFragment extends Fragment{
-    public static int rideNum;
-    public static RideHistoryDetailsFragment newInstance(int num) {
+    public static RideReturnedDTO ride;
+    public static RideHistoryDetailsFragment newInstance(RideReturnedDTO r) {
         RideHistoryDetailsFragment frag = new RideHistoryDetailsFragment();
-        rideNum = num;
+        ride = r;
         return frag;
     }
 
@@ -29,22 +30,16 @@ public class RideHistoryDetailsFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_ride_history_details, container, false);
 
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.reviewsLV);
-
-        Ride ride = Mockap.getRides().get(rideNum);
         fitFragmentToRole(view, ride);
 
 
-        ((TextView)view.findViewById(R.id.routeTV)).setText(ride.getPickUpLocation()+" -> "+ride.getDestination());
-        String stops = "";
-        for (String s : ride.getStops()){
-            stops = stops + s +", ";
-        }
-        ((TextView)view.findViewById(R.id.stopsTV)).setText("Stops: "+ stops);
-        ((TextView)view.findViewById(R.id.startTimeTV)).setText(ride.getStartTime());
-        ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getEndTime());
+        ((TextView)view.findViewById(R.id.routeTV)).setText(ride.getRouteDepartureDestinationTitle());
+        ((TextView)view.findViewById(R.id.startTimeTV)).setText(ride.getStartDateTextView());
+        ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getStartDateTextView());
         ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
-        ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getPrice());
-
+        ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getTotalCost());
+        //distanca je losa
+        
         view.findViewById(R.id.passengerDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +47,7 @@ public class RideHistoryDetailsFragment extends Fragment{
                 //AccountDetailsFragment dialogFragment = AccountDetailsFragment.newInstance(rideNum);
                 //dialogFragment.setWidthPercent()
                // dialogFragment.show(getParentFragmentManager(), "My fragment");
-                new PassengerDetailsDialog(getActivity(), rideNum).show();
+                new PassengerDetailsDialog(getActivity(), 1).show();
                 //FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
             }
         });
@@ -60,30 +55,21 @@ public class RideHistoryDetailsFragment extends Fragment{
         view.findViewById(R.id.driverDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DriverDetailsDialog(getActivity(), rideNum).show();
+                new DriverDetailsDialog(getActivity(), 1).show();
                 //DriverDetailsDialog driverDetailsDialog = DriverDetailsDialog.newInstance(rideNum);
                 //driverDetailsDialog.show(getParentFragmentManager(), "My fragment");
             }
         });
-        /*TextView tt = view.findViewById(R.id.textViewDistance);
-        String s = getString(R.string.acceptanceRideDistance, "sss");
-        tt.setText(s);*/
-//        view.findViewById(R.id.passengerDetails).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FragmentTransition.to(PassengerDetailsFragment.newInstance(), getActivity(), true, R.id.list);
-//            }
-//        });
         return view;
     }
 
-    private void fitFragmentToRole(View view, Ride ride) {
+    private void fitFragmentToRole(View view, RideReturnedDTO ride) {
         switch (Globals.userRole) {
             case "driver":
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver: " + ride.getDriver().getName() + " " + ride.getDriver().getSurName());
+                ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver: " + ride.getDriver().getEmail());
                 break;
         }
     }

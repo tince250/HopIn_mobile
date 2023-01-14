@@ -41,10 +41,10 @@ public class RideHistoryFragment extends ListFragment{
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        if (Globals.userRole == "passenger") {
-            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.passengerFL);
+        if (Globals.userRole != "passenger") {
+            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.passengerFL);
         } else {
-            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(position), getActivity(), true, R.id.driverFL);
+            FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.driverFL);
 
         }
     }

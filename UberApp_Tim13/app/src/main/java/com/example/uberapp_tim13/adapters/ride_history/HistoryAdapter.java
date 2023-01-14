@@ -50,22 +50,9 @@ public class HistoryAdapter extends BaseAdapter {
         if (view == null) {
             view_new = activity.getLayoutInflater().inflate(R.layout.ride_history_item, null);
         }
-        String departureAddress = ride.getLocations().get(0).getDeparture().getAddress();
-        String destinationAddress = ride.getLocations().get(0).getDestination().getAddress();
-        ((TextView)view_new.findViewById(R.id.routeTV)).setText(departureAddress+ " -> " + destinationAddress);
-//        String stops = "";
-//        for (String s : ride.getStops()){
-//            stops = stops + s +", ";
-//        }
-//        ((TextView)view_new.findViewById(R.id.stopsTV)).setText("Stops: "+ stops);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//        String formattedDateTime = ride.getStartTime().format(formatter);
 
-        String time = ride.getStartTime().split("T")[1].split(":")[0] + ":" +ride.getStartTime().split("T")[1].split(":")[1];
-        String day = ride.getStartTime().split("T")[0].split("-")[2];
-        String month = ride.getStartTime().split("T")[0].split("-")[1];
-        String year = ride.getStartTime().split("T")[0].split("-")[0];
-        ((TextView)view_new.findViewById(R.id.dateTV)).setText("Date: " + day + "." + month + "." + year + ". " + time);
+        ((TextView)view_new.findViewById(R.id.routeTV)).setText(ride.getRouteDepartureDestinationTitle());
+        ((TextView)view_new.findViewById(R.id.dateTV)).setText(ride.getStartDateTextView());
         ((TextView)view_new.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view_new.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getTotalCost());
 

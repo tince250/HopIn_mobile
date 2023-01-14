@@ -188,6 +188,28 @@ public class RideReturnedDTO implements Serializable {
 		this.scheduledTime = scheduledTime;
 	}
 
+	public String getRouteDepartureDestinationTitle(){
+		String departureAddress = this.getLocations().get(0).getDeparture().getAddress();
+		String destinationAddress = this.getLocations().get(0).getDestination().getAddress();
+		return departureAddress+ " -> " + destinationAddress;
+	}
+
+	public String getStartDateTextView(){
+		String time = this.getStartTime().split("T")[1].split(":")[0] + ":" + this.getStartTime().split("T")[1].split(":")[1];
+		String day = this.getStartTime().split("T")[0].split("-")[2];
+		String month = this.getStartTime().split("T")[0].split("-")[1];
+		String year = this.getStartTime().split("T")[0].split("-")[0];
+		return "Date: " + day + "." + month + "." + year + ". " + time;
+	}
+
+	public String getEndDateTextView(){
+		String time = this.getEndTime().split("T")[1].split(":")[0] + ":" + this.getEndTime().split("T")[1].split(":")[1];
+		String day = this.getEndTime().split("T")[0].split("-")[2];
+		String month = this.getEndTime().split("T")[0].split("-")[1];
+		String year = this.getEndTime().split("T")[0].split("-")[0];
+		return "Date: " + day + "." + month + "." + year + ". " + time;
+	}
+
 	@Override
 	public String toString() {
 		return "RideReturnedDTO{" +
