@@ -4,7 +4,9 @@ package com.example.uberapp_tim13.dtos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
 	@SerializedName("id")
 	@Expose
 	private int id;

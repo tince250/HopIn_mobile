@@ -71,7 +71,8 @@
         </activity>
         <activity
             android:name=".activities.DriverMainActivity"
-            android:exported="true">
+            android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -99,6 +100,11 @@
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -116,15 +122,12 @@
         <activity
             android:name=".activities.SplashActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -132,6 +135,11 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
+        <service android:name=".services.AuthService"/>
+        <service android:name=".services.RideService"/>
+        <service android:name=".services.DriverService"/>
+        <service android:name=".services.UserService"/>
     </application>
 
 </manifest>
