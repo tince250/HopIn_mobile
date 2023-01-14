@@ -39,7 +39,7 @@ public class RideHistoryDetailsFragment extends Fragment{
         ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getTotalCost());
         //distanca je losa
-        
+
         view.findViewById(R.id.passengerDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,7 +47,7 @@ public class RideHistoryDetailsFragment extends Fragment{
                 //AccountDetailsFragment dialogFragment = AccountDetailsFragment.newInstance(rideNum);
                 //dialogFragment.setWidthPercent()
                // dialogFragment.show(getParentFragmentManager(), "My fragment");
-                new PassengerDetailsDialog(getActivity(), 1).show();
+                new PassengerDetailsDialog(getActivity(), ride).show();
                 //FragmentTransition.to(AccountDetailsFragment.newInstance(rideNum), getActivity(), true, R.id.driverFL);
             }
         });
