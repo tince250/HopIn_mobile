@@ -3,10 +3,12 @@ package com.example.uberapp_tim13.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
@@ -34,12 +36,14 @@ import retrofit2.Response;
 public class CurrentRideActivity extends AppCompatActivity {
 
     public static RideReturnedDTO ride;
-    Activity context;
+    private Activity context;
 
+    private Chronometer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         ride = (RideReturnedDTO) getIntent().getExtras().get("ride");
 
@@ -47,10 +51,13 @@ public class CurrentRideActivity extends AppCompatActivity {
 
         context=this;
 
+
         setTitle("Current ride");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_current_ride);
+
+        timer = findViewById(R.id.timePassedTV);
 
         fitActivityToRole();
     }
@@ -112,6 +119,8 @@ public class CurrentRideActivity extends AppCompatActivity {
                 inconsistentBtn.setVisibility(View.GONE);
 
                 startFinishBtns.setVisibility(View.VISIBLE);
+                addListenersToStartFinishBtns();
+
                 passDetails.setVisibility(View.VISIBLE);
                 passDetails.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -141,5 +150,29 @@ public class CurrentRideActivity extends AppCompatActivity {
                 new PanicReasonDialog(context, ride).show();
             }
         });
+    }
+
+    private void addListenersToStartFinishBtns() {
+        Button start = findViewById(R.id.startBtn);
+        Button finish = findViewById(R.id.finishBtn);
+
+        start.setEnabled(true);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                start.setEnabled(false);
+                timer.setBase(SystemClock.elapsedRealtime());
+                timer.start();
+                finish.setEnabled(true);
+            }
+        });
+
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timer.stop();
+            }
+        });
+        finish.setEnabled(false);
     }
 }
