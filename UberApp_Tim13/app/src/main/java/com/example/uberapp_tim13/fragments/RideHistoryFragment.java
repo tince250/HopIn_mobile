@@ -1,5 +1,10 @@
 package com.example.uberapp_tim13.fragments;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +12,16 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
+import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
+import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.services.DriverService;
+import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 
@@ -41,9 +53,25 @@ public class RideHistoryFragment extends ListFragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        HistoryAdapter adapter = new HistoryAdapter(getActivity());
-        setListAdapter(adapter);
+        Intent intentDriverService = new Intent(getContext(), DriverService.class);
+        intentDriverService.putExtra("method", "getAllRides");
+        intentDriverService.putExtra("driverId", Globals.userId);
+        requireActivity().startService(intentDriverService);
+
+
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                allRides = (AllPassengerRidesDTO) extras.get("allRides");
+
+                HistoryAdapter adapter = new HistoryAdapter(allRides.getResults(), getActivity());
+                setListAdapter(adapter);
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("rideHistoryFragment"));
+
     }
 
-
+    private AllPassengerRidesDTO allRides;
 }

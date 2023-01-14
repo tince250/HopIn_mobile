@@ -116,6 +116,8 @@
                 android:value="" />
         </activity>
         <service android:name=".services.AuthService"/>
+        <service android:name=".services.RideService"/>
+        <service android:name=".services.DriverService"/>
     </application>
 
 </manifest>

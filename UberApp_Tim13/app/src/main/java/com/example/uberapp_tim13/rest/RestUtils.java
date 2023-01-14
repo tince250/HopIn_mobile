@@ -12,6 +12,7 @@ public class RestUtils {
     public static final String SERVICE_API_PATH = "http://192.168.1.105:4321/api/";
     public static final String USER_GET = "user/1";
     public static final String LOGIN = "user/login";
+    public static final String RIDE_GET_ID = "ride/3";
 
     /*
      * Ovo ce nam sluziti za debug, da vidimo da li zahtevi i odgovoru idu
@@ -45,4 +46,7 @@ public class RestUtils {
      * */
 //    public static ReviewerService reviewerService = retrofit.create(ReviewerService.class);
     public static UserAPI userApi = retrofit.create(UserAPI.class);
+    public static RideAPI rideAPI = retrofit.create(RideAPI.class);
+    public static DriverAPI driverAPI = retrofit.create(DriverAPI.class);
+    public static PassengerAPI passengerAPI = retrofit.create(PassengerAPI.class);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Ride {
 
+    private int id;
     private User driver;
     private List<User> passengers;
     private String startTime;
@@ -15,7 +16,8 @@ public class Ride {
     private double price;
     private List<Rating> ratings;
 
-    public Ride(User driver, List<User> passengers, String startTime, String endTime, String pickUpLocation, List<String> stops, String destination, float distance, double price, List<Rating> ratings) {
+    public Ride(int id, User driver, List<User> passengers, String startTime, String endTime, String pickUpLocation, List<String> stops, String destination, float distance, double price, List<Rating> ratings) {
+        this.id = id;
         this.driver = driver;
         this.passengers = passengers;
         this.startTime = startTime;

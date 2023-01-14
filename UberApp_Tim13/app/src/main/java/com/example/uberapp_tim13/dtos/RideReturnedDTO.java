@@ -1,28 +1,60 @@
 package com.example.uberapp_tim13.dtos;
 
 import com.example.uberapp_tim13.model.RejectionNotice;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-public class RideReturnedDTO {
-	int id;
-	private LocalDateTime startTime;
-	private LocalDateTime endTime;
+public class RideReturnedDTO implements Serializable {
+	@SerializedName("id")
+	@Expose
+	private int id;
+	@SerializedName("startTime")
+	@Expose
+	private String startTime;
+	@SerializedName("endTime")
+	@Expose
+	private String endTime;
+	@SerializedName("totalCost")
+	@Expose
 	private double totalCost;
+	@SerializedName("driver")
+	@Expose
 	private UserInRideDTO driver;
+	@SerializedName("passengers")
+	@Expose
 	private List<UserInRideDTO> passengers;
+	@SerializedName("estimatedTimeInMinutes")
+	@Expose
 	private int estimatedTimeInMinutes;
+	@SerializedName("vehicleType")
+	@Expose
 	private String vehicleType;
+	@SerializedName("petTransport")
+	@Expose
 	private boolean petTransport;
+	@SerializedName("babyTransport")
+	@Expose
 	private boolean babyTransport;
+	@SerializedName("rejection")
+	@Expose
 	private RejectionNotice rejection;
+	@SerializedName("locations")
+	@Expose
 	private List<LocationDTO> locations;
+	@SerializedName("status")
+	@Expose
 	private String status;
+	@SerializedName("scheduledTime")
+	@Expose
 	private LocalDateTime scheduledTime;
 
-	public RideReturnedDTO(int id, LocalDateTime startTime, LocalDateTime endTime, double totalCost,
+	public RideReturnedDTO() {}
+
+	public RideReturnedDTO(int id, String startTime, String endTime, double totalCost,
 			UserInRideDTO driver, List<UserInRideDTO> passengers, int estimatedTimeInMinutes,
 			String vehicleType, boolean petTransport, boolean babyTransport, RejectionNotice rejection,
 			List<LocationDTO> locations, String status, LocalDateTime scheduledTime) {
@@ -52,19 +84,19 @@ public class RideReturnedDTO {
 		this.id = id;
 	}
 
-	public LocalDateTime getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -156,4 +188,23 @@ public class RideReturnedDTO {
 		this.scheduledTime = scheduledTime;
 	}
 
+	@Override
+	public String toString() {
+		return "RideReturnedDTO{" +
+				"id=" + id +
+				", startTime='" + startTime + '\'' +
+				", endTime='" + endTime + '\'' +
+				", totalCost=" + totalCost +
+				", driver=" + driver +
+				", passengers=" + passengers +
+				", estimatedTimeInMinutes=" + estimatedTimeInMinutes +
+				", vehicleType='" + vehicleType + '\'' +
+				", petTransport=" + petTransport +
+				", babyTransport=" + babyTransport +
+				", rejection=" + rejection +
+				", locations=" + locations +
+				", status='" + status + '\'' +
+				", scheduledTime=" + scheduledTime +
+				'}';
+	}
 }
