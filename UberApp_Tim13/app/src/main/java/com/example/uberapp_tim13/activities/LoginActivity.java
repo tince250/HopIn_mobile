@@ -3,19 +3,23 @@ package com.example.uberapp_tim13.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.model.User;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
 
 import java.util.List;
 
 public class LoginActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +28,14 @@ public class LoginActivity extends Activity {
     }
 
     public void login(View v) {
-        List<User> users = Mockap.getUsers();
         TextView email = findViewById(R.id.emailET);
         TextView password = (TextView) findViewById(R.id.passwordET);
 
-        for(User user : users){
-            if (email.getText().toString().equals(user.getEmail()) &&
-                password.getText().toString().equals(user.getPassword())){
-                Globals.currentUser = user;
-                Globals.userRole = user.getRole();
-                break;
-            }
-        }
+        Intent intent = new Intent(this, AuthService.class);
+        intent.putExtra("credentials", new CredentialsDTO(email.getText().toString(), password.getText().toString()));
+        startService(intent);
 
-        if (Globals.userRole.equals("passenger")) {
+        if (Globals.userRole.equals("S")) {
             startActivity(new Intent(LoginActivity.this, PassengerMainActivity.class));
         }else if (Globals.userRole.equals("driver")) {
             startActivity(new Intent(LoginActivity.this, DriverMainActivity.class));
