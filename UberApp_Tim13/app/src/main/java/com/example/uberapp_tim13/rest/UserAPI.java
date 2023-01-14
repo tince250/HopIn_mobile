@@ -11,6 +11,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UserAPI {
 
@@ -24,4 +25,8 @@ public interface UserAPI {
     })
     @POST(RestUtils.LOGIN)
     Call<TokenDTO> login(@Body CredentialsDTO credentialsDTO);
+
+    @GET("user?")
+    Call<UserDTO> getUserByEmail(@Header("Authorization") String token,
+                                 @Query("email") String email);
 }
