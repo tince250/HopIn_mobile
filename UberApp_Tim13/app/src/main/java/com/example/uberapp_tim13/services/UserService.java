@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-
-<<<<<<< HEAD
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-=======
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
->>>>>>> feature/driver-ride-history
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
@@ -27,8 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-<<<<<<< HEAD
-public class UserService {
+public class UserService extends Service {
    public UserDTO returnedUser;
 
    public void getUserByEmail(String email) {
@@ -49,9 +44,6 @@ public class UserService {
            }
        });
    }
-}
-=======
-public class UserService extends Service{
 
     ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -104,4 +96,3 @@ public class UserService extends Service{
         return null;
     }
 }
->>>>>>> feature/driver-ride-history

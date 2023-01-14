@@ -1,6 +1,4 @@
 package com.example.uberapp_tim13.services;
-
-<<<<<<< HEAD
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,8 +6,6 @@ import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
-
-=======
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,14 +22,12 @@ import com.example.uberapp_tim13.rest.RestUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
->>>>>>> feature/driver-ride-history
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.HEAD;
 
-<<<<<<< HEAD
-public class RideService {
+public class RideService extends Service {
     public static RideDTO rideInCreation = new RideDTO();
     public static RideReturnedDTO returnedRide;
     public static boolean success = false;
@@ -42,7 +36,7 @@ public class RideService {
     }
 
     public void orderRide() {
-        Call<RideReturnedDTO> call = RestUtils.rideApi.orderRide(rideInCreation);
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.orderRide(rideInCreation);
         call.enqueue(new Callback<RideReturnedDTO>() {
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
@@ -51,8 +45,16 @@ public class RideService {
                     returnedRide = response.body();
                     success = true;
                 }
-=======
-public class RideService extends Service {
+            }
+
+            @Override
+            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                success = false;
+                Log.d("PAPAPAEEE", "ERROR");
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
 
     ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -78,23 +80,17 @@ public class RideService extends Service {
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response){
                 Log.d("PAPAPA", response.body().toString());
                 sendRideByIdBroadcast(response.body());
->>>>>>> feature/driver-ride-history
             }
 
             @Override
             public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
-<<<<<<< HEAD
                 success = false;
-
-=======
                 Log.d("PAPAPAEEE", "ERROR");
->>>>>>> feature/driver-ride-history
                 Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
     }
-<<<<<<< HEAD
-=======
+
 
     private void sendRideByIdBroadcast(RideReturnedDTO ride){
         Log.d("PAPAPA", ride.toString());
@@ -109,5 +105,5 @@ public class RideService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
->>>>>>> feature/driver-ride-history
+
 }

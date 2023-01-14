@@ -140,8 +140,14 @@
     <string name="logOutTitle">Are you sure you want to log out?</string>
     <string name="cancel">Cancel</string>
     <string name="oops">Ooops</string>
+    <string name="why">Panic reason?</string>
     <string name="location_disabled_message">Your Locations seems to be disabled, do you want to enable it? It\'s necessary to enable full map functionalities!</string>
     <string name="enable">Enable</string>
     <string name="no">No, thank you</string>
     <string name="api_key">AIzaSyADf7wmEupGmb08OGVJR1eNhvtvF6KYuiM</string>
+    <string name="panicTitle">Tell us about the PANIC reason?</string>
+    <string name="sendPanic">Notify Support</string>
+    <string name="reasonHint">Reason...</string>
+    <string name="succPanic">Panic notification successfully sent!</string>
+    <string name="failPanic">Panic notification failed to send!</string>
 </resources>

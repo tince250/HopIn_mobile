@@ -98,17 +98,12 @@ public class PassengerHomeFragment extends Fragment {
                         // and populate the form with the address components
                         Log.d("AUTO", "Place: " + place.getAddressComponents());
 
-                        Location temp = new Location(LocationManager.GPS_PROVIDER);
-                        LatLng latLng = place.getLatLng();
-                        temp.setLatitude(latLng.latitude);
-                        temp.setLongitude(latLng.longitude);
-
                         String type = "pickup";
                         if (!isPickup) {
                             type = "destination";
                         }
 
-                        mapFragment.addMarker(temp, type);
+                        mapFragment.addMarker(place.getLatLng(), type);
                         fillInAddress(place);
                     }
                 } else if (result.getResultCode() == Activity.RESULT_CANCELED) {

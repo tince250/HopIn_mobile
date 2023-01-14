@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/declineReasonPU"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="20dp">
+
+    <TextView
+        android:id="@+id/titleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="15dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppinsbold"
+        android:text="@string/panicTitle"
+        android:textColor="@color/dark_blue"
+        android:textFontWeight="700"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/panicReasonTF"
+        android:layout_below="@id/titleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reasonHint"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/panicReasonBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_below="@id/panicReasonTF"
+        android:paddingVertical="10dp"
+        android:text="@string/sendPanic"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        android:textSize="14sp"
+        app:cornerRadius="10dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

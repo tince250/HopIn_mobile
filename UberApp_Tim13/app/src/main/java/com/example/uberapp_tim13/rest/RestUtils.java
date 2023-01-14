@@ -8,12 +8,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestUtils {
-<<<<<<< HEAD
-    public static final String SERVICE_API_PATH = "http://192.168.0.11:4321/api/";
-=======
     //EXAMPLE: http://192.168.43.73:8080/rs.ftn.reviewer.rest/rest/proizvodi/
-    public static final String SERVICE_API_PATH = "http://192.168.1.105:4321/api/";
->>>>>>> feature/driver-ride-history
+    public static final String SERVICE_API_PATH = "http://192.168.0.27:4321/api/";
     public static final String USER_GET = "user/1";
     public static final String LOGIN = "user/login";
     public static final String RIDE_GET_ID = "ride/3";
@@ -40,12 +36,7 @@ public class RestUtils {
 
 
     public static UserAPI userApi = retrofit.create(UserAPI.class);
-<<<<<<< HEAD
-    public static RideAPI rideApi = retrofit.create(RideAPI.class);
-
-=======
     public static RideAPI rideAPI = retrofit.create(RideAPI.class);
     public static DriverAPI driverAPI = retrofit.create(DriverAPI.class);
     public static PassengerAPI passengerAPI = retrofit.create(PassengerAPI.class);
->>>>>>> feature/driver-ride-history
 }

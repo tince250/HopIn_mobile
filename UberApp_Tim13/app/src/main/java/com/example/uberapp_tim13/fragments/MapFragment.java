@@ -6,13 +6,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import com.example.uberapp_tim13.BuildConfig;
 import com.example.uberapp_tim13.dialogs.LocationDialog;
+import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -36,6 +40,18 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.model.DirectionsLeg;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.DirectionsStep;
+import com.google.maps.model.EncodedPolyline;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
@@ -51,10 +67,17 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     private Marker destination;
     private Marker here;
 
+    RideReturnedDTO ride = null;
+
     private String current_type = "pickup";
 
     public MapFragment() {
         // Required empty public constructor
+    }
+
+
+    public MapFragment(RideReturnedDTO ride) {
+        this.ride = ride;
     }
 
     @Override
@@ -222,11 +245,8 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             }
         }
 
-
         // setting map to current user's location
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(location.getLatitude(), location.getLongitude())).zoom(10).build();
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
 
 //        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 //            @Override
@@ -246,13 +266,84 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 //            }
 //        });
 
-        if (location != null) {
-            addMarker(location, "here");
+        if (ride == null && location != null) {
+            addMarker(new LatLng(location.getLatitude(), location.getLongitude()), "here");
+        } else {
+            displayRoute();
         }
     }
 
-    public void addMarker(Location location, String type) {
-        LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+    private void displayRoute() {
+        LocationNoIdDTO pickupLoc = ride.getLocations().get(0).getDeparture();
+        LatLng pickup = new LatLng(pickupLoc.getLatitude(), pickupLoc.getLongitude());
+
+        LocationNoIdDTO destLoc = ride.getLocations().get(0).getDestination();
+        LatLng destination = new LatLng(destLoc.getLatitude(),destLoc.getLongitude());
+
+        addMarker(pickup, "Pickup");
+        addMarker(destination, "Pickup");
+
+        List<LatLng> path = new ArrayList();
+
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey(BuildConfig.MAPS_API_KEY)
+                .build();
+        DirectionsApiRequest req = DirectionsApi.getDirections(context, pickup.latitude + "," + pickup.longitude,
+                destination.latitude + "," + destination.longitude);
+
+        try {
+            DirectionsResult res = req.await();
+            //Loop through legs and steps to get encoded polylines of each step
+            if (res.routes != null && res.routes.length > 0) {
+                DirectionsRoute route = res.routes[0];
+
+                if (route.legs !=null) {
+                    for(int i=0; i<route.legs.length; i++) {
+                        DirectionsLeg leg = route.legs[i];
+                        if (leg.steps != null) {
+                            for (int j=0; j<leg.steps.length;j++){
+                                DirectionsStep step = leg.steps[j];
+                                if (step.steps != null && step.steps.length >0) {
+                                    for (int k=0; k<step.steps.length;k++){
+                                        DirectionsStep step1 = step.steps[k];
+                                        EncodedPolyline points1 = step1.polyline;
+                                        if (points1 != null) {
+                                            //Decode polyline and add points to list of route coordinates
+                                            List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
+                                            for (com.google.maps.model.LatLng coord1 : coords1) {
+                                                path.add(new LatLng(coord1.lat, coord1.lng));
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    EncodedPolyline points = step.polyline;
+                                    if (points != null) {
+                                        //Decode polyline and add points to list of route coordinates
+                                        List<com.google.maps.model.LatLng> coords = points.decodePath();
+                                        for (com.google.maps.model.LatLng coord : coords) {
+                                            path.add(new LatLng(coord.lat, coord.lng));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch(Exception ex) {
+            Log.e("error", ex.getLocalizedMessage());
+        }
+
+        //Draw the polyline
+        if (path.size() > 0) {
+            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(5);
+            map.addPolyline(opts);
+        }
+
+        map.getUiSettings().setZoomControlsEnabled(true);
+    }
+
+    public void addMarker(LatLng loc, String type) {
 
         Marker marker = null;
         String title = "";
