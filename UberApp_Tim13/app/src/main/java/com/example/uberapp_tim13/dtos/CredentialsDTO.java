@@ -3,7 +3,9 @@ package com.example.uberapp_tim13.dtos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CredentialsDTO {
+import java.io.Serializable;
+
+public class CredentialsDTO implements Serializable {
     @SerializedName("email")
     @Expose
     String email;

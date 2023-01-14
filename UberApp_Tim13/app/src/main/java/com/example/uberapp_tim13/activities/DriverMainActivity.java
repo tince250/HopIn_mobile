@@ -39,25 +39,25 @@ public class DriverMainActivity extends AppCompatActivity {
 
         setBottomNavigationBar();
 
-        Call<UserDTO> call = RestUtils.userApi.doGetUser("Bearer " + AuthService.tokenDTO.getAccessToken());
-
-        call.enqueue(new Callback<UserDTO>() {
-            @Override
-            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-                if (response.code() == 200) {
-                    Log.d("SRLE", "Meesage recieved");
-                    Log.d("SRKI_DOKTOR", response.body().toString());
-
-                } else {
-                    Log.d("SRLE", "Meesage recieved: " + response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserDTO> call, Throwable t) {
-                Log.d("SRLE", t.getMessage() != null ? t.getMessage() : "error");
-            }
-        });
+//        Call<UserDTO> call = RestUtils.userApi.doGetUser("Bearer " + AuthService.tokenDTO.getAccessToken());
+//
+//        call.enqueue(new Callback<UserDTO>() {
+//            @Override
+//            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+//                if (response.code() == 200) {
+//                    Log.d("SRLE", "Meesage recieved");
+//                    Log.d("SRKI_DOKTOR", response.body().toString());
+//
+//                } else {
+//                    Log.d("SRLE", "Meesage recieved: " + response.body());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserDTO> call, Throwable t) {
+//                Log.d("SRLE", t.getMessage() != null ? t.getMessage() : "error");
+//            }
+//        });
     }
 
     public void onClickCurrentRide(View v){

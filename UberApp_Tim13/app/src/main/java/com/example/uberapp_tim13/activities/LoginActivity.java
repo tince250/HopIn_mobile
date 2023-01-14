@@ -3,6 +3,7 @@ package com.example.uberapp_tim13.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import java.util.List;
 
 public class LoginActivity extends Activity {
 
-    private AuthService authService = new AuthService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,11 @@ public class LoginActivity extends Activity {
         TextView email = findViewById(R.id.emailET);
         TextView password = (TextView) findViewById(R.id.passwordET);
 
-        this.authService.login(new CredentialsDTO(email.getText().toString(), password.getText().toString()));
+        Intent intent = new Intent(this, AuthService.class);
+        intent.putExtra("credentials", new CredentialsDTO(email.getText().toString(), password.getText().toString()));
+        startService(intent);
 
-        if (Globals.userRole.equals("passenger")) {
+        if (Globals.userRole.equals("S")) {
             startActivity(new Intent(LoginActivity.this, PassengerMainActivity.class));
         }else if (Globals.userRole.equals("driver")) {
             startActivity(new Intent(LoginActivity.this, DriverMainActivity.class));
