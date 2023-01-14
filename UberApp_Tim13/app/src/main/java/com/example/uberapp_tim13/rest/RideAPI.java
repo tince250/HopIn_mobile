@@ -22,8 +22,8 @@ public interface RideAPI {
     @GET(RestUtils.RIDE_GET_ID)
     Call<RideReturnedDTO> getRideById(@Header("Authorization") String token);
 
-    @GET(RestUtils.RIDE_GET_ID)
-    Call<RideReturnedDTO> getRideByIdOnly();
+    @GET("ride/{id}")
+    Call<RideReturnedDTO> getRideByIdOnly(@Path("id") int id);
 
     @PUT("ride/{id}/panic")
     Call<PanicRideDTO> panicRide(@Path("id") int rideId, @Body ReasonDTO reason);

@@ -15,8 +15,10 @@ import android.os.Bundle;
 
 import com.example.uberapp_tim13.BuildConfig;
 import com.example.uberapp_tim13.dialogs.LocationDialog;
+import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,6 +40,7 @@ import com.example.uberapp_tim13.R;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -274,14 +277,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     }
 
     private void displayRoute() {
-        LocationNoIdDTO pickupLoc = ride.getLocations().get(0).getDeparture();
+        LocationDTO loc = ride.getLocations().get(0);
+        LocationNoIdDTO pickupLoc = loc.getDeparture();
         LatLng pickup = new LatLng(pickupLoc.getLatitude(), pickupLoc.getLongitude());
 
-        LocationNoIdDTO destLoc = ride.getLocations().get(0).getDestination();
+        LocationNoIdDTO destLoc = loc.getDestination();
         LatLng destination = new LatLng(destLoc.getLatitude(),destLoc.getLongitude());
 
-        addMarker(pickup, "Pickup");
-        addMarker(destination, "Pickup");
+        addMarker(pickup, "pickup");
+        addMarker(destination, "destination");
 
         List<LatLng> path = new ArrayList();
 
@@ -336,9 +340,19 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
         //Draw the polyline
         if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(5);
+            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.parseColor("#337D98")).width(12);
             map.addPolyline(opts);
         }
+
+        //set camera to show whole route
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(destination);
+        builder.include(pickup);
+        LatLngBounds bounds = builder.build();
+
+        int padding = 120; // padding around start and end marker
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        map.animateCamera(cu);
 
         map.getUiSettings().setZoomControlsEnabled(true);
     }

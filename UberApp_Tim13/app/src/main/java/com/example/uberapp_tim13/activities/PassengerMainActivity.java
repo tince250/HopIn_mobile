@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,12 +12,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
+import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PassengerMainActivity extends AppCompatActivity{
 
@@ -26,9 +33,31 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
-        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.getRideByIdOnly(3);
+        Log.d("prov", "tu sam");
+        call.enqueue(new Callback<RideReturnedDTO>() {
+            @Override
+            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                Toast.makeText(getApplicationContext(), "Stiglo", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(PassengerMainActivity.this, CurrentRideActivity.class);
+                intent.putExtra("ride", response.body());
+                Log.d("prov", "" + response.body());
+                startActivity(intent);
+            }
 
-        setBottomNavigationBar();
+            @Override
+            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+
+            }
+        });
+
+//        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
+
+//        setBottomNavigationBar();
+
+
+
+
     }
 
     public void onClickNext(View v){

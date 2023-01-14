@@ -41,28 +41,11 @@ public class CurrentRideActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.map_container_current, new MapFragment()).commit();
+        ride = (RideReturnedDTO) getIntent().getExtras().get("ride");
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.map_container_current, new MapFragment(ride)).commit();
 
         context=this;
-
-        Call<RideReturnedDTO> call = RestUtils.rideAPI.getRideByIdOnly();
-        call.enqueue(new Callback<RideReturnedDTO>() {
-            @Override
-            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                ride = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
-
-            }
-        });
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         setTitle("Current ride");
         ActionBar actionBar = getSupportActionBar();
