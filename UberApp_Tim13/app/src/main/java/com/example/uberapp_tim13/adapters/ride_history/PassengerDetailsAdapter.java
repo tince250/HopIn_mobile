@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.tools.Mockap;
 
@@ -15,11 +16,11 @@ import java.util.List;
 public class PassengerDetailsAdapter extends BaseAdapter {
 
     private Activity activity;
-    List<User> users;
+    List<UserDTO> users;
 
-    public PassengerDetailsAdapter(Activity activity, int rideNum) {
+    public PassengerDetailsAdapter(Activity activity, List<UserDTO> users) {
         this.activity = activity;
-        users = Mockap.getRides().get(rideNum).getPassengers();
+        this.users = users;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class PassengerDetailsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        User user = users.get(i);
+        UserDTO user = users.get(i);
         View view_new = view;
 
         if (view == null) {
@@ -48,7 +49,7 @@ public class PassengerDetailsAdapter extends BaseAdapter {
 
         ((TextView) view_new.findViewById(R.id.detailsNameTV)).setText(user.getName());
         ((TextView) view_new.findViewById(R.id.detailsEmailTV)).setText(user.getEmail());
-        ((TextView) view_new.findViewById(R.id.detailsContactTV)).setText("+381"+user.getPhone().toString());
+        ((TextView) view_new.findViewById(R.id.detailsContactTV)).setText(user.getTelephoneNumber());
 
         return view_new;
     }

@@ -25,8 +25,8 @@ public class AccountDetailsFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_passenger_details, container, false);
         listView = (ListView) view.findViewById(android.R.id.list);
-        PassengerDetailsAdapter adapter = new PassengerDetailsAdapter(getActivity(), rideNum);
-        listView.setAdapter(adapter);
+        //assengerDetailsAdapter adapter = new PassengerDetailsAdapter(getActivity(), rideNum);
+        //listView.setAdapter(adapter);
         return view;
     }
 

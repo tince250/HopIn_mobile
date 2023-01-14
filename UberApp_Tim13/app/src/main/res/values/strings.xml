@@ -92,7 +92,7 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
-    <string name="routeStops">Stops: Stara Pazova</string>
+    <string name="routeStops">Stops: /</string>
     <string name="timeExmp">00:05:45</string>
     <string name="start">Start</string>
     <string name="finish">Finish</string>

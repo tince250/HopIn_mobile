@@ -10,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestUtils {
     public static final String SERVICE_API_PATH = "http://192.168.0.11:4321/api/";
     public static final String USER_GET = "user/1";
+    public static final String LOGIN = "user/login";
+    public static final String RIDE_GET_ID = "ride/3";
 
     public static OkHttpClient test(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -33,6 +35,7 @@ public class RestUtils {
 
 
     public static UserAPI userApi = retrofit.create(UserAPI.class);
-    public static RideAPI rideApi = retrofit.create(RideAPI.class);
-
+    public static RideAPI rideAPI = retrofit.create(RideAPI.class);
+    public static DriverAPI driverAPI = retrofit.create(DriverAPI.class);
+    public static PassengerAPI passengerAPI = retrofit.create(PassengerAPI.class);
 }
