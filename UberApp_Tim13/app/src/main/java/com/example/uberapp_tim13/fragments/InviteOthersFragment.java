@@ -1,5 +1,9 @@
 package com.example.uberapp_tim13.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +17,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAdapter;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
+import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.services.UserService;
@@ -37,8 +43,8 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     InvitedPassengersAdapter adapter;
     private ListView listView;
     TextView emailTV;
-    private UserService userService;
-    private RideService rideService;
+    UserDTO user;
+
 
 
     @Override
@@ -57,19 +63,15 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
 
         this.emailTV = (TextView) view.findViewById(R.id.emailET);
 
-        this.userService = new UserService();
-        this.rideService = new RideService();
-
+        setBroadcast();
         view.findViewById(R.id.finishBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: call order ride from rideService
                 setDataInRide();
-                rideService.orderRide();
-                if (RideService.success) {
-                    Toast.makeText(getActivity(),"You successfully ordered a ride.",Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(),"Sorry, you can't order right now. Try again!",Toast.LENGTH_SHORT).show();
-                }
+                Intent intentRideService = new Intent(getContext(), RideService.class);
+                intentRideService.putExtra("method", "orderRide");
+                requireActivity().startService(intentRideService);
                 FragmentTransition.to(DriverHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
@@ -81,9 +83,12 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.inviteBtn:
+                user = null;
                 String email = this.emailTV.getText().toString();
-                userService.getUserByEmail(email);
-                UserDTO user = userService.returnedUser;
+                Intent intentUserService = new Intent(getContext(), UserService.class);
+                intentUserService.putExtra("method", "getByEmail");
+                intentUserService.putExtra("email", email);
+                requireActivity().startService(intentUserService);
 
                 if (user == null) {
                     Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
@@ -110,10 +115,23 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    private void setBroadcast() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                if (user == null)
+                    user = (UserDTO) extras.get("userByEmail");
+
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("inviteOthersFragment"));
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 }

@@ -31,7 +31,6 @@ public class RideSettingsFragment extends Fragment {
     private MaterialButton luxuryCarBtn;
     private MaterialButton babyBtn;
     private MaterialButton petBtn;
-    private RideService rideService = new RideService();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
