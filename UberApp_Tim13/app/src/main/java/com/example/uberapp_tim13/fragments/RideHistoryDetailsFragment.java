@@ -65,10 +65,10 @@ public class RideHistoryDetailsFragment extends Fragment{
 
     private void fitFragmentToRole(View view, RideReturnedDTO ride) {
         switch (Globals.userRole) {
-            case "passenger":
+            case "driver":
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
                 break;
-            case "driver":
+            case "passenger":
                 ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver: " + ride.getDriver().getEmail());
                 break;
         }

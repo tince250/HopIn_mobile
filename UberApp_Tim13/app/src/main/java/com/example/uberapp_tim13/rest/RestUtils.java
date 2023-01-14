@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestUtils {
     //EXAMPLE: http://192.168.43.73:8080/rs.ftn.reviewer.rest/rest/proizvodi/
-    public static final String SERVICE_API_PATH = "http://192.168.1.105:4321/api/";
+    public static final String SERVICE_API_PATH = "http://192.168.1.102:4321/api/";
     public static final String USER_GET = "user/1";
     public static final String LOGIN = "user/login";
     public static final String RIDE_GET_ID = "ride/3";
@@ -49,4 +49,5 @@ public class RestUtils {
     public static RideAPI rideAPI = retrofit.create(RideAPI.class);
     public static DriverAPI driverAPI = retrofit.create(DriverAPI.class);
     public static PassengerAPI passengerAPI = retrofit.create(PassengerAPI.class);
+    public static ReviewAPI reviewAPI = retrofit.create(ReviewAPI.class);
 }

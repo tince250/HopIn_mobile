@@ -25,6 +25,8 @@ import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 
+import java.util.List;
+
 public class RideHistoryFragment extends ListFragment{
     public static RideHistoryFragment newInstance() {
         return new RideHistoryFragment();

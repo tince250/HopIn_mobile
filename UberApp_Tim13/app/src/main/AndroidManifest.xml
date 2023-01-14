@@ -119,6 +119,7 @@
         <service android:name=".services.RideService"/>
         <service android:name=".services.DriverService"/>
         <service android:name=".services.UserService"/>
+        <service android:name=".services.ReviewService"/>
     </application>
 
 </manifest>
