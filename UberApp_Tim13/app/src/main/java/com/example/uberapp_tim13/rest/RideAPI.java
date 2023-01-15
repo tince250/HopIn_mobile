@@ -1,4 +1,6 @@
 package com.example.uberapp_tim13.rest;
+import com.example.uberapp_tim13.dtos.EstimatedRideDetailsDTO;
+import com.example.uberapp_tim13.dtos.GetRideDetailsDTO;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.ReasonDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
@@ -18,6 +20,9 @@ public interface RideAPI {
 
     @POST("ride")
     Call<RideReturnedDTO> orderRide(@Body RideDTO ride);
+
+    @POST("unregisteredUser")
+    Call<EstimatedRideDetailsDTO> getRideDetail(@Body GetRideDetailsDTO ride);
 
     @GET(RestUtils.RIDE_GET_ID)
     Call<RideReturnedDTO> getRideById(@Header("Authorization") String token);

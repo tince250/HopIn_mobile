@@ -43,6 +43,8 @@ import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
 public class InviteOthersFragment extends Fragment implements View.OnClickListener {
+    private boolean listeningInvites = false;
+
     public static InviteOthersFragment newInstance() {
         return new InviteOthersFragment();
     }
@@ -132,19 +134,26 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                     }
 
                     if (user != null) {
+                        //TODO: dodati karticu za korisnika
+
                         // sending invite
                         Gson gson = new Gson();
-                        RideInviteDTO invite = new RideInviteDTO(new UserDTO(), new RideInInviteDTO(RideService.rideInCreation));
+                        RideInviteDTO invite = new RideInviteDTO(Globals.user, new RideInInviteDTO(RideService.rideInCreation));
                         mStompClient.send("/ws/send/invite/" + user.getId(), gson.toJson(invite)).subscribe();
-
+                        Log.d("EVO", user.getId() + "");
                         // implementing reaction to invite response
                         Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
-                        mStompClient.topic("/topic/invite-response/" + Globals.userId).subscribe(topicMessage -> {
-                            //TODO: don't add user if answer is negative
-                            Log.d("SOCKET", topicMessage.getPayload());
-                            addedUsers.add(user);
-                            adapter.notifyDataSetChanged();
-                        });
+                        if (!listeningInvites) {
+                            mStompClient.topic("/topic/invite-response/" + Globals.userId).subscribe(topicMessage -> {
+                                ///TODO: promeniti ikonicu u korisnickoj kartici (true - stiklica, false - iksic)
+                                //TODO: true - dodas u listu addeddUsers, ako je false izbaci iz liste
+                                Log.d("JUHU", topicMessage.getPayload());
+                                addedUsers.add(user);
+                                adapter.notifyDataSetChanged();
+                            });
+                            listeningInvites = true;
+                        }
+                        
 //                        mStompClient.disconnect();
                     }
                     user = null;

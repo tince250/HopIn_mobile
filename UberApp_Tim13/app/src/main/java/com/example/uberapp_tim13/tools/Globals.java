@@ -11,6 +11,8 @@ public class Globals {
     public static int userId = 0;
     public static User currentUser;
 
+    public static UserDTO user;
+
     public static StompClient stompClient;
 
     public static Gson gson = new Gson();

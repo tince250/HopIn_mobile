@@ -64,7 +64,10 @@ public class AuthService extends Service {
         call.enqueue(new Callback<TokenDTO>() {
             @Override
             public void onResponse(Call<TokenDTO> call, Response<TokenDTO> response) {
-                Log.d("prov", String.valueOf(response.code()));
+                if (!response.isSuccessful()) {
+                    Log.e("prov", String.valueOf(response.code()));
+                    return;
+                }
                 tokenDTO = response.body();
                 setUserGlobalsData();
                 sendUserLoginBroadcast();
@@ -86,6 +89,20 @@ public class AuthService extends Service {
         try {
             Globals.userRole = JWTUtils.getUserRoleFromToken(tokenBody);
             Globals.userId = JWTUtils.getUserIdFromToken(tokenBody);
+
+            Call<UserDTO> call = RestUtils.userApi.doGetUser("", Globals.userId);
+            call.enqueue(new Callback<UserDTO>() {
+
+                @Override
+                public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
+                    Globals.user = response.body();
+                }
+
+                @Override
+                public void onFailure(Call<UserDTO> call, Throwable t) {
+                    Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+                }
+            });
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -55,6 +55,7 @@ import com.google.maps.model.EncodedPolyline;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MapFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
@@ -269,12 +270,19 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 //            }
 //        });
 
-        if (ride == null && location != null) {
-            addMarker(new LatLng(location.getLatitude(), location.getLongitude()), "here");
-        } else {
-            if (ride != null)
-                displayRoute();
-        }
+        Location finalLocation = location;
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                if (ride == null && finalLocation != null) {
+                    addMarker(new LatLng(finalLocation.getLatitude(), finalLocation.getLongitude()), "here");
+                } else {
+                    if (ride != null)
+                        displayRoute();
+                }
+            }
+        });
+
     }
 
     private void displayRoute() {
@@ -350,6 +358,8 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         builder.include(destination);
         builder.include(pickup);
         LatLngBounds bounds = builder.build();
+
+
 
         int padding = 120; // padding around start and end marker
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
