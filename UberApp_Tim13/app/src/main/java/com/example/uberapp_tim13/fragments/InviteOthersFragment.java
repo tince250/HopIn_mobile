@@ -34,6 +34,9 @@ import com.example.uberapp_tim13.tools.Mockap;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
+
 public class InviteOthersFragment extends Fragment implements View.OnClickListener {
     public static InviteOthersFragment newInstance() {
         return new InviteOthersFragment();
@@ -45,8 +48,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     private ListView listView;
     TextView emailTV;
     UserDTO user;
-
-
+    private StompClient mStompClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,14 +70,13 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         view.findViewById(R.id.finishBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: call order ride from rideService
                 setDataInRide();
                 addedUsers.clear();
                 adapter.notifyDataSetChanged();
-                Intent intentRideService = new Intent(getContext(), RideService.class);
-                intentRideService.putExtra("method", "orderRide");
-                requireActivity().startService(intentRideService);
-                FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+//                Intent intentRideService = new Intent(getContext(), RideService.class);
+//                intentRideService.putExtra("method", "orderRide");
+//                requireActivity().startService(intentRideService);
+                FragmentTransition.to(RideLoadingFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
 
@@ -107,15 +108,15 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
                 if (user == null) {
-                    Log.d("REC", extras.get("userByEmail").toString());
+                    //Log.d("REC", extras.get("userByEmail").toString());
 
                     user = (UserDTO) extras.get("userByEmail");
-                    String email = user.getEmail();
                     if (user == null) {
                         Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
+                    String email = user.getEmail();
                     for (UserDTO u : addedUsers) {
                         if (u.getEmail().equals(email)) {
                             user = null;
@@ -124,8 +125,16 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                     }
 
                     if (user != null) {
-                        addedUsers.add(user);
-                        adapter.notifyDataSetChanged();
+                        Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
+                        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+                        mStompClient.connect();
+                        mStompClient.topic("/topic/invites/" + user.getId()).subscribe(topicMessage -> {
+                            //TODO: don't add user if answer is negative
+                            Log.d("SOCKET", topicMessage.getPayload());
+                            addedUsers.add(user);
+                            adapter.notifyDataSetChanged();
+                        });
+                        mStompClient.disconnect();
                     }
                     user = null;
                 }
