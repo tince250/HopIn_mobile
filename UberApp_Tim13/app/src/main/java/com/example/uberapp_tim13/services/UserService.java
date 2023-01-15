@@ -102,7 +102,7 @@ public class UserService extends Service {
 
     private void sendMessage(MessageDTO message) {
 
-        Call<MessageReturnedDTO> call = RestUtils.userApi.sendMessage(AuthService.tokenDTO.getAccessToken(), message.getReceiverId(), message);
+        Call<MessageReturnedDTO> call = RestUtils.userApi.sendMessage("Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MTMzMjUsImV4cCI6MTY3MzgxNTEyNX0.x-Ges2rvbdikpHi8q3NkEH2mTSlAMQU-PJP8fkaGLTO6CnWlTuAO-twArCf_9an4RVTLGejbngiv-xEVSxYdBA", message.getReceiverId(), message);
         call.enqueue(new Callback<MessageReturnedDTO>() {
 
             @Override
@@ -122,7 +122,7 @@ public class UserService extends Service {
     }
 
     private void getMessages() {
-        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages(AuthService.tokenDTO.getAccessToken(), 2);
+        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages("Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MTMzMjUsImV4cCI6MTY3MzgxNTEyNX0.x-Ges2rvbdikpHi8q3NkEH2mTSlAMQU-PJP8fkaGLTO6CnWlTuAO-twArCf_9an4RVTLGejbngiv-xEVSxYdBA", 2);
         call.enqueue(new Callback<AllMessagesDTO>() {
 
             @Override

@@ -9,7 +9,7 @@ public class Message {
     public Message(String message, int sender, String time) {
         this.message = message;
         this.sender = sender;
-        this.time = time;
+        this.time = time.substring(11, 16);
     }
 
     public String getMessage() {
