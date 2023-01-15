@@ -140,4 +140,9 @@
     <string name="logOutTitle">Are you sure you want to log out?</string>
     <string name="cancel">Cancel</string>
     <string name="api_key">AIzaSyADf7wmEupGmb08OGVJR1eNhvtvF6KYuiM</string>
+    <string name="thank_you">Thank you for Hoping in</string>
+    <string name="ride_finished">ride is finished</string>
+    <string name="write_comment">Leave a comment...</string>
+    <string name="driver_rating">Driver rating</string>
+    <string name="vehicle_rating">Vehicle rating</string>
 </resources>
