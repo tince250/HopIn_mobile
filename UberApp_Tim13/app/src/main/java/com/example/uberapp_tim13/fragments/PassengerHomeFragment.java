@@ -84,14 +84,14 @@ public class PassengerHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
-        mStompClient.connect();
-
-        mStompClient.topic("/topic/invites/1").subscribe(topicMessage -> {
-            Log.d("SOCKET", topicMessage.getPayload());
-        });
-
-        mStompClient.send("/ws/send/invite/1", "My first STOMP message!").subscribe();
+//        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+//        mStompClient.connect();
+//
+//        mStompClient.topic("/topic/invites/1").subscribe(topicMessage -> {
+//            Log.d("SOCKET", topicMessage.getPayload());
+//        });
+//
+//        mStompClient.send("/ws/send/invite/1", "My first STOMP message!").subscribe();
 
         // ...
 
@@ -241,28 +241,5 @@ public class PassengerHomeFragment extends Fragment {
             destination.setText(address.toString());
             route.setDestinations(loc);
         }
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setBroadcastOrderedRide();
-    }
-
-    private void setBroadcastOrderedRide() {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Bundle extras = intent.getExtras();
-                if (extras.get("orderedRide") != null && !RideService.finished) {
-                    Log.d("ORDER_FINISH", "SUCCESS");
-                    Toast.makeText(getActivity(),"Ride is successfully ordered!",Toast.LENGTH_SHORT).show();
-                    RideService.finished = true;
-                }
-            }
-        };
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("orderedRide"));
-
     }
 }
