@@ -1,6 +1,9 @@
 package com.example.uberapp_tim13.rest;
 
+import com.example.uberapp_tim13.dtos.AllMessagesDTO;
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.MessageDTO;
+import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 
@@ -36,4 +39,12 @@ public interface UserAPI {
     Call<UserDTO> getUserByEmail(@Header("Authorization") String token,
                                  @Query("email") String email);
 
+    @POST("user/{id}/message")
+    Call<MessageReturnedDTO> sendMessage(@Header("Authorization") String token,
+                                         @Path("id") int id,
+                                         @Body MessageDTO message);
+
+    @GET("user/{id}/message")
+    Call<AllMessagesDTO> getMessages(@Header("Authorization") String token,
+                                     @Path("id") int id);
 }

@@ -3,10 +3,10 @@ package com.example.uberapp_tim13.model;
 public class Message {
 
     private String message;
-    private User sender;
+    private int sender;
     private String time;
 
-    public Message(String message, User sender, String time) {
+    public Message(String message, int sender, String time) {
         this.message = message;
         this.sender = sender;
         this.time = time;
@@ -16,7 +16,7 @@ public class Message {
         return message;
     }
 
-    public User getSender() {
+    public int getSender() {
         return sender;
     }
 
