@@ -48,17 +48,19 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 
-//	public UserDTO(User user) {
-//		super();
-//		this.id = user.getId();
-//		this.name = user.getName();
-//		this.surname = user.getSurName();
-//		this.profilePicture = user.get;
-//		this.telephoneNumber = telephoneNumber;
-//		this.email = email;
-//		this.address = address;
-//		this.password = password;
-//	}
+
+	public UserDTO(User user) {
+		//TODO: make this work
+		super();
+		this.id = user.getId();
+		this.name = user.getName();
+		this.surname = user.getSurName();
+		this.profilePicture = null;
+		this.telephoneNumber = user.getPhone();
+		this.email = user.getEmail();
+		this.address = null;
+		this.password = user.getPassword();
+	}
 
 
 	public int getId() {

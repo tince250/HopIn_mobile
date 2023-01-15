@@ -33,6 +33,7 @@ import com.example.uberapp_tim13.services.UserService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -69,6 +70,8 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         inviteBtn.setOnClickListener(this);
 
         this.emailTV = (TextView) view.findViewById(R.id.emailET);
+
+        this.mStompClient = StompManager.stompClient;
 
         setBroadcast();
         view.findViewById(R.id.finishBtn).setOnClickListener(new View.OnClickListener() {
@@ -136,8 +139,6 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
 
                         // implementing reaction to invite response
                         Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
-                        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
-                        mStompClient.connect();
                         mStompClient.topic("/topic/invite-response/" + Globals.userId).subscribe(topicMessage -> {
                             //TODO: don't add user if answer is negative
                             Log.d("SOCKET", topicMessage.getPayload());

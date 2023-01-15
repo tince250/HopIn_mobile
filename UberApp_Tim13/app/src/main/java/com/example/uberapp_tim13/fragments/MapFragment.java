@@ -272,7 +272,8 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         if (ride == null && location != null) {
             addMarker(new LatLng(location.getLatitude(), location.getLongitude()), "here");
         } else {
-            displayRoute();
+            if (ride != null)
+                displayRoute();
         }
     }
 

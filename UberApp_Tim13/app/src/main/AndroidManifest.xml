@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,8 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberApp_Tim13"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <activity
             android:name=".activities.DriverReportsActivity"
             android:exported="true">
@@ -33,18 +32,15 @@
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""
-                android:parentActivityName=".PassengerMainActivity"/>
-
+                android:parentActivityName=".PassengerMainActivity"
+                android:value="" />
         </activity>
-        <activity android:name=".activities.ChatActivity"
+        <activity
+            android:name=".activities.ChatActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="">
-
-            </meta-data>
-
+                android:value=""></meta-data>
         </activity>
         <activity
             android:name=".activities.FavoriteRoutesActivity"
@@ -52,23 +48,18 @@
             android:parentActivityName=".activities.PassengerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.PassengerMainActivity"/>
+                android:value=".activities.PassengerMainActivity" />
         </activity>
         <activity
             android:name=".activities.CurrentRideActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
-
-
         </activity>
         <activity
             android:name=".activities.AcceptanceRideActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -80,11 +71,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.PassengerMainActivity"
@@ -92,7 +79,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".activities.PassengerRegisterActivity"
@@ -103,32 +89,32 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:exported="true">
-
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.DriverStatisticsActivity"
             android:exported="false"
-            android:parentActivityName=".activities.DriverMainActivity">
-        </activity>
+            android:parentActivityName=".activities.DriverMainActivity"></activity>
         <activity
             android:name=".activities.AccountSettingsActivity"
             android:exported="false"
-            android:parentActivityName=".activities.DriverMainActivity">
-        </activity>
+            android:parentActivityName=".activities.DriverMainActivity"></activity>
         <activity
             android:name=".activities.SplashActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -137,10 +123,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
-        <service android:name=".services.AuthService"/>
-        <service android:name=".services.RideService"/>
-        <service android:name=".services.DriverService"/>
-        <service android:name=".services.UserService"/>
+        <service android:name=".services.AuthService" />
+        <service android:name=".services.RideService" />
+        <service android:name=".services.DriverService" />
+        <service android:name=".services.UserService" />
     </application>
 
 </manifest>

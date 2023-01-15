@@ -53,7 +53,6 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.mapAcceptanceRouteCV, new MapFragment(new RideReturnedDTO(invite.getRide()))).commit();
         fillRideInfo();
 
-        // TODO: dodati da imamo id voznje
         declineReasonDialog = new DeclineReasonDialog(this, RideService.returnedRide.getId());
     }
 
@@ -79,8 +78,11 @@ public class AcceptanceRideActivity extends AppCompatActivity {
     public void onClickAccept(View v){
         if (type == "driver-offer")
             RestUtils.rideAPI.acceptRide(RideService.returnedRide.getId());
-        else
-            stompClient.send("/ws/send/invite-response/" + invite.getFrom().getId() , Globals.gson.toJson(new InvitationResponseDTO(Globals.userId, true)));    }
+        else {
+            stompClient.send("/ws/send/invite-response/" + invite.getFrom().getId() , Globals.gson.toJson(new InvitationResponseDTO(Globals.userId, true)));
+            // podesiti da sad i on slusa order ride odgovor od drivera
+        }
+    }
 
     @Override
     protected void onDestroy() {
