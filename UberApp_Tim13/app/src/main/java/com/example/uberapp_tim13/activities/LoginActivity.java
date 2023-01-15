@@ -41,11 +41,11 @@ public class LoginActivity extends Activity {
         TextView email = findViewById(R.id.emailET);
         TextView password = (TextView) findViewById(R.id.passwordET);
 
-        int id = Integer.parseInt(email.getText().toString());
+//        int id = Integer.parseInt(email.getText().toString());
 
         Intent intent = new Intent(this, AuthService.class);
         intent.putExtra("credentials", new CredentialsDTO(email.getText().toString(), password.getText().toString()));
-        intent.putExtra("user", id);
+//        intent.putExtra("user", id);
         startService(intent);
 
         setBroadcast();

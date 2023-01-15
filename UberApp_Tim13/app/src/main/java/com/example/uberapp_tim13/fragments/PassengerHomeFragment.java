@@ -133,9 +133,9 @@ public class PassengerHomeFragment extends Fragment {
                 int minute = mcurrentTime.get(Calendar.MINUTE);
 
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(getActivity(), R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                    public void onTimeSet(TimePicker timePicker,  int selectedHour, int selectedMinute) {
                         pickUpTime.setText( selectedHour + ":" + selectedMinute);
                         LocalDateTime time = LocalDateTime.of(LocalDate.now(), LocalTime.of(selectedHour, selectedMinute, 0));
                         RideService.rideInCreation.setScheduledTime(time.toString());
@@ -159,10 +159,10 @@ public class PassengerHomeFragment extends Fragment {
                     }
                 }
                 route = null;
-                if (RideService.rideInCreation.getScheduledTime() == null) {
-                    Toast.makeText(getActivity(),"Pick a time!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (RideService.rideInCreation.getScheduledTime() == null) {
+//                    Toast.makeText(getActivity(),"Pick a time!",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });

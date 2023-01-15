@@ -53,7 +53,8 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.mapAcceptanceRouteCV, new MapFragment(new RideReturnedDTO(invite.getRide()))).commit();
         fillRideInfo();
 
-        declineReasonDialog = new DeclineReasonDialog(this, RideService.returnedRide.getId());
+        if (type == "driver-offer")
+            declineReasonDialog = new DeclineReasonDialog(this, RideService.returnedRide.getId());
     }
 
     private void fillRideInfo() {

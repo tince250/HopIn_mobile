@@ -12,14 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:backgroundTint="@color/gray">
+        android:backgroundTint="@color/dark_gray">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             app:contentPadding="15dp"
-            android:backgroundTint="@color/white">
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,19 +67,19 @@
                     android:drawableTint="@color/dark_gray"
                     android:drawablePadding="7dp"/>
 
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="addStops"
-                    android:paddingLeft="5dp"
-                    android:text="@string/add_stops"
-                    android:textAllCaps="false"
-                    android:textColor="@color/dark_gray"
-                    android:textFontWeight="700"
-                    app:icon="@drawable/ic_add_circle_24"
-                    app:iconPadding="7dp"
-                    app:iconTint="@color/orange" />
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:onClick="addStops"-->
+<!--                    android:paddingLeft="5dp"-->
+<!--                    android:text="@string/add_stops"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/dark_gray"-->
+<!--                    android:textFontWeight="700"-->
+<!--                    app:icon="@drawable/ic_add_circle_24"-->
+<!--                    app:iconPadding="7dp"-->
+<!--                    app:iconTint="@color/orange" />-->
 
                 <EditText
                     android:id="@+id/pickUpTimeET"

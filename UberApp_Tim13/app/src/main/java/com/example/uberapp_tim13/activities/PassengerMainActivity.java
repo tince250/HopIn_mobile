@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
@@ -20,6 +21,7 @@ import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
@@ -30,7 +32,6 @@ import ua.naiksoftware.stomp.StompClient;
 
 public class PassengerMainActivity extends AppCompatActivity{
 
-    private StompClient mStompClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +39,23 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
-        conncetToRideInvitesSocket();
+        connectToRideInvitesSocket();
 
         FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
 
         setBottomNavigationBar();
     }
 
-    private void conncetToRideInvitesSocket() {
-        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
-        mStompClient.connect();
-        mStompClient.topic("/topic/invites/" + Globals.userId).subscribe(topicMessage -> {
-            Log.d("SOCKET", topicMessage.getPayload());
+    private void connectToRideInvitesSocket() {
+        StompManager manager = new StompManager();
+        manager.connect();
+        StompManager.stompClient.topic("/topic/invites/" + Globals.userId).subscribe(topicMessage -> {
+            RideInviteDTO invite = Globals.gson.fromJson(topicMessage.getPayload(), RideInviteDTO.class);
+            Log.d("prov", "" + invite.getRide());
+            Intent i = new Intent(PassengerMainActivity.this, AcceptanceRideActivity.class);
+            i.putExtra("invite", invite);
+            i.putExtra("type", "invite");
+            startActivity(i);
         });
     }
 
@@ -142,6 +148,6 @@ public class PassengerMainActivity extends AppCompatActivity{
 
         super.onDestroy();
 
-        mStompClient.disconnect();
+        StompManager.stompClient.disconnect();
     }
 }
