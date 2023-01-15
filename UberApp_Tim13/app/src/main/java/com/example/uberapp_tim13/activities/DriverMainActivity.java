@@ -13,6 +13,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
@@ -36,6 +38,7 @@ public class DriverMainActivity extends AppCompatActivity {
         setTitle(R.string.home_nav);
 
         FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driverFL);
+
 
         setBottomNavigationBar();
 
@@ -62,6 +65,7 @@ public class DriverMainActivity extends AppCompatActivity {
 
     public void onClickCurrentRide(View v){
         startActivity(new Intent(DriverMainActivity.this, CurrentRideActivity.class));
+
     }
 
     @Override

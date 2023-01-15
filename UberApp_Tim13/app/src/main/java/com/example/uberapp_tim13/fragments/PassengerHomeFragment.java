@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
@@ -125,20 +126,22 @@ public class PassengerHomeFragment extends Fragment {
         view.findViewById(R.id.nextBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (route != null) {
-                    if (route.getDeparture() != null && route.getDestination() != null) {
-                        RideService.rideInCreation.getLocations().add(route);
-                    }else {
-                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-                route = null;
-                if (RideService.rideInCreation.getScheduledTime() == null) {
-                    Toast.makeText(getActivity(),"Pick a time!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+
+                new RateRideDialog(getActivity(), null).show();
+//                if (route != null) {
+//                    if (route.getDeparture() != null && route.getDestination() != null) {
+//                        RideService.rideInCreation.getLocations().add(route);
+//                    }else {
+//                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
+//                route = null;
+//                if (RideService.rideInCreation.getScheduledTime() == null) {
+//                    Toast.makeText(getActivity(),"Pick a time!",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
 

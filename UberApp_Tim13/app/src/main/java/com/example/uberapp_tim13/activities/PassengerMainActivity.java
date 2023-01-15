@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
@@ -32,7 +33,7 @@ public class PassengerMainActivity extends AppCompatActivity{
     }
 
     public void onClickNext(View v){
-        startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
+        //startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
     }
 
 
