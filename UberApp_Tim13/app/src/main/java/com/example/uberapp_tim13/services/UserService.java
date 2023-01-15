@@ -73,8 +73,13 @@ public class UserService extends Service{
 
             @Override
             public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
-                Log.d("EMAIL_REZ", response.body().toString());
-                sendUserByEmailBroadcast(response.body());
+                //Log.d("EMAIL_REZ", response.body().toString());
+                if(response.code() == 200) {
+                    sendUserByEmailBroadcast(response.body());
+                }
+                else {
+                    sendUserByEmailBroadcast(null);
+                }
             }
 
             @Override
@@ -95,7 +100,7 @@ public class UserService extends Service{
     private void sendUserByEmailBroadcast(UserDTO user){
         Intent intent = new Intent("inviteOthersFragment");
         intent.putExtra("userByEmail", user);
-        Log.d("provera", user.getName());
+        //Log.d("provera", user.getName());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
