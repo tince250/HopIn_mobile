@@ -10,7 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.dtos.reviews.CompleteRideReviewDTO;
+import com.example.uberapp_tim13.dtos.reviews.ReviewDTO;
+import com.example.uberapp_tim13.dtos.reviews.ReviewReturnedDTO;
+import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.rest.ReviewAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,12 @@ public class ReviewService extends Service {
                     getAllRideReviews(rideId, method);
                 else if (method.equals("getAllReviews"))
                     getAllRideReviews(rideId, method);
+                else if (method.equals("postBothReviews")){
+                    ReviewDTO review = (ReviewDTO) extras.get("driverReview");
+                    postVehicleReview(rideId, review);
+                    review = (ReviewDTO) extras.get("vehicleReview");
+                    postDriverReview(rideId, review);
+                }
             }
         });
         stopSelf();
@@ -63,6 +73,53 @@ public class ReviewService extends Service {
                 Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
+    }
+
+    private void postVehicleReview(int rideId, ReviewDTO review){
+        Call<ReviewReturnedDTO> call = RestUtils.reviewAPI.postVehicleReview(
+                "Bearer: eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MDA3NTksImV4cCI6MTY3MzgwMjU1OX0.NOdzgtlZH5Sxrmdmb_KwAkyjDAx7ZxmIPf-494edLz7oGi3FmcH28lfBoe4lGddQDuPVMcVF2nkQrXLC1zk0iQ", 3, review);
+        call.enqueue(new Callback<ReviewReturnedDTO>() {
+
+            @Override
+            public void onResponse(Call<ReviewReturnedDTO> call, Response<ReviewReturnedDTO> response){
+                if (response.code() == 200){
+                    sendPostedReviewBroadcast("driver");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewReturnedDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    private void postDriverReview(int rideId, ReviewDTO review){
+        Call<ReviewReturnedDTO> call = RestUtils.reviewAPI.postDriverReview(
+                "Bearer: eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MDA3NTksImV4cCI6MTY3MzgwMjU1OX0.NOdzgtlZH5Sxrmdmb_KwAkyjDAx7ZxmIPf-494edLz7oGi3FmcH28lfBoe4lGddQDuPVMcVF2nkQrXLC1zk0iQ", 3, review);
+        call.enqueue(new Callback<ReviewReturnedDTO>() {
+
+            @Override
+            public void onResponse(Call<ReviewReturnedDTO> call, Response<ReviewReturnedDTO> response){
+                if (response.code() == 200){
+                    sendPostedReviewBroadcast("vehicle");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewReturnedDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    private void sendPostedReviewBroadcast(String method){
+        Intent intent = new Intent("rateRideDialog");
+        if (method.equals("vehicle"))
+            intent.putExtra("postedVehicle", true);
+        else
+            intent.putExtra("postedDriver", true);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void sendAllReviewsBroadcast(ArrayList<CompleteRideReviewDTO> reviews){

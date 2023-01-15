@@ -27,8 +27,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
-import com.example.uberapp_tim13.dtos.LocationDTO;
-import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.locations.LocationDTO;
+import com.example.uberapp_tim13.dtos.locations.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.services.RideService;
