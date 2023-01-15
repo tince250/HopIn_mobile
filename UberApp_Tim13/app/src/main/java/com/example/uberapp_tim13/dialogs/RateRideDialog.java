@@ -10,7 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
 
 public class RateRideDialog extends Dialog {
     RideReturnedDTO ride;

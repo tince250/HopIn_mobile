@@ -3,20 +3,14 @@ package com.example.uberapp_tim13.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.CredentialsDTO;
-import com.example.uberapp_tim13.model.User;
+import com.example.uberapp_tim13.dtos.login.CredentialsDTO;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
-import com.example.uberapp_tim13.tools.Mockap;
-
-import java.util.List;
 
 public class LoginActivity extends Activity {
 

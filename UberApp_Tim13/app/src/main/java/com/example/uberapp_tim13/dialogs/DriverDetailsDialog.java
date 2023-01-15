@@ -7,20 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
-import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.services.UserService;
-import com.example.uberapp_tim13.tools.Mockap;
 
 public class DriverDetailsDialog extends Dialog {
     RideReturnedDTO ride;

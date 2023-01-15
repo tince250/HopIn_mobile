@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
-import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
-import com.example.uberapp_tim13.dtos.CredentialsDTO;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.dtos.rides.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.services.DriverService;
-import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 
@@ -41,7 +36,7 @@ public class RideHistoryFragment extends ListFragment{
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        if (Globals.userRole != "passenger") {
+        if (Globals.userRole == "passenger") {
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.passengerFL);
         } else {
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.driverFL);

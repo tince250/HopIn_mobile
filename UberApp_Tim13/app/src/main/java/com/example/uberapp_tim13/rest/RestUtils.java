@@ -38,4 +38,5 @@ public class RestUtils {
     public static RideAPI rideAPI = retrofit.create(RideAPI.class);
     public static DriverAPI driverAPI = retrofit.create(DriverAPI.class);
     public static PassengerAPI passengerAPI = retrofit.create(PassengerAPI.class);
+    public static ReviewAPI reviewAPI = retrofit.create(ReviewAPI.class);
 }

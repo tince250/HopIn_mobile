@@ -1,5 +1,6 @@
-package com.example.uberapp_tim13.dtos;
+package com.example.uberapp_tim13.dtos.rides;
 
+import com.example.uberapp_tim13.dtos.locations.LocationDTO;
 import com.example.uberapp_tim13.model.RejectionNotice;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

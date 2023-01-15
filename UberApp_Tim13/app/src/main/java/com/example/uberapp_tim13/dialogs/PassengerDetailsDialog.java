@@ -13,15 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.adapters.ride_history.PassengerDetailsAdapter;
-import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.model.User;
-import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.services.UserService;
-import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.ArrayList;
 import java.util.List;
