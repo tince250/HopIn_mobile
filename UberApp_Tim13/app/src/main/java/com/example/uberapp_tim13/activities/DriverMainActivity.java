@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
@@ -61,7 +62,21 @@ public class DriverMainActivity extends AppCompatActivity {
     }
 
     public void onClickCurrentRide(View v){
-        startActivity(new Intent(DriverMainActivity.this, CurrentRideActivity.class));
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.getRideByIdOnly(3);
+        call.enqueue(new Callback<RideReturnedDTO>() {
+            @Override
+            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                Intent intent = new Intent(DriverMainActivity.this, CurrentRideActivity.class);
+                intent.putExtra("ride", response.body());
+                Log.d("prov", "" + response.body());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

@@ -23,12 +23,12 @@
         android:layout_margin="5dp"
         android:elevation="10dp">
 
-        <ImageView
-            android:id="@+id/mapImg"
-            app:srcCompat="@drawable/mapa_mockap"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/map_container_aroundyou"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true" />
+            android:layout_height="420dp"
+            android:adjustViewBounds="true"
+            app:cardCornerRadius="10dp"/>
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton

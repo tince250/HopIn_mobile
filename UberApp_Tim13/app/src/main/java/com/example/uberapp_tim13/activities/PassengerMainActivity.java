@@ -33,31 +33,9 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
-        Call<RideReturnedDTO> call = RestUtils.rideAPI.getRideByIdOnly(3);
-        Log.d("prov", "tu sam");
-        call.enqueue(new Callback<RideReturnedDTO>() {
-            @Override
-            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                Toast.makeText(getApplicationContext(), "Stiglo", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(PassengerMainActivity.this, CurrentRideActivity.class);
-                intent.putExtra("ride", response.body());
-                Log.d("prov", "" + response.body());
-                startActivity(intent);
-            }
+        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
 
-            @Override
-            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
-
-            }
-        });
-
-//        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
-
-//        setBottomNavigationBar();
-
-
-
-
+        setBottomNavigationBar();
     }
 
     public void onClickNext(View v){
