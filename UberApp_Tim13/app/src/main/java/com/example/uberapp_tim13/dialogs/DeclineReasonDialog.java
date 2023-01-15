@@ -10,7 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
+import com.example.uberapp_tim13.dtos.ReasonDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
+
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class DeclineReasonDialog extends Dialog implements android.view.View.OnClickListener {
 
@@ -21,9 +28,13 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
     MaterialButton submitBtn;
     EditText otherReasonET;
 
-    public DeclineReasonDialog(Activity activity) {
+    private int rideId;
+    private String chosenReason = "";
+
+    public DeclineReasonDialog(Activity activity, int rideId) {
         super(activity);
         this.activity = activity;
+        this.rideId = rideId;
     }
 
     @Override
@@ -52,6 +63,10 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.submitBtn) {
+            if (chosenReason == "") {
+                chosenReason = otherReasonET.getText().toString();
+            }
+            RestUtils.rideAPI.declineRide(rideId, new ReasonDTO(chosenReason));
             Toast.makeText(activity, "submited", Toast.LENGTH_SHORT).show();
             dismiss();
         }
@@ -61,10 +76,12 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
                 case R.id.passengersReasonBtn:
                     passengersReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
                     passengersReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
+                    chosenReason = (String) passengersReasonBtn.getText();
                     break;
                 case R.id.familyReasonBtn:
                     familyReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
                     familyReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
+                    chosenReason = (String) familyReasonBtn.getText();
                     break;
                 case R.id.otherReasonBtn:
                     otherReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));

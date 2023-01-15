@@ -28,6 +28,7 @@ import java.util.concurrent.Executors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
 
 public class AuthService extends Service {
 
@@ -58,6 +59,7 @@ public class AuthService extends Service {
             public void onResponse(Call<TokenDTO> call, Response<TokenDTO> response) {
                 tokenDTO = response.body();
                 setUserGlobalsData();
+                connectToSocket();
             }
 
             @Override
@@ -65,6 +67,15 @@ public class AuthService extends Service {
                 Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
+    }
+
+    private void connectToSocket() {
+//        Globals.stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+//        Globals.stompClient.connect();
+//        Globals.stompClient.topic("/topic/invites/" + Globals.userId).subscribe(topicMessage -> {
+//            //TODO: display invitation
+//            //TODO: gde nam je logout
+//        });
     }
 
     public void setUserGlobalsData() {

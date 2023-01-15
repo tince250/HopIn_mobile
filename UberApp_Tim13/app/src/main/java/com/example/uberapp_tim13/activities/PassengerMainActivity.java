@@ -19,13 +19,18 @@ import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class PassengerMainActivity extends AppCompatActivity{
+
+    private StompClient mStompClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +38,19 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
+        conncetToRideInvitesSocket();
+
         FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
 
         setBottomNavigationBar();
+    }
+
+    private void conncetToRideInvitesSocket() {
+        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+        mStompClient.connect();
+        mStompClient.topic("/topic/invites/" + Globals.userId).subscribe(topicMessage -> {
+            Log.d("SOCKET", topicMessage.getPayload());
+        });
     }
 
     public void onClickNext(View v){
@@ -124,6 +139,9 @@ public class PassengerMainActivity extends AppCompatActivity{
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+
+        mStompClient.disconnect();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.uberapp_tim13.dtos;
 
 
+import com.example.uberapp_tim13.model.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -46,6 +47,19 @@ public class UserDTO implements Serializable {
 		this.address = address;
 		this.password = password;
 	}
+
+//	public UserDTO(User user) {
+//		super();
+//		this.id = user.getId();
+//		this.name = user.getName();
+//		this.surname = user.getSurName();
+//		this.profilePicture = user.get;
+//		this.telephoneNumber = telephoneNumber;
+//		this.email = email;
+//		this.address = address;
+//		this.password = password;
+//	}
+
 
 	public int getId() {
 		return id;

@@ -22,6 +22,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAdapter;
+import com.example.uberapp_tim13.dtos.RideInInviteDTO;
+import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
@@ -29,7 +31,9 @@ import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.services.UserService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,16 +129,22 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                     }
 
                     if (user != null) {
+                        // sending invite
+                        Gson gson = new Gson();
+                        RideInviteDTO invite = new RideInviteDTO(new UserDTO(), new RideInInviteDTO(RideService.rideInCreation));
+                        mStompClient.send("/ws/send/invite/" + user.getId(), gson.toJson(invite)).subscribe();
+
+                        // implementing reaction to invite response
                         Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
                         mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
                         mStompClient.connect();
-                        mStompClient.topic("/topic/invites/" + user.getId()).subscribe(topicMessage -> {
+                        mStompClient.topic("/topic/invite-response/" + Globals.userId).subscribe(topicMessage -> {
                             //TODO: don't add user if answer is negative
                             Log.d("SOCKET", topicMessage.getPayload());
                             addedUsers.add(user);
                             adapter.notifyDataSetChanged();
                         });
-                        mStompClient.disconnect();
+//                        mStompClient.disconnect();
                     }
                     user = null;
                 }

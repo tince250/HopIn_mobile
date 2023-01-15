@@ -34,4 +34,10 @@ public interface RideAPI {
     @PUT("ride/{id}/end")
     Call<RideReturnedDTO> finishRide(@Path("id") int rideId);
 
+    @PUT("ride/{id}/accept")
+    Call<RideReturnedDTO> acceptRide(@Path("id") int rideId);
+
+    @PUT("ride/{id}/cancel")
+    Call<RideReturnedDTO> declineRide(@Path("id") int rideId,  @Body ReasonDTO reason);
+
 }
