@@ -14,7 +14,7 @@ public class RideDTO {
 	private double distance;
 	private double duration;
 	private double price;
-	private LocalDateTime scheduledTime;
+	private String scheduledTime;
 
 	public RideDTO() {
 	}
@@ -31,7 +31,7 @@ public class RideDTO {
 
 	public RideDTO(List<LocationDTO> locations, List<UserInRideDTO> passengers, String vehicleType,
 			boolean babyTransport, boolean petTransport, double distance, double duration, double price,
-			LocalDateTime scheduledTime) {
+				   String scheduledTime) {
 		super();
 		this.locations = locations;
 		this.passengers = passengers;
@@ -108,11 +108,11 @@ public class RideDTO {
 		this.price = price;
 	}
 
-	public LocalDateTime getScheduledTime() {
+	public String getScheduledTime() {
 		return scheduledTime;
 	}
 
-	public void setScheduledTime(LocalDateTime scheduledTime) {
+	public void setScheduledTime(String scheduledTime) {
 		this.scheduledTime = scheduledTime;
 	}
 

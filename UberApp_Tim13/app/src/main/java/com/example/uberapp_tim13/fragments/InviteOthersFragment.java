@@ -1,6 +1,11 @@
 package com.example.uberapp_tim13.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +18,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAdapter;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
+import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.services.UserService;
@@ -26,6 +33,9 @@ import com.example.uberapp_tim13.tools.Mockap;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class InviteOthersFragment extends Fragment implements View.OnClickListener {
     public static InviteOthersFragment newInstance() {
@@ -37,9 +47,8 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     InvitedPassengersAdapter adapter;
     private ListView listView;
     TextView emailTV;
-    private UserService userService;
-    private RideService rideService;
-
+    UserDTO user;
+    private StompClient mStompClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,20 +66,17 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
 
         this.emailTV = (TextView) view.findViewById(R.id.emailET);
 
-        this.userService = new UserService();
-        this.rideService = new RideService();
-
+        setBroadcast();
         view.findViewById(R.id.finishBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setDataInRide();
-                rideService.orderRide();
-                if (RideService.success) {
-                    Toast.makeText(getActivity(),"You successfully ordered a ride.",Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(),"Sorry, you can't order right now. Try again!",Toast.LENGTH_SHORT).show();
-                }
-                FragmentTransition.to(DriverHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                addedUsers.clear();
+                adapter.notifyDataSetChanged();
+//                Intent intentRideService = new Intent(getContext(), RideService.class);
+//                intentRideService.putExtra("method", "orderRide");
+//                requireActivity().startService(intentRideService);
+                FragmentTransition.to(RideLoadingFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
 
@@ -81,26 +87,12 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.inviteBtn:
+                user = null;
                 String email = this.emailTV.getText().toString();
-                userService.getUserByEmail(email);
-                UserDTO user = userService.returnedUser;
-
-                if (user == null) {
-                    Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                for (UserDTO u : this.addedUsers) {
-                    if (u.getEmail().equals(email)) {
-                        user = null;
-                        Toast.makeText(getActivity(),"User already added!",Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if (user != null) {
-                    addedUsers.add(user);
-                    adapter.notifyDataSetChanged();
-                }
+                Intent intentUserService = new Intent(getContext(), UserService.class);
+                intentUserService.putExtra("method", "getByEmail");
+                intentUserService.putExtra("email", email);
+                requireActivity().startService(intentUserService);
         }
     }
 
@@ -110,10 +102,51 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    private void setBroadcast() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                if (user == null) {
+                    //Log.d("REC", extras.get("userByEmail").toString());
+
+                    user = (UserDTO) extras.get("userByEmail");
+                    if (user == null) {
+                        Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    String email = user.getEmail();
+                    for (UserDTO u : addedUsers) {
+                        if (u.getEmail().equals(email)) {
+                            user = null;
+                            Toast.makeText(getActivity(),"User already added!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    if (user != null) {
+                        Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
+                        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+                        mStompClient.connect();
+                        mStompClient.topic("/topic/invites/" + user.getId()).subscribe(topicMessage -> {
+                            //TODO: don't add user if answer is negative
+                            Log.d("SOCKET", topicMessage.getPayload());
+                            addedUsers.add(user);
+                            adapter.notifyDataSetChanged();
+                        });
+                        mStompClient.disconnect();
+                    }
+                    user = null;
+                }
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("inviteOthersFragment"));
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 }

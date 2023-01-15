@@ -1,7 +1,11 @@
 package com.example.uberapp_tim13.fragments;
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -10,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -17,8 +23,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.LocationDTO;
+import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.RideDTO;
+import com.example.uberapp_tim13.model.Ride;
+import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
@@ -30,21 +42,36 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
+import ua.naiksoftware.stomp.dto.StompHeader;
+
 
 public class PassengerHomeFragment extends Fragment {
 
+
     private MapFragment mapFragment;
     private PlacesClient placesClient;
+
+    private StompClient mStompClient;
+
 
     public static PassengerHomeFragment newInstance() {
         return new PassengerHomeFragment();
     }
     EditText pickUpLoc;
     EditText destination;
+    EditText pickUpTime;
+    private LocationDTO route;
 
     boolean isPickup = true;
+
 
     View.OnClickListener startAutocompleteIntentListener = view -> {
         isPickup = true;
@@ -62,9 +89,29 @@ public class PassengerHomeFragment extends Fragment {
         mapFragment = new MapFragment();
         getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
 
+//        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+//        mStompClient.connect();
+//
+//        mStompClient.topic("/topic/invites/1").subscribe(topicMessage -> {
+//            Log.d("SOCKET", topicMessage.getPayload());
+//        });
+//
+//        mStompClient.send("/ws/send/invite/1", "My first STOMP message!").subscribe();
+
+        // ...
+
+
+//        mapFragment = new MapFragment();
+//        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
+
         View view = inflater.inflate(R.layout.fragment_passenger_main, container, false);
         pickUpLoc = view.findViewById(R.id.pickUpLocET);
         destination = view.findViewById(R.id.destinationET);
+        pickUpTime = view.findViewById(R.id.pickUpTimeET);
+
+        // Starting new ride order, need to reinit rideInCreation
+        RideService.rideInCreation = new RideDTO();
+
 
         String apiKey = getString(R.string.api_key);
         if (!Places.isInitialized()) {
@@ -76,9 +123,46 @@ public class PassengerHomeFragment extends Fragment {
         pickUpLoc.setOnClickListener(startAutocompleteIntentListener);
         destination.setOnClickListener(startAutocompleteIntentListener);
 
+        pickUpTime.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        pickUpTime.setText( selectedHour + ":" + selectedMinute);
+                        LocalDateTime time = LocalDateTime.of(LocalDate.now(), LocalTime.of(selectedHour, selectedMinute, 0));
+                        RideService.rideInCreation.setScheduledTime(time.toString());
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
         view.findViewById(R.id.nextBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (route != null) {
+                    if (route.getDeparture() != null && route.getDestination() != null) {
+                        RideService.rideInCreation.getLocations().add(route);
+                    }else {
+                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                route = null;
+                if (RideService.rideInCreation.getScheduledTime() == null) {
+                    Toast.makeText(getActivity(),"Pick a time!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
@@ -113,13 +197,9 @@ public class PassengerHomeFragment extends Fragment {
             });
 
     private void startAutocompleteIntent() {
-
-        // Set the fields to specify which types of place data to
-        // return after the user has made a selection.
         List<Place.Field> fields = Arrays.asList(Place.Field.ADDRESS_COMPONENTS,
                 Place.Field.LAT_LNG, Place.Field.VIEWPORT);
 
-        // Build the autocomplete intent with field, country, and type filters applied
         Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
                 .setCountry("SRB")
                 .setTypeFilter(TypeFilter.ADDRESS)
@@ -131,9 +211,6 @@ public class PassengerHomeFragment extends Fragment {
         AddressComponents components = place.getAddressComponents();
         StringBuilder address = new StringBuilder();
 
-        // Get each component of the address from the place details,
-        // and then fill-in the corresponding field on the form.
-        // Possible AddressComponent types are documented at https://goo.gle/32SJPM1
         if (components != null) {
             for (AddressComponent component : components.asList()) {
                 String type = component.getTypes().get(0);
@@ -158,5 +235,19 @@ public class PassengerHomeFragment extends Fragment {
             destination.setText(address.toString());
         }
 
+
+        if (route == null) {
+            route = new LocationDTO();
+        }
+        LocationNoIdDTO loc = new LocationNoIdDTO(address.toString(), place.getLatLng().latitude,  place.getLatLng().longitude);
+
+        if (isPickup)  {
+            pickUpLoc.setText(address.toString());
+            route.setDeparture(loc);
+            destination.requestFocus();
+        } else {
+            destination.setText(address.toString());
+            route.setDestinations(loc);
+        }
     }
 }

@@ -3,8 +3,11 @@ package com.example.uberapp_tim13.dtos;
 import java.io.Serializable;
 
 public class LocationDTO implements Serializable {
+
 	private LocationNoIdDTO departure;
 	private LocationNoIdDTO destination;
+
+	public LocationDTO() {}
 
 	public LocationDTO(LocationNoIdDTO departure, LocationNoIdDTO destinations) {
 		super();
