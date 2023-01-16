@@ -50,7 +50,7 @@ public class RideHistoryFragment extends ListFragment{
         super.onCreate(savedInstanceState);
 
         Intent intent = new Intent(getContext(), RideService.class);
-        intent.putExtra("method", "getAllRides");
+        intent.putExtra("method", "getAllUserRides");
         intent.putExtra("userId", Globals.userId);
         intent.putExtra("role", Globals.userRole);
         requireActivity().startService(intent);
