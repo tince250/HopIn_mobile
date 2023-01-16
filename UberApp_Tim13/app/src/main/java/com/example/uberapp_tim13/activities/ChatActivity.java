@@ -90,6 +90,7 @@ public class ChatActivity extends AppCompatActivity {
     private void getMessages() {
         Intent intentUserService = new Intent(getApplicationContext(), UserService.class);
         intentUserService.putExtra("method", "getMessages");
+        intentUserService.putExtra("id", receiverId);
         startService(intentUserService);
     }
 
@@ -116,34 +117,11 @@ public class ChatActivity extends AppCompatActivity {
                     public void run() {
                         getMessages();
                     }
-                }, 10000);
+                }, 3000);
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("chatActivity"));
 
     }
 
-//    private void setUpTimer(){
-//        Intent intentUserService = new Intent(this, UserService.class);
-//        intentUserService.putExtra("method", "getMessages");
-//        pendingIntent = PendingIntent.getService(this, 0, intentUserService, PendingIntent.FLAG_IMMUTABLE);
-//
-//        //koristicemo sistemski AlarmManager pa je potrebno da dobijemo
-//        //njegovu instancu.
-//        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//
-//        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 3000, pendingIntent);
-//
-//    }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        if (manager == null) {
-//            setUpTimer();
-//        }
-//
-//        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 3000, pendingIntent);
-//    }
 }

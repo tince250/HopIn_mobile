@@ -20,10 +20,9 @@
                 android:id="@+id/chatBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/message_icon"
-                android:background="@color/blue"
-                android:backgroundTint="@color/blue"
-                android:layout_gravity="end"/>
+                android:src="@drawable/message_square"
+                android:background="@drawable/circle_background"
+                android:layout_gravity="end" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/map_container_current"

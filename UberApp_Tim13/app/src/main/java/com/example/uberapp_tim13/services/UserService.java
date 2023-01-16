@@ -18,6 +18,7 @@ import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.rest.UserAPI;
+import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -51,7 +52,8 @@ public class UserService extends Service {
                     sendMessage(message);
                 }
                 else if (method.equals("getMessages")) {
-                    getMessages();
+                    int id = (int) extras.get("id");
+                    getMessages(id);
                 }
             }
         });
@@ -102,7 +104,7 @@ public class UserService extends Service {
 
     private void sendMessage(MessageDTO message) {
 
-        Call<MessageReturnedDTO> call = RestUtils.userApi.sendMessage("Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MTMzMjUsImV4cCI6MTY3MzgxNTEyNX0.x-Ges2rvbdikpHi8q3NkEH2mTSlAMQU-PJP8fkaGLTO6CnWlTuAO-twArCf_9an4RVTLGejbngiv-xEVSxYdBA", message.getReceiverId(), message);
+        Call<MessageReturnedDTO> call = RestUtils.userApi.sendMessage(AuthService.tokenDTO.getAccessToken(), message.getReceiverId(), message);
         call.enqueue(new Callback<MessageReturnedDTO>() {
 
             @Override
@@ -121,8 +123,8 @@ public class UserService extends Service {
         });
     }
 
-    private void getMessages() {
-        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages("Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MTMzMjUsImV4cCI6MTY3MzgxNTEyNX0.x-Ges2rvbdikpHi8q3NkEH2mTSlAMQU-PJP8fkaGLTO6CnWlTuAO-twArCf_9an4RVTLGejbngiv-xEVSxYdBA", 2);
+    private void getMessages(int id) {
+        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages(AuthService.tokenDTO.getAccessToken(), id);
         call.enqueue(new Callback<AllMessagesDTO>() {
 
             @Override

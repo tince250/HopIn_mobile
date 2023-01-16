@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
@@ -41,6 +42,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     private Activity context;
 
     private Chronometer timer;
+    private ImageView chatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,6 @@ public class CurrentRideActivity extends AppCompatActivity {
 
 
         ride = (RideReturnedDTO) getIntent().getExtras().get("ride");
-//        ride = new RideReturnedDTO();
-//        ride.setDriver(new UserInRideDTO(2, "driver@gmail.com"));
 
         getSupportFragmentManager().beginTransaction().replace(R.id.map_container_current, new MapFragment(ride)).commit();
 
@@ -61,15 +61,28 @@ public class CurrentRideActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_current_ride);
 
+        chatBtn = findViewById(R.id.chatBtn);
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CurrentRideActivity.this, ChatActivity.class);
+                if(Globals.userRole.equals("driver")) {
+                    i.putExtra("receiverId", ride.getPassengers().get(0).getId());
+                } else {
+                    i.putExtra("receiverId", ride.getDriver().getId());
+                }
+
+                i.putExtra("rideId", ride.getId());
+
+                startActivity(i);
+            }
+        });
+
         MaterialButton panicBtn = this.findViewById(R.id.panicBtn);
         panicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(CurrentRideActivity.this, ChatActivity.class);
-                i.putExtra("receiverId", 2);
-                i.putExtra("rideId", 1);
-
-                startActivity(i);
+                new PanicReasonDialog(context, ride).show();
             }
         });
 
@@ -148,6 +161,10 @@ public class CurrentRideActivity extends AppCompatActivity {
             case "passenger":
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);
+
+                if (Globals.userId != ride.getPassengers().get(0).getId()) {
+                    chatBtn.setEnabled(false);
+                }
 
                 driverDetails.setVisibility(View.VISIBLE);
                 driverDetails.setOnClickListener(new View.OnClickListener() {
