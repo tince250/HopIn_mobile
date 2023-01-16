@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.PassengerRideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.services.ReviewService;
 import com.example.uberapp_tim13.tools.Globals;
@@ -58,7 +59,7 @@ public class HistoryAdapter extends BaseAdapter {
         ((TextView)view_new.findViewById(R.id.routeTV)).setText(ride.getRouteDepartureDestinationTitle());
         ((TextView)view_new.findViewById(R.id.dateTV)).setText(ride.getStartDateTextView());
         ((TextView)view_new.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
-        ((TextView)view_new.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getTotalCost());
+        ((TextView)view_new.findViewById(R.id.priceTV)).setText("Price: " + ride.getTotalCost() + "RSD");;
         setRatingBar(view_new, ride.getId());
 
         fitFragmentToRole(view_new, ride);
@@ -91,7 +92,7 @@ public class HistoryAdapter extends BaseAdapter {
                 view_new.findViewById(R.id.driverTV).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view_new.findViewById(R.id.driverTV)).setText(R.string.driver);
+                view_new.findViewById(R.id.driverTV).setVisibility(View.GONE);
                 break;
         }
     }

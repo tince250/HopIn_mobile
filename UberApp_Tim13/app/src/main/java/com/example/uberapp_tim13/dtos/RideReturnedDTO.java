@@ -52,6 +52,8 @@ public class RideReturnedDTO implements Serializable {
 	@SerializedName("scheduledTime")
 	@Expose
 	private String scheduledTime;
+	@SerializedName("distance")
+	@Expose
 	private double distance;
 
 	public RideReturnedDTO() {}

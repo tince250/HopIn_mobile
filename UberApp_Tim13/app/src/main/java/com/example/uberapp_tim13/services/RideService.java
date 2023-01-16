@@ -50,7 +50,7 @@ public class RideService extends Service {
                     getRideById();
                 } else if (method.equals("orderRide")) {
                     orderRide();
-                } else if (method.equals("getAllUserRides")){
+                } else if (method.equals("getAllRides")){
                     int userId = (int) extras.get("userId");
                     String role = (String) extras.get("role");
                     getAllUserRides(userId, role);

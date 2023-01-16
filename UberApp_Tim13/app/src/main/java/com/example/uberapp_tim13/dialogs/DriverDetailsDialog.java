@@ -30,7 +30,7 @@ public class DriverDetailsDialog extends Dialog {
         this.activity = activity;
         this.ride = ride;
 
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override

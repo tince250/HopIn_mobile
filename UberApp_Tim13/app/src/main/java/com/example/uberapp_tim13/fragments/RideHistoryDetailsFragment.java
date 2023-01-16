@@ -59,8 +59,8 @@ public class RideHistoryDetailsFragment extends Fragment{
         ((TextView)view.findViewById(R.id.startTimeTV)).setText(ride.getStartDateTextView());
         ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getStartDateTextView());
         ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
-        ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getTotalCost());
-        ((TextView)view.findViewById(R.id.distanceTV)).setText("Distance: " + ride.getDistance());
+        ((TextView)view.findViewById(R.id.priceTV)).setText("Price: " + ride.getTotalCost() + "RSD");
+        ((TextView)view.findViewById(R.id.distanceTV)).setText("Distance: " + ride.getDistance() + "km");
 
         setListViewAdapterAndRating(view, ride.getId());
 
@@ -117,7 +117,7 @@ public class RideHistoryDetailsFragment extends Fragment{
                 view.findViewById(R.id.driver_info_card_hist).setVisibility(View.GONE);
                 break;
             case "passenger":
-                ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver: " + ride.getDriver().getEmail());
+                ((TextView)view.findViewById(R.id.nameDriverTV)).setText("Driver");
                 break;
         }
     }
