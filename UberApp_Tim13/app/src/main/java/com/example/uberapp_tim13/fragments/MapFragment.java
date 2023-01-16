@@ -43,6 +43,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -71,6 +72,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     private Marker destination;
     private Marker here;
 
+    private Polyline polyline;
     RideReturnedDTO ride = null;
 
     private String current_type = "pickup";
@@ -350,7 +352,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         //Draw the polyline
         if (path.size() > 0) {
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.parseColor("#337D98")).width(12);
-            map.addPolyline(opts);
+            polyline = map.addPolyline(opts);
         }
 
         //set camera to show whole route

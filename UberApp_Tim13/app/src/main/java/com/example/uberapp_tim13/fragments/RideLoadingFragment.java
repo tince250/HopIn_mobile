@@ -67,10 +67,17 @@ public class RideLoadingFragment extends Fragment {
                         Log.d("ORDER_FINISH", topicMessage.getPayload());
                         if (topicMessage.getPayload().trim().equals("true")) {
                             //TODO: testirati
-                            Log.d("ORDER_FINISH", "ACCEPT");
-                            Intent i = new Intent(getParentFragment().getActivity(), CurrentRideActivity.class);
-                            i.putExtra("ride", RideService.returnedRide);
-                            startActivity(i);
+                            handler.post(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Log.d("ORDER_FINISH", "ACCEPT");
+                                    Intent i = new Intent(getActivity(), CurrentRideActivity.class);
+                                    i.putExtra("ride", RideService.returnedRide);
+                                    startActivity(i);
+                                }
+                            });
+
                         } else {
                             // handles both the decline and no suitable driver case
                             Log.d("ORDER_FINISH", "DECLINE");
@@ -86,7 +93,7 @@ public class RideLoadingFragment extends Fragment {
                     });
                     Toast.makeText(getActivity(),"Ride is successfully ordered!",Toast.LENGTH_SHORT).show();
                     RideService.finished = true;
-//                    FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                    FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
                 } else {
                     Toast.makeText(getActivity(),"Ups, something went wrong!",Toast.LENGTH_SHORT).show();
                     RideService.finished = true;

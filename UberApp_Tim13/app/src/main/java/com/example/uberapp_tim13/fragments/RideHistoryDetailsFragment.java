@@ -16,9 +16,13 @@ import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RideHistoryDetailsFragment extends Fragment{
     public static RideReturnedDTO ride;
+    private MapFragment mapFragment;
+
     public static RideHistoryDetailsFragment newInstance(RideReturnedDTO r) {
         RideHistoryDetailsFragment frag = new RideHistoryDetailsFragment();
         ride = r;
@@ -28,6 +32,10 @@ public class RideHistoryDetailsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_history_details, container, false);
+        mapFragment = new MapFragment();
+        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
+        MarkerOptions marker = new MarkerOptions().position(new LatLng(46.5, 36.5)).title("point");
+        mapFragment.addMarker(new LatLng(46.5, 46.5), "here");
 
         FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.reviewsLV);
         fitFragmentToRole(view, ride);

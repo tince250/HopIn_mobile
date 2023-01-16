@@ -83,12 +83,16 @@ public class RideService extends Service {
 
     public void orderRide() {
         finished = false;
+        Log.d("ride", rideInCreation.toString());
         Call<RideReturnedDTO> call = RestUtils.rideAPI.orderRide(rideInCreation);
         call.enqueue((new Callback<RideReturnedDTO>() {
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
                 returnedRide = response.body();
-                sendOrderedRideBroadcast(response.body());
+                if (response.code() == 200)
+                    sendOrderedRideBroadcast(response.body());
+                else if (response.code() == 400)
+                    Log.d("greska", "greska");
             }
 
             @Override

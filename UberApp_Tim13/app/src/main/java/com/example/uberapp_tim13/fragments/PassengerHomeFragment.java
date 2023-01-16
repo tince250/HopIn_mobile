@@ -1,5 +1,7 @@
 package com.example.uberapp_tim13.fragments;
 
+import static com.google.maps.android.Context.getApplicationContext;
+
 import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
@@ -32,6 +34,7 @@ import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AddressComponent;
@@ -88,8 +91,7 @@ public class PassengerHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         mapFragment = new MapFragment();
         getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
-
-//        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
+        //        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
 //        mStompClient.connect();
 //
 //        mStompClient.topic("/topic/invites/1").subscribe(topicMessage -> {

@@ -60,6 +60,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     TextView emailTV;
     UserDTO user;
     private StompClient mStompClient;
+    private UserDTO loggedUser;
     Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
@@ -112,6 +113,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     }
 
     private void setDataInRide() {
+        RideService.rideInCreation.getPassengers().add(new UserInRideDTO(Globals.user.getId(), Globals.user.getEmail()));
         for (int i = 0; i < addedUsers.size(); i++) {
             if (accepted.get(i) != null)
                 if (accepted.get(i))
@@ -126,7 +128,6 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                 Bundle extras = intent.getExtras();
                 if (user == null) {
                     //Log.d("REC", extras.get("userByEmail").toString());
-
                     user = (UserDTO) extras.get("userByEmail");
                     if (user == null) {
                         Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
