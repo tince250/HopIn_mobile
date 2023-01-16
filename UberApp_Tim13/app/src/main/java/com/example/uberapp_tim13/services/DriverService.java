@@ -32,9 +32,7 @@ public class DriverService extends Service {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                if (method.equals("getAllRides")){
-                    getAllRides(driverId);
-                } else if (method.equals("getVehicle")){
+                if (method.equals("getVehicle")){
                     getVehicle(driverId);
                 }
             }
@@ -43,23 +41,7 @@ public class DriverService extends Service {
         return START_NOT_STICKY;
     }
 
-    private void getAllRides(int driverId){
-        Call<AllPassengerRidesDTO> call = RestUtils.driverAPI.getAllRides("",
-                driverId, 0, 2, "", "", "");
-        call.enqueue(new Callback<AllPassengerRidesDTO>() {
 
-            @Override
-            public void onResponse(Call<AllPassengerRidesDTO> call, Response<AllPassengerRidesDTO> response){
-                Log.d("allRides", response.body().toString());
-                sendAllRidesBroadcast(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<AllPassengerRidesDTO> call, Throwable t) {
-                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
-            }
-        });
-    }
 
     private void getVehicle(int driverId){
         Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle("",
@@ -79,11 +61,7 @@ public class DriverService extends Service {
         });
     }
 
-    private void sendAllRidesBroadcast(AllPassengerRidesDTO rides){
-        Intent intent = new Intent("rideHistoryFragment");
-        intent.putExtra("allRides", rides);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
+
 
     private void sendVehicleBroadcast(VehicleDTO vehicleDTO){
         Intent intent = new Intent("userDetailsDialog");

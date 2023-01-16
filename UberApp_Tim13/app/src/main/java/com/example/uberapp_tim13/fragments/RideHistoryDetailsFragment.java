@@ -46,10 +46,10 @@ public class RideHistoryDetailsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_history_details, container, false);
-        mapFragment = new MapFragment();
-        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
-        MarkerOptions marker = new MarkerOptions().position(new LatLng(46.5, 36.5)).title("point");
-        mapFragment.addMarker(new LatLng(46.5, 46.5), "here");
+
+//        mapFragment = new MapFragment();
+//        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
+//        mapFragment.addMarker(new LatLng(46.5, 46.5), "here");
 
         //FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.reviewsLV);
 
@@ -60,9 +60,9 @@ public class RideHistoryDetailsFragment extends Fragment{
         ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getStartDateTextView());
         ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view.findViewById(R.id.priceTV)).setText("Price(RSD): " + ride.getTotalCost());
+        ((TextView)view.findViewById(R.id.distanceTV)).setText("Distance: " + ride.getDistance());
 
         setListViewAdapterAndRating(view, ride.getId());
-        //distanca je losa
 
         view.findViewById(R.id.passengerDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +83,7 @@ public class RideHistoryDetailsFragment extends Fragment{
     private void setListViewAdapterAndRating(View view, int rideId){
         Intent intent = new Intent(getContext(), ReviewService.class);
         intent.putExtra("method", "getAllReviews");
-        intent.putExtra("rideId", Globals.userId);
+        intent.putExtra("rideId", rideId);
         requireActivity().startService(intent);
 
 
