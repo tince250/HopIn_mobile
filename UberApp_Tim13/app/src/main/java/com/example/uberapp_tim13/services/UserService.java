@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.example.uberapp_tim13.dtos.AllMessagesDTO;
+import com.example.uberapp_tim13.dtos.MessageDTO;
+import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -41,6 +45,13 @@ public class UserService extends Service {
                 else if (method.equals("getByEmail")) {
                     String email = (String) extras.get("email");
                     getByEmail(email);
+                }
+                else if (method.equals("sendMessage")) {
+                    MessageDTO message = (MessageDTO) extras.get("message");
+                    sendMessage(message);
+                }
+                else if (method.equals("getMessages")) {
+                    getMessages();
                 }
             }
         });
@@ -89,6 +100,48 @@ public class UserService extends Service {
         });
     }
 
+    private void sendMessage(MessageDTO message) {
+
+        Call<MessageReturnedDTO> call = RestUtils.userApi.sendMessage("Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MTMzMjUsImV4cCI6MTY3MzgxNTEyNX0.x-Ges2rvbdikpHi8q3NkEH2mTSlAMQU-PJP8fkaGLTO6CnWlTuAO-twArCf_9an4RVTLGejbngiv-xEVSxYdBA", message.getReceiverId(), message);
+        call.enqueue(new Callback<MessageReturnedDTO>() {
+
+            @Override
+            public void onResponse(Call<MessageReturnedDTO> call, Response<MessageReturnedDTO> response){
+                //Log.d("EMAIL_REZ", response.body().toString());
+                if (response.body() != null)
+                    Log.d("MESS", response.body().toString());
+                else
+                    Log.d("MESS", "SENDING ERROR");
+            }
+
+            @Override
+            public void onFailure(Call<MessageReturnedDTO> call, Throwable t) {
+                Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    private void getMessages() {
+        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages("Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MTMzMjUsImV4cCI6MTY3MzgxNTEyNX0.x-Ges2rvbdikpHi8q3NkEH2mTSlAMQU-PJP8fkaGLTO6CnWlTuAO-twArCf_9an4RVTLGejbngiv-xEVSxYdBA", 2);
+        call.enqueue(new Callback<AllMessagesDTO>() {
+
+            @Override
+            public void onResponse(Call<AllMessagesDTO> call, Response<AllMessagesDTO> response){
+                //Log.d("EMAIL_REZ", response.body().toString());
+                if (response.body() != null) {
+                    getMessagesBroadcast(response.body());
+                }
+                else {
+                    Log.d("MESS", "SENDING ERROR");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllMessagesDTO> call, Throwable t) {
+                Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });    }
+
 
     private void sendUserByIdBroadcast(UserDTO user){
         Intent intent = new Intent("userDetailsDialog");
@@ -101,6 +154,12 @@ public class UserService extends Service {
         Intent intent = new Intent("inviteOthersFragment");
         intent.putExtra("userByEmail", user);
         //Log.d("provera", user.getName());
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void getMessagesBroadcast(AllMessagesDTO dto){
+        Intent intent = new Intent("chatActivity");
+        intent.putExtra("messages", dto);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 

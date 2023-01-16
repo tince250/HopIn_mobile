@@ -26,6 +26,7 @@ import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.Globals;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,8 @@ public class CurrentRideActivity extends AppCompatActivity {
 
 
         ride = (RideReturnedDTO) getIntent().getExtras().get("ride");
+//        ride = new RideReturnedDTO();
+//        ride.setDriver(new UserInRideDTO(2, "driver@gmail.com"));
 
         getSupportFragmentManager().beginTransaction().replace(R.id.map_container_current, new MapFragment(ride)).commit();
 
@@ -57,6 +60,18 @@ public class CurrentRideActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_current_ride);
+
+        MaterialButton panicBtn = this.findViewById(R.id.panicBtn);
+        panicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CurrentRideActivity.this, ChatActivity.class);
+                i.putExtra("receiverId", 2);
+                i.putExtra("rideId", 1);
+
+                startActivity(i);
+            }
+        });
 
         timer = findViewById(R.id.timePassedTV);
 
@@ -145,12 +160,12 @@ public class CurrentRideActivity extends AppCompatActivity {
                 break;
         }
 
-        findViewById(R.id.panicBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new PanicReasonDialog(context, ride).show();
-            }
-        });
+//        findViewById(R.id.panicBtn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new PanicReasonDialog(context, ride).show();
+//            }
+//        });
     }
 
     private void addListenersToStartFinishBtns() {
