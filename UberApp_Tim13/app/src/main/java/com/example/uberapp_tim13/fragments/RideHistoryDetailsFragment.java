@@ -83,7 +83,7 @@ public class RideHistoryDetailsFragment extends Fragment{
     private void setListViewAdapterAndRating(View view, int rideId){
         Intent intent = new Intent(getContext(), ReviewService.class);
         intent.putExtra("method", "getAllReviews");
-        intent.putExtra("rideId", 3);
+        intent.putExtra("rideId", Globals.userId);
         requireActivity().startService(intent);
 
 

@@ -88,7 +88,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
 //                Intent intentRideService = new Intent(getContext(), RideService.class);
 //                intentRideService.putExtra("method", "orderRide");
 //                requireActivity().startService(intentRideService);
-                FragmentTransition.to(RideLoadingFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                FragmentTransition.to(RideLoadingFragment.newInstance(), getActivity(), false, R.id.passengerFL);
             }
         });
 

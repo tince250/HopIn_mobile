@@ -34,6 +34,7 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
         super(activity);
         this.activity = activity;
         this.ride = ride;
+
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
@@ -41,6 +42,10 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_rate_ride_after);
+
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
+
         setComponents();
         setListeners();
     }
@@ -62,7 +67,7 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
         switch (view.getId()) {
             case R.id.submitBtn:
                 collectDataAndSetBroadcast();
-                this.dismiss();
+                this.activity.finish();
                 break;
             default:
                 break;
@@ -76,7 +81,7 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
 
         Intent intent = new Intent(getContext(), ReviewService.class);
         intent.putExtra("method", "postBothReviews");
-        intent.putExtra("rideId", 3);
+        intent.putExtra("rideId", ride.getId());
         intent.putExtra("driverReview", driverReviewDTO);
         intent.putExtra("vehicleReview", vehicleReviewDTO);
         this.activity.startService(intent);

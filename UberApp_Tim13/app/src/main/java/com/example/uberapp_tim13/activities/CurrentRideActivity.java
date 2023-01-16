@@ -21,6 +21,7 @@ import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
 import com.example.uberapp_tim13.dialogs.PanicReasonDialog;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
@@ -184,6 +185,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                             timer.stop();
                             try {
                                 Thread.sleep(1000);
+                                new RateRideDialog(CurrentRideActivity.this, ride).show();
 
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
