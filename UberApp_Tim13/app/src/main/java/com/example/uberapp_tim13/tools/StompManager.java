@@ -12,7 +12,7 @@ public class StompManager {
     public static StompClient stompClient;
 
     public void  connect() {
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.0.27:4321/api/socket/websocket");
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.0.20:4321/api/socket/websocket");
         stompClient.lifecycle()
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())

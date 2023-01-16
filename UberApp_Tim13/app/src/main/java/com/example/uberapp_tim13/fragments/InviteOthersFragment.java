@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAdapter;
+import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
@@ -50,12 +53,14 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     }
 
     List<UserDTO> addedUsers;
+    List<Boolean> accepted;
     ImageView inviteBtn;
     InvitedPassengersAdapter adapter;
     private ListView listView;
     TextView emailTV;
     UserDTO user;
     private StompClient mStompClient;
+    Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +69,8 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         getActivity().setTitle("Other passengers");
 
         this.addedUsers = new ArrayList<UserDTO>();
-        this.adapter = new InvitedPassengersAdapter(getActivity(), this.addedUsers);
+        this.accepted = new ArrayList<Boolean>();
+        this.adapter = new InvitedPassengersAdapter(getActivity(), this.addedUsers, this.accepted);
         listView = (ListView) view.findViewById(R.id.list);
         listView.setAdapter(adapter);
 
@@ -106,8 +112,10 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     }
 
     private void setDataInRide() {
-        for (UserDTO u : addedUsers) {
-            RideService.rideInCreation.getPassengers().add(new UserInRideDTO(u.getId(), u.getEmail()));
+        for (int i = 0; i < addedUsers.size(); i++) {
+            if (accepted.get(i) != null)
+                if (accepted.get(i))
+                    RideService.rideInCreation.getPassengers().add(new UserInRideDTO(addedUsers.get(i).getId(), addedUsers.get(i).getEmail()));
         }
     }
 
@@ -143,13 +151,33 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                         Log.d("EVO", user.getId() + "");
                         // implementing reaction to invite response
                         Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
+                        UserDTO userCopy = user;
+                        accepted.add(null);
+                        addedUsers.add(userCopy);
+                        adapter.notifyDataSetChanged();
+                        int index = accepted.size()-1;
+                        Log.d("user", userCopy.getName());
                         if (!listeningInvites) {
                             mStompClient.topic("/topic/invite-response/" + Globals.userId).subscribe(topicMessage -> {
                                 ///TODO: promeniti ikonicu u korisnickoj kartici (true - stiklica, false - iksic)
                                 //TODO: true - dodas u listu addeddUsers, ako je false izbaci iz liste
                                 Log.d("JUHU", topicMessage.getPayload());
-                                addedUsers.add(user);
-                                adapter.notifyDataSetChanged();
+                                handler.post(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        InvitationResponseDTO response = Globals.gson.fromJson(topicMessage.getPayload(), InvitationResponseDTO.class);
+                                        if (response.isResponse()){
+                                            //todo nacrtaj
+                                            accepted.set(index, true);
+                                        } else {
+                                            //nacrtaj
+                                            accepted.set(index, false);
+                                        }
+                                        Log.d("user", userCopy.getName());
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                });
                             });
                             listeningInvites = true;
                         }

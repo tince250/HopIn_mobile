@@ -1,6 +1,8 @@
 package com.example.uberapp_tim13.dtos;
 
-public class InvitationResponseDTO {
+import java.io.Serializable;
+
+public class InvitationResponseDTO implements Serializable {
     private int passengerId;
     private boolean response;
 
