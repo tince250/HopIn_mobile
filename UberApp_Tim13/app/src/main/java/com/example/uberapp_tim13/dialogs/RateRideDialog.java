@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -36,6 +37,7 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
         this.ride = ride;
 
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     @Override
