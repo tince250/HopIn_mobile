@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.example.uberapp_tim13.dtos.AllMessagesDTO;
+import com.example.uberapp_tim13.dtos.MessageDTO;
+import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.rest.UserAPI;
+import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,7 +33,7 @@ public class UserService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle extras = intent.getExtras();
         String method = (String) extras.get("method");
-        int userId = (int) extras.get("userId");
+//        int userId = (int) extras.get("userId");
         String sender = (String) extras.get("sender");
         executor.execute(new Runnable() {
             @Override
@@ -39,8 +45,17 @@ public class UserService extends Service {
                 else if (method.equals("getByEmail")) {
                     String email = (String) extras.get("email");
                     getByEmail(email);
-                }else if (method.equals("getUserName"))
-                    getById(userId, method);
+                }
+                else if (method.equals("sendMessage")) {
+                    MessageDTO message = (MessageDTO) extras.get("message");
+                    sendMessage(message);
+                }
+                else if (method.equals("getMessages")) {
+                    int id = (int) extras.get("id");
+                    getMessages(id);
+                }
+//                else if (method.equals("getUserName"))
+//                    getById(userId, method);
             }
         });
         stopSelf();
@@ -48,7 +63,7 @@ public class UserService extends Service {
     }
 
     private void getById(int userId, String method){
-        Call<UserDTO> call = RestUtils.userApi.doGetUser("", userId);
+        Call<UserDTO> call = RestUtils.userApi.doGetUser(AuthService.tokenDTO.getAccessToken(), userId);
         Log.d("userid", String.valueOf(userId));
         call.enqueue(new Callback<UserDTO>() {
 
@@ -69,7 +84,7 @@ public class UserService extends Service {
     }
 
     private void getByEmail(String email){
-        Call<UserDTO> call = RestUtils.userApi.getUserByEmail("", email);
+        Call<UserDTO> call = RestUtils.userApi.getUserByEmail(AuthService.tokenDTO.getAccessToken(), email);
         Log.d("email", String.valueOf(email));
         call.enqueue(new Callback<UserDTO>() {
 
@@ -91,6 +106,48 @@ public class UserService extends Service {
         });
     }
 
+    private void sendMessage(MessageDTO message) {
+
+        Call<MessageReturnedDTO> call = RestUtils.userApi.sendMessage(AuthService.tokenDTO.getAccessToken(), message.getReceiverId(), message);
+        call.enqueue(new Callback<MessageReturnedDTO>() {
+
+            @Override
+            public void onResponse(Call<MessageReturnedDTO> call, Response<MessageReturnedDTO> response){
+                //Log.d("EMAIL_REZ", response.body().toString());
+                if (response.body() != null)
+                    Log.d("MESS", response.body().toString());
+                else
+                    Log.d("MESS", "SENDING ERROR");
+            }
+
+            @Override
+            public void onFailure(Call<MessageReturnedDTO> call, Throwable t) {
+                Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    private void getMessages(int id) {
+        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages(AuthService.tokenDTO.getAccessToken(), id);
+        call.enqueue(new Callback<AllMessagesDTO>() {
+
+            @Override
+            public void onResponse(Call<AllMessagesDTO> call, Response<AllMessagesDTO> response){
+                //Log.d("EMAIL_REZ", response.body().toString());
+                if (response.body() != null) {
+                    getMessagesBroadcast(response.body());
+                }
+                else {
+                    Log.d("MESS", "SENDING ERROR");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllMessagesDTO> call, Throwable t) {
+                Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });    }
+
 
     private void sendUserByIdBroadcast(UserDTO user){
         Intent intent = new Intent("userDetailsDialog");
@@ -108,6 +165,12 @@ public class UserService extends Service {
         Intent intent = new Intent("inviteOthersFragment");
         intent.putExtra("userByEmail", user);
         //Log.d("provera", user.getName());
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void getMessagesBroadcast(AllMessagesDTO dto){
+        Intent intent = new Intent("chatActivity");
+        intent.putExtra("messages", dto);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 

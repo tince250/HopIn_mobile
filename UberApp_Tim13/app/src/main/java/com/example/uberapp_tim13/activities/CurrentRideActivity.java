@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
@@ -29,8 +30,10 @@ import com.example.uberapp_tim13.fragments.MapFragment;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
+import com.google.android.material.button.MaterialButton;
 import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -49,6 +52,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     Handler handler = new Handler(Looper.getMainLooper());
 
     private Chronometer timer;
+    private ImageView chatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,31 @@ public class CurrentRideActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_current_ride);
+
+        chatBtn = findViewById(R.id.chatBtn);
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CurrentRideActivity.this, ChatActivity.class);
+                if(Globals.userRole.equals("driver")) {
+                    i.putExtra("receiverId", ride.getPassengers().get(0).getId());
+                } else {
+                    i.putExtra("receiverId", ride.getDriver().getId());
+                }
+
+                i.putExtra("rideId", ride.getId());
+
+                startActivity(i);
+            }
+        });
+
+        MaterialButton panicBtn = this.findViewById(R.id.panicBtn);
+        panicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PanicReasonDialog(context, ride).show();
+            }
+        });
 
         timer = findViewById(R.id.timePassedTV);
 
@@ -144,6 +173,10 @@ public class CurrentRideActivity extends AppCompatActivity {
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);
 
+                if (Globals.userId != ride.getPassengers().get(0).getId()) {
+                    chatBtn.setEnabled(false);
+                }
+
                 driverDetails.setVisibility(View.VISIBLE);
                 driverDetails.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -155,12 +188,12 @@ public class CurrentRideActivity extends AppCompatActivity {
                 break;
         }
 
-        findViewById(R.id.panicBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new PanicReasonDialog(context, ride).show();
-            }
-        });
+//        findViewById(R.id.panicBtn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new PanicReasonDialog(context, ride).show();
+//            }
+//        });
     }
 
     private void subscribeToStartFinishMessages() {
@@ -209,7 +242,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 timer.setBase(SystemClock.elapsedRealtime());
                 finish.setEnabled(true);
 
-                Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(ride.getId());
+                Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
@@ -229,7 +262,7 @@ public class CurrentRideActivity extends AppCompatActivity {
             public void onClick(View view) {
                 timer.stop();
 
-                Call<RideReturnedDTO> call = RestUtils.rideAPI.finishRide(ride.getId());
+                Call<RideReturnedDTO> call = RestUtils.rideAPI.finishRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {

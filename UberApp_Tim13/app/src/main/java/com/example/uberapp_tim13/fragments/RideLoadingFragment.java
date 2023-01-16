@@ -71,6 +71,8 @@ public class RideLoadingFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     Log.d("ORDER_FINISH", "ACCEPT");
+                                    getParentFragmentManager().beginTransaction().remove(RideLoadingFragment.this).commit();
+                                    FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
                                     Intent i = new Intent(getActivity(), CurrentRideActivity.class);
                                     i.putExtra("ride", RideService.returnedRide);
                                     startActivity(i);

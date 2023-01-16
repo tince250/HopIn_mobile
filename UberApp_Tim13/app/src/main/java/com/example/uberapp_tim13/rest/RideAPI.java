@@ -19,30 +19,30 @@ import retrofit2.http.Path;
 public interface RideAPI {
 
     @POST("ride")
-    Call<RideReturnedDTO> orderRide(@Body RideDTO ride);
+    Call<RideReturnedDTO> orderRide(@Header("Authorization") String token, @Body RideDTO ride);
 
     @POST("unregisteredUser")
-    Call<EstimatedRideDetailsDTO> getRideDetail(@Body GetRideDetailsDTO ride);
+    Call<EstimatedRideDetailsDTO> getRideDetail(@Header("Authorization") String token, @Body GetRideDetailsDTO ride);
 
     @GET(RestUtils.RIDE_GET_ID)
     Call<RideReturnedDTO> getRideById(@Header("Authorization") String token);
 
     @GET("ride/{id}")
-    Call<RideReturnedDTO> getRideByIdOnly(@Path("id") int id);
+    Call<RideReturnedDTO> getRideByIdOnly(@Header("Authorization") String token, @Path("id") int id);
 
     @PUT("ride/{id}/panic")
-    Call<PanicRideDTO> panicRide(@Path("id") int rideId, @Body ReasonDTO reason);
+    Call<PanicRideDTO> panicRide(@Header("Authorization") String token, @Path("id") int rideId, @Body ReasonDTO reason);
 
     @PUT("ride/{id}/start")
-    Call<RideReturnedDTO> startRide(@Path("id") int rideId);
+    Call<RideReturnedDTO> startRide(@Header("Authorization") String token, @Path("id") int rideId);
 
     @PUT("ride/{id}/end")
-    Call<RideReturnedDTO> finishRide(@Path("id") int rideId);
+    Call<RideReturnedDTO> finishRide(@Header("Authorization") String token, @Path("id") int rideId);
 
     @PUT("ride/{id}/accept")
-    Call<RideReturnedDTO> acceptRide(@Path("id") int rideId);
+    Call<RideReturnedDTO> acceptRide(@Header("Authorization") String token, @Path("id") int rideId);
 
     @PUT("ride/{id}/cancel")
-    Call<RideReturnedDTO> declineRide(@Path("id") int rideId,  @Body ReasonDTO reason);
+    Call<RideReturnedDTO> declineRide(@Header("Authorization") String token, @Path("id") int rideId,  @Body ReasonDTO reason);
 
 }

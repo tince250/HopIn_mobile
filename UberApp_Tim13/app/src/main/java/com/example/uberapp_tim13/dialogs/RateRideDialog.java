@@ -98,8 +98,10 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
                     postedVehicle[0] = (boolean) extras.get("postedVehicle");
                 if (!postedDriver[0]&& extras.get("postedDriver") != null)
                     postedDriver[0] = (boolean) extras.get("postedDriver");
-                if (postedDriver[0] && postedVehicle[0])
-                Toast.makeText(activity, "You reviewed the ride!", Toast.LENGTH_SHORT).show();
+                if (postedDriver[0] && postedVehicle[0]) {
+                    Toast.makeText(activity, "You reviewed the ride!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         };
         LocalBroadcastManager.getInstance(this.activity).registerReceiver(broadcastReceiver, new IntentFilter("rateRideDialog"));

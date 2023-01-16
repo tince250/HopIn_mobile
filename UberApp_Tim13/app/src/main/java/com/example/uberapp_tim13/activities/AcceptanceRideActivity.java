@@ -21,6 +21,7 @@ import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.fragments.MapFragment;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.StompManager;
@@ -93,7 +94,7 @@ public class AcceptanceRideActivity extends AppCompatActivity {
 
     public void onClickAccept(View v){
         if (type.equals("driver-offer")) {
-            Call<RideReturnedDTO> call = RestUtils.rideAPI.acceptRide(RideService.returnedRide.getId());
+            Call<RideReturnedDTO> call = RestUtils.rideAPI.acceptRide(AuthService.tokenDTO.getAccessToken(), RideService.returnedRide.getId());
             call.enqueue(new Callback<RideReturnedDTO>() {
                 @Override
                 public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
