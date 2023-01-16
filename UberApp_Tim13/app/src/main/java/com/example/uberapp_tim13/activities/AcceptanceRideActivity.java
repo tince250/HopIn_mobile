@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.DeclineReasonDialog;
@@ -23,6 +24,9 @@ import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.StompManager;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
@@ -46,8 +50,9 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         invite = (RideInviteDTO) getIntent().getExtras().get("invite");
         type = (String) getIntent().getExtras().get("type");
 
-        if (type == "driver-offer")
+        if (type.equals("driver-offer")) {
             setTitle("Ride offer");
+        }
         else {
             findViewById(R.id.passengersTV).setVisibility(View.GONE);
             setTitle("Ride invitation from " + invite.getFrom().getName());
@@ -57,7 +62,7 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.mapAcceptanceRouteCV, new MapFragment(new RideReturnedDTO(invite.getRide()))).commit();
         fillRideInfo();
 
-        if (type == "driver-offer")
+        if (type.equals("driver-offer"))
             declineReasonDialog = new DeclineReasonDialog(this, RideService.returnedRide.getId());
     }
 
@@ -77,19 +82,29 @@ public class AcceptanceRideActivity extends AppCompatActivity {
     }
 
     public void onClickDecline(View v){
-        Log.d("PROBA", "TU SAM BRE");
-        if (type == "driver-offer")
+        if (type.equals("driver-offer")) {
             declineReasonDialog.show();
+        }
         else {
-            Log.d("soc", "/ws/send/invite-response/" + invite.getFrom().getId());
-            Log.d("soc", "" + Globals.gson.toJson(new InvitationResponseDTO(Globals.userId, false)));
             stompClient.send("/ws/send/invite-response/" + invite.getFrom().getId() , Globals.gson.toJson(new InvitationResponseDTO(Globals.userId, false))).subscribe();
         }
     }
 
     public void onClickAccept(View v){
-        if (type == "driver-offer")
-            RestUtils.rideAPI.acceptRide(RideService.returnedRide.getId());
+        if (type.equals("driver-offer")) {
+            Call<RideReturnedDTO> call = RestUtils.rideAPI.acceptRide(RideService.returnedRide.getId());
+            call.enqueue(new Callback<RideReturnedDTO>() {
+                @Override
+                public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                    Toast.makeText(getApplicationContext(), "Answer sent successfully", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Answer fail to send", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         else {
             stompClient.send("/ws/send/invite-response/" + invite.getFrom().getId() , Globals.gson.toJson(new InvitationResponseDTO(Globals.userId, true))).subscribe();
             // podesiti da sad i on slusa order ride odgovor od drivera

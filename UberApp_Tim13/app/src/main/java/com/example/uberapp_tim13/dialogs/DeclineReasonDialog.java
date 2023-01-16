@@ -12,10 +12,14 @@ import android.widget.Toast;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
 import com.example.uberapp_tim13.dtos.ReasonDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
@@ -66,9 +70,21 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
             if (chosenReason == "") {
                 chosenReason = otherReasonET.getText().toString();
             }
-            RestUtils.rideAPI.declineRide(rideId, new ReasonDTO(chosenReason));
-            Toast.makeText(activity, "submited", Toast.LENGTH_SHORT).show();
-            dismiss();
+            Call<RideReturnedDTO> call = RestUtils.rideAPI.declineRide(rideId, new ReasonDTO(chosenReason));
+            call.enqueue(new Callback<RideReturnedDTO>() {
+                @Override
+                public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                    Toast.makeText(getContext(), "Answer sent successfully", Toast.LENGTH_LONG).show();
+                    dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                    Toast.makeText(getContext(), "Answer fail to send", Toast.LENGTH_LONG).show();
+                    dismiss();
+                }
+            });
+
         }
         else {
             resetComponents();

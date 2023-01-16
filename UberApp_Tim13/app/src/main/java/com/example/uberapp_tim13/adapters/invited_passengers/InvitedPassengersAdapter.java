@@ -1,6 +1,7 @@
 package com.example.uberapp_tim13.adapters.invited_passengers;
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -68,4 +69,5 @@ public class InvitedPassengersAdapter extends BaseAdapter {
 
         return view_new;
     }
+
 }

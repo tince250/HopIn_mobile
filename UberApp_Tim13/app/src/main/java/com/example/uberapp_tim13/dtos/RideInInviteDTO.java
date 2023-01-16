@@ -58,6 +58,20 @@ public class RideInInviteDTO implements Serializable {
         this.scheduledTime = rideInCreation.getScheduledTime();
     }
 
+    public RideInInviteDTO(RideReturnedDTO ride) {
+        this.id = ride.getId();
+        this.pickup = ride.getLocations().get(0).getDeparture();
+        this.destination = ride.getLocations().get(0).getDestination();
+        this.passengers = ride.getPassengers();
+        this.vehicleType = ride.getVehicleType();
+        this.babyTransport = ride.isBabyTransport();
+        this.petTransport = ride.isPetTransport();
+        this.distance = ride.getDistance();
+        this.duration = ride.getEstimatedTimeInMinutes();
+        this.price = ride.getTotalCost();
+        this.scheduledTime = ride.getScheduledTime();
+    }
+
     public LocationNoIdDTO getPickup() {
         return pickup;
     }

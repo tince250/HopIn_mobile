@@ -12,6 +12,7 @@
         android:textAlignment="center">
 
         <TextView
+            android:id="@+id/loadTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sit tight, we're looking for the best ride option for you!"
