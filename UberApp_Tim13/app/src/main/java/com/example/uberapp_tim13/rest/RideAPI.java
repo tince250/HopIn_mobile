@@ -1,7 +1,7 @@
 package com.example.uberapp_tim13.rest;
 
 import com.example.uberapp_tim13.dtos.RideDTO;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

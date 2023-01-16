@@ -16,21 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.adapters.ride_history.RatingsAdapter;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
-import com.example.uberapp_tim13.dtos.reviews.CompleteRideReviewDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewReturnedDTO;
-import com.example.uberapp_tim13.dtos.rides.AllPassengerRidesDTO;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
-import com.example.uberapp_tim13.services.DriverService;
+import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
+import com.example.uberapp_tim13.dtos.ReviewReturnedDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.services.ReviewService;
-import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RideHistoryDetailsFragment extends Fragment{
     public static RideReturnedDTO ride;

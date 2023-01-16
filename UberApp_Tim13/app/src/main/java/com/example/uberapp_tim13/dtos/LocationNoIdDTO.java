@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13.dtos.locations;
+package com.example.uberapp_tim13.dtos;
 
 public class LocationNoIdDTO {
 	private String address;

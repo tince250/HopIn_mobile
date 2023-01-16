@@ -1,10 +1,8 @@
 package com.example.uberapp_tim13.rest;
 
-import com.example.uberapp_tim13.dtos.RideDTO;
-import com.example.uberapp_tim13.dtos.reviews.CompleteRideReviewDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewReturnedDTO;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
+import com.example.uberapp_tim13.dtos.ReviewDTO;
+import com.example.uberapp_tim13.dtos.ReviewReturnedDTO;
 
 import java.util.ArrayList;
 

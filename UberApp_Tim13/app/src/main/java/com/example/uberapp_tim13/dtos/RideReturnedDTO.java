@@ -1,12 +1,10 @@
-package com.example.uberapp_tim13.dtos.rides;
+package com.example.uberapp_tim13.dtos;
 
-import com.example.uberapp_tim13.dtos.locations.LocationDTO;
 import com.example.uberapp_tim13.model.RejectionNotice;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class RideReturnedDTO implements Serializable {

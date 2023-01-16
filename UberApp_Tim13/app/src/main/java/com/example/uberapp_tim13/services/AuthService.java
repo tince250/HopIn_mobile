@@ -8,8 +8,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.uberapp_tim13.dtos.login.CredentialsDTO;
-import com.example.uberapp_tim13.dtos.login.TokenDTO;
+import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.JWTUtils;

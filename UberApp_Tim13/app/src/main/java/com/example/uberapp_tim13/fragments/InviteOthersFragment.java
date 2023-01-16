@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,19 +16,15 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAdapter;
 import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.dtos.VehicleDTO;
-import com.example.uberapp_tim13.dtos.rides.UserInRideDTO;
-import com.example.uberapp_tim13.model.User;
+import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.services.UserService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
-import com.example.uberapp_tim13.tools.Mockap;
 
 import java.util.ArrayList;
 import java.util.List;

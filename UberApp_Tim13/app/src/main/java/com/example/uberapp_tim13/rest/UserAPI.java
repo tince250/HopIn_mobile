@@ -1,7 +1,7 @@
 package com.example.uberapp_tim13.rest;
 
-import com.example.uberapp_tim13.dtos.login.CredentialsDTO;
-import com.example.uberapp_tim13.dtos.login.TokenDTO;
+import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 
 import retrofit2.Call;

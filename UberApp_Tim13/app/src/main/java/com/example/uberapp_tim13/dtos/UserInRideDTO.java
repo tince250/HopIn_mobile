@@ -1,4 +1,4 @@
-package com.example.uberapp_tim13.dtos.rides;
+package com.example.uberapp_tim13.dtos;
 
 import com.example.uberapp_tim13.model.User;
 

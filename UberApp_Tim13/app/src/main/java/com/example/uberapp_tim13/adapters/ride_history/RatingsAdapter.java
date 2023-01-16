@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,10 +15,7 @@ import android.widget.TextView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewReturnedDTO;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
-import com.example.uberapp_tim13.services.ReviewService;
+import com.example.uberapp_tim13.dtos.ReviewReturnedDTO;
 import com.example.uberapp_tim13.services.UserService;
 
 import java.util.List;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.services.ReviewService;
 import com.example.uberapp_tim13.tools.Globals;
 

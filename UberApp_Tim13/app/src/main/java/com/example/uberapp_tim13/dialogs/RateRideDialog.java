@@ -6,8 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.activities.LoginActivity;
-import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewDTO;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.ReviewDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.services.ReviewService;
-import com.example.uberapp_tim13.services.UserService;
 
 public class RateRideDialog extends Dialog implements android.view.View.OnClickListener {
     RideReturnedDTO ride;

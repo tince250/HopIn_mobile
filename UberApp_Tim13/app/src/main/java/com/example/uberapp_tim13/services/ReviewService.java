@@ -9,12 +9,10 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.uberapp_tim13.dtos.reviews.CompleteRideReviewDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewDTO;
-import com.example.uberapp_tim13.dtos.reviews.ReviewReturnedDTO;
-import com.example.uberapp_tim13.dtos.rides.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
+import com.example.uberapp_tim13.dtos.ReviewDTO;
+import com.example.uberapp_tim13.dtos.ReviewReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
-import com.example.uberapp_tim13.rest.ReviewAPI;
 
 import java.util.ArrayList;
 import java.util.List;

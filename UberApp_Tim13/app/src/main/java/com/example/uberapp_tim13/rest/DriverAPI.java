@@ -1,6 +1,6 @@
 package com.example.uberapp_tim13.rest;
 
-import com.example.uberapp_tim13.dtos.rides.AllPassengerRidesDTO;
+import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 
 import retrofit2.Call;

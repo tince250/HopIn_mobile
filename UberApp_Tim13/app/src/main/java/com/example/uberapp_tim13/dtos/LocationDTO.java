@@ -1,6 +1,4 @@
-package com.example.uberapp_tim13.dtos.locations;
-
-import android.location.Location;
+package com.example.uberapp_tim13.dtos;
 
 public class LocationDTO {
 	private LocationNoIdDTO departure;

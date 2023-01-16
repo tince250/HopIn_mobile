@@ -1,7 +1,5 @@
 package com.example.uberapp_tim13.dtos;
 
-import com.example.uberapp_tim13.dtos.locations.LocationNoIdDTO;
-
 import java.io.Serializable;
 
 public class VehicleDTO implements Serializable{

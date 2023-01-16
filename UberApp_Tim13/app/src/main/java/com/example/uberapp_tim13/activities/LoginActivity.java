@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.login.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
 
