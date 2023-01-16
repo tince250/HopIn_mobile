@@ -1,8 +1,9 @@
 package com.example.uberapp_tim13.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class RejectionNotice {
+public class RejectionNotice implements Serializable {
 
 	private int id;
 	private String reason;

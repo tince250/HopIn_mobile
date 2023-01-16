@@ -22,6 +22,7 @@ import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.tools.StompManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -87,7 +88,6 @@ public class RideService extends Service {
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
                 returnedRide = response.body();
-                Log.d("REZ", returnedRide.toString());
                 sendOrderedRideBroadcast(response.body());
             }
 

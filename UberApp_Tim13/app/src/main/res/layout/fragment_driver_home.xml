@@ -16,19 +16,22 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mapCV"
-        app:cardCornerRadius="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/aroundTW"
-        android:layout_margin="5dp"
-        android:elevation="10dp">
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="12dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/map_container_aroundyou"
             android:layout_width="wrap_content"
-            android:layout_height="420dp"
+            android:layout_height="370dp"
             android:adjustViewBounds="true"
-            app:cardCornerRadius="10dp"/>
+            app:cardCornerRadius="10dp" />
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
@@ -51,23 +54,23 @@
         android:textFontWeight="700"
         android:textSize="16dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/setDestBtn"
-        app:cornerRadius="10dp"
-        app:icon="@drawable/ic_location_pin"
-        app:iconGravity="textStart"
-        app:iconPadding="4dp"
-        app:iconSize="25dp"
-        app:iconTint="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/currentRideBtn"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/dark_blue"
-        android:paddingVertical="15dp"
-        android:text="@string/set_destination"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textFontWeight="700"
-        android:textSize="16dp" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/setDestBtn"-->
+<!--        app:cornerRadius="10dp"-->
+<!--        app:icon="@drawable/ic_location_pin"-->
+<!--        app:iconGravity="textStart"-->
+<!--        app:iconPadding="4dp"-->
+<!--        app:iconSize="25dp"-->
+<!--        app:iconTint="@color/white"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/currentRideBtn"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:backgroundTint="@color/dark_blue"-->
+<!--        android:paddingVertical="15dp"-->
+<!--        android:text="@string/set_destination"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textFontWeight="700"-->
+<!--        android:textSize="16dp" />-->
 </RelativeLayout>

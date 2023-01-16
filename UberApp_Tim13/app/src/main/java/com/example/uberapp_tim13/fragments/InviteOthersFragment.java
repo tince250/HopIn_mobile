@@ -22,6 +22,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAdapter;
+import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
@@ -148,8 +149,8 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                                 ///TODO: promeniti ikonicu u korisnickoj kartici (true - stiklica, false - iksic)
                                 //TODO: true - dodas u listu addeddUsers, ako je false izbaci iz liste
                                 Log.d("JUHU", topicMessage.getPayload());
-                                addedUsers.add(user);
-                                adapter.notifyDataSetChanged();
+                                InvitationResponseDTO responseDTO = gson.fromJson(topicMessage.getPayload(), InvitationResponseDTO.class);
+                                handleInvitationResponse(responseDTO);
                             });
                             listeningInvites = true;
                         }
@@ -162,6 +163,14 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("inviteOthersFragment"));
 
+    }
+
+    private void handleInvitationResponse(InvitationResponseDTO res) {
+        if (res.isResponse()) {
+            addedUsers.add(user);
+        } else {
+
+        }
     }
 
     @Override

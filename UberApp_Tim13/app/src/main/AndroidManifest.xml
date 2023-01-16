@@ -59,7 +59,8 @@
         </activity>
         <activity
             android:name=".activities.AcceptanceRideActivity"
-            android:exported="true">
+            android:exported="false"
+            android:noHistory="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
