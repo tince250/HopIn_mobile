@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 
 public interface ReviewAPI {
     @GET("review/{rideId}")
-    Call<ArrayList<CompleteRideReviewDTO>> getAllRideReviews(@Path("rideId") int rideId);
+    Call<ArrayList<CompleteRideReviewDTO>> getAllRideReviews(@Header("Authorization") String token, @Path("rideId") int rideId);
 
     @POST("review/{rideId}/vehicle")
     Call<ReviewReturnedDTO> postVehicleReview(@Header("Authorization") String token,

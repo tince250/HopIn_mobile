@@ -15,6 +15,7 @@ import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.EstimatedRideDetailsDTO;
 import com.example.uberapp_tim13.dtos.GetRideDetailsDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.button.MaterialButton;
@@ -64,7 +65,7 @@ public class RideSettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setDataInRide();
-                Call<EstimatedRideDetailsDTO> call = RestUtils.rideAPI.getRideDetail(new GetRideDetailsDTO(RideService.rideInCreation));
+                Call<EstimatedRideDetailsDTO> call = RestUtils.rideAPI.getRideDetail(AuthService.tokenDTO.getAccessToken(), new GetRideDetailsDTO(RideService.rideInCreation));
                 call.enqueue(new Callback<EstimatedRideDetailsDTO>() {
                     @Override
                     public void onResponse(Call<EstimatedRideDetailsDTO> call, Response<EstimatedRideDetailsDTO> response) {

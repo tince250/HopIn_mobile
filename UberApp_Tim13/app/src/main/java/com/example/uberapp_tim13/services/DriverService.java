@@ -44,7 +44,7 @@ public class DriverService extends Service {
 
 
     private void getVehicle(int driverId){
-        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle("",
+        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
                 driverId);
         call.enqueue(new Callback<VehicleDTO>() {
 

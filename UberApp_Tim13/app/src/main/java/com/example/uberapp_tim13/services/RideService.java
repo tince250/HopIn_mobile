@@ -86,7 +86,7 @@ public class RideService extends Service {
     public void orderRide() {
         finished = false;
         Log.d("ride", rideInCreation.toString());
-        Call<RideReturnedDTO> call = RestUtils.rideAPI.orderRide(rideInCreation);
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.orderRide(AuthService.tokenDTO.getAccessToken(), rideInCreation);
         call.enqueue((new Callback<RideReturnedDTO>() {
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {

@@ -21,8 +21,6 @@ public interface UserAPI {
     @GET(RestUtils.USER_GET)
     Call<UserDTO> doGetUser();
 
-    @GET("user/email?")
-    Call<UserDTO> getUserByEmail(@Query("email") String email);
 
     @GET("user/{id}")
     Call<UserDTO> doGetUser(@Header("Authorization") String token,

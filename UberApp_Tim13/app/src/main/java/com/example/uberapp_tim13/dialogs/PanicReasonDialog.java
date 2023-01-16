@@ -17,6 +17,7 @@ import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.ReasonDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +51,7 @@ public class PanicReasonDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 ReasonDTO reason = new ReasonDTO(reasonText.getText().toString());
-                Call<PanicRideDTO> call = RestUtils.rideAPI.panicRide(ride.getId(), reason);
+                Call<PanicRideDTO> call = RestUtils.rideAPI.panicRide(AuthService.tokenDTO.getAccessToken(), ride.getId(), reason);
                 call.enqueue(new Callback<PanicRideDTO>() {
                     @Override
                     public void onResponse(Call<PanicRideDTO> call, Response<PanicRideDTO> response) {

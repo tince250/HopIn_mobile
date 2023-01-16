@@ -52,7 +52,7 @@ public class ReviewService extends Service {
     }
 
     private void getAllRideReviews(int rideId, String method) {
-        Call<ArrayList<CompleteRideReviewDTO>> call = RestUtils.reviewAPI.getAllRideReviews(rideId);
+        Call<ArrayList<CompleteRideReviewDTO>> call = RestUtils.reviewAPI.getAllRideReviews(AuthService.tokenDTO.getAccessToken(), rideId);
         final ArrayList<CompleteRideReviewDTO>[] reviews = new ArrayList[]{null};
         call.enqueue(new Callback<ArrayList<CompleteRideReviewDTO>>() {
 
@@ -75,7 +75,7 @@ public class ReviewService extends Service {
 
     private void postVehicleReview(int rideId, ReviewDTO review){
         Call<ReviewReturnedDTO> call = RestUtils.reviewAPI.postVehicleReview(
-                "Bearer: eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MDA3NTksImV4cCI6MTY3MzgwMjU1OX0.NOdzgtlZH5Sxrmdmb_KwAkyjDAx7ZxmIPf-494edLz7oGi3FmcH28lfBoe4lGddQDuPVMcVF2nkQrXLC1zk0iQ", 3, review);
+                AuthService.tokenDTO.getAccessToken(), rideId, review);
         call.enqueue(new Callback<ReviewReturnedDTO>() {
 
             @Override
@@ -94,7 +94,7 @@ public class ReviewService extends Service {
 
     private void postDriverReview(int rideId, ReviewDTO review){
         Call<ReviewReturnedDTO> call = RestUtils.reviewAPI.postDriverReview(
-                "Bearer: eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIb3BJbiIsInN1YiI6InBlcmFAZ21haWwuY29tIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiUk9MRV9QQVNTRU5HRVIifV0sImlkIjoxLCJhdWQiOiJ3ZWIiLCJpYXQiOjE2NzM4MDA3NTksImV4cCI6MTY3MzgwMjU1OX0.NOdzgtlZH5Sxrmdmb_KwAkyjDAx7ZxmIPf-494edLz7oGi3FmcH28lfBoe4lGddQDuPVMcVF2nkQrXLC1zk0iQ", 3, review);
+                AuthService.tokenDTO.getAccessToken(), rideId, review);
         call.enqueue(new Callback<ReviewReturnedDTO>() {
 
             @Override

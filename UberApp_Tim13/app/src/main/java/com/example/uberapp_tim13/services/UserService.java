@@ -33,7 +33,7 @@ public class UserService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle extras = intent.getExtras();
         String method = (String) extras.get("method");
-        int userId = (int) extras.get("userId");
+//        int userId = (int) extras.get("userId");
         String sender = (String) extras.get("sender");
         executor.execute(new Runnable() {
             @Override
@@ -54,8 +54,8 @@ public class UserService extends Service {
                     int id = (int) extras.get("id");
                     getMessages(id);
                 }
-                }else if (method.equals("getUserName"))
-                    getById(userId, method);
+//                else if (method.equals("getUserName"))
+//                    getById(userId, method);
             }
         });
         stopSelf();
@@ -63,7 +63,7 @@ public class UserService extends Service {
     }
 
     private void getById(int userId, String method){
-        Call<UserDTO> call = RestUtils.userApi.doGetUser("", userId);
+        Call<UserDTO> call = RestUtils.userApi.doGetUser(AuthService.tokenDTO.getAccessToken(), userId);
         Log.d("userid", String.valueOf(userId));
         call.enqueue(new Callback<UserDTO>() {
 
@@ -84,7 +84,7 @@ public class UserService extends Service {
     }
 
     private void getByEmail(String email){
-        Call<UserDTO> call = RestUtils.userApi.getUserByEmail("", email);
+        Call<UserDTO> call = RestUtils.userApi.getUserByEmail(AuthService.tokenDTO.getAccessToken(), email);
         Log.d("email", String.valueOf(email));
         call.enqueue(new Callback<UserDTO>() {
 

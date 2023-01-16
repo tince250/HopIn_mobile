@@ -31,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -101,6 +102,12 @@ public class ChatActivity extends AppCompatActivity {
                 Bundle extras = intent.getExtras();
                 AllMessagesDTO dto = (AllMessagesDTO) extras.get("messages");
                 allMessages.clear();
+                Collections.sort(allMessages, new Comparator<Message>() {
+                    @Override
+                    public int compare(Message lhs, Message rhs) {
+                        return lhs.getTime().compareTo(rhs.getTime());
+                    }
+                });
                 for(MessageReturnedDTO m : dto.getResults()) {
                     if (m.getSenderId() == receiverId) {
                         allMessages.add(new Message(m.getMessage(), 0, m.getTimeOfSending()));

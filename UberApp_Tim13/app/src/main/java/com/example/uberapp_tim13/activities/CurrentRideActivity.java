@@ -30,6 +30,7 @@ import com.example.uberapp_tim13.fragments.MapFragment;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
@@ -241,7 +242,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 timer.setBase(SystemClock.elapsedRealtime());
                 finish.setEnabled(true);
 
-                Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(ride.getId());
+                Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
@@ -261,7 +262,7 @@ public class CurrentRideActivity extends AppCompatActivity {
             public void onClick(View view) {
                 timer.stop();
 
-                Call<RideReturnedDTO> call = RestUtils.rideAPI.finishRide(ride.getId());
+                Call<RideReturnedDTO> call = RestUtils.rideAPI.finishRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {

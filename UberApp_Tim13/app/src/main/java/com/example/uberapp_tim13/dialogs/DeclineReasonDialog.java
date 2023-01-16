@@ -14,6 +14,7 @@ import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
 import com.example.uberapp_tim13.dtos.ReasonDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
@@ -70,7 +71,7 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
             if (chosenReason == "") {
                 chosenReason = otherReasonET.getText().toString();
             }
-            Call<RideReturnedDTO> call = RestUtils.rideAPI.declineRide(rideId, new ReasonDTO(chosenReason));
+            Call<RideReturnedDTO> call = RestUtils.rideAPI.declineRide(AuthService.tokenDTO.getAccessToken(), rideId, new ReasonDTO(chosenReason));
             call.enqueue(new Callback<RideReturnedDTO>() {
                 @Override
                 public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
