@@ -2,6 +2,7 @@ package com.example.uberapp_tim13.services;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
@@ -12,15 +13,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.StompManager;
 
@@ -52,6 +50,10 @@ public class RideService extends Service {
                     getRideById();
                 } else if (method.equals("orderRide")) {
                     orderRide();
+                } else if (method.equals("getAllUserRides")){
+                    int userId = (int) extras.get("userId");
+                    String role = (String) extras.get("role");
+                    getAllUserRides(userId, role);
                 }
             }
         });
@@ -101,6 +103,35 @@ public class RideService extends Service {
                 Log.d("REZ", t.getMessage());
             }
         }));
+    }
+
+    private void getAllUserRides(int userId, String role){
+        Call<AllPassengerRidesDTO> call = null;
+        if (role.equals("driver"))
+            call = RestUtils.driverAPI.getAllRides("",
+                userId, 0, 5, "", "", "");
+        else
+            call = RestUtils.passengerAPI.getAllRides("",
+                    userId, 0, 5, "", "", "");
+        call.enqueue(new Callback<AllPassengerRidesDTO>() {
+
+            @Override
+            public void onResponse(Call<AllPassengerRidesDTO> call, Response<AllPassengerRidesDTO> response){
+                Log.d("allRides", response.body().toString());
+                sendAllUserRidesBroadcast(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<AllPassengerRidesDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    private void sendAllUserRidesBroadcast(AllPassengerRidesDTO rides){
+        Intent intent = new Intent("rideHistoryFragment");
+        intent.putExtra("allRides", rides);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void sendRideByIdBroadcast(RideReturnedDTO ride){

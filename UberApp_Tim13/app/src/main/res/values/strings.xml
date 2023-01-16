@@ -145,9 +145,19 @@
     <string name="enable">Enable</string>
     <string name="no">No, thank you</string>
     <string name="api_key">AIzaSyADf7wmEupGmb08OGVJR1eNhvtvF6KYuiM</string>
+
     <string name="panicTitle">Tell us about the PANIC reason?</string>
     <string name="sendPanic">Notify Support</string>
     <string name="reasonHint">Reason...</string>
     <string name="succPanic">Panic notification successfully sent!</string>
     <string name="failPanic">Panic notification failed to send!</string>
+    <string name="finishedAlert">Great work :)</string>
+    <string name="finishedAlertContent">Ride is finished successfully!</string>
+
+    <string name="thank_you">Thank you for Hoping in</string>
+    <string name="ride_finished">ride is finished</string>
+    <string name="write_comment">Leave a comment...</string>
+    <string name="driver_rating">Driver rating</string>
+    <string name="vehicle_rating">Vehicle rating</string>
+
 </resources>

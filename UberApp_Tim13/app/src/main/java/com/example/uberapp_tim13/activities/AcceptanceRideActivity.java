@@ -3,6 +3,7 @@ package com.example.uberapp_tim13.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -96,7 +97,12 @@ public class AcceptanceRideActivity extends AppCompatActivity {
             call.enqueue(new Callback<RideReturnedDTO>() {
                 @Override
                 public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                    if (!response.isSuccessful())
+                        return;
                     Toast.makeText(getApplicationContext(), "Answer sent successfully", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(AcceptanceRideActivity.this, CurrentRideActivity.class);
+                    i.putExtra("ride", RideService.returnedRide);
+                    startActivity(i);
                 }
 
                 @Override

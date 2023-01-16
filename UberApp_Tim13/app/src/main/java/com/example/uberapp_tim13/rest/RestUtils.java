@@ -8,7 +8,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestUtils {
-    public static final String SERVICE_API_PATH = "http://192.168.0.20:4321/api/";
+
+    public static final String SERVICE_API_PATH = "http://192.168.0.27:4321/api/";
+
     public static final String USER_GET = "user/1";
     public static final String LOGIN = "user/login";
     public static final String RIDE_GET_ID = "ride/3";
@@ -38,4 +40,5 @@ public class RestUtils {
     public static RideAPI rideAPI = retrofit.create(RideAPI.class);
     public static DriverAPI driverAPI = retrofit.create(DriverAPI.class);
     public static PassengerAPI passengerAPI = retrofit.create(PassengerAPI.class);
+    public static ReviewAPI reviewAPI = retrofit.create(ReviewAPI.class);
 }

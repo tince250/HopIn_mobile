@@ -13,9 +13,13 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+
+import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
@@ -45,27 +49,8 @@ public class DriverMainActivity extends AppCompatActivity {
 
         FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driverFL);
 
-        setBottomNavigationBar();
 
-//        Call<UserDTO> call = RestUtils.userApi.doGetUser("Bearer " + AuthService.tokenDTO.getAccessToken());
-//
-//        call.enqueue(new Callback<UserDTO>() {
-//            @Override
-//            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-//                if (response.code() == 200) {
-//                    Log.d("SRLE", "Meesage recieved");
-//                    Log.d("SRKI_DOKTOR", response.body().toString());
-//
-//                } else {
-//                    Log.d("SRLE", "Meesage recieved: " + response.body());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserDTO> call, Throwable t) {
-//                Log.d("SRLE", t.getMessage() != null ? t.getMessage() : "error");
-//            }
-//        });
+        setBottomNavigationBar();
     }
 
     private void connectToRideOffersSocket() {
@@ -85,21 +70,7 @@ public class DriverMainActivity extends AppCompatActivity {
     }
 
     public void onClickCurrentRide(View v){
-        Call<RideReturnedDTO> call = RestUtils.rideAPI.getRideByIdOnly(3);
-        call.enqueue(new Callback<RideReturnedDTO>() {
-            @Override
-            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                Intent intent = new Intent(DriverMainActivity.this, CurrentRideActivity.class);
-                intent.putExtra("ride", response.body());
-                Log.d("prov", "" + response.body());
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
-
-            }
-        });
+        //TODO: IMPLEMENT
     }
 
     @Override

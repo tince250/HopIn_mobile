@@ -9,10 +9,12 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
 import com.example.uberapp_tim13.activities.AcceptanceRideActivity;
 import com.example.uberapp_tim13.activities.PassengerMainActivity;
+
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
@@ -22,11 +24,8 @@ import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.JWTUtils;
 import com.example.uberapp_tim13.tools.StompManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

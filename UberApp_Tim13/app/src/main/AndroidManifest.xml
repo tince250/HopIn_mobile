@@ -126,10 +126,13 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".services.AuthService" />
-        <service android:name=".services.RideService" />
-        <service android:name=".services.DriverService" />
-        <service android:name=".services.UserService" />
+
+        <service android:name=".services.AuthService"/>
+        <service android:name=".services.RideService"/>
+        <service android:name=".services.DriverService"/>
+        <service android:name=".services.UserService"/>
+        <service android:name=".services.ReviewService"/>
+
     </application>
 
 </manifest>
