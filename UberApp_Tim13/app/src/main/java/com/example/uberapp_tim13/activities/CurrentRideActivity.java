@@ -1,8 +1,11 @@
 package com.example.uberapp_tim13.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,7 +28,10 @@ import com.example.uberapp_tim13.fragments.MapFragment;
 import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +44,8 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     public static RideReturnedDTO ride;
     private Activity context;
+
+    Handler handler = new Handler(Looper.getMainLooper());
 
     private Chronometer timer;
 
@@ -131,6 +139,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 });
                 break;
             case "passenger":
+                subscribeToStartFinishMessages();
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);
 
@@ -149,6 +158,39 @@ public class CurrentRideActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new PanicReasonDialog(context, ride).show();
+            }
+        });
+    }
+
+    private void subscribeToStartFinishMessages() {
+        StompManager.stompClient.topic("/topic/ride-start-finish/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+            if (topicMessage.getPayload().trim().equals("start")) {
+                handler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Log.d("ORDER_MESSAGE", "START");
+                        timer.setBase(SystemClock.elapsedRealtime());
+                        timer.start();
+                    }
+                });
+            } else {
+                if (topicMessage.getPayload().trim().equals("finish")) {
+                    handler.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Log.d("ORDER_MESSAGE", "FINISH");
+                            timer.stop();
+                            try {
+                                Thread.sleep(1000);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
             }
         });
     }
@@ -189,7 +231,16 @@ public class CurrentRideActivity extends AppCompatActivity {
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-
+                        new MaterialAlertDialogBuilder(CurrentRideActivity.this, R.style.AlertDialogTheme)
+                                .setTitle(R.string.finishedAlert)
+                                .setMessage(R.string.finishedAlertContent)
+                                .setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        getParent().finish();
+                                    }
+                                })
+                                .show();
                     }
 
                     @Override

@@ -150,4 +150,6 @@
     <string name="reasonHint">Reason...</string>
     <string name="succPanic">Panic notification successfully sent!</string>
     <string name="failPanic">Panic notification failed to send!</string>
+    <string name="finishedAlert">Great work :)</string>
+    <string name="finishedAlertContent">Ride is finished successfully!</string>
 </resources>

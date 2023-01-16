@@ -61,12 +61,11 @@ public class RideLoadingFragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
-                if (extras.get("orderedRide") != null && !RideService.finished) {
+                if (RideService.returnedRide != null && !RideService.finished) {
                     Log.d("ORDER_FINISH", "SUCCESS");
                     StompManager.stompClient.topic("/topic/ride-offer-response/" + Globals.userId).subscribe(topicMessage -> {
                         Log.d("ORDER_FINISH", topicMessage.getPayload());
                         if (topicMessage.getPayload().trim().equals("true")) {
-                            //TODO: testirati
                             handler.post(new Runnable() {
 
                                 @Override
@@ -93,11 +92,9 @@ public class RideLoadingFragment extends Fragment {
                     });
                     Toast.makeText(getActivity(),"Ride is successfully ordered!",Toast.LENGTH_SHORT).show();
                     RideService.finished = true;
-                    FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
                 } else {
                     Toast.makeText(getActivity(),"Ups, something went wrong!",Toast.LENGTH_SHORT).show();
                     RideService.finished = true;
-//                    FragmentTransition.to(PassengerHomeFragment.newInstance(), getActivity(), true, R.id.passengerFL);
                 }
             }
         };
