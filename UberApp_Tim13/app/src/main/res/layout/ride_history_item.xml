@@ -166,7 +166,6 @@
             android:numStars="5"
             android:progressBackgroundTint="@color/black"
             android:progressTint="@color/orange"
-            android:rating="4"
             android:scaleX="0.6"
             android:scaleY="0.6"
             android:layout_alignParentEnd="true"

@@ -1,5 +1,6 @@
 package com.example.uberapp_tim13.dtos;
 
+
 import java.io.Serializable;
 
 public class LocationDTO implements Serializable {

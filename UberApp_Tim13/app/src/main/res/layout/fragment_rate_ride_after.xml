@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/rideCardLL"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/border">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thank_you"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="18sp"
+            android:textFontWeight="900"
+            android:textColor="@color/dark_blue"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ride_finished"
+            android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="16sp"
+            android:textFontWeight="700"
+            android:textColor="@color/dark_gray"
+            android:textStyle="bold"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="500px"
+            app:srcCompat="@drawable/rating"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:padding="15dp">
+        
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/driverRatingTV"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/driver_rating"
+                android:textStyle="bold"
+                android:textFontWeight="900"
+                android:layout_centerVertical="true"
+                android:textColor="@color/dark_blue"
+                android:textSize="17sp" />
+
+            <RatingBar
+                android:id="@+id/driverRatingBar"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="-35dp"
+                android:numStars="5"
+                android:isIndicator="false"
+                android:progressBackgroundTint="@color/black"
+                android:progressTint="@color/orange"
+                android:scaleX="0.6"
+                android:focusable="true"
+                android:scaleY="0.6" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/driverLeaveCommentRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="7dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/border">
+
+
+        <EditText
+            android:layout_marginStart="5dp"
+            android:id="@+id/driverLeaveCommentET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:hint="@string/write_comment"
+            android:inputType="textMultiLine"
+            android:maxLines="6"
+            android:textSize="14dp"
+            tools:ignore="Autofill"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/vehicleRatingTV"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/vehicle_rating"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:textColor="@color/orange"
+                android:textSize="17sp" />
+
+            <RatingBar
+                android:id="@+id/vehicleRatingBar"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:isIndicator="false"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:progressBackgroundTint="@color/black"
+                android:progressTint="@color/orange"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:layout_marginRight="-35dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/vehicleLeaveCommentRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="7dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/border">
+
+
+            <EditText
+                android:layout_marginStart="5dp"
+                android:id="@+id/vehicleLeaveCommentET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:hint="@string/write_comment"
+                android:inputType="textMultiLine"
+                android:maxLines="6"
+
+                android:textSize="14dp"
+                tools:ignore="Autofill"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_gravity="center"
+
+        android:text="@string/submit"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppinsbold"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        android:textAllCaps="false"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="5dp"
+        android:paddingHorizontal="25sp"
+        android:paddingVertical="5sp"
+        app:cornerRadius="10dp"
+        />
+
+
+    </LinearLayout>
+
+</LinearLayout>

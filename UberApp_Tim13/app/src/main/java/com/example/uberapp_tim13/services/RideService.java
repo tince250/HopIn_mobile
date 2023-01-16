@@ -12,15 +12,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.StompManager;
 

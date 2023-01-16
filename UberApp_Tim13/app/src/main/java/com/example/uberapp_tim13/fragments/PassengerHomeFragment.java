@@ -23,15 +23,14 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
-import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.gms.maps.MapsInitializer;
@@ -51,6 +50,8 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.http.HEAD;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 import ua.naiksoftware.stomp.dto.StompHeader;
@@ -161,10 +162,6 @@ public class PassengerHomeFragment extends Fragment {
                     }
                 }
                 route = null;
-//                if (RideService.rideInCreation.getScheduledTime() == null) {
-//                    Toast.makeText(getActivity(),"Pick a time!",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
                 FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
