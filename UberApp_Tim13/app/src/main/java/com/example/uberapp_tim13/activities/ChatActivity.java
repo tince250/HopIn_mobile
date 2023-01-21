@@ -102,12 +102,7 @@ public class ChatActivity extends AppCompatActivity {
                 Bundle extras = intent.getExtras();
                 AllMessagesDTO dto = (AllMessagesDTO) extras.get("messages");
                 allMessages.clear();
-                Collections.sort(allMessages, new Comparator<Message>() {
-                    @Override
-                    public int compare(Message lhs, Message rhs) {
-                        return lhs.getTime().compareTo(rhs.getTime());
-                    }
-                });
+
                 for(MessageReturnedDTO m : dto.getResults()) {
                     if (m.getSenderId() == receiverId) {
                         allMessages.add(new Message(m.getMessage(), 0, m.getTimeOfSending()));
@@ -116,6 +111,12 @@ public class ChatActivity extends AppCompatActivity {
                         allMessages.add(new Message(m.getMessage(), 1, m.getTimeOfSending()));
                     }
                 }
+                Collections.sort(allMessages, new Comparator<Message>() {
+                    @Override
+                    public int compare(Message lhs, Message rhs) {
+                        return lhs.getTime().compareTo(rhs.getTime());
+                    }
+                });
                 Collections.reverse(allMessages);
                 chatAdapter.notifyDataSetChanged();
                 t = new Timer();

@@ -47,12 +47,7 @@ public class RideHistoryDetailsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_history_details, container, false);
 
-//        mapFragment = new MapFragment();
-//        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
-//        mapFragment.addMarker(new LatLng(46.5, 46.5), "here");
-
-        //FragmentTransition.to(RideReviewsFragment.newInstance(), getActivity(), false, R.id.reviewsLV);
-
+        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, new MapFragment(ride)).commit();
         fitFragmentToRole(view, ride);
 
         ((TextView)view.findViewById(R.id.routeTV)).setText(ride.getRouteDepartureDestinationTitle());

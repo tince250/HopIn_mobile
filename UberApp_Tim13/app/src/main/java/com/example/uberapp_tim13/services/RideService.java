@@ -107,12 +107,13 @@ public class RideService extends Service {
 
     private void getAllUserRides(int userId, String role){
         Call<AllPassengerRidesDTO> call = null;
+        Log.d("TOKEN", AuthService.tokenDTO.getAccessToken());
         if (role.equals("driver"))
-            call = RestUtils.driverAPI.getAllRides("",
+            call = RestUtils.driverAPI.getAllRides(AuthService.tokenDTO.getAccessToken(),
                 userId, 0, 5, "", "", "");
         else
-            call = RestUtils.passengerAPI.getAllRides("",
-                    userId, 0, 5, "", "", "");
+            call = RestUtils.passengerAPI.getAllRides(AuthService.tokenDTO.getAccessToken(),
+                    1, 0, 5, "", "", "");
         call.enqueue(new Callback<AllPassengerRidesDTO>() {
 
             @Override

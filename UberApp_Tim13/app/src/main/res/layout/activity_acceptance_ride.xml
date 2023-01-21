@@ -32,10 +32,10 @@
 
 
         <androidx.cardview.widget.CardView
-            android:minHeight="210dp"
+            android:minHeight="170dp"
             android:id="@+id/mapAcceptanceRouteCV"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="12dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
