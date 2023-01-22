@@ -48,13 +48,16 @@ public class PassengerService extends Service {
 
             @Override
             public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response){
-                Log.d("reg", "SUCCESS");
-                sendResponseBroadcast(true);
+                Log.d("rez", String.valueOf(response.code()));
+                if (response.code() == 200)
+                    sendResponseBroadcast(true);
+                else
+                    sendResponseBroadcast(false);
             }
 
             @Override
             public void onFailure(Call<UserReturnedDTO> call, Throwable t) {
-                Log.d("reg", t.getMessage() != null ? t.getMessage() : "error");
+                Log.d("rez", t.getMessage() != null ? t.getMessage() : "error");
                 sendResponseBroadcast(false);
             }
         });
