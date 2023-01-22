@@ -20,7 +20,10 @@ import android.widget.Toast;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
+import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.fragments.RideLoadingFragment;
+import com.example.uberapp_tim13.services.PassengerService;
+import com.example.uberapp_tim13.services.UserService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 
 public class PassengerRegisterActivity extends Activity {
@@ -53,10 +56,22 @@ public class PassengerRegisterActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaNumSpinner.setAdapter(adapter);
 
+        setBroadcast();
+
         findViewById(R.id.registerBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (!validateForm()) {
+                    return;
+                }
+                UserDTO user = new UserDTO(nameET.getText().toString(), surnameET.getText().toString(),
+                        emailET.getText().toString(), passwordET.getText().toString(), addressET.getText().toString(),
+                        areaNumSpinner.getSelectedItem().toString() + phoneET.getText().toString(), null);
+                Intent intentPassengerService = new Intent(getApplicationContext(), PassengerService.class);
+                intentPassengerService.putExtra("method", "register");
+                intentPassengerService.putExtra("user", user);
+                startService(intentPassengerService);
+                Log.d("proa", "prob");
             }
         });
     }
@@ -124,6 +139,7 @@ public class PassengerRegisterActivity extends Activity {
                 boolean success = extras.getBoolean("success");
                 if (success) {
                     Toast.makeText(getApplicationContext(),"Registration successful, activation email has been sent to " + emailET.getText().toString(),Toast.LENGTH_SHORT).show();
+                    resetForm();
                 } else {
                     Toast.makeText(getApplicationContext(),"Registration failed, email may already be in use.",Toast.LENGTH_SHORT).show();
                 }
@@ -131,6 +147,16 @@ public class PassengerRegisterActivity extends Activity {
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("registerActivity"));
 
+    }
+
+    private void resetForm() {
+        nameET.setText("");
+        surnameET.setText("");
+        emailET.setText("");
+        passwordET.setText("");
+        confirmPasswordET.setText("");
+        addressET.setText("");
+        phoneET.setText("");
     }
 
 
