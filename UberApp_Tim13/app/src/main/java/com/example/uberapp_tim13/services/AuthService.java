@@ -87,7 +87,7 @@ public class AuthService extends Service {
                 @Override
                 public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response){
                     Globals.user = response.body();
-                    Log.d("user", Globals.user.toString());
+//                    Log.d("user", Globals.user.toString());
                     Log.d("code", String.valueOf(response.code()));
                 }
 
