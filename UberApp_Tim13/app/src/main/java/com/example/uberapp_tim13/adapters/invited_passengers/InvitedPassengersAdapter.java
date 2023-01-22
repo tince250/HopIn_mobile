@@ -1,27 +1,24 @@
 package com.example.uberapp_tim13.adapters.invited_passengers;
 
 import android.app.Activity;
-import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.model.User;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InvitedPassengersAdapter extends BaseAdapter {
 
     private Activity activity;
-    private List<UserDTO> users;
+    private List<UserReturnedDTO> users;
     private TextView pressedName;
     private List<Boolean> accepted;
 
-    public InvitedPassengersAdapter(Activity activity, List<UserDTO> users, List<Boolean> accepted) {
+    public InvitedPassengersAdapter(Activity activity, List<UserReturnedDTO> users, List<Boolean> accepted) {
         this.activity = activity;
         this.users = users;
         this.accepted = accepted;
@@ -44,7 +41,7 @@ public class InvitedPassengersAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        UserDTO user = this.users.get(i);
+        UserReturnedDTO user = this.users.get(i);
         Boolean accepted = this.accepted.get(i);
         View view_new = view;
 

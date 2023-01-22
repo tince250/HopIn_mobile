@@ -18,24 +18,15 @@ import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 
-import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
-import com.example.uberapp_tim13.dialogs.RateRideDialog;
-import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.fragments.DriverHomeFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
-import com.example.uberapp_tim13.rest.RestUtils;
-import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DriverMainActivity extends AppCompatActivity {
 
