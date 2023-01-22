@@ -17,9 +17,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
-import com.example.uberapp_tim13.dtos.CredentialsDTO;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
@@ -40,10 +37,11 @@ public class RideHistoryFragment extends ListFragment{
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
-        if (Globals.userRole != "passenger") {
+        Log.d("rola", Globals.userRole );
+        if (Globals.userRole.equals("passenger")) {
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.passengerFL);
         } else {
+            Log.d("udje", "kako");
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.driverFL);
 
         }
@@ -53,10 +51,11 @@ public class RideHistoryFragment extends ListFragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intentDriverService = new Intent(getContext(), DriverService.class);
-        intentDriverService.putExtra("method", "getAllRides");
-        intentDriverService.putExtra("driverId", Globals.userId);
-        requireActivity().startService(intentDriverService);
+        Intent intent = new Intent(getContext(), RideService.class);
+        intent.putExtra("method", "getAllRides");
+        intent.putExtra("userId", Globals.userId);
+        intent.putExtra("role", Globals.userRole);
+        requireActivity().startService(intent);
 
 
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
@@ -64,6 +63,7 @@ public class RideHistoryFragment extends ListFragment{
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
                 allRides = (AllPassengerRidesDTO) extras.get("allRides");
+                Log.d("aa", allRides.getResults().toString());
 
                 HistoryAdapter adapter = new HistoryAdapter(allRides.getResults(), getActivity());
                 setListAdapter(adapter);

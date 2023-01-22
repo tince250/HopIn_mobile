@@ -1,6 +1,7 @@
 package com.example.uberapp_tim13.adapters.invited_passengers;
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -18,10 +19,12 @@ public class InvitedPassengersAdapter extends BaseAdapter {
     private Activity activity;
     private List<UserDTO> users;
     private TextView pressedName;
+    private List<Boolean> accepted;
 
-    public InvitedPassengersAdapter(Activity activity, List<UserDTO> users) {
+    public InvitedPassengersAdapter(Activity activity, List<UserDTO> users, List<Boolean> accepted) {
         this.activity = activity;
         this.users = users;
+        this.accepted = accepted;
     }
 
     @Override
@@ -42,6 +45,7 @@ public class InvitedPassengersAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         UserDTO user = this.users.get(i);
+        Boolean accepted = this.accepted.get(i);
         View view_new = view;
 
         if(view == null) {
@@ -51,16 +55,19 @@ public class InvitedPassengersAdapter extends BaseAdapter {
         this.pressedName = (TextView)view_new.findViewById(R.id.passengerNameTV);
         this.pressedName.setText(user.getName() + " " + user.getSurname());
 
-        view_new.findViewById(R.id.deleteItemBtn).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                users.remove(i);
-                notifyDataSetChanged();
-            }
 
-        });
+        if (accepted == null)
+            view_new.findViewById(R.id.deleteItemBtn).setVisibility(View.VISIBLE);
+        else if (accepted == true){
+            view_new.findViewById(R.id.deleteItemBtn).setVisibility(View.GONE);
+            view_new.findViewById(R.id.acceptedItemBtn).setVisibility(View.VISIBLE);
+        }
+        else if (accepted == false) {
+            view_new.findViewById(R.id.deleteItemBtn).setVisibility(View.GONE);
+            view_new.findViewById(R.id.declinedItemBtn).setVisibility(View.VISIBLE);
+        }
 
         return view_new;
     }
+
 }

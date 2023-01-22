@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -13,15 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.adapters.ride_history.PassengerDetailsAdapter;
-import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.model.User;
-import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.services.UserService;
-import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +33,8 @@ public class PassengerDetailsDialog extends Dialog {
         super(activity);
         this.activity = activity;
         this.ride = ride;
+
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override

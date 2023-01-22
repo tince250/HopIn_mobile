@@ -19,6 +19,9 @@ public class DriverHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_driver_home, container, false);
+
+        getParentFragmentManager().beginTransaction().replace(R.id.map_container_aroundyou, new MapFragment()).commit();
+
         return view;
     }
 }

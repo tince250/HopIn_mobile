@@ -13,6 +13,13 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+
+import com.example.uberapp_tim13.dtos.RideInInviteDTO;
+import com.example.uberapp_tim13.dtos.RideInviteDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+
+import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
@@ -20,7 +27,10 @@ import com.example.uberapp_tim13.fragments.DriverHomeFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
@@ -35,33 +45,32 @@ public class DriverMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driver_main);
         setTitle(R.string.home_nav);
 
+        connectToRideOffersSocket();
+
         FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driverFL);
 
-        setBottomNavigationBar();
 
-//        Call<UserDTO> call = RestUtils.userApi.doGetUser("Bearer " + AuthService.tokenDTO.getAccessToken());
-//
-//        call.enqueue(new Callback<UserDTO>() {
-//            @Override
-//            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-//                if (response.code() == 200) {
-//                    Log.d("SRLE", "Meesage recieved");
-//                    Log.d("SRKI_DOKTOR", response.body().toString());
-//
-//                } else {
-//                    Log.d("SRLE", "Meesage recieved: " + response.body());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserDTO> call, Throwable t) {
-//                Log.d("SRLE", t.getMessage() != null ? t.getMessage() : "error");
-//            }
-//        });
+        setBottomNavigationBar();
+    }
+
+    private void connectToRideOffersSocket() {
+        StompManager manager = new StompManager();
+        manager.connect();
+        Log.d("OFFER", "/topic/driver/ride-offers/" + Globals.userId);
+        StompManager.stompClient.topic("/topic/driver/ride-offers/" + Globals.userId).subscribe(topicMessage -> {
+            RideReturnedDTO ride = Globals.gson.fromJson(topicMessage.getPayload(), RideReturnedDTO.class);
+            RideService.returnedRide = ride;
+
+            Log.d("OFFER", "" + ride);
+            Intent i = new Intent(DriverMainActivity.this, AcceptanceRideActivity.class);
+            i.putExtra("invite", new RideInviteDTO(null, new RideInInviteDTO(ride)));
+            i.putExtra("type", "driver-offer");
+            startActivity(i);
+        });
     }
 
     public void onClickCurrentRide(View v){
-        startActivity(new Intent(DriverMainActivity.this, CurrentRideActivity.class));
+        //TODO: IMPLEMENT
     }
 
     @Override

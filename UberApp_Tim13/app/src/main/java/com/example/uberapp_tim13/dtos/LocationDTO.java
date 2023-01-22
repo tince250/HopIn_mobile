@@ -1,8 +1,10 @@
 package com.example.uberapp_tim13.dtos;
 
-import android.location.Location;
 
-public class LocationDTO {
+import java.io.Serializable;
+
+public class LocationDTO implements Serializable {
+
 	private LocationNoIdDTO departure;
 	private LocationNoIdDTO destination;
 

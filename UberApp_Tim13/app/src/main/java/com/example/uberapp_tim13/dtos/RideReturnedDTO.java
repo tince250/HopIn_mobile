@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RideReturnedDTO implements Serializable {
@@ -51,13 +52,16 @@ public class RideReturnedDTO implements Serializable {
 	@SerializedName("scheduledTime")
 	@Expose
 	private String scheduledTime;
+	@SerializedName("distance")
+	@Expose
+	private double distance;
 
 	public RideReturnedDTO() {}
 
 	public RideReturnedDTO(int id, String startTime, String endTime, double totalCost,
 			UserInRideDTO driver, List<UserInRideDTO> passengers, int estimatedTimeInMinutes,
 			String vehicleType, boolean petTransport, boolean babyTransport, RejectionNotice rejection,
-			List<LocationDTO> locations, String status, String scheduledTime) {
+			List<LocationDTO> locations, String status, String scheduledTime, double distance) {
 		super();
 		this.id = id;
 		this.startTime = startTime;
@@ -73,6 +77,15 @@ public class RideReturnedDTO implements Serializable {
 		this.locations = locations;
 		this.status = status;
 		this.scheduledTime = scheduledTime;
+		this.distance = distance;
+	}
+
+	public RideReturnedDTO(RideInInviteDTO ride) {
+		this.locations = new ArrayList<LocationDTO>();
+		LocationDTO loc = new LocationDTO();
+		loc.setDeparture(ride.getPickup());
+		loc.setDestinations(ride.getDestination());
+		locations.add(loc);
 	}
 
 
@@ -186,6 +199,14 @@ public class RideReturnedDTO implements Serializable {
 
 	public void setScheduledTime(String scheduledTime) {
 		this.scheduledTime = scheduledTime;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 
 	public String getRouteDepartureDestinationTitle(){

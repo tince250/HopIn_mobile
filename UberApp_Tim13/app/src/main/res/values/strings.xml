@@ -83,12 +83,12 @@
     <string name="YY">YY</string>
     <string name="CVC">CVC</string>
     <string name="acceptanceRideTitle">Wanna go for a ride?</string>
-    <string name="acceptanceRidePickUp">Pick up location: Vladimira Rolovica 3, Backa Palanka</string>
-    <string name="acceptanceRideDestination">Destination: Bulevar oslobodjenja 88, Novi Sad</string>
-    <string name="acceptanceRideDuration">Duration: 45min</string>
-    <string name="acceptanceRideDistance">Distance: 1.2km</string>
-    <string name="acceptanceRidePassengers">Passengers: 1</string>
-    <string name="acceptanceRidePrice">Price(RSD): 300</string>
+    <string name="acceptanceRidePickUp">Pick up location: </string>
+    <string name="acceptanceRideDestination">Destination: </string>
+    <string name="acceptanceRideDuration">Duration: </string>
+    <string name="acceptanceRideDistance">Distance: </string>
+    <string name="acceptanceRidePassengers">Passengers: </string>
+    <string name="acceptanceRidePrice">Price(RSD): </string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="routeCities">Novi Sad to Belgrade</string>
@@ -139,5 +139,25 @@
     <string name="driverDetailsTitle">Driver\'s info</string>
     <string name="logOutTitle">Are you sure you want to log out?</string>
     <string name="cancel">Cancel</string>
+    <string name="oops">Ooops</string>
+    <string name="why">Panic reason?</string>
+    <string name="location_disabled_message">Your Locations seems to be disabled, do you want to enable it? It\'s necessary to enable full map functionalities!</string>
+    <string name="enable">Enable</string>
+    <string name="no">No, thank you</string>
     <string name="api_key">AIzaSyADf7wmEupGmb08OGVJR1eNhvtvF6KYuiM</string>
+
+    <string name="panicTitle">Tell us about the PANIC reason?</string>
+    <string name="sendPanic">Notify Support</string>
+    <string name="reasonHint">Reason...</string>
+    <string name="succPanic">Panic notification successfully sent!</string>
+    <string name="failPanic">Panic notification failed to send!</string>
+    <string name="finishedAlert">Great work :)</string>
+    <string name="finishedAlertContent">Ride is finished successfully!</string>
+
+    <string name="thank_you">Thank you for Hoping in</string>
+    <string name="ride_finished">ride is finished</string>
+    <string name="write_comment">Leave a comment...</string>
+    <string name="driver_rating">Driver rating</string>
+    <string name="vehicle_rating">Vehicle rating</string>
+
 </resources>

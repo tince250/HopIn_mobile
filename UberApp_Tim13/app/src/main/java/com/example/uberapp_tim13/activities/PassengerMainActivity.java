@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,14 +12,30 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+
+import com.example.uberapp_tim13.dtos.RideInviteDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
+
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
+import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
+
 public class PassengerMainActivity extends AppCompatActivity{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +43,28 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
+        connectToRideInvitesSocket();
+
         FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
 
         setBottomNavigationBar();
     }
 
+    private void connectToRideInvitesSocket() {
+        StompManager manager = new StompManager();
+        manager.connect();
+        StompManager.stompClient.topic("/topic/invites/" + Globals.userId).subscribe(topicMessage -> {
+            RideInviteDTO invite = Globals.gson.fromJson(topicMessage.getPayload(), RideInviteDTO.class);
+            Log.d("prov", "" + invite.getRide());
+            Intent i = new Intent(PassengerMainActivity.this, AcceptanceRideActivity.class);
+            i.putExtra("invite", invite);
+            i.putExtra("type", "invite");
+            startActivity(i);
+        });
+    }
+
     public void onClickNext(View v){
-        startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
+        //startActivity(new Intent(PassengerMainActivity.this, FavoriteRoutesActivity.class));
     }
 
 
@@ -117,6 +149,9 @@ public class PassengerMainActivity extends AppCompatActivity{
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+
+        StompManager.stompClient.disconnect();
     }
 }

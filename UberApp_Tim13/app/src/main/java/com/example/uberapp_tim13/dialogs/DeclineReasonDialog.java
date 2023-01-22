@@ -10,7 +10,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
+import com.example.uberapp_tim13.dtos.ReasonDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class DeclineReasonDialog extends Dialog implements android.view.View.OnClickListener {
 
@@ -21,9 +33,13 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
     MaterialButton submitBtn;
     EditText otherReasonET;
 
-    public DeclineReasonDialog(Activity activity) {
+    private int rideId;
+    private String chosenReason = "";
+
+    public DeclineReasonDialog(Activity activity, int rideId) {
         super(activity);
         this.activity = activity;
+        this.rideId = rideId;
     }
 
     @Override
@@ -52,8 +68,24 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.submitBtn) {
-            Toast.makeText(activity, "submited", Toast.LENGTH_SHORT).show();
-            dismiss();
+            if (chosenReason == "") {
+                chosenReason = otherReasonET.getText().toString();
+            }
+            Call<RideReturnedDTO> call = RestUtils.rideAPI.declineRide(AuthService.tokenDTO.getAccessToken(), rideId, new ReasonDTO(chosenReason));
+            call.enqueue(new Callback<RideReturnedDTO>() {
+                @Override
+                public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                    Toast.makeText(getContext(), "Answer sent successfully", Toast.LENGTH_LONG).show();
+                    dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                    Toast.makeText(getContext(), "Answer fail to send", Toast.LENGTH_LONG).show();
+                    dismiss();
+                }
+            });
+
         }
         else {
             resetComponents();
@@ -61,10 +93,12 @@ public class DeclineReasonDialog extends Dialog implements android.view.View.OnC
                 case R.id.passengersReasonBtn:
                     passengersReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
                     passengersReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
+                    chosenReason = (String) passengersReasonBtn.getText();
                     break;
                 case R.id.familyReasonBtn:
                     familyReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));
                     familyReasonBtn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.teal_200)));
+                    chosenReason = (String) familyReasonBtn.getText();
                     break;
                 case R.id.otherReasonBtn:
                     otherReasonBtn.setTextColor(activity.getResources().getColor(R.color.teal_200));

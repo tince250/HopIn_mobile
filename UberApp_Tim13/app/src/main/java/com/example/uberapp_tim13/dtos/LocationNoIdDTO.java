@@ -1,6 +1,8 @@
 package com.example.uberapp_tim13.dtos;
 
-public class LocationNoIdDTO {
+import java.io.Serializable;
+
+public class LocationNoIdDTO implements Serializable {
 	private String address;
 	private double latitude;
 	private double longitude;

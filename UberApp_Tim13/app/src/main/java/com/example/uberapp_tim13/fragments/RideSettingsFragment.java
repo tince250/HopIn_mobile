@@ -2,6 +2,7 @@ package com.example.uberapp_tim13.fragments;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,17 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.EstimatedRideDetailsDTO;
+import com.example.uberapp_tim13.dtos.GetRideDetailsDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.google.android.material.button.MaterialButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RideSettingsFragment extends Fragment {
 
@@ -56,7 +65,23 @@ public class RideSettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setDataInRide();
-                FragmentTransition.to(InviteOthersFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                Call<EstimatedRideDetailsDTO> call = RestUtils.rideAPI.getRideDetail(AuthService.tokenDTO.getAccessToken(), new GetRideDetailsDTO(RideService.rideInCreation));
+                call.enqueue(new Callback<EstimatedRideDetailsDTO>() {
+                    @Override
+                    public void onResponse(Call<EstimatedRideDetailsDTO> call, Response<EstimatedRideDetailsDTO> response) {
+                        EstimatedRideDetailsDTO res = response.body();
+                        Log.d("det", response.code() + " " + response.body());
+                        RideService.rideInCreation.setDistance(res.getEstimatedDistance());
+                        RideService.rideInCreation.setPrice(res.getEstimatedCost());
+                        RideService.rideInCreation.setDuration(res.getEstimatedTimeInMinutes());
+                        FragmentTransition.to(InviteOthersFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                    }
+
+                    @Override
+                    public void onFailure(Call<EstimatedRideDetailsDTO> call, Throwable t) {
+
+                    }
+                });
             }
         });
         

@@ -1,6 +1,5 @@
 package com.example.uberapp_tim13.dtos;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,4 +115,18 @@ public class RideDTO {
 		this.scheduledTime = scheduledTime;
 	}
 
+	@Override
+	public String toString() {
+		return "RideDTO{" +
+				"locations=" + locations +
+				", passengers=" + passengers +
+				", vehicleType='" + vehicleType + '\'' +
+				", babyTransport=" + babyTransport +
+				", petTransport=" + petTransport +
+				", distance=" + distance +
+				", duration=" + duration +
+				", price=" + price +
+				", scheduledTime='" + scheduledTime + '\'' +
+				'}';
+	}
 }

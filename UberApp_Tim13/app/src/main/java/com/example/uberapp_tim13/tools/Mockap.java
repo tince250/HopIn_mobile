@@ -71,20 +71,20 @@ public class Mockap {
     public static List<Message> getMessages(){
         if (messages == null) {
         
-          User user = users.get(0);
-          User admin = new User();
-          messages = new ArrayList<Message>();
-          messages.add(new Message("Hello", user, "11:59, 11/11"));
-          messages.add(new Message("Hello", admin, "11:59, 11/11"));
-          messages.add(new Message("I need help", user, "12:00, 11/11"));
-          messages.add(new Message("My vehicle is not here", user, "12:01, 11/11"));
-          messages.add(new Message("Tell me your adress", admin, "12:02, 11/11"));
-          messages.add(new Message("We will see what we can do", admin, "12:02, 11/11"));
-          messages.add(new Message("Thank you", user, "12:03, 11/11"));
-          messages.add(new Message("Bye", user, "12:04, 11/11"));
-          messages.add(new Message("Bye", admin, "12:04, 11/11"));
-
-          Collections.reverse(messages);
+//          User user = users.get(0);
+//          User admin = new User();
+//          messages = new ArrayList<Message>();
+//          messages.add(new Message("Hello", user, "11:59, 11/11"));
+//          messages.add(new Message("Hello", admin, "11:59, 11/11"));
+//          messages.add(new Message("I need help", user, "12:00, 11/11"));
+//          messages.add(new Message("My vehicle is not here", user, "12:01, 11/11"));
+//          messages.add(new Message("Tell me your adress", admin, "12:02, 11/11"));
+//          messages.add(new Message("We will see what we can do", admin, "12:02, 11/11"));
+//          messages.add(new Message("Thank you", user, "12:03, 11/11"));
+//          messages.add(new Message("Bye", user, "12:04, 11/11"));
+//          messages.add(new Message("Bye", admin, "12:04, 11/11"));
+//
+//          Collections.reverse(messages);
         }
         return messages;
     }

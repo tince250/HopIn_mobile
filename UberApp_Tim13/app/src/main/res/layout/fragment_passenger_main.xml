@@ -6,26 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".activities.PassengerMainActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:backgroundTint="@color/gray">
+        android:backgroundTint="@color/dark_gray">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
             app:cardCornerRadius="10dp"
             app:contentPadding="15dp"
-            android:backgroundTint="@color/white">
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:id="@+id/tellUsTV"
@@ -37,9 +39,10 @@
                     android:textSize="18sp"
                     android:textColor="@color/dark_blue"
                     android:textAlignment="center"
-                    android:paddingVertical="10dp"/>
+                    android:paddingVertical="10dp"
+                    />
 
-                <EditText
+                <com.example.uberapp_tim13.model.AutocompleteEditText
                     android:id="@+id/pickUpLocET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,19 +67,19 @@
                     android:drawableTint="@color/dark_gray"
                     android:drawablePadding="7dp"/>
 
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="addStops"
-                    android:paddingLeft="5dp"
-                    android:text="@string/add_stops"
-                    android:textAllCaps="false"
-                    android:textColor="@color/dark_gray"
-                    android:textFontWeight="700"
-                    app:icon="@drawable/ic_add_circle_24"
-                    app:iconPadding="7dp"
-                    app:iconTint="@color/orange" />
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:onClick="addStops"-->
+<!--                    android:paddingLeft="5dp"-->
+<!--                    android:text="@string/add_stops"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/dark_gray"-->
+<!--                    android:textFontWeight="700"-->
+<!--                    app:icon="@drawable/ic_add_circle_24"-->
+<!--                    app:iconPadding="7dp"-->
+<!--                    app:iconTint="@color/orange" />-->
 
                 <EditText
                     android:id="@+id/pickUpTimeET"
@@ -104,6 +107,7 @@
             android:backgroundTint="@color/dark_blue"
             android:layout_gravity="center"
 
+
             android:text="@string/next"
             android:textSize="16sp"
             android:onClick="onClickNext"
@@ -119,13 +123,14 @@
             app:cornerRadius="10dp"
             />
 
-        <ImageView
+        <FrameLayout
+            android:id="@+id/map_fragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_marginTop="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/map"
-            android:scaleType="fitXY" />
+            android:adjustViewBounds="true">
+        </FrameLayout>
 
     </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

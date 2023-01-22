@@ -84,7 +84,8 @@
                 android:textSize="15sp"
                 android:drawableLeft="@drawable/ic_calendar"
                 android:drawablePadding="3dp"
-                android:paddingHorizontal="8dp"/>
+                android:paddingHorizontal="8dp"
+                android:textStyle="bold"/>
 
 
             <TextView
@@ -98,7 +99,8 @@
                 android:drawablePadding="3dp"
                 android:paddingHorizontal="8dp"
                 android:textColor="@color/dark_blue"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/distanceTV"
@@ -111,7 +113,8 @@
                 android:textSize="15sp"
                 android:drawableLeft="@drawable/ic_baseline_timeline_24"
                 android:drawablePadding="3dp"
-                android:paddingHorizontal="8dp"/>
+                android:paddingHorizontal="8dp"
+                android:textStyle="bold"/>
 
 
             <TextView
@@ -125,7 +128,8 @@
                 android:drawablePadding="3dp"
                 android:paddingHorizontal="8dp"
                 android:textColor="@color/dark_blue"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/priceTV"
@@ -138,24 +142,17 @@
                 android:textSize="15sp"
                 android:drawableLeft="@drawable/ic_price"
                 android:drawablePadding="3dp"
-                android:paddingHorizontal="8dp"/>
+                android:paddingHorizontal="8dp"
+                android:textStyle="bold"/>
 
-            <androidx.cardview.widget.CardView
-
-                android:id="@+id/mapAcceptanceRouteCV"
+            <FrameLayout
+                android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="10dp"
-                android:elevation="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/acceptance_route"
-                    android:adjustViewBounds="true"/>
-
-            </androidx.cardview.widget.CardView>
+                android:layout_height="400px"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:padding="10dp">
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -367,13 +364,11 @@
                 android:scaleY="0.6"
                 android:layout_marginRight="-25dp"/>
 
-            <FrameLayout
-                android:id="@+id/reviewsLV"
+            <ListView
+                android:id="@id/list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ratingBar">
-
-            </FrameLayout>
+                android:layout_below="@id/ratingBar"/>
 
 
 
