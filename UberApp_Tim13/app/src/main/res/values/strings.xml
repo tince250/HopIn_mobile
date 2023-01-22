@@ -21,7 +21,7 @@
     <string name="telephone">phone number: </string>
     <string name="telephoneExmp">0633324561</string>
     <string name="locationInfo">Location info</string>
-    <string name="city">city: </string>
+    <string name="address">address: </string>
     <string name="street">street: </string>
     <string name="cityExmp">Novi Sad</string>
     <string name="houseNumber">house number: </string>
