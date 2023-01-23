@@ -25,6 +25,7 @@ import com.example.uberapp_tim13.activities.PassengerMainActivity;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.RouteDTO;
 import com.example.uberapp_tim13.services.RideService;
+import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.material.button.MaterialButton;
 
 import java.time.LocalDate;
@@ -81,7 +82,7 @@ public class OrderAgainDialog extends Dialog implements View.OnClickListener {
                 mTimePicker = new TimePickerDialog(activity, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        changeBtnToGray((MaterialButton) asapBtn);
+                        Utils.changeBtnToGray((MaterialButton) asapBtn, activity);
 
                         pickUpTime.setText( selectedHour + ":" + selectedMinute);
                         LocalDateTime time = LocalDateTime.of(LocalDate.now(), LocalTime.of(selectedHour, selectedMinute, 0));
@@ -127,7 +128,7 @@ public class OrderAgainDialog extends Dialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.asapButton:
-                changeBtnToBlue((MaterialButton) asapBtn);
+                Utils.changeBtnToBlue((MaterialButton) asapBtn, activity);
                 confirmBtn.setEnabled(true);
                 pickUpTime.setText(null);
                 pickUpTime.setError(null);
@@ -139,16 +140,5 @@ public class OrderAgainDialog extends Dialog implements View.OnClickListener {
         }
     }
 
-    private void changeBtnToBlue(MaterialButton btn) {
-        btn.setTextColor(activity.getResources().getColor(R.color.lighter_blue));
-        btn.setIconTint(ColorStateList.valueOf(activity.getResources().getColor(R.color.lighter_blue)));
-        btn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.lighter_blue)));
-    }
-
-    private void changeBtnToGray(MaterialButton btn) {
-        btn.setTextColor(activity.getResources().getColor(R.color.disabled_gray));
-        btn.setIconTint(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
-        btn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
-    }
 
 }

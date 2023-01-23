@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
@@ -43,6 +46,7 @@ import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.android.material.button.MaterialButton;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,6 +79,9 @@ public class PassengerHomeFragment extends Fragment {
     EditText pickUpLoc;
     EditText destination;
     EditText pickUpTime;
+    private TextView timeError;
+    private Button asapBtn;
+    private MaterialButton nextBtn;
     private LocationDTO route;
 
     boolean isPickup = true;
@@ -100,7 +107,9 @@ public class PassengerHomeFragment extends Fragment {
         pickUpLoc = view.findViewById(R.id.pickUpLocET);
         destination = view.findViewById(R.id.destinationET);
         pickUpTime = view.findViewById(R.id.pickUpTimeET);
-
+        nextBtn = view.findViewById(R.id.nextBtn);
+        asapBtn = view.findViewById(R.id.asapButton);
+        timeError = view.findViewById(R.id.timeErrorTV);
 
         // Starting new ride order, need to reinit rideInCreation
         RideService.rideInCreation = new RideDTO();
@@ -129,9 +138,23 @@ public class PassengerHomeFragment extends Fragment {
                 mTimePicker = new TimePickerDialog(getActivity(), R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker,  int selectedHour, int selectedMinute) {
+                        Utils.changeBtnToGray((MaterialButton) asapBtn, getActivity());
+
                         pickUpTime.setText( selectedHour + ":" + selectedMinute);
                         LocalDateTime time = LocalDateTime.of(LocalDate.now(), LocalTime.of(selectedHour, selectedMinute, 0));
-                        RideService.rideInCreation.setScheduledTime(time.toString());
+                        if (time.isBefore(LocalDateTime.now())) {
+                            time = time.plusDays(1);
+                        }
+                        if (time.minusHours(5).isAfter(LocalDateTime.now())) {
+                            pickUpTime.setError("Schedule max 5h in advance.");
+                            timeError.setVisibility(View.VISIBLE);
+                            nextBtn.setEnabled(false);
+                        } else {
+                            nextBtn.setEnabled(true);
+                            pickUpTime.setError(null);
+                            timeError.setVisibility(View.GONE);
+                            RideService.rideInCreation.setScheduledTime(time.toString());
+                        }
                     }
                 }, hour, minute, true);
                 mTimePicker.setTitle("Select Time");
@@ -140,9 +163,12 @@ public class PassengerHomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.nextBtn).setOnClickListener(new View.OnClickListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               if (!validateInputs())
+                   return;
+
                 if (route != null) {
                     if (route.getDeparture() != null && route.getDestination() != null) {
                         RideService.rideInCreation.getLocations().add(route);
@@ -150,13 +176,43 @@ public class PassengerHomeFragment extends Fragment {
                         Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
                         return;
                     }
+                } else {
+                    Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 route = null;
                 FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
             }
         });
 
+        asapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.changeBtnToBlue((MaterialButton) asapBtn, getActivity());
+                nextBtn.setEnabled(true);
+                pickUpTime.setText(null);
+                pickUpTime.setError(null);
+                timeError.setVisibility(View.GONE);
+                RideService.rideInCreation.setScheduledTime(null);
+            }
+        });
+
         return view;
+    }
+
+    private boolean validateInputs() {
+        boolean valid = true;
+        if (pickUpLoc.getText().toString().isEmpty()) {
+            pickUpLoc.setError("Pickup is required.");
+            valid = false;
+        }
+
+        if (destination.getText().toString().isEmpty()) {
+            destination.setError("Destination is required.");
+            valid = false;
+        }
+
+        return valid;
     }
 
     private final ActivityResultLauncher<Intent> startAutocomplete = registerForActivityResult(
@@ -219,9 +275,11 @@ public class PassengerHomeFragment extends Fragment {
         }
         if (isPickup)  {
             pickUpLoc.setText(address.toString());
+            pickUpLoc.setError(null);
             destination.requestFocus();
         } else {
             destination.setText(address.toString());
+            destination.setError(null);
         }
 
 
@@ -239,4 +297,6 @@ public class PassengerHomeFragment extends Fragment {
             route.setDestinations(loc);
         }
     }
+
+
 }

@@ -1,11 +1,16 @@
 package com.example.uberapp_tim13.tools;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
+
+import com.example.uberapp_tim13.R;
+import com.google.android.material.button.MaterialButton;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,5 +31,17 @@ public class Utils {
         byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return decodedByte;
+    }
+
+    public static void changeBtnToBlue(MaterialButton btn, Activity activity) {
+        btn.setTextColor(activity.getResources().getColor(R.color.lighter_blue));
+        btn.setIconTint(ColorStateList.valueOf(activity.getResources().getColor(R.color.lighter_blue)));
+        btn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.lighter_blue)));
+    }
+
+    public static void changeBtnToGray(MaterialButton btn, Activity activity) {
+        btn.setTextColor(activity.getResources().getColor(R.color.disabled_gray));
+        btn.setIconTint(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
+        btn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
     }
 }
