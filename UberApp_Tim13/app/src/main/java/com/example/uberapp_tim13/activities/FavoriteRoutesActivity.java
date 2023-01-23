@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.FavouriteRoutesAdapter;
+import com.example.uberapp_tim13.dialogs.OrderAgainDialog;
 import com.example.uberapp_tim13.dtos.RouteDTO;
 import com.example.uberapp_tim13.fragments.FavoriteRouteFragment;
 import com.example.uberapp_tim13.rest.RestUtils;
@@ -34,6 +35,8 @@ public class FavoriteRoutesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FavouriteRoutesAdapter adapterRV;
     private RecyclerView.LayoutManager layoutManagerRV;
+
+    private OrderAgainDialog orderAgainDialog;
 
     private List<RouteDTO> routes;
 
@@ -64,9 +67,9 @@ public class FavoriteRoutesActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapterRV);
                     adapterRV.setListener(new FavouriteRoutesAdapter.OnItemClickListener() {
                         @Override
-                        public void onItemClick(int position) {
-                            routes.get(position).setDistance(0);
-                            adapterRV.notifyItemChanged(position);
+                        public void onOrderAgainClick(int position) {
+                            orderAgainDialog = new OrderAgainDialog(FavoriteRoutesActivity.this, routes.get(position));
+                            orderAgainDialog.show();
                         }
 
                         @Override

@@ -32,6 +32,7 @@ import retrofit2.http.HEAD;
 
 public class RideService extends Service {
 
+    public static boolean orderAgain = false;
     public static RideDTO rideInCreation = new RideDTO();
     public static RideReturnedDTO returnedRide;
     public static boolean finished = false;

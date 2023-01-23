@@ -7,6 +7,7 @@
     <string name="emailExmp">example@gmail.com </string>
     <string name="password">password</string>
     <string name="loginBtn">Log in</string>
+    <string name="logOutBtn">Log out</string>
     <string name="welcome">Welcome!</string>
     <string name="register">Register</string>
     <string name="accountBtn">Account</string>
@@ -32,7 +33,8 @@
     <string name="regPlatesExmp">K61-A-435</string>
     <string name="regPlates">reg plates: </string>
     <string name="modelExmp">Ford mustang</string>
-    <string name="logOutBtn">Log out</string>
+    <string name="confirm">Confirm</string>
+    <string name="asap">asap</string>
     <string name="slogan">Safe. Quick. Pleasant.</string>
     <string name="company_name">HopIn.</string>
     <string name="registerTitle">Create account</string>
@@ -72,6 +74,7 @@
     <string name="pick_up">Pick up location</string>
     <string name="where_to">Where to?</string>
     <string name="pick_up_time">Pick up time</string>
+    <string name="later">Schedule for later</string>
     <string name="add_stops">add in-between stops</string>
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
@@ -139,7 +142,11 @@
     <string name="passengerDetailsTitle">Passengers on ride</string>
     <string name="driverDetailsTitle">Driver\'s info</string>
     <string name="logOutTitle">Are you sure you want to log out?</string>
+    <string name="orderAgainTitle">HopIn this ride again?</string>
+    <string name="orderAgainSubitle">You are about to create a new ride</string>
+    <string name="orderAgainSubitle2">using these locations from your favourites:</string>
     <string name="cancel">Cancel</string>
+    <string name="timeError">Schedule max 5h in advance.</string>
     <string name="oops">Ooops</string>
     <string name="why">Panic reason?</string>
     <string name="location_disabled_message">Your Locations seems to be disabled, do you want to enable it? It\'s necessary to enable full map functionalities!</string>

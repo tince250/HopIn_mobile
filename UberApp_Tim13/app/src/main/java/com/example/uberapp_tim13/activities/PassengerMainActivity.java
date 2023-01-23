@@ -22,6 +22,7 @@ import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
+import com.example.uberapp_tim13.fragments.RideSettingsFragment;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
@@ -36,6 +37,8 @@ import ua.naiksoftware.stomp.StompClient;
 
 public class PassengerMainActivity extends AppCompatActivity{
 
+    private boolean orderAgain = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,13 @@ public class PassengerMainActivity extends AppCompatActivity{
 
         connectToRideInvitesSocket();
 
-        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
+        this.orderAgain = false;
+        // to enable order again from favourites
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().get("orderAgain").equals("true")) {
+                this.orderAgain = true;
+            }
+        }
 
         setBottomNavigationBar();
     }
@@ -82,7 +91,10 @@ public class PassengerMainActivity extends AppCompatActivity{
                     break;
                 case R.id.nav_home:
                     setTitle("Home");
-                    FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
+                    if (orderAgain)
+                        FragmentTransition.to(RideSettingsFragment.newInstance(), this, false, R.id.passengerFL);
+                    else
+                        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:

@@ -27,7 +27,7 @@ public class FavouriteRoutesAdapter extends RecyclerView.Adapter<FavouriteRoutes
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onOrderAgainClick(int position);
         void onHeartClick(int position, ImageView heartIcon);
     }
 
@@ -69,6 +69,7 @@ public class FavouriteRoutesAdapter extends RecyclerView.Adapter<FavouriteRoutes
         public TextView locationsTV;
         public TextView distanceTV;
         public ImageView heartIcon;
+        private ImageView orderAgainIcon;
 
         public FavouritesViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -76,14 +77,15 @@ public class FavouriteRoutesAdapter extends RecyclerView.Adapter<FavouriteRoutes
             locationsTV = itemView.findViewById(R.id.routeTV);
             distanceTV = itemView.findViewById(R.id.distanceTV);
             heartIcon = itemView.findViewById(R.id.heartImg);
+            orderAgainIcon = itemView.findViewById(R.id.repeatImg);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            orderAgainIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
+                            listener.onOrderAgainClick(position);
                         }
                     }
                 }

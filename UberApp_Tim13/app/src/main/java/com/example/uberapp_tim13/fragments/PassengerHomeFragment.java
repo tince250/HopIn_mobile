@@ -65,10 +65,13 @@ public class PassengerHomeFragment extends Fragment {
 
     private StompClient mStompClient;
 
+    private boolean orderAgain;
+
 
     public static PassengerHomeFragment newInstance() {
         return new PassengerHomeFragment();
     }
+
     EditText pickUpLoc;
     EditText destination;
     EditText pickUpTime;
@@ -92,25 +95,12 @@ public class PassengerHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         mapFragment = new MapFragment();
         getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
-        //        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:4321/api/socket/websocket");
-//        mStompClient.connect();
-//
-//        mStompClient.topic("/topic/invites/1").subscribe(topicMessage -> {
-//            Log.d("SOCKET", topicMessage.getPayload());
-//        });
-//
-//        mStompClient.send("/ws/send/invite/1", "My first STOMP message!").subscribe();
-
-        // ...
-
-
-//        mapFragment = new MapFragment();
-//        getParentFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
 
         View view = inflater.inflate(R.layout.fragment_passenger_main, container, false);
         pickUpLoc = view.findViewById(R.id.pickUpLocET);
         destination = view.findViewById(R.id.destinationET);
         pickUpTime = view.findViewById(R.id.pickUpTimeET);
+
 
         // Starting new ride order, need to reinit rideInCreation
         RideService.rideInCreation = new RideDTO();
