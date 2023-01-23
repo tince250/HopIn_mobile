@@ -94,7 +94,7 @@ public class PassengerMainActivity extends AppCompatActivity{
                     if (orderAgain)
                         FragmentTransition.to(RideSettingsFragment.newInstance(), this, false, R.id.passengerFL);
                     else
-                        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, false, R.id.passengerFL);
+                        FragmentTransition.to(PassengerHomeFragment.newInstance(), this, true, R.id.passengerFL);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
