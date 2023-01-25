@@ -103,6 +103,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
+    <string name="reportsParams">Report criteria:</string>
     <string name="reportsGreeting">Hey, Grace</string>
     <string name="reportsSubtitle">Here are your stats:</string>
     <string name="chooseDate">Choose date</string>
@@ -112,7 +113,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="totalKm">120km</string>
     <string name="avgKm">30km</string>
-    <string name="average">average</string>
+    <string name="noReports">Looks like there\'s no reports for the chosen date(s)</string>
     <string name="rideDate">Date: 15.12.2021.</string>
     <string name="userName">Grace Collins</string>
     <string name="userEmail">email: grace@gmail.com</string>
@@ -167,5 +168,7 @@
     <string name="write_comment">Leave a comment...</string>
     <string name="driver_rating">Driver rating</string>
     <string name="vehicle_rating">Vehicle rating</string>
+    <string name="generateReport">generate</string>
+    <string name="average">average</string>
 
 </resources>

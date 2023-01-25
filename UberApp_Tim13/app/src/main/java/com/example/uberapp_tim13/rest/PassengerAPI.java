@@ -1,6 +1,7 @@
 package com.example.uberapp_tim13.rest;
 
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
+import com.example.uberapp_tim13.dtos.RideForReportDTO;
 import com.example.uberapp_tim13.dtos.RouteDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 
@@ -25,6 +26,12 @@ public interface PassengerAPI {
                                            @Query("sort") String sort,
                                            @Query("from") String from,
                                            @Query("to") String to);
+
+    @GET("passenger/{id}/ride/date")
+    Call<List<RideForReportDTO>> getAllRidesBetweenDates(@Header("Authorization") String token,
+                                                         @Path("id") int id,
+                                                         @Query("from") String from,
+                                                         @Query("to") String to);
 
     @GET("passenger/{id}/favouriteRoutes")
     Call<List<RouteDTO>> getFavouriteRoutes(@Header("Authorization") String token,
