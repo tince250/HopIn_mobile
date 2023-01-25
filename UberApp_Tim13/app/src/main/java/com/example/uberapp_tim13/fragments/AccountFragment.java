@@ -88,17 +88,7 @@ public class AccountFragment extends Fragment {
         view.findViewById(R.id.reportsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (Globals.userRole) {
-                    case "driver":
-                        startActivity(new Intent(getActivity(), DriverReportsActivity.class));
-                        break;
-                    case "passenger":
-                        startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
-                        break;
-                    default:
-                        break;
-                }
-
+                startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
             }
         });
 
