@@ -32,4 +32,11 @@ public class LocationDTO implements Serializable {
 		this.destination = destination;
 	}
 
+	@Override
+	public String toString() {
+		return "LocationDTO{" +
+				"departure=" + departure +
+				", destination=" + destination +
+				'}';
+	}
 }
