@@ -63,7 +63,6 @@ public class RideHistoryFragment extends ListFragment{
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
                 allRides = (AllPassengerRidesDTO) extras.get("allRides");
-                Log.d("aa", allRides.getResults().toString());
 
                 HistoryAdapter adapter = new HistoryAdapter(allRides.getResults(), getActivity());
                 setListAdapter(adapter);

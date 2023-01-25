@@ -16,7 +16,7 @@ public class LocationNoIdDTO implements Serializable {
 		this.longitude = longitude;
 	}
 
-	public String getAddress() {
+    public String getAddress() {
 		return address;
 	}
 

@@ -37,10 +37,19 @@ public interface PassengerAPI {
     Call<List<RouteDTO>> getFavouriteRoutes(@Header("Authorization") String token,
                                             @Path("id") int id);
 
+    @GET("passenger/{rideId}/is-favourite/route")
+    Call<Boolean> isFavouriteRoute(@Header("Authorization") String token,
+                                            @Path("rideId") int rideId);
+
     @POST("passenger/{passengerId}/remove/route")
     Call<Void> removeFavouriteRoute(@Header("Authorization") String token,
                                     @Path("passengerId") int id,
                                     @Query("routeId") int routeId);
+
+    @POST("passenger/{passengerId}/add/route")
+        Call<Void> addFavouriteRoute(@Header("Authorization") String token,
+                                        @Path("passengerId") int id,
+                                        @Body RouteDTO route);
 
     @PUT("passenger/{id}")
     Call<UserDTO> update(@Header("Authorization") String token,
