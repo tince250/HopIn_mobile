@@ -6,34 +6,25 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.activities.AccountSettingsActivity;
-import com.example.uberapp_tim13.activities.CurrentRideActivity;
-import com.example.uberapp_tim13.activities.DriverReportsActivity;
 import com.example.uberapp_tim13.activities.DriverStatisticsActivity;
 import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.activities.LoginActivity;
-import com.example.uberapp_tim13.activities.PassengerReportsActivity;
+import com.example.uberapp_tim13.activities.ReportsActivity;
 import com.example.uberapp_tim13.dialogs.LogOutDialog;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.services.DriverService;
-import com.example.uberapp_tim13.services.RideService;
-import com.example.uberapp_tim13.services.UserService;
-import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
-import com.example.uberapp_tim13.tools.StompManager;
 import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.material.button.MaterialButton;
 
@@ -88,7 +79,7 @@ public class AccountFragment extends Fragment {
         view.findViewById(R.id.reportsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
+                startActivity(new Intent(getActivity(), ReportsActivity.class));
             }
         });
 

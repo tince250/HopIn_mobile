@@ -50,7 +50,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PassengerReportsActivity extends AppCompatActivity {
+public class ReportsActivity extends AppCompatActivity {
 
     private BarChart barChart;
     private TextView totalTV;
@@ -168,14 +168,14 @@ public class PassengerReportsActivity extends AppCompatActivity {
                     rides = response.body();
                     fillEntries(rides);
                 } else {
-                    Toast.makeText(PassengerReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
+                    Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
                 }
             }
 
             @Override
             public void onFailure(Call<List<RideForReportDTO>> call, Throwable t) {
                 Log.d("EVOME", t.toString());
-                Toast.makeText(PassengerReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
+                Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
             }
         });
     }
@@ -198,14 +198,14 @@ public class PassengerReportsActivity extends AppCompatActivity {
                     rides = response.body();
                     fillEntries(rides);
                 } else {
-                    Toast.makeText(PassengerReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
+                    Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
                 }
             }
 
             @Override
             public void onFailure(Call<List<RideForReportDTO>> call, Throwable t) {
                 Log.d("EVOME", t.toString());
-                Toast.makeText(PassengerReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
+                Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
             }
         });
     }
