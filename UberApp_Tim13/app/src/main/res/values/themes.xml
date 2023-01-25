@@ -35,4 +35,6 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorOnSurface">@color/dark_blue</item>
     </style>
+
+
 </resources>

@@ -11,52 +11,5 @@
     android:background="@drawable/border"
     android:layout_centerHorizontal="true">
 
-        <LinearLayout
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/routeTV"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:text="@string/routeCities"
-                android:textColor="@color/dark_blue"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                />
-
-            <TextView
-                android:id="@+id/stopsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
-                android:text="@string/routeStops"
-                android:textSize="13sp"
-                android:textColor="@color/dark_gray"/>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/heartImg"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_heart"
-            app:tint="@color/red"/>
-
-        <ImageView
-            android:id="@+id/repeatImg"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_repeat"
-            app:tint="@color/dark_blue" />
 </LinearLayout>

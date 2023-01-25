@@ -39,5 +39,13 @@ public class LocationNoIdDTO implements Serializable {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "LocationNoIdDTO{" +
+				"address='" + address + '\'' +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
+				'}';
+	}
 }

@@ -18,6 +18,7 @@ import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
@@ -74,6 +75,7 @@ public class RideSettingsFragment extends Fragment {
                         RideService.rideInCreation.setDistance(res.getEstimatedDistance());
                         RideService.rideInCreation.setPrice(res.getEstimatedCost());
                         RideService.rideInCreation.setDuration(res.getEstimatedTimeInMinutes());
+                        Log.d("OPET", RideService.rideInCreation.toString());
                         FragmentTransition.to(InviteOthersFragment.newInstance(), getActivity(), true, R.id.passengerFL);
                     }
 
@@ -169,9 +171,13 @@ public class RideSettingsFragment extends Fragment {
     private void setDataInRide() {
         if (babyClicked) {
             RideService.rideInCreation.setBabyTransport(true);
+        } else {
+            RideService.rideInCreation.setBabyTransport(false);
         }
         if (petClicked) {
             RideService.rideInCreation.setPetTransport(true);
+        } else {
+            RideService.rideInCreation.setPetTransport(false);
         }
 
         if (basicCarClicked) {

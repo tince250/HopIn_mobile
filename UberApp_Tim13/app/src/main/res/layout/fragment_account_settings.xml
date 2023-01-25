@@ -49,7 +49,7 @@
                         android:layout_height="110dp"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/profile_pic" />
+                        android:src="@drawable/profile_placeholder" />
 
 
                 </androidx.cardview.widget.CardView>
@@ -141,20 +141,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Spinner
-                    android:id="@+id/spinnerAreaNumSettings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/border"
-                    android:backgroundTint="#D9D9D9"
-                    android:fontFamily="@font/poppinsbold"
-                    android:paddingHorizontal="10sp" />
+<!--                <Spinner-->
+<!--                    android:id="@+id/spinnerAreaNumSettings"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="fill_parent"-->
+<!--                    android:background="@drawable/border"-->
+<!--                    android:backgroundTint="#D9D9D9"-->
+<!--                    android:fontFamily="@font/poppinsbold"-->
+<!--                    android:paddingHorizontal="10sp" />-->
 
                 <EditText
                     android:id="@+id/phoneSettingsET"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginStart="40dp"
                     android:background="@drawable/border"
                     android:fontFamily="@font/poppinsbold"
                     android:padding="10sp"
@@ -164,26 +163,14 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/ccardSettingsET"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/border"
-                android:fontFamily="@font/poppinsbold"
-                android:inputType="text"
-                android:padding="10sp"
-                android:text="@string/inputCCard"
-                android:textSize="16sp"
-                android:enabled="false"/>
+
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/changePasswordBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ccardSettingsET"
+                android:layout_below="@id/telephoneSettingsLL"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/gray"
                 android:fontFamily="@font/poppinsbold"
@@ -200,44 +187,26 @@
                 app:iconSize="20dp"
                 app:iconTint="@color/blue" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/changePayInfoBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/changePasswordBtn"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="@color/gray"
-                android:fontFamily="@font/poppinsbold"
-                android:onClick="switchToPaymentInfo"
-                android:paddingVertical="8dp"
-                android:text="@string/changePaymentInfo"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textFontWeight="700"
-                android:textSize="14sp"
-                app:cornerRadius="10dp"
-                app:icon="@drawable/ccard"
-                app:iconGravity="textStart"
-                app:iconSize="20dp"
-                app:iconTint="@color/blue" />
+
 
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:backgroundTint="@color/solid_blue"
-            android:fontFamily="@font/poppinsbold"
-            android:paddingHorizontal="35dp"
-            android:paddingVertical="10sp"
-            android:text="@string/save"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:cornerRadius="10dp"
-            android:textStyle="bold"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveProfileChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:backgroundTint="@color/solid_blue"
+        android:fontFamily="@font/poppinsbold"
+        android:paddingHorizontal="35dp"
+        android:paddingVertical="10sp"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp" />
 
 </LinearLayout>
