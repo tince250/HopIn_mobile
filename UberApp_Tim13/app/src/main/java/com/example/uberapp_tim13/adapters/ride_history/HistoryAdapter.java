@@ -21,6 +21,8 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
+import com.example.uberapp_tim13.dialogs.OrderAgainDialog;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.RouteDTO;
@@ -82,7 +84,8 @@ public class HistoryAdapter extends BaseAdapter {
         repeatIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                OrderAgainDialog orderAgainDialog = new OrderAgainDialog(activity, new RouteDTO(ride));
+                orderAgainDialog.show();
             }
         });
 

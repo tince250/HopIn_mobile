@@ -13,6 +13,13 @@ public class RouteDTO {
         this.destination = destination;
     }
 
+    public RouteDTO(RideReturnedDTO ride) {
+        this.id = 0;
+        this.distance = ride.getDistance();
+        this.departure = ride.getLocations().get(0).getDeparture();
+        this.destination = ride.getLocations().get(0).getDestination();
+    }
+
     public int getId() {
         return id;
     }
