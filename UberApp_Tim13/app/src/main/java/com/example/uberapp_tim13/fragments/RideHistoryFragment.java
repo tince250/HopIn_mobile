@@ -41,9 +41,7 @@ public class RideHistoryFragment extends ListFragment{
         if (Globals.userRole.equals("passenger")) {
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.passengerFL);
         } else {
-            Log.d("udje", "kako");
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.driverFL);
-
         }
     }
 

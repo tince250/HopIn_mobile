@@ -218,7 +218,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                             timer.stop();
                             try {
                                 Thread.sleep(1000);
-                                new RateRideDialog(CurrentRideActivity.this, ride).show();
+                                new RateRideDialog(CurrentRideActivity.this, ride, "currentRide", null).show();
 
                             } catch (InterruptedException e) {
                                 e.printStackTrace();

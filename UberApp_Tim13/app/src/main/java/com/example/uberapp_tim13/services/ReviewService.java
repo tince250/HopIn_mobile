@@ -53,17 +53,16 @@ public class ReviewService extends Service {
 
     private void getAllRideReviews(int rideId, String method) {
         Call<ArrayList<CompleteRideReviewDTO>> call = RestUtils.reviewAPI.getAllRideReviews(AuthService.tokenDTO.getAccessToken(), rideId);
-        final ArrayList<CompleteRideReviewDTO>[] reviews = new ArrayList[]{null};
         call.enqueue(new Callback<ArrayList<CompleteRideReviewDTO>>() {
 
             @Override
             public void onResponse(Call<ArrayList<CompleteRideReviewDTO>> call, Response<ArrayList<CompleteRideReviewDTO>> response){
-                reviews[0] = response.body();
+                ArrayList<CompleteRideReviewDTO> reviews = response.body();
                 Log.d("reviews", response.body().toString());
                 if (method.equals("calculateRideReviews"))
-                    sendAllReviewsCalculationBroadcast(reviews[0]);
+                    sendAllReviewsCalculationBroadcast(reviews, rideId);
                 if (method.equals("getAllReviews"))
-                    sendAllReviewsBroadcast(reviews[0]);
+                    sendAllReviewsBroadcast(reviews);
             }
 
             @Override
@@ -127,13 +126,18 @@ public class ReviewService extends Service {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void sendAllReviewsCalculationBroadcast(ArrayList<CompleteRideReviewDTO> reviews){
+    private void sendAllReviewsCalculationBroadcast(ArrayList<CompleteRideReviewDTO> reviews, int rideId){
         Intent intent = new Intent("historyAdapter");
         intent.putExtra("allRideReviewsRating", calculateRating(reviews));
+        intent.putExtra("allReviews", reviews);
+        intent.putExtra("rideId", rideId);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private float calculateRating(List<CompleteRideReviewDTO> reviews){
+        if (reviews.size() == 0)
+            return -1;
+
         float rating = 0;
         int counter = 0;
         for (CompleteRideReviewDTO review : reviews){

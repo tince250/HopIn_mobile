@@ -170,5 +170,9 @@
     <string name="vehicle_rating">Vehicle rating</string>
     <string name="generateReport">generate</string>
     <string name="average">average</string>
+    <string name="leaveRating">leave a rating</string>
+    <string name="notRated">not rated</string>
+    <string name="rateRide">Leave a rating</string>
+    <string name="feedback">your feedback matters :)</string>
 
 </resources>

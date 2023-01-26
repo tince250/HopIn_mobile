@@ -158,7 +158,8 @@
                 android:drawablePadding="3dp"
                 android:textColor="@color/dark_blue"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -173,10 +174,45 @@
                 android:scaleX="0.6"
                 android:scaleY="0.6"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="-25dp"
-                android:layout_marginTop="-5dp"/>
+                android:layout_marginRight="-40dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                />
 
         </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange"
+            android:text="@string/leaveRating"
+            android:textAllCaps="false"
+            android:paddingVertical="2dp"
+            android:includeFontPadding="false"
+            android:layout_marginTop="-25dp"
+            android:layout_gravity="end"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:textSize="13dp"
+            android:visibility="gone"
+            android:focusable="false"
+            />
+
+        <TextView
+            android:id="@+id/notRatedBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:text="@string/notRated"
+            android:textColor="#959595"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="-25dp"
+            android:layout_gravity="end"
+            android:textSize="13dp"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 

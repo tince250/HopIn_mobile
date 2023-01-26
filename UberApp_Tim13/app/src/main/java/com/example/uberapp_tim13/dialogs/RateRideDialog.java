@@ -12,17 +12,22 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.dtos.ReviewDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.services.ReviewService;
 
+import org.w3c.dom.Text;
+
 public class RateRideDialog extends Dialog implements android.view.View.OnClickListener {
+    private HistoryAdapter adapter;
     RideReturnedDTO ride;
     Activity activity;
     Button submitBtn;
@@ -31,10 +36,14 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
     RatingBar driverRatingBar;
     RatingBar vehicleRatingBar;
 
-    public RateRideDialog(@NonNull Activity activity, RideReturnedDTO ride) {
+    private String type;
+
+    public RateRideDialog(@NonNull Activity activity, RideReturnedDTO ride, String type, HistoryAdapter adapter) {
         super(activity);
         this.activity = activity;
         this.ride = ride;
+        this.type = type;
+        this.adapter = adapter;
 
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -45,8 +54,8 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_rate_ride_after);
 
-        setCancelable(false);
-        setCanceledOnTouchOutside(false);
+//        setCancelable(false);
+//        setCanceledOnTouchOutside(false);
 
         setComponents();
         setListeners();
@@ -58,6 +67,13 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
         vehicleLeaveCommentET = findViewById(R.id.vehicleLeaveCommentET);
         driverRatingBar = findViewById(R.id.driverRatingBar);
         vehicleRatingBar = findViewById(R.id.vehicleRatingBar);
+        TextView thankYouTV = findViewById(R.id.thankYouTV);
+        TextView finishedTV = findViewById(R.id.finishedTV);
+
+        if (type.equals("history")) {
+            thankYouTV.setText(R.string.rateRide);
+            finishedTV.setText(R.string.feedback);
+        }
     }
 
     private void setListeners(){
@@ -69,7 +85,8 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
         switch (view.getId()) {
             case R.id.submitBtn:
                 collectDataAndSetBroadcast();
-                this.activity.finish();
+                if (!type.equals("history"))
+                    this.activity.finish();
                 break;
             default:
                 break;
@@ -77,6 +94,9 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
     }
 
     private void collectDataAndSetBroadcast(){
+
+        if (!validateInputs())
+            return;
 
         ReviewDTO driverReviewDTO = new ReviewDTO((int) driverRatingBar.getRating(), driverLeaveCommentET.getText().toString());
         ReviewDTO vehicleReviewDTO = new ReviewDTO((int) vehicleRatingBar.getRating(), vehicleLeaveCommentET.getText().toString());
@@ -100,11 +120,28 @@ public class RateRideDialog extends Dialog implements android.view.View.OnClickL
                     postedDriver[0] = (boolean) extras.get("postedDriver");
                 if (postedDriver[0] && postedVehicle[0]) {
                     Toast.makeText(activity, "You reviewed the ride!", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                    RateRideDialog.this.dismiss();
                 }
 
             }
         };
         LocalBroadcastManager.getInstance(this.activity).registerReceiver(broadcastReceiver, new IntentFilter("rateRideDialog"));
 
+    }
+
+    private boolean validateInputs() {
+        boolean valid = true;
+        if (driverLeaveCommentET.getText().toString().trim().isEmpty()) {
+            driverLeaveCommentET.setError("Can't submit an empty comment.");
+            valid = false;
+        }
+
+        if (vehicleLeaveCommentET.getText().toString().trim().isEmpty()) {
+            vehicleLeaveCommentET.setError("Can't submit an empty comment.");
+            valid = false;
+        }
+
+        return valid;
     }
 }

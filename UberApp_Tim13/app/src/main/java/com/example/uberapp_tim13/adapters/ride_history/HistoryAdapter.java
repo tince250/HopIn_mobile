@@ -23,14 +23,21 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.dialogs.OrderAgainDialog;
+import com.example.uberapp_tim13.dialogs.RateRideDialog;
+import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.RouteDTO;
+import com.example.uberapp_tim13.model.Ride;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.ReviewService;
 import com.example.uberapp_tim13.tools.Globals;
+import com.google.android.material.button.MaterialButton;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -76,7 +83,8 @@ public class HistoryAdapter extends BaseAdapter {
         ((TextView)view_new.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view_new.findViewById(R.id.priceTV)).setText("Price: " + ride.getTotalCost() + " RSD");
         ((TextView)view_new.findViewById(R.id.rideDistanceTV)).setText("distance: " + ride.getDistance() + " km");;
-        setRatingBar(view_new, ride.getId());
+
+        initRating(view_new, ride);
 
         ImageView favIcon = view_new.findViewById(R.id.addToFavImg);
         ImageView repeatIcon = view_new.findViewById(R.id.repeatImg);
@@ -115,6 +123,69 @@ public class HistoryAdapter extends BaseAdapter {
         fitFragmentToRole(view_new, ride);
 
         return view_new;
+    }
+
+    private void initRating(View view_new, RideReturnedDTO ride) {
+        Intent intent = new Intent(this.activity, ReviewService.class);
+        intent.putExtra("method", "calculateRideReviews");
+        intent.putExtra("rideId", ride.getId());
+        this.activity.startService(intent);
+
+        RideReturnedDTO newRide = ride;
+
+        View finalView_new = view_new;
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                int rideId = (int) extras.get("rideId");
+                float rating = (float) extras.get("allRideReviewsRating");
+                ArrayList<CompleteRideReviewDTO> reviews = (ArrayList<CompleteRideReviewDTO>) extras.get("allReviews");
+
+                if (rideId != newRide.getId())
+                    return;
+
+                if (rating == -1 || notMyRating(reviews)) {
+                    Log.d("reviews", notMyRating(reviews) + " " + rating);
+                    displayRateButtonIfEligible(view_new, newRide);
+                } else {
+                    Log.d("reviews", newRide.getId() + " " + notMyRating(reviews) + " " + rating);
+                    finalView_new.findViewById(R.id.rateBtn).setVisibility(View.GONE);
+                    ((RatingBar) finalView_new.findViewById(R.id.ratingBar)).setRating(rating);
+                    ((RatingBar) finalView_new.findViewById(R.id.ratingBar)).setVisibility(View.VISIBLE);
+                }
+            }
+        };
+        LocalBroadcastManager.getInstance(this.activity).registerReceiver(broadcastReceiver, new IntentFilter("historyAdapter"));
+    }
+
+    private boolean notMyRating(ArrayList<CompleteRideReviewDTO> reviews) {
+        for (CompleteRideReviewDTO review: reviews) {
+            if (review.getDriverReview().getPassenger().getId() == Globals.user.getId())
+                return false;
+        }
+
+        return true;
+    }
+
+    private void displayRateButtonIfEligible(View view_new, RideReturnedDTO ride) {
+        if (LocalDateTime.parse(ride.getEndTime()).plusDays(3).isAfter(LocalDateTime.now())) {
+            displayRateButton(view_new, ride);
+        } else {
+            view_new.findViewById(R.id.notRatedBtn).setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    private void displayRateButton(View view_new, RideReturnedDTO ride) {
+        MaterialButton rateBtn = view_new.findViewById(R.id.rateBtn);
+        rateBtn.setVisibility(View.VISIBLE);
+        rateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new RateRideDialog(activity, ride, "history", HistoryAdapter.this).show();
+            }
+        });
     }
 
     private void paintRed(ImageView favIcon) {

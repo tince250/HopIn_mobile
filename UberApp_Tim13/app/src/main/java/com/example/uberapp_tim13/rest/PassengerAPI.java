@@ -19,13 +19,17 @@ import retrofit2.http.Query;
 public interface PassengerAPI {
 
     @GET("passenger/{id}/ride")
+    Call<AllPassengerRidesDTO> getAllRidesPaginated(@Header("Authorization") String token,
+                                                    @Path("id") int id,
+                                                    @Query("page") int page,
+                                                    @Query("size") int size,
+                                                    @Query("sort") String sort,
+                                                    @Query("from") String from,
+                                                    @Query("to") String to);
+
+    @GET("passenger/{id}/all/rides")
     Call<AllPassengerRidesDTO> getAllRides(@Header("Authorization") String token,
-                                           @Path("id") int id,
-                                           @Query("page") int page,
-                                           @Query("size") int size,
-                                           @Query("sort") String sort,
-                                           @Query("from") String from,
-                                           @Query("to") String to);
+                                                    @Path("id") int id);
 
     @GET("passenger/{id}/ride/date")
     Call<List<RideForReportDTO>> getAllRidesBetweenDates(@Header("Authorization") String token,

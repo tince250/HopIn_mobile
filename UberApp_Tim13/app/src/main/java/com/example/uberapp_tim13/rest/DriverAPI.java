@@ -12,13 +12,17 @@ import retrofit2.http.Query;
 public interface DriverAPI {
 
     @GET("driver/{id}/ride")
-    Call<AllPassengerRidesDTO> getAllRides(@Header("Authorization") String token,
+    Call<AllPassengerRidesDTO> getAllRidesPaginated(@Header("Authorization") String token,
                                            @Path("id") int id,
                                            @Query("page") int page,
                                            @Query("size") int size,
                                            @Query("sort") String sort,
                                            @Query("from") String from,
                                            @Query("to") String to);
+
+    @GET("driver/{id}/all/rides")
+    Call<AllPassengerRidesDTO> getAllRides(@Header("Authorization") String token,
+                                           @Path("id") int id);
 
     @GET("driver/{id}/vehicle")
     Call<VehicleDTO> getVehicle(@Header("Authorization") String token,
