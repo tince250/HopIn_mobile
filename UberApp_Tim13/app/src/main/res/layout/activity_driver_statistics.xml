@@ -30,19 +30,96 @@
             android:paddingEnd="0dp"
             android:paddingTop="40dp"/>
 
-        <Spinner
-            android:id="@+id/spinnerStatisticsOptions"
-            android:layout_width="wrap_content"
+<!--        <Spinner-->
+<!--            android:id="@+id/spinnerStatisticsOptions"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/poppinsregular"-->
+<!--            android:background="@drawable/border"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:paddingHorizontal="10sp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            />-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsregular"
-            android:background="@drawable/border"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="10sp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            />
+
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/paramsTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reportsParams"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/lighter_blue"
+                    android:textFontWeight="700"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"/>
+
+                <Spinner
+                    android:id="@+id/spinnerPasengerReportsFilter"
+                    android:layout_width="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsregular"
+                    android:background="@drawable/border"
+                    android:textSize="14sp"
+                    android:textFontWeight="700"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="10dp"
+                    />
+            </RelativeLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dateRangeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/gray"
+                    android:text="@string/chooseDate"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textFontWeight="700"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    app:cornerRadius="10dp"/>
+
+                <TextView
+                    android:id="@+id/dateRangeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange"
+                    android:textFontWeight="700"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
         <LinearLayout
@@ -120,7 +197,7 @@
                 android:textColor="@color/black"
                 android:paddingStart="15sp"
                 android:paddingEnd="0sp"
-                android:layout_gravity="start"
+                android:layout_gravity="center_horizontal"
                 />
 
             <TextView
@@ -133,14 +210,15 @@
                 android:paddingEnd="15sp"
                 android:text="@string/hours"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/graph_stats"
+            android:src="@drawable/statistics_background_img"
             android:layout_marginTop="35dp"/>
         
     </LinearLayout>
