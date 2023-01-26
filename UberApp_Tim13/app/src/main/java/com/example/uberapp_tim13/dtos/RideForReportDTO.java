@@ -8,15 +8,17 @@ public class RideForReportDTO {
     private double distance;
     private int estimatedTimeInMinutes;
     private double totalCost;
+    private boolean rejected;
 
     public RideForReportDTO() {}
 
-    public RideForReportDTO(String startTime, String endTime, double distance, int estimatedTimeInMinutes, double totalCost) {
+    public RideForReportDTO(String startTime, String endTime, double distance, int estimatedTimeInMinutes, double totalCost, boolean rejected) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.distance = distance;
         this.estimatedTimeInMinutes = estimatedTimeInMinutes;
         this.totalCost = totalCost;
+        this.rejected = rejected;
     }
 
     public String getStartTime() {
@@ -68,5 +70,13 @@ public class RideForReportDTO {
                 ", estimatedTimeInMinutes=" + estimatedTimeInMinutes +
                 ", totalCost=" + totalCost +
                 '}';
+    }
+
+    public boolean isRejected() {
+        return rejected;
+    }
+
+    public void setRejected(boolean rejected) {
+        this.rejected = rejected;
     }
 }
