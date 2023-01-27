@@ -2,12 +2,17 @@ package com.example.uberapp_tim13.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
 
@@ -43,13 +48,43 @@ public class SplashActivity extends Activity {
         }, 4000);
 
         int SPLASH_TIME_OUT = 5000;
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
+        if (this.isConnectedToInternet(SplashActivity.this)) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }, SPLASH_TIME_OUT);
+        } else {
+            Toast.makeText(SplashActivity.this, "You have to be connected to internet", Toast.LENGTH_LONG).show();
+            this.finishAffinity();
+        }
+    }
+
+    public boolean isConnectedToInternet(Activity a) {
+        boolean isConnectedToWifi = false;
+        boolean isConnectedToMobileData = false;
+        try {
+
+            ConnectivityManager cm = (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
+            for (NetworkInfo networkInfo : networkInfos) {
+                if (networkInfo.getTypeName().equalsIgnoreCase("wifi"))
+                    if (networkInfo.isConnected())
+                        isConnectedToWifi = true;
+                if (networkInfo.getTypeName().equalsIgnoreCase("mobile"))
+                    if (networkInfo.isConnected())
+                        isConnectedToMobileData = true;
             }
-        }, SPLASH_TIME_OUT);
+            Log.d("rbrbr", String.valueOf(isConnectedToWifi));
+            Log.d("rrbrb", String.valueOf(isConnectedToMobileData));
+            return isConnectedToWifi || isConnectedToMobileData;
+        }
+        catch (Exception ex) {
+            Log.d("error", "error");
+        }
+        return false;
     }
 
     @Override
