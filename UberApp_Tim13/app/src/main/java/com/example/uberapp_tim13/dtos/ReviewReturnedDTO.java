@@ -8,7 +8,7 @@ public class ReviewReturnedDTO implements Serializable {
     private int id;
     private int rating;
     private String comment;
-    private UserDTO passenger;
+    private UserReturnedDTO passenger;
 
     public int getId() {
         return id;
@@ -22,7 +22,7 @@ public class ReviewReturnedDTO implements Serializable {
         return comment;
     }
 
-    public UserDTO getPassenger() {
+    public UserReturnedDTO getPassenger() {
         return passenger;
     }
 

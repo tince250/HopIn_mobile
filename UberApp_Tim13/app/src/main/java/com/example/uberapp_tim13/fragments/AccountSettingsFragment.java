@@ -26,7 +26,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
@@ -148,13 +148,13 @@ public class AccountSettingsFragment extends Fragment {
             return;
 
 
-        UserDTO newUserInfo = this.copyNewInfo(view);
+        UserReturnedDTO newUserInfo = this.copyNewInfo(view);
 
         if (Globals.userRole.equals("passenger")) {
-            Call<UserDTO> call = RestUtils.passengerAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
-            call.enqueue(new Callback<UserDTO>() {
+            Call<UserReturnedDTO> call = RestUtils.passengerAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
+            call.enqueue(new Callback<UserReturnedDTO>() {
                 @Override
-                public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response) {
                     if (response.isSuccessful()) {
                         Globals.user = response.body();
                         fillUserInfo(currView);
@@ -167,15 +167,15 @@ public class AccountSettingsFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<UserDTO> call, Throwable t) {
+                public void onFailure(Call<UserReturnedDTO> call, Throwable t) {
 
                 }
             });
         } else {
-            Call<UserDTO> call = RestUtils.driverAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
-            call.enqueue(new Callback<UserDTO>() {
+            Call<UserReturnedDTO> call = RestUtils.driverAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
+            call.enqueue(new Callback<UserReturnedDTO>() {
                 @Override
-                public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response) {
                     if (response.isSuccessful()) {
                         Globals.user = response.body();
                         fillUserInfo(currView);
@@ -188,7 +188,7 @@ public class AccountSettingsFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<UserDTO> call, Throwable t) {
+                public void onFailure(Call<UserReturnedDTO> call, Throwable t) {
 
                 }
             });
@@ -236,8 +236,8 @@ public class AccountSettingsFragment extends Fragment {
         return valid;
     }
 
-    private UserDTO copyNewInfo(View view) {
-        UserDTO newUserInfo = new UserDTO();
+    private UserReturnedDTO copyNewInfo(View view) {
+        UserReturnedDTO newUserInfo = new UserReturnedDTO();
         newUserInfo.setName(nameET.getText().toString());
         newUserInfo.setSurname(surnameET.getText().toString());
         newUserInfo.setAddress(addressET.getText().toString());

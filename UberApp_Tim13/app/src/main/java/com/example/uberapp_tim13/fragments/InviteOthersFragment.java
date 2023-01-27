@@ -65,7 +65,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
 
         Log.d("PROVERA", RideService.rideInCreation.toString());
 
-        this.addedUsers = new ArrayList<UserDTO>();
+        this.addedUsers = new ArrayList<UserReturnedDTO>();
         this.accepted = new ArrayList<Boolean>();
         this.adapter = new InvitedPassengersAdapter(getActivity(), this.addedUsers, this.accepted);
         listView = (ListView) view.findViewById(R.id.list);
