@@ -1,9 +1,10 @@
 package com.example.uberapp_tim13.rest;
 
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
+import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.RideForReportDTO;
 import com.example.uberapp_tim13.dtos.RouteDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public interface PassengerAPI {
                                            @Query("sort") String sort,
                                            @Query("from") String from,
                                            @Query("to") String to);
+
+    @POST("passenger")
+    Call<UserReturnedDTO> register(@Body UserDTO user);
 
     @GET("passenger/{id}/ride/date")
     Call<List<RideForReportDTO>> getAllRidesBetweenDates(@Header("Authorization") String token,

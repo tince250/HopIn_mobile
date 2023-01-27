@@ -10,19 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
-import com.auth0.android.jwt.Claim;
-import com.auth0.android.jwt.JWT;
-import com.example.uberapp_tim13.activities.AcceptanceRideActivity;
-import com.example.uberapp_tim13.activities.PassengerMainActivity;
-
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
-import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.JWTUtils;
-import com.example.uberapp_tim13.tools.StompManager;
 
 import org.json.JSONException;
 
@@ -32,7 +25,6 @@ import java.util.concurrent.Executors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ua.naiksoftware.stomp.Stomp;
 
 public class AuthService extends Service {
 
@@ -89,18 +81,18 @@ public class AuthService extends Service {
             Globals.userRole = JWTUtils.getUserRoleFromToken(tokenBody);
             Globals.userId = JWTUtils.getUserIdFromToken(tokenBody);
 
-            Call<UserDTO> call = RestUtils.userApi.doGetUser("", Globals.userId);
-            call.enqueue(new Callback<UserDTO>() {
+            Call<UserReturnedDTO> call = RestUtils.userApi.doGetUser("", Globals.userId);
+            call.enqueue(new Callback<UserReturnedDTO>() {
 
                 @Override
-                public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
+                public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response){
                     Globals.user = response.body();
-                    Log.d("user", Globals.user.toString());
+//                    Log.d("user", Globals.user.toString());
                     Log.d("code", String.valueOf(response.code()));
                 }
 
                 @Override
-                public void onFailure(Call<UserDTO> call, Throwable t) {
+                public void onFailure(Call<UserReturnedDTO> call, Throwable t) {
                     Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
                 }
             });

@@ -134,6 +134,8 @@
         <service android:name=".services.DriverService"/>
         <service android:name=".services.UserService"/>
         <service android:name=".services.ReviewService"/>
+        <service android:name=".services.PassengerService"/>
+
 
     </application>
 

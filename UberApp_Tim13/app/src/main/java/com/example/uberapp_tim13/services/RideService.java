@@ -1,26 +1,18 @@
 package com.example.uberapp_tim13.services;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.example.uberapp_tim13.dtos.RideDTO;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.rest.RestUtils;
-import com.example.uberapp_tim13.tools.StompManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,7 +20,6 @@ import java.util.concurrent.Executors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.HEAD;
 
 public class RideService extends Service {
 
