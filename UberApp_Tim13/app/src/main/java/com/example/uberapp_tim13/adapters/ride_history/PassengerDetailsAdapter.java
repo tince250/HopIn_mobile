@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.tools.Mockap;
 import com.example.uberapp_tim13.tools.Utils;

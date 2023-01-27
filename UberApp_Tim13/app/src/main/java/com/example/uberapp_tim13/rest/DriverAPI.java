@@ -2,7 +2,7 @@ package com.example.uberapp_tim13.rest;
 
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideForReportDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public interface DriverAPI {
                                                          @Query("to") String to);
 
     @PUT("driver/{id}")
-    Call<UserDTO> update(@Header("Authorization") String token,
+    Call<UserReturnedDTO> update(@Header("Authorization") String token,
                          @Path("id") int id,
-                         @Body UserDTO dto);
+                         @Body UserReturnedDTO dto);
 }

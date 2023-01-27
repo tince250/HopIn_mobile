@@ -32,6 +32,7 @@ public class UserReturnedDTO implements Serializable {
 	@SerializedName("password")
 	@Expose
 	private String password;
+	private boolean isBlocked;
 	
 	public UserReturnedDTO() {}
 
@@ -48,20 +49,17 @@ public class UserReturnedDTO implements Serializable {
 		this.password = password;
 	}
 
-
-	public UserReturnedDTO(User user) {
-		//TODO: make this work
-		super();
-		this.id = user.getId();
-		this.name = user.getName();
-		this.surname = user.getSurName();
-		this.profilePicture = null;
-		this.telephoneNumber = user.getPhone();
-		this.email = user.getEmail();
-		this.address = null;
-		this.password = user.getPassword();
+	public UserReturnedDTO(int id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean isBlocked) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.profilePicture = profilePicture;
+		this.telephoneNumber = telephoneNumber;
+		this.email = email;
+		this.address = address;
+		this.password = password;
+		this.isBlocked = isBlocked;
 	}
-
 
 	public int getId() {
 		return id;
@@ -127,9 +125,17 @@ public class UserReturnedDTO implements Serializable {
 		this.password = password;
 	}
 
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		isBlocked = blocked;
+	}
+
 	@Override
 	public String toString() {
-		return "UserDTO{" +
+		return "UserReturnedDTO{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", surname='" + surname + '\'' +
@@ -138,6 +144,7 @@ public class UserReturnedDTO implements Serializable {
 				", email='" + email + '\'' +
 				", address='" + address + '\'' +
 				", password='" + password + '\'' +
+				", isBlocked=" + isBlocked +
 				'}';
 	}
 }

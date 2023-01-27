@@ -21,6 +21,7 @@ import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.ride_history.HistoryAdapter;
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.fragments.RideLoadingFragment;
 import com.example.uberapp_tim13.services.PassengerService;
 import com.example.uberapp_tim13.services.UserService;
