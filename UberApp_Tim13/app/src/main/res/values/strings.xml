@@ -170,5 +170,7 @@
     <string name="vehicle_rating">Vehicle rating</string>
     <string name="generateReport">generate</string>
     <string name="average">average</string>
+    <string name="you">You</string>
+    <string name="week">WEEK</string>
 
 </resources>

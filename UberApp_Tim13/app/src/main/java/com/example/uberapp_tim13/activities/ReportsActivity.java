@@ -41,8 +41,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -52,7 +50,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PassengerReportsActivity extends AppCompatActivity {
+public class ReportsActivity extends AppCompatActivity {
 
     private BarChart barChart;
     private TextView totalTV;
@@ -86,7 +84,10 @@ public class PassengerReportsActivity extends AppCompatActivity {
         addDatePicker();
         setSpinner();
         dateRangeTV.setText(getDefaultDateText());
-        getData();
+        if(Globals.userRole.equals("passenger"))
+            getDataPassenger();
+        else
+            getDataDriver();
     }
 
     private String getDefaultDateText() {
@@ -117,8 +118,10 @@ public class PassengerReportsActivity extends AppCompatActivity {
                         Log.d("PICKER", "PICKER");
                         setDateRangeText();
                         dateChosen = true;
-                        getData();
-                    }
+                        if(Globals.userRole.equals("passenger"))
+                            getDataPassenger();
+                        else
+                            getDataDriver();                    }
                 });
             }
         });
@@ -147,7 +150,7 @@ public class PassengerReportsActivity extends AppCompatActivity {
         dateRangeTV = (TextView) findViewById(R.id.dateRangeTV);
     }
 
-    private void getData() {
+    private void getDataPassenger() {
         start = LocalDateTime.now();
         end = LocalDateTime.now();
 
@@ -165,14 +168,44 @@ public class PassengerReportsActivity extends AppCompatActivity {
                     rides = response.body();
                     fillEntries(rides);
                 } else {
-                    Toast.makeText(PassengerReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
+                    Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
                 }
             }
 
             @Override
             public void onFailure(Call<List<RideForReportDTO>> call, Throwable t) {
                 Log.d("EVOME", t.toString());
-                Toast.makeText(PassengerReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
+                Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
+            }
+        });
+    }
+
+    private void getDataDriver() {
+        start = LocalDateTime.now();
+        end = LocalDateTime.now();
+
+        if (dateChosen) {
+            Pair<Long, Long> sel = (Pair<Long, Long>) picker.getSelection();
+            start = getDateFromPickerSelection(sel.first);
+            end = getDateFromPickerSelection(sel.second);
+        }
+
+        Call<List<RideForReportDTO>> call = RestUtils.driverAPI.getAllRidesBetweenDates(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), convertDate(start), convertDate(end));
+        call.enqueue(new Callback<List<RideForReportDTO>>() {
+            @Override
+            public void onResponse(Call<List<RideForReportDTO>> call, Response<List<RideForReportDTO>> response) {
+                if (response.isSuccessful()) {
+                    rides = response.body();
+                    fillEntries(rides);
+                } else {
+                    Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RideForReportDTO>> call, Throwable t) {
+                Log.d("EVOME", t.toString());
+                Toast.makeText(ReportsActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
             }
         });
     }
@@ -232,6 +265,15 @@ public class PassengerReportsActivity extends AppCompatActivity {
                 sufix = "km";
                 break;
             case "Money spent":
+                for (Object date : map.keySet().stream().sorted().collect(toList()))
+                {
+                    List<RideForReportDTO> ridesVals = map.get(date);
+                    entries.add(new BarEntry((float) i++, (float) ridesVals.stream().mapToDouble(RideForReportDTO::getTotalCost).sum()));
+                    labels.add(formatLabel(date.toString()));
+                }
+                sufix = "RSD";
+                break;
+            case "Money earnd":
                 for (Object date : map.keySet().stream().sorted().collect(toList()))
                 {
                     List<RideForReportDTO> ridesVals = map.get(date);
@@ -344,20 +386,30 @@ public class PassengerReportsActivity extends AppCompatActivity {
     }
 
     private void setSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.passenger_reports_filter));
+        ArrayAdapter<String> adapter;
+        if(Globals.userRole.equals("passenger")) {
+            adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.passenger_reports_filter));
+        } else {
+            adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.driver_reports_filter));
+        }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         criteriaSpinner.setAdapter(adapter);
 
         criteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (dateChosen || rides != null)
+                if (dateChosen || rides != null) {
                     fillEntries(rides);
-                else
-                    getData();
+                }
+                else {
+                    if(Globals.userRole.equals("passenger"))
+                        getDataPassenger();
+                    else
+                        getDataDriver();
+                }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
