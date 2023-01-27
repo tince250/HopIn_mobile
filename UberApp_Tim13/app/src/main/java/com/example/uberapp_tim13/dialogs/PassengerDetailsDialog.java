@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.example.uberapp_tim13.adapters.ride_history.PassengerDetailsAdapter;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.services.UserService;
+import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class PassengerDetailsDialog extends Dialog {
     Activity activity;
     ListView listView;
     int counter = 0;
+    int passengersNum;
 
     public PassengerDetailsDialog(@NonNull Activity activity, RideReturnedDTO ride) {
         super(activity);
@@ -53,10 +56,15 @@ public class PassengerDetailsDialog extends Dialog {
     private void setBroadcast(){
         Intent intentUserService = new Intent(getContext(), UserService.class);
 
+        passengersNum = 0;
+
         for (int i = 0; i < ride.getPassengers().size(); i++){
-            intentUserService.putExtra("method", "getById");
-            intentUserService.putExtra("userId", ride.getPassengers().get(i).getId());
-            this.activity.startService(intentUserService);
+            if (ride.getPassengers().get(i).getId() != Globals.user.getId()) {
+                passengersNum++;
+                intentUserService.putExtra("method", "getById");
+                intentUserService.putExtra("userId", ride.getPassengers().get(i).getId());
+                this.activity.startService(intentUserService);
+            }
         }
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
             @Override
@@ -64,7 +72,7 @@ public class PassengerDetailsDialog extends Dialog {
                 Bundle extras = intent.getExtras();
                 users.add((UserDTO) extras.get("userById"));
                 counter++;
-                if (counter == ride.getPassengers().size())
+                if (counter == passengersNum)
                     setComponents();
             }
         };

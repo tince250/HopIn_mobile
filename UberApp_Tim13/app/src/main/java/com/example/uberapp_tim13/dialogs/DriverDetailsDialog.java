@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.services.UserService;
+import com.example.uberapp_tim13.tools.Utils;
 
 public class DriverDetailsDialog extends Dialog {
     RideReturnedDTO ride;
@@ -30,7 +32,7 @@ public class DriverDetailsDialog extends Dialog {
         this.activity = activity;
         this.ride = ride;
 
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override
@@ -46,6 +48,12 @@ public class DriverDetailsDialog extends Dialog {
         ((TextView) findViewById(R.id.detailsContactTV)).setText("Phone: " + driver.getTelephoneNumber());
         ((TextView) findViewById(R.id.detailsPlatesTV)).setText("Plates: " + vehicle.getLicenseNumber());
         ((TextView) findViewById(R.id.detailsVehicleTV)).setText("Model: " + vehicle.getModel());
+        ((TextView) findViewById(R.id.vehicleTypeTV)).setText("Type: " + vehicle.getVehicleType());
+
+        if (driver.getProfilePicture() != null) {
+            ImageView profilePic = findViewById(R.id.ic_profile);
+            profilePic.setImageBitmap(Utils.convertBase64ToBitmap(driver.getProfilePicture()));
+        }
     }
 
     private void setBroadcast(){

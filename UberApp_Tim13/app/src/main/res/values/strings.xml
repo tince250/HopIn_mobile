@@ -120,7 +120,7 @@
     <string name="userTelephone">contact: +3816572193</string>
     <string name="driverName">Mark Jackson</string>
     <string name="showDetails">Show details</string>
-    <string name="ratingsSubtitle">Ratings</string>
+    <string name="ratingsSubtitle">Reviews</string>
     <string name="passengersSubtitle">Passengers</string>
     <string name="inconsistent">driver inconsistent</string>
     <string name="send">Send</string>

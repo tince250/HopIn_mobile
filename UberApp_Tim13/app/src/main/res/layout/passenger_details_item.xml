@@ -8,26 +8,33 @@
     android:background="@drawable/border"
     android:gravity="center"
     app:cardCornerRadius="5dp"
-    app:strokeColor="@color/disabled_gray"
-    app:strokeWidth="2dp">
+    app:strokeColor="@color/gray"
+    app:strokeWidth="1dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
-        android:paddingHorizontal="5dp">
+        android:paddingHorizontal="10dp">
 
-        <ImageView
-            android:id="@+id/ic_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ic_profile_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="15dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_profile"
-            app:tint="@color/dark_gray" />
+            android:elevation="0dp"
+            app:cardCornerRadius="50dp"
+            android:layout_marginHorizontal="3dp">
+
+            <ImageView
+                android:id="@+id/ic_profile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_placeholder"/>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/detailsNameTV"
@@ -35,7 +42,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
             android:text="@string/userName"
-            android:layout_toEndOf="@id/ic_profile"
+            android:layout_toEndOf="@id/ic_profile_card"
             android:textColor="@color/dark_blue"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -46,7 +53,7 @@
         <TextView
             android:id="@+id/detailsEmailTV"
             android:layout_below="@id/detailsNameTV"
-            android:layout_toEndOf="@id/ic_profile"
+            android:layout_toEndOf="@id/ic_profile_card"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
@@ -59,7 +66,7 @@
         <TextView
             android:id="@+id/detailsContactTV"
             android:layout_below="@id/detailsEmailTV"
-            android:layout_toEndOf="@id/ic_profile"
+            android:layout_toEndOf="@id/ic_profile_card"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -134,7 +134,7 @@ public class ReviewService extends Service {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private float calculateRating(List<CompleteRideReviewDTO> reviews){
+    public static float calculateRating(List<CompleteRideReviewDTO> reviews){
         if (reviews.size() == 0)
             return -1;
 

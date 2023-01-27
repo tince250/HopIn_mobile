@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -31,6 +32,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class RideHistoryDetailsFragment extends Fragment{
@@ -52,19 +55,24 @@ public class RideHistoryDetailsFragment extends Fragment{
 
         ((TextView)view.findViewById(R.id.routeTV)).setText(ride.getRouteDepartureDestinationTitle());
         ((TextView)view.findViewById(R.id.startTimeTV)).setText(ride.getStartDateTextView());
-        ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getStartDateTextView());
+        ((TextView)view.findViewById(R.id.endTimeTV)).setText(ride.getEndDateTextView());
         ((TextView)view.findViewById(R.id.passengersTV)).setText("Passengers: " + ride.getPassengers().size());
         ((TextView)view.findViewById(R.id.priceTV)).setText("Price: " + ride.getTotalCost() + "RSD");
         ((TextView)view.findViewById(R.id.distanceTV)).setText("Distance: " + ride.getDistance() + "km");
 
         setListViewAdapterAndRating(view, ride.getId());
 
-        view.findViewById(R.id.passengerDetailsRL).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {;
-                new PassengerDetailsDialog(getActivity(), ride).show();
-            }
-        });
+        if (Globals.userRole.equals("passenger") && ride.getPassengers().size() == 1) {
+            ((TextView)view.findViewById(R.id.displayMessageTV)).setText("Only you");
+        } else {
+            view.findViewById(R.id.passengerDetailsRL).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new PassengerDetailsDialog(getActivity(), ride).show();
+                }
+            });
+        }
+
 
         view.findViewById(R.id.driverDetailsRL).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,23 +95,63 @@ public class RideHistoryDetailsFragment extends Fragment{
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
                 ArrayList<CompleteRideReviewDTO> completeReviews = (ArrayList<CompleteRideReviewDTO>) extras.get("allReviews");
-                ArrayList<ReviewReturnedDTO> allReviews = new ArrayList<ReviewReturnedDTO>();
-                for (CompleteRideReviewDTO completeReview : completeReviews){
-                    if (completeReview.getDriverReview() != null)
-                        allReviews.add(completeReview.getDriverReview());
-                    if (completeReview.getVehicleReview() != null)
-                        allReviews.add(completeReview.getVehicleReview());
+
+                if (completeReviews.size() == 0) {
+                    view.findViewById(R.id.notRatedTV).setVisibility(View.VISIBLE);
+                    return;
                 }
 
-                RatingsAdapter adapter = new RatingsAdapter(getActivity(), allReviews);
+                setListViewListener(view);
+                completeReviews = sortReviews(completeReviews);
+
+
+                RatingsAdapter adapter = new RatingsAdapter(getActivity(), completeReviews);
                 ListView listView = view.findViewById(R.id.list);
                 listView.setAdapter(adapter);
 
                 ((RatingBar)view.findViewById(R.id.ratingBar)).setRating((Float) extras.get("allRideReviewsRating"));
+                view.findViewById(R.id.ratingBar).setVisibility(View.VISIBLE);
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("rideHistoryDetailsFragment"));
 
+    }
+
+    private ArrayList<CompleteRideReviewDTO> sortReviews(ArrayList<CompleteRideReviewDTO> completeReviews) {
+        List<CompleteRideReviewDTO> reviewList = completeReviews.stream().filter((review) -> {return review.getDriverReview().getPassenger().getId() == Globals.user.getId();}).collect(Collectors.toList());
+        if (reviewList.size() == 0)
+            return completeReviews;
+
+        CompleteRideReviewDTO review = reviewList.get(0);
+        completeReviews.remove(review);
+        completeReviews.add(0, review);
+
+        return completeReviews;
+    }
+
+    private void setListViewListener(View view) {
+        ListView lv = (ListView)view.findViewById(R.id.list);
+        lv.setOnTouchListener(new ListView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
     }
 
     private void fitFragmentToRole(View view, RideReturnedDTO ride) {

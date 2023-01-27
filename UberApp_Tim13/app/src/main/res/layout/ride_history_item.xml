@@ -208,7 +208,7 @@
             android:textColor="#959595"
             android:paddingVertical="2dp"
             android:paddingHorizontal="10dp"
-            android:layout_marginTop="-25dp"
+            android:layout_marginTop="-15dp"
             android:layout_gravity="end"
             android:textSize="13dp"
             android:visibility="gone"

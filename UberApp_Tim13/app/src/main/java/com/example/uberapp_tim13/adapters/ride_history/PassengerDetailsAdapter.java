@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.tools.Mockap;
+import com.example.uberapp_tim13.tools.Utils;
 
 import java.util.List;
 
@@ -50,6 +52,11 @@ public class PassengerDetailsAdapter extends BaseAdapter {
         ((TextView) view_new.findViewById(R.id.detailsNameTV)).setText(user.getName());
         ((TextView) view_new.findViewById(R.id.detailsEmailTV)).setText(user.getEmail());
         ((TextView) view_new.findViewById(R.id.detailsContactTV)).setText(user.getTelephoneNumber());
+
+        if (user.getProfilePicture() != null) {
+            ImageView profilePic = view_new.findViewById(R.id.ic_profile);
+            profilePic.setImageBitmap(Utils.convertBase64ToBitmap(user.getProfilePicture()));
+        }
 
         return view_new;
     }
