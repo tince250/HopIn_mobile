@@ -1,18 +1,28 @@
 package com.example.uberapp_tim13.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.util.Log;
+import android.widget.Button;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.uberapp_tim13.R;
 
 public class LocationDialog extends AlertDialog.Builder {
 
+    private Context context;
+    private Button positiveButton;
+    private Button negativeButton;
 
     public LocationDialog(Context context) {
         super(context);
+        this.context = context;
         setUpDialog();
     }
 
@@ -42,4 +52,5 @@ public class LocationDialog extends AlertDialog.Builder {
 
         return dialog;
     }
+
 }
