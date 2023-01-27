@@ -37,6 +37,7 @@ public class LoginActivity extends Activity {
     public void login(View v) {
         if (!isFormValid()){
             Toast.makeText(LoginActivity.this, "Bad credentials!", Toast.LENGTH_LONG).show();
+            return;
         }
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
@@ -55,8 +56,6 @@ public class LoginActivity extends Activity {
                 boolean done = (boolean) intent.getExtras().get("done");
 
                 if (done) {
-                    Log.d("prov", Globals.userRole);
-
                     if (Globals.userRole.equals("passenger")) {
                         startActivity(new Intent(LoginActivity.this, PassengerMainActivity.class));
                     }else if (Globals.userRole.equals("driver")) {
