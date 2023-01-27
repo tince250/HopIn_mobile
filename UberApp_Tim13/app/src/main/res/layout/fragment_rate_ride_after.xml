@@ -17,18 +17,20 @@
         android:background="@drawable/border">
 
         <TextView
+            android:id="@+id/thankYouTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/thank_you"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/poppinsbold"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textFontWeight="900"
             android:textColor="@color/dark_blue"
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/finishedTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ride_finished"
@@ -136,7 +138,7 @@
 
             <TextView
                 android:id="@+id/vehicleRatingTV"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppinsbold"

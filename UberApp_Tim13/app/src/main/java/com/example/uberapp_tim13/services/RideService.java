@@ -5,6 +5,7 @@ import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.tools.Globals;
 
 import android.app.Service;
 import android.content.Intent;
@@ -101,11 +102,9 @@ public class RideService extends Service {
         Call<AllPassengerRidesDTO> call = null;
         Log.d("TOKEN", AuthService.tokenDTO.getAccessToken());
         if (role.equals("driver"))
-            call = RestUtils.driverAPI.getAllRides(AuthService.tokenDTO.getAccessToken(),
-                userId, 0, 5, "", "", "");
+            call = RestUtils.driverAPI.getAllRides(AuthService.tokenDTO.getAccessToken(), userId);
         else
-            call = RestUtils.passengerAPI.getAllRides(AuthService.tokenDTO.getAccessToken(),
-                    1, 0, 5, "", "", "");
+            call = RestUtils.passengerAPI.getAllRides(AuthService.tokenDTO.getAccessToken(), userId);
         call.enqueue(new Callback<AllPassengerRidesDTO>() {
 
             @Override

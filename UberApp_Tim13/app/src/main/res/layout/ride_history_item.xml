@@ -1,178 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
     android:background="@drawable/border"
     android:id="@+id/historyRideCardLL"
-    android:padding="10dp">
-
-    <RelativeLayout
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        >
+        android:orientation="vertical"
+        android:padding="10dp">
 
-
-        <ImageView
-            android:id="@+id/carImg"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="5dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_car"
-            app:tint="@color/dark_gray"
-            android:layout_marginTop="5dp"/>
-
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:orientation="vertical"
-            android:layout_toEndOf="@id/carImg">
-
-            <TextView
-                android:id="@+id/routeTV"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
-                android:gravity="center_vertical"
-                android:paddingTop="5dp"
-                android:text="@string/routeCities"
-                android:textColor="@color/dark_blue"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                />
-
-            <TextView
-                android:id="@+id/stopsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsbold"
-                android:text="@string/routeStops"
-                android:textSize="12sp"
-                android:textColor="@color/dark_gray"
-                android:layout_marginTop="-2dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="-5dp"
-            android:layout_marginTop="2dp">
+            android:layout_marginBottom="10dp"
+            >
+
+
             <ImageView
-                android:id="@+id/messageImg"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_gravity="top"
-                android:layout_marginStart="5dp"
+                android:id="@+id/carImg"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_baseline_chat_bubble_outline_24"
-                app:tint="@color/dark_blue" />
-            <ImageView
-                android:id="@+id/addToFavImg"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_gravity="top"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_heart"
-                app:tint="@color/gray"
-                android:layout_alignParentEnd="true" />
-        </LinearLayout>
+                android:contentDescription="@null"
+                android:src="@drawable/ic_car"
+                app:tint="@color/dark_gray"
+                android:layout_marginTop="5dp"/>
+
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/carImg">
+
+                <TextView
+                    android:id="@+id/routeTV"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsbold"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:text="@string/routeCities"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/rideDistanceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="@string/routeDistance"
+                    android:textSize="12sp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="-2dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="-5dp"
+                android:layout_marginTop="2dp">
+                <ImageView
+                    android:id="@+id/repeatImg"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_repeat"
+                    app:tint="@color/dark_blue" />
+                <ImageView
+                    android:id="@+id/addToFavImg"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="top"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_heart"
+                    app:tint="@color/gray"
+                    android:layout_alignParentEnd="true" />
+            </LinearLayout>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-
-    <TextView
-        android:id="@+id/dateTV"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/poppinsbold"
-        android:text="@string/rideDate"
-        android:textColor="@color/dark_blue"
-        android:textSize="15sp"
-        android:drawableLeft="@drawable/ic_calendar"
-        android:drawablePadding="3dp"
-        android:paddingHorizontal="8dp"
-
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/driverTV"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/poppinsbold"
-        android:text="@string/driverName"
-        android:drawableLeft="@drawable/wheel"
-        android:drawablePadding="3dp"
-        android:paddingHorizontal="8dp"
-        android:textColor="@color/dark_blue"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/passengersTV"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/poppinsbold"
-        android:text="@string/acceptanceRidePassengers"
-        android:drawableLeft="@drawable/ic_passenger"
-        android:drawablePadding="3dp"
-        android:paddingHorizontal="8dp"
-        android:textColor="@color/dark_blue"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/priceTV"
-            android:layout_width="wrap_content"
+            android:id="@+id/dateTV"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/poppinsbold"
-            android:text="@string/acceptanceRidePrice"
-            android:drawableLeft="@drawable/ic_price"
-            android:paddingHorizontal="8dp"
+            android:text="@string/rideDate"
+            android:textColor="@color/dark_blue"
+            android:textSize="15sp"
+            android:drawableLeft="@drawable/ic_calendar"
             android:drawablePadding="3dp"
+            android:paddingHorizontal="8dp"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/driverTV"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppinsbold"
+            android:text="@string/driverName"
+            android:drawableLeft="@drawable/wheel"
+            android:drawablePadding="3dp"
+            android:paddingHorizontal="8dp"
             android:textColor="@color/dark_blue"
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+        <TextView
+            android:id="@+id/passengersTV"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:progressBackgroundTint="@color/black"
-            android:progressTint="@color/orange"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="-25dp"
-            android:layout_marginTop="-5dp"/>
+            android:fontFamily="@font/poppinsbold"
+            android:text="@string/acceptanceRidePassengers"
+            android:drawableLeft="@drawable/ic_passenger"
+            android:drawablePadding="3dp"
+            android:paddingHorizontal="8dp"
+            android:textColor="@color/dark_blue"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/priceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/acceptanceRidePrice"
+                android:drawableLeft="@drawable/ic_price"
+                android:paddingHorizontal="8dp"
+                android:drawablePadding="3dp"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressBackgroundTint="@color/black"
+                android:progressTint="@color/orange"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="-40dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange"
+            android:text="@string/leaveRating"
+            android:textAllCaps="false"
+            android:paddingVertical="2dp"
+            android:includeFontPadding="false"
+            android:layout_marginTop="-25dp"
+            android:layout_gravity="end"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:textSize="13dp"
+            android:visibility="gone"
+            android:focusable="false"
+            />
+
+        <TextView
+            android:id="@+id/notRatedBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:text="@string/notRated"
+            android:textColor="#959595"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="-15dp"
+            android:layout_gravity="end"
+            android:textSize="13dp"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

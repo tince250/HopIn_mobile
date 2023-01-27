@@ -120,7 +120,7 @@
     <string name="userTelephone">contact: +3816572193</string>
     <string name="driverName">Mark Jackson</string>
     <string name="showDetails">Show details</string>
-    <string name="ratingsSubtitle">Ratings</string>
+    <string name="ratingsSubtitle">Reviews</string>
     <string name="passengersSubtitle">Passengers</string>
     <string name="inconsistent">driver inconsistent</string>
     <string name="send">Send</string>
@@ -170,6 +170,10 @@
     <string name="vehicle_rating">Vehicle rating</string>
     <string name="generateReport">generate</string>
     <string name="average">average</string>
+    <string name="leaveRating">leave a rating</string>
+    <string name="notRated">not rated</string>
+    <string name="rateRide">Leave a rating</string>
+    <string name="feedback">your feedback matters :)</string>
     <string name="you">You</string>
     <string name="week">WEEK</string>
 

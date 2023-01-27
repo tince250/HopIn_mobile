@@ -59,6 +59,8 @@ public class OrderAgainDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.dialog_order_again);
         setComponents();
         setListeners();
+
+        RideService.rideInCreation.setScheduledTime(null);
     }
 
     private void setComponents(){

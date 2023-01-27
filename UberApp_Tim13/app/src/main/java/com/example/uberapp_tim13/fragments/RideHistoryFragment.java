@@ -41,9 +41,7 @@ public class RideHistoryFragment extends ListFragment{
         if (Globals.userRole.equals("passenger")) {
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.passengerFL);
         } else {
-            Log.d("udje", "kako");
             FragmentTransition.to(RideHistoryDetailsFragment.newInstance(allRides.getResults().get(position)), getActivity(), true, R.id.driverFL);
-
         }
     }
 
@@ -63,7 +61,6 @@ public class RideHistoryFragment extends ListFragment{
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
                 allRides = (AllPassengerRidesDTO) extras.get("allRides");
-                Log.d("aa", allRides.getResults().toString());
 
                 HistoryAdapter adapter = new HistoryAdapter(allRides.getResults(), getActivity());
                 setListAdapter(adapter);

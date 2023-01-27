@@ -15,29 +15,31 @@ import android.widget.TextView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
 import com.example.uberapp_tim13.dtos.ReviewReturnedDTO;
 import com.example.uberapp_tim13.services.UserService;
+import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.List;
 
 public class RatingsAdapter extends BaseAdapter {
 
     private Activity activity;
-    List<ReviewReturnedDTO> items;
+    List<CompleteRideReviewDTO> reviews;
 
-    public RatingsAdapter(Activity activity, List<ReviewReturnedDTO> items) {
+    public RatingsAdapter(Activity activity, List<CompleteRideReviewDTO> items) {
         this.activity = activity;
-        this.items = items;
+        this.reviews = items;
     }
 
     @Override
     public int getCount() {
-        return items.size();
+        return reviews.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return items.get(i);
+        return reviews.get(i);
     }
 
     @Override
@@ -47,34 +49,21 @@ public class RatingsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ReviewReturnedDTO review = items.get(i);
+        CompleteRideReviewDTO review = reviews.get(i);
         View view_new = view;
         if (view == null) {
             view_new = activity.getLayoutInflater().inflate(R.layout.fragment_ride_reviews, null);
         }
 
-        ((RatingBar)view_new.findViewById(R.id.rating)).setRating(review.getRating());
-        ((TextView)view_new.findViewById(R.id.commentTV)).setText(review.getComment());
-        setReviewerName(view_new, review.getPassenger().getId());
+        ((RatingBar)view_new.findViewById(R.id.ratingDriver)).setRating(review.getDriverReview().getRating());
+        ((RatingBar)view_new.findViewById(R.id.ratingVehicle)).setRating(review.getVehicleReview().getRating());
+        ((TextView)view_new.findViewById(R.id.commentDriverTV)).setText(review.getDriverReview().getComment());
+        ((TextView)view_new.findViewById(R.id.commentVehicleTV)).setText(review.getVehicleReview().getComment());
+        if (review.getDriverReview().getPassenger().getId() != Globals.user.getId())
+            ((TextView)view_new.findViewById(R.id.nameTV)).setText(review.getDriverReview().getPassenger().getName() + " " + review.getDriverReview().getPassenger().getSurname() + ":");
+        else
+            ((TextView)view_new.findViewById(R.id.nameTV)).setText("You:");
         return view_new;
     }
 
-    private void setReviewerName(View view_new, int userId){
-        Intent intent = new Intent(this.activity, UserService.class);
-        intent.putExtra("method", "getUserName");
-        intent.putExtra("userId", userId);
-        intent.putExtra("sender", "ratingsAdapter");
-        this.activity.startService(intent);
-
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Bundle extras = intent.getExtras();
-                String name = (String) extras.get("userName");
-                ((TextView)view_new.findViewById(R.id.nameTV)).setText(name);
-
-            }
-        };
-        LocalBroadcastManager.getInstance(this.activity).registerReceiver(broadcastReceiver, new IntentFilter("ratingsAdapter"));
-    }
 }

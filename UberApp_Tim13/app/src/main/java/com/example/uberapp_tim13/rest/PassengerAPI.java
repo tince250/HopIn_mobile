@@ -20,13 +20,17 @@ import retrofit2.http.Query;
 public interface PassengerAPI {
 
     @GET("passenger/{id}/ride")
+    Call<AllPassengerRidesDTO> getAllRidesPaginated(@Header("Authorization") String token,
+                                                    @Path("id") int id,
+                                                    @Query("page") int page,
+                                                    @Query("size") int size,
+                                                    @Query("sort") String sort,
+                                                    @Query("from") String from,
+                                                    @Query("to") String to);
+
+    @GET("passenger/{id}/all/rides")
     Call<AllPassengerRidesDTO> getAllRides(@Header("Authorization") String token,
-                                           @Path("id") int id,
-                                           @Query("page") int page,
-                                           @Query("size") int size,
-                                           @Query("sort") String sort,
-                                           @Query("from") String from,
-                                           @Query("to") String to);
+                                                    @Path("id") int id);
 
     @POST("passenger")
     Call<UserReturnedDTO> register(@Body UserDTO user);
@@ -41,10 +45,19 @@ public interface PassengerAPI {
     Call<List<RouteDTO>> getFavouriteRoutes(@Header("Authorization") String token,
                                             @Path("id") int id);
 
+    @GET("passenger/{rideId}/is-favourite/route")
+    Call<Boolean> isFavouriteRoute(@Header("Authorization") String token,
+                                            @Path("rideId") int rideId);
+
     @POST("passenger/{passengerId}/remove/route")
     Call<Void> removeFavouriteRoute(@Header("Authorization") String token,
                                     @Path("passengerId") int id,
                                     @Query("routeId") int routeId);
+
+    @POST("passenger/{passengerId}/add/route")
+        Call<Void> addFavouriteRoute(@Header("Authorization") String token,
+                                        @Path("passengerId") int id,
+                                        @Body RouteDTO route);
 
     @PUT("passenger/{id}")
     Call<UserDTO> update(@Header("Authorization") String token,

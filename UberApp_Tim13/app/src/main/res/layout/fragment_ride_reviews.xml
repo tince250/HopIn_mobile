@@ -9,7 +9,8 @@
     android:background="@drawable/border"
     android:orientation="vertical"
     android:padding="15dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,40 +22,126 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/poppinsbold"
-            android:text=""
+            android:text="Grace Collins"
             android:textStyle="bold"
+            android:textFontWeight="700"
             android:layout_centerVertical="true"
             android:textColor="@color/dark_gray"
             android:textSize="16sp" />
 
+    </RelativeLayout>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:elevation="0dp"
+        app:strokeColor="@color/gray"
+        app:strokeWidth="1dp"
+        android:layout_marginTop="10dp">
         <RatingBar
-            android:id="@+id/rating"
+            android:id="@+id/ratingDriver"
             style="?android:attr/ratingBarStyleIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_gravity="right"
             android:progressBackgroundTint="@color/black"
             android:progressTint="@color/orange"
             android:rating="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:layout_marginRight="-35dp"/>
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:layout_marginRight="-40dp"
+            android:layout_marginTop="-5dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="10dp">
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="7dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/driverIC"
+                android:src="@drawable/driver"/>
 
 
-    <TextView
-        android:id="@+id/commentTV"
-        android:layout_width="wrap_content"
+
+            <TextView
+                android:id="@+id/commentDriverTV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="100dp"
+                android:fontFamily="@font/poppinsbold"
+                android:text="Very Nice Ride"
+                android:textColor="@color/dark_blue"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@id/driverIC" />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Very Nice Ride"
-        android:textColor="@color/dark_blue"
-        android:textSize="14sp"
-        android:layout_marginTop="-5dp"/>
+        app:cardCornerRadius="5dp"
+        android:elevation="0dp"
+        app:strokeColor="@color/gray"
+        app:strokeWidth="1dp"
+        android:layout_marginTop="10dp">
+        <RatingBar
+            android:id="@+id/ratingVehicle"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:layout_gravity="right"
+            android:progressBackgroundTint="@color/black"
+            android:progressTint="@color/orange"
+            android:rating="4"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:layout_marginRight="-40dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginBottom="4dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="7dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:id="@+id/vehicleIC"
+                android:src="@drawable/ic_car"/>
+
+
+
+            <TextView
+                android:id="@+id/commentVehicleTV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="100dp"
+                android:fontFamily="@font/poppinsbold"
+                android:text="Very Nice Ride"
+                android:textColor="@color/dark_blue"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@id/vehicleIC"/>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
 
 
 </LinearLayout>
