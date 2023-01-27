@@ -49,6 +49,10 @@ public class LoginActivity extends Activity {
         setBroadcast();
     }
 
+    public void forgottenPassword(View v){
+        goToResetPassword(v);
+    }
+
     private void setBroadcast() {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
             @Override
@@ -69,6 +73,10 @@ public class LoginActivity extends Activity {
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("userLoggedIn"));
 
+    }
+
+    public void goToResetPassword(View v){
+        startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
     }
 
     public void goToRegister(View v) {
