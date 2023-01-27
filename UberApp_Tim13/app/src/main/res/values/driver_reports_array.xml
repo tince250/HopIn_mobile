@@ -2,7 +2,7 @@
 <resources>
     <string-array name="driver_reports_filter">
         <item>Distance traveled</item>
-        <item>Money spent</item>
+        <item>Money earnd</item>
         <item>Number of rides</item>
     </string-array>
 </resources>

@@ -9,14 +9,12 @@ import android.util.Log;
 import com.example.uberapp_tim13.dtos.AllMessagesDTO;
 import com.example.uberapp_tim13.dtos.MessageDTO;
 import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
-import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
-import com.example.uberapp_tim13.rest.UserAPI;
-import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,12 +61,12 @@ public class UserService extends Service {
     }
 
     private void getById(int userId, String method){
-        Call<UserDTO> call = RestUtils.userApi.doGetUser(AuthService.tokenDTO.getAccessToken(), userId);
+        Call<UserReturnedDTO> call = RestUtils.userApi.doGetUser(AuthService.tokenDTO.getAccessToken(), userId);
         Log.d("userid", String.valueOf(userId));
-        call.enqueue(new Callback<UserDTO>() {
+        call.enqueue(new Callback<UserReturnedDTO>() {
 
             @Override
-            public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
+            public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response){
                 Log.d("allDrivers", response.body().toString());
                 if (method.equals("getById"))
                     sendUserByIdBroadcast(response.body());
@@ -77,19 +75,19 @@ public class UserService extends Service {
             }
 
             @Override
-            public void onFailure(Call<UserDTO> call, Throwable t) {
+            public void onFailure(Call<UserReturnedDTO> call, Throwable t) {
                 Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
     }
 
     private void getByEmail(String email){
-        Call<UserDTO> call = RestUtils.userApi.getUserByEmail(AuthService.tokenDTO.getAccessToken(), email);
+        Call<UserReturnedDTO> call = RestUtils.userApi.getUserByEmail(AuthService.tokenDTO.getAccessToken(), email);
         Log.d("email", String.valueOf(email));
-        call.enqueue(new Callback<UserDTO>() {
+        call.enqueue(new Callback<UserReturnedDTO>() {
 
             @Override
-            public void onResponse(Call<UserDTO> call, Response<UserDTO> response){
+            public void onResponse(Call<UserReturnedDTO> call, Response<UserReturnedDTO> response){
                 //Log.d("EMAIL_REZ", response.body().toString());
                 if(response.code() == 200) {
                     sendUserByEmailBroadcast(response.body());
@@ -100,7 +98,7 @@ public class UserService extends Service {
             }
 
             @Override
-            public void onFailure(Call<UserDTO> call, Throwable t) {
+            public void onFailure(Call<UserReturnedDTO> call, Throwable t) {
                 Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
@@ -149,19 +147,19 @@ public class UserService extends Service {
         });    }
 
 
-    private void sendUserByIdBroadcast(UserDTO user){
+    private void sendUserByIdBroadcast(UserReturnedDTO user){
         Intent intent = new Intent("userDetailsDialog");
         intent.putExtra("userById", user);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void sendUserNameBroadcast(UserDTO user){
+    private void sendUserNameBroadcast(UserReturnedDTO user){
         Intent intent = new Intent("ratingsAdapter");
         intent.putExtra("userName", user.getName() + " " + user.getSurname());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void sendUserByEmailBroadcast(UserDTO user){
+    private void sendUserByEmailBroadcast(UserReturnedDTO user){
         Intent intent = new Intent("inviteOthersFragment");
         intent.putExtra("userByEmail", user);
         //Log.d("provera", user.getName());

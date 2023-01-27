@@ -1,23 +1,21 @@
 package com.example.uberapp_tim13.dtos;
 
-import com.example.uberapp_tim13.model.Ride;
-
 import java.io.Serializable;
 
 public class RideInviteDTO implements Serializable {
-    private UserDTO from;
+    private UserReturnedDTO from;
     private RideInInviteDTO ride;
 
-    public RideInviteDTO(UserDTO from, RideInInviteDTO ride) {
+    public RideInviteDTO(UserReturnedDTO from, RideInInviteDTO ride) {
         this.from = from;
         this.ride = ride;
     }
 
-    public UserDTO getFrom() {
+    public UserReturnedDTO getFrom() {
         return from;
     }
 
-    public void setFrom(UserDTO from) {
+    public void setFrom(UserReturnedDTO from) {
         this.from = from;
     }
 

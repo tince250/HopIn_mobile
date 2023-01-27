@@ -1,6 +1,9 @@
 package com.example.uberapp_tim13.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +14,16 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.activities.AccountSettingsActivity;
-import com.example.uberapp_tim13.activities.DriverReportsActivity;
 import com.example.uberapp_tim13.activities.DriverStatisticsActivity;
 import com.example.uberapp_tim13.activities.FavoriteRoutesActivity;
 import com.example.uberapp_tim13.R;
-import com.example.uberapp_tim13.activities.LoginActivity;
-import com.example.uberapp_tim13.activities.PassengerReportsActivity;
+import com.example.uberapp_tim13.activities.ReportsActivity;
 import com.example.uberapp_tim13.dialogs.LogOutDialog;
+import com.example.uberapp_tim13.dtos.VehicleDTO;
+import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.material.button.MaterialButton;
@@ -75,17 +79,7 @@ public class AccountFragment extends Fragment {
         view.findViewById(R.id.reportsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (Globals.userRole) {
-                    case "driver":
-                        startActivity(new Intent(getActivity(), DriverReportsActivity.class));
-                        break;
-                    case "passenger":
-                        startActivity(new Intent(getActivity(), PassengerReportsActivity.class));
-                        break;
-                    default:
-                        break;
-                }
-
+                startActivity(new Intent(getActivity(), ReportsActivity.class));
             }
         });
 
@@ -96,6 +90,12 @@ public class AccountFragment extends Fragment {
         MaterialButton button = view.findViewById(R.id.statisticsBtn);
         switch (Globals.userRole) {
             case "driver":
+                Intent intentDriverService = new Intent(getContext(), DriverService.class);
+                intentDriverService.putExtra("method", "getVehicle");
+                intentDriverService.putExtra("driverId", Globals.user.getId());
+                requireActivity().startService(intentDriverService);
+                setBroadcastGetVehicle();
+
                 button.setIcon(ContextCompat.getDrawable(this.getContext(), R.drawable.statistics));
                 button.setText("statistics");
                 break;
@@ -124,5 +124,19 @@ public class AccountFragment extends Fragment {
     public void onResume() {
         super.onResume();
         fitTextViewsToUser();
+    }
+
+    private void setBroadcastGetVehicle() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                VehicleDTO vehicle = (VehicleDTO) extras.get("vehicle");
+                ((TextView) currView.findViewById(R.id.vehicleModelTV)).setText(vehicle.getModel());
+                ((TextView) currView.findViewById(R.id.regPlatesTV)).setText(vehicle.getLicenseNumber());
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("userDetailsDialog"));
+
     }
 }

@@ -25,20 +25,18 @@ import com.example.uberapp_tim13.adapters.invited_passengers.InvitedPassengersAd
 import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.services.UserService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
-import com.example.uberapp_tim13.tools.Mockap;
 import com.example.uberapp_tim13.tools.StompManager;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
 public class InviteOthersFragment extends Fragment implements View.OnClickListener {
@@ -48,15 +46,15 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
         return new InviteOthersFragment();
     }
 
-    List<UserDTO> addedUsers;
+    List<UserReturnedDTO> addedUsers;
     List<Boolean> accepted;
     ImageView inviteBtn;
     InvitedPassengersAdapter adapter;
     private ListView listView;
     TextView emailTV;
-    UserDTO user;
+    UserReturnedDTO user;
     private StompClient mStompClient;
-    private UserDTO loggedUser;
+    private UserReturnedDTO loggedUser;
     Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
@@ -126,14 +124,14 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                 Bundle extras = intent.getExtras();
                 if (user == null) {
                     //Log.d("REC", extras.get("userByEmail").toString());
-                    user = (UserDTO) extras.get("userByEmail");
+                    user = (UserReturnedDTO) extras.get("userByEmail");
                     if (user == null) {
                         Toast.makeText(getActivity(),"User does not exist!",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     String email = user.getEmail();
-                    for (UserDTO u : addedUsers) {
+                    for (UserReturnedDTO u : addedUsers) {
                         if (u.getEmail().equals(email)) {
                             user = null;
                             Toast.makeText(getActivity(),"User already added!",Toast.LENGTH_SHORT).show();
@@ -150,7 +148,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
                         Log.d("EVO", user.getId() + "");
                         // implementing reaction to invite response
                         Toast.makeText(getActivity(),"Waiting for answer!",Toast.LENGTH_SHORT).show();
-                        UserDTO userCopy = user;
+                        UserReturnedDTO userCopy = user;
                         accepted.add(null);
                         addedUsers.add(userCopy);
                         adapter.notifyDataSetChanged();

@@ -150,26 +150,49 @@ public class AccountSettingsFragment extends Fragment {
 
         UserDTO newUserInfo = this.copyNewInfo(view);
 
-        Call<UserDTO> call = RestUtils.passengerAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
-        call.enqueue(new Callback<UserDTO>() {
-            @Override
-            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-                if (response.isSuccessful()) {
-                    Globals.user = response.body();
-                    fillUserInfo(currView);
-                    Toast.makeText(getActivity(), "Profile info successfully updated :)", Toast.LENGTH_LONG).show();
+        if (Globals.userRole.equals("passenger")) {
+            Call<UserDTO> call = RestUtils.passengerAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
+            call.enqueue(new Callback<UserDTO>() {
+                @Override
+                public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                    if (response.isSuccessful()) {
+                        Globals.user = response.body();
+                        fillUserInfo(currView);
+                        Toast.makeText(getActivity(), "Profile info successfully updated :)", Toast.LENGTH_LONG).show();
 
-                } else {
-                    Toast.makeText(getActivity(), response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
-            }
+                @Override
+                public void onFailure(Call<UserDTO> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<UserDTO> call, Throwable t) {
+                }
+            });
+        } else {
+            Call<UserDTO> call = RestUtils.driverAPI.update(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), newUserInfo);
+            call.enqueue(new Callback<UserDTO>() {
+                @Override
+                public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                    if (response.isSuccessful()) {
+                        Globals.user = response.body();
+                        fillUserInfo(currView);
+                        Toast.makeText(getActivity(), "Profile info successfully updated :)", Toast.LENGTH_LONG).show();
 
-            }
-        });
+                    } else {
+                        Toast.makeText(getActivity(), response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<UserDTO> call, Throwable t) {
+
+                }
+            });
+        }
     }
 
     private boolean validateFields() {

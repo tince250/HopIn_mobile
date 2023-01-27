@@ -1,37 +1,22 @@
 package com.example.uberapp_tim13.activities;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
-import com.example.uberapp_tim13.dtos.RideInInviteDTO;
-import com.example.uberapp_tim13.dtos.RideInviteDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
-import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.services.AuthService;
-import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
-import com.example.uberapp_tim13.tools.Mockap;
-import com.google.gson.Gson;
-
-import java.util.List;
 
 public class LoginActivity extends Activity {
 

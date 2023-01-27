@@ -6,8 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
-import com.example.uberapp_tim13.dtos.UserDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.services.DriverService;
 import com.example.uberapp_tim13.services.UserService;
@@ -73,7 +71,7 @@ public class DriverDetailsDialog extends Dialog {
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
                 if (driver == null)
-                    driver = (UserDTO) extras.get("userById");
+                    driver = (UserReturnedDTO) extras.get("userById");
                 if (vehicle == null)
                     vehicle = (VehicleDTO) extras.get("vehicle");
                 if (vehicle != null && driver != null)
@@ -84,7 +82,7 @@ public class DriverDetailsDialog extends Dialog {
 
     }
 
-    private UserDTO driver = null;
+    private UserReturnedDTO driver = null;
     private VehicleDTO vehicle = null;
 }
 

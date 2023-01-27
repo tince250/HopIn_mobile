@@ -30,7 +30,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.PassengerReportsActivity"
+            android:name=".activities.ReportsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -134,6 +134,8 @@
         <service android:name=".services.DriverService"/>
         <service android:name=".services.UserService"/>
         <service android:name=".services.ReviewService"/>
+        <service android:name=".services.PassengerService"/>
+
 
     </application>
 

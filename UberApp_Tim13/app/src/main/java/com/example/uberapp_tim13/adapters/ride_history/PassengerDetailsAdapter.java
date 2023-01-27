@@ -12,15 +12,16 @@ import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.tools.Mockap;
 import com.example.uberapp_tim13.tools.Utils;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 
 import java.util.List;
 
 public class PassengerDetailsAdapter extends BaseAdapter {
 
     private Activity activity;
-    List<UserDTO> users;
+    List<UserReturnedDTO> users;
 
-    public PassengerDetailsAdapter(Activity activity, List<UserDTO> users) {
+    public PassengerDetailsAdapter(Activity activity, List<UserReturnedDTO> users) {
         this.activity = activity;
         this.users = users;
     }
@@ -42,7 +43,7 @@ public class PassengerDetailsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        UserDTO user = users.get(i);
+        UserReturnedDTO user = users.get(i);
         View view_new = view;
 
         if (view == null) {
