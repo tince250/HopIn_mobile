@@ -7,21 +7,21 @@ import java.time.LocalDateTime;
 public class WorkingHoursEndDTO implements Serializable {
 
 //	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
-	private LocalDateTime end;
+	private String end;
 
 	public WorkingHoursEndDTO() {
 	}
 
-	public WorkingHoursEndDTO(LocalDateTime end) {
+	public WorkingHoursEndDTO(String end) {
 		super();
 		this.end = end;
 	}
 
-	public LocalDateTime getEnd() {
+	public String getEnd() {
 		return end;        
 	}
 
-	public void setEnd(LocalDateTime end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 

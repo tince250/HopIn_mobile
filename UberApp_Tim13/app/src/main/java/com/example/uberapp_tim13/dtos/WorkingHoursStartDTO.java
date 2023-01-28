@@ -5,21 +5,21 @@ import java.time.LocalDateTime;
 
 public class WorkingHoursStartDTO implements Serializable {
 	
-	private LocalDateTime start;
+	private String start;
 
 	public WorkingHoursStartDTO() {
 	}
 
-	public WorkingHoursStartDTO(LocalDateTime start) {
+	public WorkingHoursStartDTO(String start) {
 		super();
 		this.start = start;
 	}
   
-	public LocalDateTime getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(LocalDateTime start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
