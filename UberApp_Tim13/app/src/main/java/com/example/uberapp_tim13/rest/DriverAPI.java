@@ -4,6 +4,9 @@ import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideForReportDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursEndDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursStartDTO;
 
 import java.util.List;
 
@@ -11,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -44,4 +48,14 @@ public interface DriverAPI {
     Call<UserReturnedDTO> update(@Header("Authorization") String token,
                          @Path("id") int id,
                          @Body UserReturnedDTO dto);
+
+    @POST("driver/{id}/working-hour")
+    Call<WorkingHoursDTO> addWorkingHours(@Header("Authorization") String token,
+                                          @Path("id") int id,
+                                          @Body WorkingHoursStartDTO dto);
+
+    @PUT("driver/working-hour/{id}")
+    Call<WorkingHoursDTO> updateWorkingHours(@Header("Authorization") String token,
+                                          @Path("id") int id,
+                                          @Body WorkingHoursEndDTO dto);
 }

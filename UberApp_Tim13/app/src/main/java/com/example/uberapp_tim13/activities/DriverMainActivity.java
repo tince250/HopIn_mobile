@@ -14,21 +14,36 @@ import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
 
+import com.example.uberapp_tim13.dtos.RideForReportDTO;
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 
+import com.example.uberapp_tim13.dtos.WorkingHoursDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursEndDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursStartDTO;
 import com.example.uberapp_tim13.fragments.AccountFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.fragments.DriverHomeFragment;
 import com.example.uberapp_tim13.fragments.InboxFragment;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DriverMainActivity extends AppCompatActivity {
+
+    public static WorkingHoursDTO workingHours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +86,58 @@ public class DriverMainActivity extends AppCompatActivity {
         MenuItem switchItem = menu.findItem(R.id.activeToggle);
         switchItem.setActionView(R.layout.toggle_button_bar);
         final Switch switchBtn = (Switch) menu.findItem(R.id.activeToggle).getActionView().findViewById(R.id.activeSwitch);
+        if (!Globals.isActive) {
+            switchBtn.setChecked(false);
+        }
         switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(getBaseContext(), "checked", Toast.LENGTH_LONG).show();
+                    WorkingHoursStartDTO start = new WorkingHoursStartDTO(LocalDateTime.now().withNano(0).toString());
+                    Call<WorkingHoursDTO> call = RestUtils.driverAPI.addWorkingHours(AuthService.tokenDTO.getAccessToken(), Globals.user.getId(), start);
+                    call.enqueue(new Callback<WorkingHoursDTO>() {
+                        @Override
+                        public void onResponse(Call<WorkingHoursDTO> call, Response<WorkingHoursDTO> response) {
+                            if (response.isSuccessful()) {
+                                workingHours = response.body();
+                                Globals.isActive = true;
+                                Log.d("hours", workingHours.toString());
+                            } else {
+                                switchBtn.setChecked(false);
+                                Globals.isActive = true;
+                                Toast.makeText(DriverMainActivity.this, "You exceeded the 8 hours limit!", Toast.LENGTH_LONG);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<WorkingHoursDTO> call, Throwable t) {
+                            Log.d("EVOME", t.toString());
+                            Toast.makeText(DriverMainActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
+                        }
+                    });
+                    Toast.makeText(getBaseContext(), "You are ready!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getBaseContext(), "not checked", Toast.LENGTH_LONG).show();
+                    WorkingHoursEndDTO end = new WorkingHoursEndDTO(LocalDateTime.now().withNano(0).toString());
+                    Call<WorkingHoursDTO> call = RestUtils.driverAPI.updateWorkingHours(AuthService.tokenDTO.getAccessToken(), workingHours.getId(), end);
+                    call.enqueue(new Callback<WorkingHoursDTO>() {
+                        @Override
+                        public void onResponse(Call<WorkingHoursDTO> call, Response<WorkingHoursDTO> response) {
+                            if (response.isSuccessful()) {
+                                workingHours = response.body();
+                                Globals.isActive = false;
+                                Log.d("hours", workingHours.toString());
+                            } else {
+                                Toast.makeText(DriverMainActivity.this, "An error happened while trying to fetch rides.", Toast.LENGTH_LONG);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<WorkingHoursDTO> call, Throwable t) {
+                            Log.d("EVOME", t.toString());
+                            Toast.makeText(DriverMainActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
+                        }
+                    });
+                    Toast.makeText(getBaseContext(), "You're inactive, thanks for your effort.", Toast.LENGTH_LONG).show();
                 }
             }
         });
