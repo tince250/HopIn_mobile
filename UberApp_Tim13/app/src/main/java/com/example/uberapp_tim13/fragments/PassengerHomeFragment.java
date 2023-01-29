@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.activities.CurrentRideActivity;
 import com.example.uberapp_tim13.activities.ReportsActivity;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.LocationDTO;
@@ -41,6 +42,7 @@ import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
@@ -174,29 +176,13 @@ public class PassengerHomeFragment extends Fragment {
             }
         });
 
+        setBroadcastActiveRide();
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if (alreadyInRide) {
-                   Toast.makeText(getActivity(),"Sorry, you already have active ride.",Toast.LENGTH_SHORT).show();
-                   return;
-               }
-               if (!validateInputs())
-                   return;
-
-                if (route != null) {
-                    if (route.getDeparture() != null && route.getDestination() != null) {
-                        RideService.rideInCreation.getLocations().add(route);
-                    }else {
-                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                } else {
-                    Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                route = null;
-                FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                Intent intentRideService = new Intent(getContext(), RideService.class);
+                intentRideService.putExtra("method", "activeRide");
+                requireActivity().startService(intentRideService);
             }
         });
 
@@ -314,30 +300,38 @@ public class PassengerHomeFragment extends Fragment {
     }
 
 
-    private void checkIsAllowed() {
-        Call<RideReturnedDTO> call = RestUtils.rideAPI.getPassengerActiveRide(AuthService.tokenDTO.getAccessToken(), Globals.userId);
-        call.enqueue(new Callback<RideReturnedDTO>() {
+    private void setBroadcastActiveRide() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
             @Override
-            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                Log.d("provjera", String.valueOf(response.code()));
-                if (response.isSuccessful()) {
-                    alreadyInRide = true;
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                boolean hasActive = extras.getBoolean("hasActive");
+                if (hasActive) {
+                    Toast.makeText(getActivity(),"Sorry, you already have active ride.",Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
-                    alreadyInRide = false;
+                    if (!validateInputs())
+                        return;
+
+                    if (route != null) {
+                        if (route.getDeparture() != null && route.getDestination() != null) {
+                            RideService.rideInCreation.getLocations().add(route);
+                        }else {
+                            Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    } else {
+                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    route = null;
+                    FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
                 }
-            }
 
-            @Override
-            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
-                Log.d("EVOME", t.toString());
             }
-        });
-    }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("activeRide"));
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.checkIsAllowed();
     }
 
 
