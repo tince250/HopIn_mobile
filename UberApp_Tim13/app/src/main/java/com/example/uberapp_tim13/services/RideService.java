@@ -47,6 +47,8 @@ public class RideService extends Service {
                     int userId = (int) extras.get("userId");
                     String role = (String) extras.get("role");
                     getAllUserRides(userId, role);
+                } else if (method.equals("activeRide")) {
+                    getPassengerActiveRide();
                 }
             }
         });
@@ -120,6 +122,26 @@ public class RideService extends Service {
         });
     }
 
+    private void getPassengerActiveRide() {
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.getPassengerActiveRide(AuthService.tokenDTO.getAccessToken(), Globals.userId);
+        call.enqueue(new Callback<RideReturnedDTO>() {
+            @Override
+            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                Log.d("provjera", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    sendActiveRideBroadcast(true);
+                } else {
+                    sendActiveRideBroadcast(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                Log.d("EVOME", t.toString());
+            }
+        });
+    }
+
     private void sendAllUserRidesBroadcast(AllPassengerRidesDTO rides){
         Intent intent = new Intent("rideHistoryFragment");
         intent.putExtra("allRides", rides);
@@ -137,6 +159,12 @@ public class RideService extends Service {
         Log.d("PAPAPA", ride.toString());
         Intent intent = new Intent ("orderedRide");
         intent.putExtra("orderedRide", ride);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void sendActiveRideBroadcast(boolean hasActive){
+        Intent intent = new Intent ("activeRide");
+        intent.putExtra("hasActive", hasActive);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
