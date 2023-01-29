@@ -29,12 +29,18 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.activities.ReportsActivity;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
+import com.example.uberapp_tim13.dtos.RideForReportDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
@@ -55,6 +61,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.http.HEAD;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
@@ -70,6 +79,8 @@ public class PassengerHomeFragment extends Fragment {
     private StompClient mStompClient;
 
     private boolean orderAgain;
+
+    private boolean alreadyInRide = false;
 
 
     public static PassengerHomeFragment newInstance() {
@@ -166,6 +177,10 @@ public class PassengerHomeFragment extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               if (alreadyInRide) {
+                   Toast.makeText(getActivity(),"Sorry, you already have active ride.",Toast.LENGTH_SHORT).show();
+                   return;
+               }
                if (!validateInputs())
                    return;
 
@@ -296,6 +311,33 @@ public class PassengerHomeFragment extends Fragment {
             destination.setText(address.toString());
             route.setDestinations(loc);
         }
+    }
+
+
+    private void checkIsAllowed() {
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.getPassengerActiveRide(AuthService.tokenDTO.getAccessToken(), Globals.userId);
+        call.enqueue(new Callback<RideReturnedDTO>() {
+            @Override
+            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
+                Log.d("provjera", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    alreadyInRide = true;
+                } else {
+                    alreadyInRide = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                Log.d("EVOME", t.toString());
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.checkIsAllowed();
     }
 
 
