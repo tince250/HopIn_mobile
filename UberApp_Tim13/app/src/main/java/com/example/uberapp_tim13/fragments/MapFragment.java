@@ -34,6 +34,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
@@ -187,6 +188,14 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         }
 
         dialog.show();
+        setDialogButtonsAndColors();
+    }
+
+    public void setDialogButtonsAndColors() {
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setTextColor(getContext().getResources().getColor(R.color.dark_blue));
+        Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        negativeButton.setTextColor(getContext().getResources().getColor(R.color.dark_blue));
     }
 
     private void createMapFragmentAndInflate() {

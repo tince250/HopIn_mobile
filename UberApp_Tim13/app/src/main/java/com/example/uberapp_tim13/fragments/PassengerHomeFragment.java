@@ -29,12 +29,20 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.activities.CurrentRideActivity;
+import com.example.uberapp_tim13.activities.ReportsActivity;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
+import com.example.uberapp_tim13.dtos.RideForReportDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
+import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.example.uberapp_tim13.tools.Utils;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
@@ -55,6 +63,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.http.HEAD;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
@@ -70,6 +81,8 @@ public class PassengerHomeFragment extends Fragment {
     private StompClient mStompClient;
 
     private boolean orderAgain;
+
+    private boolean alreadyInRide = false;
 
 
     public static PassengerHomeFragment newInstance() {
@@ -163,25 +176,13 @@ public class PassengerHomeFragment extends Fragment {
             }
         });
 
+        setBroadcastActiveRide();
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if (!validateInputs())
-                   return;
-
-                if (route != null) {
-                    if (route.getDeparture() != null && route.getDestination() != null) {
-                        RideService.rideInCreation.getLocations().add(route);
-                    }else {
-                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                } else {
-                    Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                route = null;
-                FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                Intent intentRideService = new Intent(getContext(), RideService.class);
+                intentRideService.putExtra("method", "activeRide");
+                requireActivity().startService(intentRideService);
             }
         });
 
@@ -296,6 +297,41 @@ public class PassengerHomeFragment extends Fragment {
             destination.setText(address.toString());
             route.setDestinations(loc);
         }
+    }
+
+
+    private void setBroadcastActiveRide() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                boolean hasActive = extras.getBoolean("hasActive");
+                if (hasActive) {
+                    Toast.makeText(getActivity(),"Sorry, you already have active ride.",Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    if (!validateInputs())
+                        return;
+
+                    if (route != null) {
+                        if (route.getDeparture() != null && route.getDestination() != null) {
+                            RideService.rideInCreation.getLocations().add(route);
+                        }else {
+                            Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    } else {
+                        Toast.makeText(getActivity(),"Pick locations!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    route = null;
+                    FragmentTransition.to(RideSettingsFragment.newInstance(), getActivity(), true, R.id.passengerFL);
+                }
+
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("activeRide"));
+
     }
 
 

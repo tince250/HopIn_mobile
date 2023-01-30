@@ -13,15 +13,20 @@ import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
+import com.example.uberapp_tim13.activities.DriverMainActivity;
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursStartDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.JWTUtils;
 
 import org.json.JSONException;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -85,6 +90,7 @@ public class AuthService extends Service {
         try {
             Globals.userRole = JWTUtils.getUserRoleFromToken(tokenBody);
             Globals.userId = JWTUtils.getUserIdFromToken(tokenBody);
+            if (Globals.userRole.equals("driver")) { setDriverActive(); }
 
             Call<UserReturnedDTO> call = RestUtils.userApi.doGetUser("", Globals.userId);
             call.enqueue(new Callback<UserReturnedDTO>() {
@@ -111,6 +117,35 @@ public class AuthService extends Service {
         Intent intent = new Intent("userLoggedIn");
         intent.putExtra("done", true);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    public void setDriverActive() {
+        Log.d("hours", LocalDateTime.now().withNano(0).toString());
+        WorkingHoursStartDTO start = new WorkingHoursStartDTO(LocalDateTime.now().withNano(0).toString());
+        Call<WorkingHoursDTO> call = RestUtils.driverAPI.addWorkingHours(AuthService.tokenDTO.getAccessToken(), Globals.userId, start);
+        call.enqueue(new Callback<WorkingHoursDTO>() {
+            @Override
+            public void onResponse(Call<WorkingHoursDTO> call, Response<WorkingHoursDTO> response) {
+                if (response.isSuccessful()) {
+                    DriverMainActivity.workingHours = response.body();
+                    Globals.isActive = true;
+                    Log.d("hours", String.valueOf(response.code()));
+                    Log.d("hours", DriverMainActivity.workingHours.toString());
+
+                } else {
+                    Globals.isActive = false;
+                    Log.d("hours", String.valueOf(response.code()));
+                    Log.d("hours", String.valueOf(response.message()));
+                    Log.d("hours", String.valueOf(response));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WorkingHoursDTO> call, Throwable t) {
+                Log.d("EVOME", t.toString());
+            }
+        });
     }
 
     @Nullable

@@ -17,8 +17,17 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursDTO;
+import com.example.uberapp_tim13.dtos.WorkingHoursStartDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.Globals;
+
+import java.time.LocalDateTime;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends Activity {
 
