@@ -43,4 +43,8 @@ public interface RideAPI {
     @PUT("ride/{id}/cancel")
     Call<RideReturnedDTO> declineRide(@Header("Authorization") String token, @Path("id") int rideId,  @Body ReasonDTO reason);
 
+    @GET("ride/passenger/{id}/active")
+    Call<RideReturnedDTO> getPassengerActiveRide(@Header("Authorization") String token,
+                                        @Path("id") int id);
+
 }

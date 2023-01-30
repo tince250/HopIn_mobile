@@ -1,6 +1,7 @@
 package com.example.uberapp_tim13.rest;
 
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
@@ -64,4 +65,6 @@ public interface PassengerAPI {
     Call<UserReturnedDTO> update(@Header("Authorization") String token,
                          @Path("id") int id,
                          @Body UserReturnedDTO dto);
+
+
 }
