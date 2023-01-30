@@ -79,12 +79,13 @@
             android:id="@+id/forgottenPasswordTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:clickable="true"
             android:fontFamily="@font/poppinsbold"
             android:minHeight="48dp"
             android:text="@string/forgottenPassword"
             android:textAlignment="center"
+            android:onClick="goToResetPassword"
             android:textColor="@color/red"
             android:textSize="12sp" />
 

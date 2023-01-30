@@ -3,8 +3,11 @@ package com.example.uberapp_tim13.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -61,7 +64,9 @@ public class AuthService extends Service {
             @Override
             public void onResponse(Call<TokenDTO> call, Response<TokenDTO> response) {
                 if (!response.isSuccessful()) {
-                    Log.e("prov", String.valueOf(response.code()));
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        Toast.makeText(getApplicationContext(), "Wrong credentials! Try again", Toast.LENGTH_LONG).show();
+                    });
                     return;
                 }
                 tokenDTO = response.body();

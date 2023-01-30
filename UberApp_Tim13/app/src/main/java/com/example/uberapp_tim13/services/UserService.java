@@ -3,9 +3,15 @@ package com.example.uberapp_tim13.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.uberapp_tim13.activities.LoginActivity;
+import com.example.uberapp_tim13.activities.PassengerRegisterActivity;
+import com.example.uberapp_tim13.activities.ResetPasswordActivity;
 import com.example.uberapp_tim13.dtos.AllMessagesDTO;
 import com.example.uberapp_tim13.dtos.MessageDTO;
 import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
@@ -51,6 +57,9 @@ public class UserService extends Service {
                 else if (method.equals("getMessages")) {
                     int id = (int) extras.get("id");
                     getMessages(id);
+                } else if (method.equals("resetPassword")){
+                    String email = (String) extras.get("email");
+                    resetPassword(email);
                 }
 //                else if (method.equals("getUserName"))
 //                    getById(userId, method);
@@ -144,7 +153,40 @@ public class UserService extends Service {
             public void onFailure(Call<AllMessagesDTO> call, Throwable t) {
                 Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
-        });    }
+        });
+    }
+
+    private void resetPassword(String email) {
+        Log.d("email", email);
+        Call<String> call = RestUtils.userApi.resetPassword(email);
+        call.enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response){
+                if (response.isSuccessful()) {
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        Toast.makeText(getApplicationContext(), "Request for reset password sent! Check your email!", Toast.LENGTH_LONG).show();
+//                        getApplicationContext().startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        Intent mIntent = new Intent(getApplicationContext(),LoginActivity.class);
+                        mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(mIntent);
+                    });
+                } else {
+                    Log.d("neuspeh", String.valueOf(response.code()));
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        Toast.makeText(getApplicationContext(), "User with that email doesn't exist", Toast.LENGTH_LONG).show();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+
 
 
     private void sendUserByIdBroadcast(UserReturnedDTO user){

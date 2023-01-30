@@ -175,6 +175,8 @@
     <string name="rateRide">Leave a rating</string>
     <string name="feedback">your feedback matters :)</string>
     <string name="you">You</string>
+    <string name="enter_email_for_reset">Please enter your email address to receive a password reset link.</string>
+    <string name="reset_password">Reset password</string>
     <string name="week">WEEK</string>
 
 </resources>

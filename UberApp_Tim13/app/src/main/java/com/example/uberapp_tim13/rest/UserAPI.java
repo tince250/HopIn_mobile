@@ -52,4 +52,7 @@ public interface UserAPI {
     Call<String> changePassword(@Header("Authorization") String token,
                                 @Path("id") int id,
                                 @Body ChangePasswordDTO dto);
+
+    @GET("user/{email}/resetPasswordEmail")
+    Call<String> resetPassword(@Path("email") String email);
 }
