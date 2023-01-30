@@ -10,6 +10,7 @@ public class Globals {
     public static String userRole;
     public static int userId = 0;
     public static User currentUser;
+    public static boolean isActive = false;
 
     public static UserReturnedDTO user;
 
