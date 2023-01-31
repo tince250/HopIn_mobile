@@ -178,5 +178,8 @@
     <string name="enter_email_for_reset">Please enter your email address to receive a password reset link.</string>
     <string name="reset_password">Reset password</string>
     <string name="week">WEEK</string>
+    <string name="newChat">Compose new message</string>
+    <string name="composeMessage">Message...</string>
+    <string name="emailRecipient">Recipient email...</string>
 
 </resources>

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,29 @@ import android.widget.Spinner;
 import com.example.uberapp_tim13.activities.ChatActivity;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.inbox.InboxAdapter;
+import com.example.uberapp_tim13.dialogs.NewChatDialog;
+import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Mockap;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class InboxFragment extends Fragment {
 
     RecyclerView recyclerView;
+    List<InboxReturnedDTO> inboxes = new ArrayList<>();
+    InboxAdapter adapter;
+    private NewChatDialog newChatDialog;
+
+    View view;
 
     public static InboxFragment newInstance() {
         return new InboxFragment();
@@ -30,16 +48,21 @@ public class InboxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inbox, container, false);
+        view = inflater.inflate(R.layout.fragment_inbox, container, false);
 
         recyclerView = view.findViewById(R.id.inboxRW);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new InboxAdapter(view.getContext(), Mockap.getInboxItems()));
+        adapter = new InboxAdapter(view.getContext(), inboxes);
+        recyclerView.setAdapter(adapter);
+
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        startActivity(new Intent(getActivity(), ChatActivity.class));
+                        Log.d("INBOKSI", "klik");
+                        Intent i = new Intent(getActivity(), ChatActivity.class);
+                        i.putExtra("inbox", inboxes.get(position));
+                        startActivity(i);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -48,7 +71,18 @@ public class InboxFragment extends Fragment {
                 })
         );
 
+        view.findViewById(R.id.addInboxFB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("INBOKSI", "KLIK FLOATIING");
+                newChatDialog.show();
+            }
+        });
+
         setSpinner(view);
+
+        newChatDialog = new NewChatDialog(getActivity());
+
         return view;
     }
 
@@ -60,4 +94,26 @@ public class InboxFragment extends Fragment {
         inboxSpinner.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Call<List<InboxReturnedDTO>> call = RestUtils.userApi.getInboxes(AuthService.tokenDTO.getAccessToken(), Globals.user.getId());
+        call.enqueue(new Callback<List<InboxReturnedDTO>>() {
+            @Override
+            public void onResponse(Call<List<InboxReturnedDTO>> call, Response<List<InboxReturnedDTO>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("INBOKSI", response.body().toString());
+                    inboxes = response.body();
+                    adapter = new InboxAdapter(view.getContext(), inboxes);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<InboxReturnedDTO>> call, Throwable t) {
+
+            }
+        });
+    }
 }

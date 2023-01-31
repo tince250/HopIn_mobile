@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/inboxImg"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/mapa_mockap"/>
+                    android:src="@drawable/profile_placeholder"/>
             </androidx.cardview.widget.CardView>
 
 
