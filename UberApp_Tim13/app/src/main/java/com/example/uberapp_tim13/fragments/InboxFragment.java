@@ -43,6 +43,7 @@ public class InboxFragment extends Fragment {
     private NewChatDialog newChatDialog;
 
     public static String type;
+    Spinner inboxSpinner;
 
     View view;
 
@@ -92,7 +93,7 @@ public class InboxFragment extends Fragment {
     }
 
     private void setSpinner(View view) {
-        Spinner inboxSpinner = view.findViewById(R.id.spinnerInbox);
+        inboxSpinner = view.findViewById(R.id.spinnerInbox);
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(view.getContext(),
                 android.R.layout.simple_spinner_item, view.getResources().getStringArray(R.array.inbox_filter));
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -141,6 +142,7 @@ public class InboxFragment extends Fragment {
                     inboxesToShow = new ArrayList<>(inboxes);
                     adapter = new InboxAdapter(view.getContext(), inboxesToShow);
                     recyclerView.setAdapter(adapter);
+                    inboxSpinner.setSelection(0);
                 }
             }
 
