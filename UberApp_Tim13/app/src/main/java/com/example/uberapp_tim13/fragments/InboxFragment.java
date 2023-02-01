@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -36,8 +37,11 @@ public class InboxFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<InboxReturnedDTO> inboxes = new ArrayList<>();
+    List<InboxReturnedDTO> inboxesToShow = new ArrayList<>();
     InboxAdapter adapter;
     private NewChatDialog newChatDialog;
+
+    private String type;
 
     View view;
 
@@ -52,7 +56,7 @@ public class InboxFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.inboxRW);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new InboxAdapter(view.getContext(), inboxes);
+        adapter = new InboxAdapter(view.getContext(), inboxesToShow);
         recyclerView.setAdapter(adapter);
 
 
@@ -61,7 +65,7 @@ public class InboxFragment extends Fragment {
                     @Override public void onItemClick(View view, int position) {
                         Log.d("INBOKSI", "klik");
                         Intent i = new Intent(getActivity(), ChatActivity.class);
-                        i.putExtra("inbox", inboxes.get(position));
+                        i.putExtra("inbox", inboxesToShow.get(position));
                         startActivity(i);
                     }
 
@@ -92,6 +96,21 @@ public class InboxFragment extends Fragment {
                 android.R.layout.simple_spinner_item, view.getResources().getStringArray(R.array.inbox_filter));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         inboxSpinner.setAdapter(adapter);
+
+        inboxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                type = (String) inboxSpinner.getSelectedItem();
+                inboxesToShow.clear();
+                for (InboxReturnedDTO inbox : inboxes) {
+                    if (inbox.)
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override
@@ -105,6 +124,7 @@ public class InboxFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.d("INBOKSI", response.body().toString());
                     inboxes = response.body();
+                    inboxesToShow = inboxes;
                     adapter = new InboxAdapter(view.getContext(), inboxes);
                     recyclerView.setAdapter(adapter);
                 }
