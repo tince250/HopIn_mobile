@@ -15,6 +15,7 @@ import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
+import com.example.uberapp_tim13.fragments.InboxFragment;
 import com.example.uberapp_tim13.model.Inbox;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.Utils;
@@ -40,6 +41,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
     @Override
     public void onBindViewHolder(@NonNull InboxItemHolder holder, int position) {
         InboxReturnedDTO item = items.get(position);
+
         if (item.getMessages().size() > 0) {
             MessageReturnedDTO lastMessage = item.getMessages().get(0);
             holder.displayMess.setText(lastMessage.getMessage());
@@ -49,6 +51,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
             holder.displayMess.setText("");
             holder.dateTime.setText("");
         }
+
 
         UserReturnedDTO recipient = item.getFirstUser().getId() == Globals.user.getId() ? item.getSecondUser() : item.getFirstUser();
 
@@ -60,8 +63,12 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
         }
         else {
             holder.name.setText(recipient.getName() + " " + recipient.getSurname());
+            holder.pin.setVisibility(View.GONE);
             if (recipient.getProfilePicture() != null)
                 holder.userImage.setImageBitmap(Utils.convertBase64ToBitmap(recipient.getProfilePicture()));
+            else {
+                holder.userImage.setImageResource(R.drawable.profile_placeholder);
+            }
         }
 
 

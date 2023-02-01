@@ -27,6 +27,7 @@ import com.example.uberapp_tim13.tools.Mockap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +42,7 @@ public class InboxFragment extends Fragment {
     InboxAdapter adapter;
     private NewChatDialog newChatDialog;
 
-    private String type;
+    public static String type;
 
     View view;
 
@@ -101,9 +102,19 @@ public class InboxFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 type = (String) inboxSpinner.getSelectedItem();
+                Log.d("tipm", String.valueOf(inboxes.size()));
+                if (type.equals("all")) {
+                    if (inboxes.size() > 0) {
+                        inboxesToShow = new ArrayList<>(inboxes);
+                        adapter = new InboxAdapter(view.getContext(), inboxesToShow);
+                        recyclerView.setAdapter(adapter);
+                    }
+                    return;
+                }
                 inboxesToShow.clear();
                 for (InboxReturnedDTO inbox : inboxes) {
-                    if (inbox.getType().equals(type)) {
+                    //Log.d("tipm", inbox.getType());
+                    if (inbox.getType().toLowerCase().equals(type)) {
                         inboxesToShow.add(inbox);
                     }
                 }
@@ -127,8 +138,8 @@ public class InboxFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.d("INBOKSI", response.body().toString());
                     inboxes = response.body();
-                    inboxesToShow = inboxes;
-                    adapter = new InboxAdapter(view.getContext(), inboxes);
+                    inboxesToShow = new ArrayList<>(inboxes);
+                    adapter = new InboxAdapter(view.getContext(), inboxesToShow);
                     recyclerView.setAdapter(adapter);
                 }
             }

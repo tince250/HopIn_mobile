@@ -11,7 +11,6 @@ public class InboxReturnedDTO implements Serializable {
     private String type;
     List<MessageReturnedDTO> messages = new ArrayList<MessageReturnedDTO>();
     private String lastMessage;
-    private String type;
 
     public InboxReturnedDTO(int id, UserReturnedDTO firstUser, UserReturnedDTO secondUser, String type, List<MessageReturnedDTO> messages, String lastMessage) {
         this.id = id;
