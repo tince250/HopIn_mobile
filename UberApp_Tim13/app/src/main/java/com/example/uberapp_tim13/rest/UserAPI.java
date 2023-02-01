@@ -66,4 +66,9 @@ public interface UserAPI {
     @GET("user/{id}/inbox")
     Call<InboxReturnedDTO> getInbox(@Header("Authorization") String token,
                                             @Path("id") int id);
+
+    @GET("user/{id}/inbox/ride/{rideId}")
+    Call<InboxReturnedDTO> getRideInbox(@Header("Authorization") String token,
+                                    @Path("id") int id,
+                                    @Path("rideId") int rideId);
 }
