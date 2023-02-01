@@ -52,11 +52,20 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("Chat");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Bundle extras = getIntent().getExtras();
         inbox = (InboxReturnedDTO) extras.get("inbox");
+        UserReturnedDTO recipient = inbox.getFirstUser().getId() == Globals.user.getId() ? inbox.getSecondUser() : inbox.getFirstUser();
+        String suffix = "";
+        if (inbox.getType() == "RIDE") {
+            suffix = " (driver)";
+        }
+        if (inbox.getType() == "SUPPORT")
+            setTitle("Support");
+        else
+            setTitle(recipient.getName() + " " + recipient.getSurname() + suffix);
 
         allMessages = new ArrayList<Message>();
         for(MessageReturnedDTO m : inbox.getMessages()) {
@@ -93,7 +102,6 @@ public class ChatActivity extends AppCompatActivity {
 //                chatAdapter = new ChatAdapter(getApplicationContext(), allMessages);
 //                chatRecycler.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();
-                UserReturnedDTO recipient = inbox.getFirstUser().getId() == Globals.user.getId() ? inbox.getSecondUser() : inbox.getFirstUser();
                 MessageDTO message = new MessageDTO(recipient.getId(), messageET.getText().toString(), inbox.getType(), inbox.getRideId());
                 Intent intentUserService = new Intent(getApplicationContext(), UserService.class);
                 intentUserService.putExtra("method", "sendMessage");
