@@ -8,14 +8,17 @@ public class InboxReturnedDTO implements Serializable {
     private int id;
     private UserReturnedDTO firstUser;
     private UserReturnedDTO secondUser;
+    private String type;
     List<MessageReturnedDTO> messages = new ArrayList<MessageReturnedDTO>();
     private String lastMessage;
 
-    public InboxReturnedDTO(int id, UserReturnedDTO firstUser, UserReturnedDTO secondUser, List<MessageReturnedDTO> messages) {
+    public InboxReturnedDTO(int id, UserReturnedDTO firstUser, UserReturnedDTO secondUser, String type, List<MessageReturnedDTO> messages, String lastMessage) {
         this.id = id;
         this.firstUser = firstUser;
         this.secondUser = secondUser;
+        this.type = type;
         this.messages = messages;
+        this.lastMessage = lastMessage;
     }
 
     public int getId() {
@@ -56,5 +59,13 @@ public class InboxReturnedDTO implements Serializable {
 
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

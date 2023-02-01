@@ -92,10 +92,10 @@ public class InboxFragment extends Fragment {
 
     private void setSpinner(View view) {
         Spinner inboxSpinner = view.findViewById(R.id.spinnerInbox);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
+        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(view.getContext(),
                 android.R.layout.simple_spinner_item, view.getResources().getStringArray(R.array.inbox_filter));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        inboxSpinner.setAdapter(adapter);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inboxSpinner.setAdapter(adapterSpinner);
 
         inboxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,8 +103,11 @@ public class InboxFragment extends Fragment {
                 type = (String) inboxSpinner.getSelectedItem();
                 inboxesToShow.clear();
                 for (InboxReturnedDTO inbox : inboxes) {
-                    if (inbox.)
+                    if (inbox.getType().equals(type)) {
+                        inboxesToShow.add(inbox);
+                    }
                 }
+                adapter.notifyDataSetChanged();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
