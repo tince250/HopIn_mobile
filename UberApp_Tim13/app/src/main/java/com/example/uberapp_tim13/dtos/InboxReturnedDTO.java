@@ -10,6 +10,7 @@ public class InboxReturnedDTO implements Serializable {
     private UserReturnedDTO secondUser;
     List<MessageReturnedDTO> messages = new ArrayList<MessageReturnedDTO>();
     private String lastMessage;
+    private String type;
 
     public InboxReturnedDTO(int id, UserReturnedDTO firstUser, UserReturnedDTO secondUser, List<MessageReturnedDTO> messages) {
         this.id = id;
@@ -56,5 +57,13 @@ public class InboxReturnedDTO implements Serializable {
 
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -52,16 +52,27 @@
 
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/nameTV"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="5dp"
                 android:layout_toEndOf="@id/imageCard"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textFontWeight="700"
-                android:text="HopIn Support"/>
+                android:text="HopIn Support"
+                />
+            <ImageView
+                android:id="@+id/pin"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_push_pin_24"
+                app:tint="@color/disabled_gray"
+                android:layout_toRightOf="@id/nameTV"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -83,8 +94,12 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="-3dp"
                 android:textSize="10sp"
-                android:textColor="@color/dark_gray"/>
+                android:textColor="@color/dark_gray" />
+
+
+
         </RelativeLayout>
+
     </LinearLayout>
 
 
