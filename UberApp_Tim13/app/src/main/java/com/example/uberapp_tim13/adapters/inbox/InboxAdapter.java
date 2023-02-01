@@ -3,6 +3,7 @@ package com.example.uberapp_tim13.adapters.inbox;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -39,17 +40,33 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxItemHolder> {
     @Override
     public void onBindViewHolder(@NonNull InboxItemHolder holder, int position) {
         InboxReturnedDTO item = items.get(position);
-        MessageReturnedDTO lastMessage = item.getMessages().get(0);
+        if (item.getMessages().size() > 0) {
+            MessageReturnedDTO lastMessage = item.getMessages().get(0);
+            holder.displayMess.setText(lastMessage.getMessage());
+            holder.dateTime.setText(formatDate(lastMessage.getTimeOfSending()));
+
+        } else {
+            holder.displayMess.setText("");
+            holder.dateTime.setText("");
+        }
+
         UserReturnedDTO recipient = item.getFirstUser().getId() == Globals.user.getId() ? item.getSecondUser() : item.getFirstUser();
 
-        holder.name.setText(recipient.getName() + " " + recipient.getSurname());
-        holder.displayMess.setText(lastMessage.getMessage());
-        holder.dateTime.setText(formatDate(lastMessage.getTimeOfSending()));
-        if (recipient.getProfilePicture() != null)
-            holder.userImage.setImageBitmap(Utils.convertBase64ToBitmap(recipient.getProfilePicture()));
+        Log.d("PORUKE", item.getType());
+        if (item.getType().equals("SUPPORT")) {
+            holder.name.setText("Support");
+            holder.userImage.setImageResource(R.drawable.support_photo);
+            holder.pin.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.name.setText(recipient.getName() + " " + recipient.getSurname());
+            if (recipient.getProfilePicture() != null)
+                holder.userImage.setImageBitmap(Utils.convertBase64ToBitmap(recipient.getProfilePicture()));
+        }
 
-        Log.d("INBOKSI", lastMessage.getType().toLowerCase());
-        switch (lastMessage.getType().toLowerCase()) {
+
+        Log.d("INBOKSI", item.getType().toLowerCase());
+        switch (item.getType().toLowerCase()) {
             case "support":
                 holder.coloredMargin.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), R.color.orange));
                 break;

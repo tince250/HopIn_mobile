@@ -94,9 +94,12 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 Log.d("PORUKE", "USAO");
                 allMessages.add(0, new Message(messageET.getText().toString(), 1, LocalDateTime.of(LocalDate.now(), LocalTime.now()).toString()));
+                Log.d("PORUKE", allMessages.toString());
+//                chatAdapter = new ChatAdapter(getApplicationContext(), allMessages);
+//                chatRecycler.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();
                 UserReturnedDTO recipient = inbox.getFirstUser().getId() == Globals.user.getId() ? inbox.getSecondUser() : inbox.getFirstUser();
-                MessageDTO message = new MessageDTO(recipient.getId(), messageET.getText().toString(), inbox.getMessages().get(0).getType(), rideId);
+                MessageDTO message = new MessageDTO(recipient.getId(), messageET.getText().toString(), inbox.getType(), rideId);
                 Intent intentUserService = new Intent(getApplicationContext(), UserService.class);
                 intentUserService.putExtra("method", "sendMessage");
                 intentUserService.putExtra("message", message);
