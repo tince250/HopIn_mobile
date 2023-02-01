@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.uberapp_tim13.activities.ChatActivity;
 import com.example.uberapp_tim13.R;
@@ -44,6 +47,8 @@ public class InboxFragment extends Fragment {
 
     public static String type;
     Spinner inboxSpinner;
+
+    private EditText searchET;
 
     View view;
 
@@ -77,11 +82,33 @@ public class InboxFragment extends Fragment {
                 })
         );
 
-        view.findViewById(R.id.addInboxFB).setOnClickListener(new View.OnClickListener() {
+        searchET = view.findViewById(R.id.searchET);
+        searchET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View view) {
-                Log.d("INBOKSI", "KLIK FLOATIING");
-                newChatDialog.show();
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String searched = textView.getText().toString().trim();
+                if(searched.equals("")) {
+                    inboxesToShow = new ArrayList<>(inboxes);
+                    adapter = new InboxAdapter(view.getContext(), inboxesToShow);
+                    recyclerView.setAdapter(adapter);
+                    return false;
+                }
+
+                inboxesToShow.clear();
+                for (InboxReturnedDTO inbox : inboxes) {
+                    String name;
+                    if (inbox.getFirstUser().getId() == Globals.user.getId()) {
+                        name = (inbox.getSecondUser().getName() + " " + inbox.getSecondUser().getSurname()).toLowerCase();
+                    } else {
+                        name = (inbox.getFirstUser().getName() + " " + inbox.getFirstUser().getSurname()).toLowerCase();
+                    }
+                    if (name.contains(searched)) {
+                        inboxesToShow.add(inbox);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+                return false;
             }
         });
 
