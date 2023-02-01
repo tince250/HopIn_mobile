@@ -20,10 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.adapters.ChatAdapter;
 import com.example.uberapp_tim13.dtos.AllMessagesDTO;
+import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.MessageDTO;
 import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.model.Message;
 import com.example.uberapp_tim13.services.UserService;
+import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 
 import java.time.LocalDate;
@@ -40,11 +43,12 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView chatRecycler;
     private ChatAdapter chatAdapter;
     private EditText messageET;
-    private int receiverId;
-    private int rideId;
     private List<Message> allMessages;
-    Timer t ;
+    Timer t = new Timer();;
+    private InboxReturnedDTO inbox;
+    private int rideId = 1;
 
+    private BroadcastReceiver broadcastReceiver;
 
 
     @Override
@@ -53,10 +57,21 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Bundle extras = getIntent().getExtras();
-        receiverId = (int) extras.get("receiverId");
-        rideId = (int) extras.get("rideId");
+        inbox = (InboxReturnedDTO) extras.get("inbox");
+        Object rideObj = extras.get("rideId");
+        if (rideObj != null) {
+            rideId = (int) rideObj;
+        }
 
         allMessages = new ArrayList<Message>();
+        for(MessageReturnedDTO m : inbox.getMessages()) {
+            if (m.getSenderId() != Globals.user.getId()) {
+                allMessages.add(new Message(m.getMessage(), 0, m.getTimeOfSending()));
+            }
+            else {
+                allMessages.add(new Message(m.getMessage(), 1, m.getTimeOfSending()));
+            }
+        }
         chatRecycler = (RecyclerView) findViewById(R.id.chatRV);
         chatAdapter = new ChatAdapter(this, this.allMessages);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -77,9 +92,14 @@ public class ChatActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter message!",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Log.d("PORUKE", "USAO");
                 allMessages.add(0, new Message(messageET.getText().toString(), 1, LocalDateTime.of(LocalDate.now(), LocalTime.now()).toString()));
+                Log.d("PORUKE", allMessages.toString());
+//                chatAdapter = new ChatAdapter(getApplicationContext(), allMessages);
+//                chatRecycler.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetChanged();
-                MessageDTO message = new MessageDTO(receiverId, messageET.getText().toString(), "RIDE", rideId);
+                UserReturnedDTO recipient = inbox.getFirstUser().getId() == Globals.user.getId() ? inbox.getSecondUser() : inbox.getFirstUser();
+                MessageDTO message = new MessageDTO(recipient.getId(), messageET.getText().toString(), inbox.getType(), rideId);
                 Intent intentUserService = new Intent(getApplicationContext(), UserService.class);
                 intentUserService.putExtra("method", "sendMessage");
                 intentUserService.putExtra("message", message);
@@ -91,45 +111,58 @@ public class ChatActivity extends AppCompatActivity {
     private void getMessages() {
         Intent intentUserService = new Intent(getApplicationContext(), UserService.class);
         intentUserService.putExtra("method", "getMessages");
-        intentUserService.putExtra("id", receiverId);
+        intentUserService.putExtra("id", inbox.getId());
         startService(intentUserService);
     }
 
     private void setBroadcastLoadMessages() {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+        broadcastReceiver = new BroadcastReceiver(){
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle extras = intent.getExtras();
-                AllMessagesDTO dto = (AllMessagesDTO) extras.get("messages");
+                InboxReturnedDTO dto = (InboxReturnedDTO) extras.get("messages");
+                inbox = dto;
                 allMessages.clear();
 
-                for(MessageReturnedDTO m : dto.getResults()) {
-                    if (m.getSenderId() == receiverId) {
+                for(MessageReturnedDTO m : dto.getMessages()) {
+                    if (m.getSenderId() != Globals.user.getId()) {
                         allMessages.add(new Message(m.getMessage(), 0, m.getTimeOfSending()));
                     }
-                    else if (m.getReceiverId() == receiverId) {
+                    else {
                         allMessages.add(new Message(m.getMessage(), 1, m.getTimeOfSending()));
                     }
                 }
-                Collections.sort(allMessages, new Comparator<Message>() {
-                    @Override
-                    public int compare(Message lhs, Message rhs) {
-                        return lhs.getTime().compareTo(rhs.getTime());
-                    }
-                });
-                Collections.reverse(allMessages);
+//                Collections.sort(allMessages, new Comparator<Message>() {
+//                    @Override
+//                    public int compare(Message lhs, Message rhs) {
+//                        return lhs.getTime().compareTo(rhs.getTime());
+//                    }
+//                });
+//                Collections.reverse(allMessages);
                 chatAdapter.notifyDataSetChanged();
-                t = new Timer();
                 t.schedule(new TimerTask() {
 
                     public void run() {
                         getMessages();
                     }
-                }, 3000);
+                }, 2000);
+
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("chatActivity"));
 
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("PAUZIRAJ", "TU");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
 }

@@ -3,10 +3,13 @@ package com.example.uberapp_tim13.rest;
 import com.example.uberapp_tim13.dtos.AllMessagesDTO;
 import com.example.uberapp_tim13.dtos.ChangePasswordDTO;
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.MessageDTO;
 import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -55,4 +58,12 @@ public interface UserAPI {
 
     @GET("user/{email}/resetPasswordEmail")
     Call<String> resetPassword(@Path("email") String email);
+
+    @GET("user/{id}/inbox/all")
+    Call<List<InboxReturnedDTO>> getInboxes(@Header("Authorization") String token,
+                                            @Path("id") int id);
+
+    @GET("user/{id}/inbox")
+    Call<InboxReturnedDTO> getInbox(@Header("Authorization") String token,
+                                            @Path("id") int id);
 }

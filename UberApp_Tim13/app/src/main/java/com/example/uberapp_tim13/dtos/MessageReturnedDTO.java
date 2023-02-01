@@ -1,8 +1,9 @@
 package com.example.uberapp_tim13.dtos;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class MessageReturnedDTO {
+public class MessageReturnedDTO implements Serializable {
 	
 	int id;
 	String timeOfSending;
@@ -11,6 +12,7 @@ public class MessageReturnedDTO {
 	String message;
 	String type;
 	int rideId;
+	int inboxId;
 	
 	public MessageReturnedDTO(int id, int senderId, int receiverId, String timeOfSending, String message,
 			String type, int rideId) {
@@ -89,5 +91,13 @@ public class MessageReturnedDTO {
 
 	public void setRideId(int rideId) {
 		this.rideId = rideId;
+	}
+
+	public int getInboxId() {
+		return inboxId;
+	}
+
+	public void setInboxId(int inboxId) {
+		this.inboxId = inboxId;
 	}
 }

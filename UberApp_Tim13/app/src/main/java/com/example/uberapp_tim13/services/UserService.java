@@ -13,6 +13,7 @@ import com.example.uberapp_tim13.activities.LoginActivity;
 import com.example.uberapp_tim13.activities.PassengerRegisterActivity;
 import com.example.uberapp_tim13.activities.ResetPasswordActivity;
 import com.example.uberapp_tim13.dtos.AllMessagesDTO;
+import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.MessageDTO;
 import com.example.uberapp_tim13.dtos.MessageReturnedDTO;
 
@@ -135,11 +136,11 @@ public class UserService extends Service {
     }
 
     private void getMessages(int id) {
-        Call<AllMessagesDTO> call = RestUtils.userApi.getMessages(AuthService.tokenDTO.getAccessToken(), id);
-        call.enqueue(new Callback<AllMessagesDTO>() {
+        Call<InboxReturnedDTO> call = RestUtils.userApi.getInbox(AuthService.tokenDTO.getAccessToken(), id);
+        call.enqueue(new Callback<InboxReturnedDTO>() {
 
             @Override
-            public void onResponse(Call<AllMessagesDTO> call, Response<AllMessagesDTO> response){
+            public void onResponse(Call<InboxReturnedDTO> call, Response<InboxReturnedDTO> response){
                 //Log.d("EMAIL_REZ", response.body().toString());
                 if (response.body() != null) {
                     getMessagesBroadcast(response.body());
@@ -150,7 +151,7 @@ public class UserService extends Service {
             }
 
             @Override
-            public void onFailure(Call<AllMessagesDTO> call, Throwable t) {
+            public void onFailure(Call<InboxReturnedDTO> call, Throwable t) {
                 Log.d("EMAIL_REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
@@ -208,7 +209,7 @@ public class UserService extends Service {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void getMessagesBroadcast(AllMessagesDTO dto){
+    private void getMessagesBroadcast(InboxReturnedDTO dto){
         Intent intent = new Intent("chatActivity");
         intent.putExtra("messages", dto);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);

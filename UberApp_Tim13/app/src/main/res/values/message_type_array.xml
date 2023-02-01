@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="message_type">
+        <item>SUPPORT</item>
+        <item>RIDE</item>
+        <item>PANIC</item>
+    </string-array>
+
+</resources>

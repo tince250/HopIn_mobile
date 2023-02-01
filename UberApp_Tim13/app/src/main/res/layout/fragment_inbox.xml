@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.InboxFragment"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:id="@+id/containerRL">
 
     <EditText
         android:id="@+id/searchET"
@@ -19,7 +21,7 @@
         android:paddingHorizontal="10dp"
         android:background="@drawable/cutom_input"
         android:layout_alignParentStart="true"
-        android:hint="@string/search"/>
+        android:hint="@string/search" />
 
     <Spinner
         android:id="@+id/spinnerInbox"
@@ -38,5 +40,16 @@
         android:id="@+id/inboxRW"
         android:layout_below="@id/searchET"
         android:layout_marginTop="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addInboxFB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add" />
 
 </RelativeLayout>
