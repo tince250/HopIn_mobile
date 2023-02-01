@@ -59,10 +59,10 @@ public class ChatActivity extends AppCompatActivity {
         inbox = (InboxReturnedDTO) extras.get("inbox");
         UserReturnedDTO recipient = inbox.getFirstUser().getId() == Globals.user.getId() ? inbox.getSecondUser() : inbox.getFirstUser();
         String suffix = "";
-        if (inbox.getType() == "RIDE") {
+        if (inbox.getType().equals("RIDE")) {
             suffix = " (driver)";
         }
-        if (inbox.getType() == "SUPPORT")
+        if (inbox.getType().equals("SUPPORT"))
             setTitle("Support");
         else
             setTitle(recipient.getName() + " " + recipient.getSurname() + suffix);
