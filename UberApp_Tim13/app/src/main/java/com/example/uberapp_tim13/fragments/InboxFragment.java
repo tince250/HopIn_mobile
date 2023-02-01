@@ -97,13 +97,21 @@ public class InboxFragment extends Fragment {
                 inboxesToShow.clear();
                 for (InboxReturnedDTO inbox : inboxes) {
                     String name;
+
                     if (inbox.getFirstUser().getId() == Globals.user.getId()) {
                         name = (inbox.getSecondUser().getName() + " " + inbox.getSecondUser().getSurname()).toLowerCase();
                     } else {
                         name = (inbox.getFirstUser().getName() + " " + inbox.getFirstUser().getSurname()).toLowerCase();
                     }
-                    if (name.contains(searched)) {
-                        inboxesToShow.add(inbox);
+                    
+                    if (!type.equals("all")) {
+                        if (name.contains(searched) && inbox.getType().toLowerCase().equals(type)) {
+                            inboxesToShow.add(inbox);
+                        }
+                    } else {
+                        if (name.contains(searched)) {
+                            inboxesToShow.add(inbox);
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged();
