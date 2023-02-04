@@ -1,15 +1,23 @@
 package com.example.uberapp_tim13.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.activities.CurrentRideActivity;
+import com.example.uberapp_tim13.activities.DriverMainActivity;
+import com.example.uberapp_tim13.activities.LoginActivity;
+import com.example.uberapp_tim13.activities.PassengerMainActivity;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
@@ -50,5 +58,22 @@ public class DriverHomeFragment extends Fragment {
         } else {
             view.findViewById(R.id.currentRideBtn).setEnabled(true);
         }
+    }
+
+
+    private void setBroadcast() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                boolean hasRide = (boolean) intent.getExtras().get("hasRide");
+                if (hasRide) {
+                    view.findViewById(R.id.currentRideBtn).setEnabled(true);
+                } else {
+                    view.findViewById(R.id.currentRideBtn).setEnabled(false);
+                }
+            }
+        };
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("hasCurrentRide"));
+
     }
 }
