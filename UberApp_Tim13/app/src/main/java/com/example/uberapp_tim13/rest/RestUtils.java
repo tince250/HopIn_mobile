@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestUtils {
 
-    public static final String SERVICE_API_PATH = "http://192.168.43.129:4321/api/";
+    public static final String SERVICE_API_PATH = "http://192.168.0.11:4321/api/";
 
     public static final String USER_GET = "user/1";
     public static final String LOGIN = "user/login";
