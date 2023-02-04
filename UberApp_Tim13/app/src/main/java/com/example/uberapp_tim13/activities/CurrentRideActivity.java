@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.DeclineReasonDialog;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
 import com.example.uberapp_tim13.dialogs.PanicReasonDialog;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
@@ -56,6 +57,10 @@ public class CurrentRideActivity extends AppCompatActivity {
     private ImageView chatBtn;
     private ImageView callBtn;
 
+    private MaterialButton startBtn;
+    private MaterialButton finishBtn;
+    private MaterialButton cancelBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +78,9 @@ public class CurrentRideActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_current_ride);
 
+        startBtn = findViewById(R.id.startBtn);
+        finishBtn = findViewById(R.id.finishBtn);
+        cancelBtn = findViewById(R.id.cancelBtn);
         chatBtn = findViewById(R.id.chatBtn);
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +234,8 @@ public class CurrentRideActivity extends AppCompatActivity {
                         Log.d("ORDER_MESSAGE", "START");
                         timer.setBase(SystemClock.elapsedRealtime());
                         timer.start();
+                        finishBtn.setVisibility(View.VISIBLE);
+                        cancelBtn.setVisibility(View.GONE);
                     }
                 });
             } else {
@@ -251,16 +261,13 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void addListenersToStartFinishBtns() {
-        Button start = findViewById(R.id.startBtn);
-        Button finish = findViewById(R.id.finishBtn);
-
-        start.setEnabled(true);
-        start.setOnClickListener(new View.OnClickListener() {
+        startBtn.setEnabled(true);
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start.setEnabled(false);
+                startBtn.setEnabled(false);
                 timer.setBase(SystemClock.elapsedRealtime());
-                finish.setEnabled(true);
+                finishBtn.setEnabled(true);
 
                 Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
@@ -277,7 +284,7 @@ public class CurrentRideActivity extends AppCompatActivity {
             }
         });
 
-        finish.setOnClickListener(new View.OnClickListener() {
+        finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 timer.stop();
@@ -305,6 +312,14 @@ public class CurrentRideActivity extends AppCompatActivity {
                 });
             }
         });
-        finish.setEnabled(false);
+        finishBtn.setEnabled(false);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timer.stop();
+                new DeclineReasonDialog(CurrentRideActivity.this, RideService.returnedRide.getId()).show();
+            }
+        });
     }
 }
