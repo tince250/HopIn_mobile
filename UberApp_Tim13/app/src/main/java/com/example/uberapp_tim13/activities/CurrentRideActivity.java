@@ -1,6 +1,11 @@
 package com.example.uberapp_tim13.activities;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.DeclineReasonDialog;
@@ -28,6 +34,7 @@ import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
+import com.example.uberapp_tim13.dtos.RideOfferResponseDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.TimerDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
@@ -251,7 +258,8 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private void subscribeToStartFinishMessages() {
         StompManager.stompClient.topic("/topic/ride-start-finish/" + ride.getDriver().getId()).subscribe(topicMessage -> {
-            if (topicMessage.getPayload().trim().equals("start")) {
+            RideReturnedDTO rideDTO = Globals.gson.fromJson(topicMessage.getPayload(), RideReturnedDTO.class);
+            if (rideDTO.getStatus().equals("STARTED")) {
                 handler.post(new Runnable() {
 
                     @Override
@@ -266,17 +274,17 @@ public class CurrentRideActivity extends AppCompatActivity {
                         timer.setBase(SystemClock.elapsedRealtime());
                         timer.start();
 
-                        finishBtn.setVisibility(View.VISIBLE);
-                        cancelBtn.setVisibility(View.GONE);
+
                     }
                 });
             } else {
-                if (topicMessage.getPayload().trim().equals("finish")) {
+                if (rideDTO.getStatus().equals("FINISHED")) {
                     handler.post(new Runnable() {
 
                         @Override
                         public void run() {
                             Log.d("ORDER_MESSAGE", "FINISH");
+                            addNotification();
                             timer.stop();
                             try {
                                 Thread.sleep(1000);
@@ -293,7 +301,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void subscribeToVehicleArrived(){
-        vehicleArrivedSM.stompClient.topic("/topic/vehicle-arrival/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+        vehicleArrivedSM.stompClient.topic("/topic/vehicle-arrival/" + ride.getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -306,7 +314,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void subscribeToVehicleArrivalTime(){
-        vehicleArrivalTimeSM.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+        vehicleArrivalTimeSM.stompClient.topic("/topic/arrival-time/" + ride.getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -333,14 +341,21 @@ public class CurrentRideActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startBtn.setEnabled(false);
-                timer.setBase(SystemClock.elapsedRealtime());
                 finishBtn.setEnabled(true);
+
+                Log.d("ORDER_MESSAGE", "START");
+                arrivalTimeTitleTV.setVisibility(View.GONE);
+                arrivalTimeTV.setVisibility(View.GONE);
+                timePassedTV.setVisibility(View.VISIBLE);
+                timer.setBase(SystemClock.elapsedRealtime());
 
                 Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
                         timer.start();
+                        finishBtn.setVisibility(View.VISIBLE);
+                        cancelBtn.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -360,16 +375,21 @@ public class CurrentRideActivity extends AppCompatActivity {
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                        new MaterialAlertDialogBuilder(CurrentRideActivity.this, R.style.AlertDialogTheme)
-                                .setTitle(R.string.finishedAlert)
-                                .setMessage(R.string.finishedAlertContent)
-                                .setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        getParent().finish();
-                                    }
-                                })
-                                .show();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                new MaterialAlertDialogBuilder(CurrentRideActivity.this, R.style.AlertDialogTheme)
+                                        .setTitle(R.string.finishedAlert)
+                                        .setMessage(R.string.finishedAlertContent)
+                                        .setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                CurrentRideActivity.this.finish();
+                                            }
+                                        })
+                                        .show();
+                            }
+                        });
                     }
 
                     @Override
@@ -388,5 +408,28 @@ public class CurrentRideActivity extends AppCompatActivity {
                 new DeclineReasonDialog(CurrentRideActivity.this, RideService.returnedRide.getId()).show();
             }
         });
+    }
+
+    private void addNotification() {
+        NotificationManager notificationManager = this.createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Ride is finished!")
+                .setContentText("You can now rate the ride and order new rides.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setAutoCancel(true);
+
+        notificationManager.notify(0, builder.build());
+    }
+
+
+    private NotificationManager createNotificationChannel() {
+        CharSequence name = "my_channel";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel("0", name, importance);
+        NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+        return notificationManager;
     }
 }

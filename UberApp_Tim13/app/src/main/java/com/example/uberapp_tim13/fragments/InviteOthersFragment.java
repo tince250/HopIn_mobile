@@ -61,7 +61,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_invite_others, container, false);
 
-        getActivity().setTitle("Other passengers");
+//        getActivity().setTitle("Other passengers");
 
         Log.d("PROVERA", RideService.rideInCreation.toString());
 

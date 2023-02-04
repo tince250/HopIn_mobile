@@ -24,10 +24,13 @@ import com.example.uberapp_tim13.fragments.PassengerHomeFragment;
 import com.example.uberapp_tim13.fragments.RideHistoryFragment;
 import com.example.uberapp_tim13.fragments.RideSettingsFragment;
 import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.tools.FragmentTransition;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +49,7 @@ public class PassengerMainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_passenger_main);
         setTitle("Home");
 
-        connectToRideInvitesSocket();
+
 
         this.orderAgain = false;
         // to enable order again from favourites
@@ -56,7 +59,29 @@ public class PassengerMainActivity extends AppCompatActivity{
             }
         }
 
+        connectToRideInvitesSocket();
+        connectToScheduledRideSockets();
+
         setBottomNavigationBar();
+    }
+
+    private void connectToScheduledRideSockets() {
+        Call<List<RideReturnedDTO>> call = RestUtils.rideAPI.getScheduledRidesForUser(AuthService.tokenDTO.getAccessToken() ,Globals.userId);
+        call.enqueue(new Callback<List<RideReturnedDTO>>() {
+            @Override
+            public void onResponse(Call<List<RideReturnedDTO>> call, Response<List<RideReturnedDTO>> response) {
+                if (response.isSuccessful()) {
+                    for (RideReturnedDTO ride: response.body()) {
+                        StompManager.subscribeToScheduledRide(PassengerMainActivity.this, ride);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RideReturnedDTO>> call, Throwable t) {
+                Log.e("ERR", t.toString());
+            }
+        });
     }
 
     private void connectToRideInvitesSocket() {

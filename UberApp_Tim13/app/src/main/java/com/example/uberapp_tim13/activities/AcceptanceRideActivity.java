@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.DeclineReasonDialog;
+import com.example.uberapp_tim13.dialogs.RideStateDialog;
 import com.example.uberapp_tim13.dtos.InvitationResponseDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
@@ -74,12 +75,13 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         LocationNoIdDTO destination = ride.getDestination();
         ((TextView)findViewById(R.id.pickUpLocationTV)).append(pickup.getAddress());
         ((TextView)findViewById(R.id.destinationTV)).append(destination.getAddress());
-        ((TextView)findViewById(R.id.distanceTV)).append(ride.getDistance() + "");
+        ((TextView)findViewById(R.id.distanceTV)).append(ride.getDistance() + "km");
         int size = 0;
         if (ride.getPassengers() != null) {
             size = ride.getPassengers().size();
         }
-        ((TextView)findViewById(R.id.durationTV)).append(0 + "");
+        ((TextView)findViewById(R.id.passengersTV)).append("" + size);
+        ((TextView)findViewById(R.id.durationTV)).append(ride.getDuration() + "");
         ((TextView)findViewById(R.id.priceTV)).append(ride.getPrice() + "");
     }
 
@@ -101,9 +103,15 @@ public class AcceptanceRideActivity extends AppCompatActivity {
                     if (!response.isSuccessful())
                         return;
                     Toast.makeText(getApplicationContext(), "Answer sent successfully", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(AcceptanceRideActivity.this, CurrentRideActivity.class);
-                    i.putExtra("ride", RideService.returnedRide);
-                    startActivity(i);
+                    if (invite.getRide().getScheduledTime() == null) {
+                        Intent i = new Intent(AcceptanceRideActivity.this, CurrentRideActivity.class);
+                        i.putExtra("ride", RideService.returnedRide);
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(AcceptanceRideActivity.this, DriverMainActivity.class);
+                        i.putExtra("acceptance", "true");
+                        startActivity(i);
+                    }
                 }
 
                 @Override
@@ -114,7 +122,6 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         }
         else {
             stompClient.send("/ws/send/invite-response/" + invite.getFrom().getId() , Globals.gson.toJson(new InvitationResponseDTO(Globals.userId, true))).subscribe();
-            // podesiti da sad i on slusa order ride odgovor od drivera
         }
     }
 

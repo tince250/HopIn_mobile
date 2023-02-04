@@ -6,6 +6,8 @@ import com.example.uberapp_tim13.dtos.ReasonDTO;
 import com.example.uberapp_tim13.dtos.RideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -47,4 +49,10 @@ public interface RideAPI {
     Call<RideReturnedDTO> getPassengerActiveRide(@Header("Authorization") String token,
                                         @Path("id") int id);
 
+    @POST("ride/driver-took-off/{rideId}")
+    Call<RideReturnedDTO> startRideToDeparture(@Header("Authorization") String token, @Path("rideId") int rideId);
+
+    @GET("ride/scheduled-rides/{userId}")
+    Call<List<RideReturnedDTO>> getScheduledRidesForUser(@Header("Authorization") String token,
+                                                      @Path("userId") int userId);
 }

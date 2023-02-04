@@ -18,6 +18,7 @@ import android.os.Bundle;
 
 import com.example.uberapp_tim13.BuildConfig;
 import com.example.uberapp_tim13.activities.AcceptanceRideActivity;
+import com.example.uberapp_tim13.activities.CurrentRideActivity;
 import com.example.uberapp_tim13.activities.PassengerMainActivity;
 import com.example.uberapp_tim13.dialogs.LocationDialog;
 import com.example.uberapp_tim13.dtos.ActiveVehicleDTO;
@@ -43,6 +44,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.maps.android.SphericalUtil;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -325,9 +327,13 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                 if (ride == null && finalLocation != null) {
                     addMarker(new LatLng(finalLocation.getLatitude(), finalLocation.getLongitude()), "here");
                 } else {
-                    if (ride != null)
+
+                    if (ride != null) {
                         displayRideRoute();
-                        displayRouteToPickup();
+                        if (getActivity() instanceof CurrentRideActivity)
+                            displayRouteToPickup();
+                    }
+
                 }
             }
         });
@@ -347,14 +353,14 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         addMarker(pickup, "pickup");
         addMarker(destination, "destination");
 
-        getPathAnDisplayOnMap(pickup, destination);
+        getPathAnDisplayOnMap(pickup, destination, true);
     }
 
     private void displayRouteToPickup() {
         LocationDTO loc = ride.getLocations().get(0);
         LocationNoIdDTO pickupLoc = loc.getDeparture();
         LatLng destination = new LatLng(pickupLoc.getLatitude(), pickupLoc.getLongitude());
-        int driverId = ride.getId();
+        int driverId = ride.getDriver().getId();
 
         Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
                 driverId);
@@ -367,7 +373,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                     @Override
                     public void run() {
                         LatLng departure = new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude());
-                        getPathAnDisplayOnMap(departure, destination);
+                        getPathAnDisplayOnMap(departure, destination, false);
                     }
                 });
             }
@@ -379,7 +385,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         });
     }
 
-    private void getPathAnDisplayOnMap(LatLng pickup, LatLng destination) {
+    private void getPathAnDisplayOnMap(LatLng pickup, LatLng destination, boolean isRide) {
         List<LatLng> path = new ArrayList();
 
         GeoApiContext context = new GeoApiContext.Builder()
@@ -431,9 +437,14 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             Log.e("error", ex.getLocalizedMessage());
         }
 
+        String color;
+        if (isRide)
+            color = "#337D98";
+        else
+            color = "#ec9a29";
         //Draw the polyline
         if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.parseColor("#337D98")).width(12);
+            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.parseColor(color)).width(12);
             polyline = map.addPolyline(opts);
         }
 
