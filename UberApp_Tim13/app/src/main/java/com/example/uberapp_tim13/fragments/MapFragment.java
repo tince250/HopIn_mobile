@@ -131,8 +131,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         createMapFragmentAndInflate();
         manager = new StompManager();
         manager.connect();
-        this.setMarkersForActiveVehiclesOnCreate();
-        this.connectToVehiclesOnMapSockets();
 
         return v;
     }
@@ -329,6 +327,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             }
         });
 
+        pozovi();
+
+    }
+
+
+
+    public void pozovi(){
+        this.setMarkersForActiveVehiclesOnCreate();
+        this.connectToVehiclesOnMapSockets();
     }
 
     private void displayRoute() {
@@ -491,8 +498,13 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
     private void connectToVehicleActivation() {
         StompManager.stompClient.topic("/topic/vehicle/activation").subscribe(topicMessage -> {
-            int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
-            this.setMarkerForVehicleFromSocketIncome(driverId, true);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    setMarkerForVehicleFromSocketIncome(driverId, true);
+                }
+            });
         });
     }
 
@@ -500,8 +512,13 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         StompManager manager = new StompManager();
         manager.connect();
         StompManager.stompClient.topic("/topic/vehicle/deactivation").subscribe(topicMessage -> {
-            int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
-            this.setMarkerForVehicleFromSocketIncome(driverId, false);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    setMarkerForVehicleFromSocketIncome(driverId, false);
+                }
+            });
         });
     }
 
