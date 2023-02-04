@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
 
+import com.example.uberapp_tim13.dialogs.RideStateDialog;
 import com.example.uberapp_tim13.dtos.RideForReportDTO;
 import com.example.uberapp_tim13.dtos.RideInInviteDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
@@ -52,11 +53,37 @@ public class DriverMainActivity extends AppCompatActivity {
         setTitle(R.string.home_nav);
 
         connectToRideOffersSocket();
+        connectToScheduledRideSockets();
 
         FragmentTransition.to(DriverHomeFragment.newInstance(), this, true, R.id.driverFL);
 
 
+        if (getIntent().getExtras() != null && getIntent().getExtras().get("acceptance") != null) {
+            (new RideStateDialog(DriverMainActivity.this, "SCHEDULED", RideService.returnedRide.getScheduledTime())).show();
+//            StompManager.subscribeToScheduledRide(getApplicationContext(), RideService.returnedRide);
+        }
+
+
         setBottomNavigationBar();
+    }
+
+    private void connectToScheduledRideSockets() {
+        Call<List<RideReturnedDTO>> call = RestUtils.rideAPI.getScheduledRidesForUser(AuthService.tokenDTO.getAccessToken() ,Globals.userId);
+        call.enqueue(new Callback<List<RideReturnedDTO>>() {
+            @Override
+            public void onResponse(Call<List<RideReturnedDTO>> call, Response<List<RideReturnedDTO>> response) {
+                if (response.isSuccessful()) {
+                    for (RideReturnedDTO ride: response.body()) {
+                        StompManager.subscribeToScheduledRide(DriverMainActivity.this, ride);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RideReturnedDTO>> call, Throwable t) {
+                Log.e("ERR", t.toString());
+            }
+        });
     }
 
     private void connectToRideOffersSocket() {

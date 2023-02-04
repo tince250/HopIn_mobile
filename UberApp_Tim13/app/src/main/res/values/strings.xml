@@ -182,12 +182,13 @@
     <string name="composeMessage">Message...</string>
     <string name="emailRecipient">Recipient email...</string>
     <string name="ride">RIDE</string>
-    <string name="close">close</string>
+    <string name="close">Close</string>
     <string name="dialogAcceptedRideInfo">Ride is accepted. Redirecting to the current ride page.</string>
     <string name="dialogRideNotFoundInfo">Sorry, we didn\'t find proper ride for you. Please, try again later.</string>
     <string name="dialogRideFinishedInfo">You have arrived at your destination. Thank you for HoppingIn.</string>
     <string name="reminder">Reminder</string>
     <string name="your_scheduled_ride_starts_soon">Your scheduled ride starts soon!</string>
     <string name="estimated_time">Estimated time</string>
+    <string name="okay">Okay</string>
 
 </resources>

@@ -30,6 +30,7 @@ import com.example.uberapp_tim13.dialogs.PanicReasonDialog;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
+import com.example.uberapp_tim13.dtos.RideOfferResponseDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.fragments.MapFragment;
@@ -204,7 +205,8 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private void subscribeToStartFinishMessages() {
         StompManager.stompClient.topic("/topic/ride-start-finish/" + ride.getDriver().getId()).subscribe(topicMessage -> {
-            if (topicMessage.getPayload().trim().equals("start")) {
+            RideReturnedDTO rideDTO = Globals.gson.fromJson(topicMessage.getPayload(), RideReturnedDTO.class);
+            if (rideDTO.getStatus().equals("STARTED")) {
                 handler.post(new Runnable() {
 
                     @Override
@@ -215,7 +217,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                if (topicMessage.getPayload().trim().equals("finish")) {
+                if (rideDTO.getStatus().equals("FINISHED")) {
                     handler.post(new Runnable() {
 
                         @Override
@@ -273,16 +275,21 @@ public class CurrentRideActivity extends AppCompatActivity {
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
-                        new MaterialAlertDialogBuilder(CurrentRideActivity.this, R.style.AlertDialogTheme)
-                                .setTitle(R.string.finishedAlert)
-                                .setMessage(R.string.finishedAlertContent)
-                                .setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        getParent().finish();
-                                    }
-                                })
-                                .show();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                new MaterialAlertDialogBuilder(CurrentRideActivity.this, R.style.AlertDialogTheme)
+                                        .setTitle(R.string.finishedAlert)
+                                        .setMessage(R.string.finishedAlertContent)
+                                        .setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                CurrentRideActivity.this.finish();
+                                            }
+                                        })
+                                        .show();
+                            }
+                        });
                     }
 
                     @Override

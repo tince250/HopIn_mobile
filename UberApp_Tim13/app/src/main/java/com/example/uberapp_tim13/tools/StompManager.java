@@ -1,6 +1,18 @@
 package com.example.uberapp_tim13.tools;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+
+import com.example.uberapp_tim13.activities.CurrentRideActivity;
+import com.example.uberapp_tim13.dialogs.ReminderDialog;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.model.Ride;
+import com.example.uberapp_tim13.services.RideService;
 
 import io.reactivex.schedulers.Schedulers;
 import ua.naiksoftware.stomp.Stomp;
@@ -42,5 +54,33 @@ public class StompManager {
                 break;
         }
 
+    }
+
+    @SuppressLint("CheckResult")
+    public static void subscribeToScheduledRide(Context context, RideReturnedDTO ride) {
+        StompManager.stompClient.topic("/topic/scheduled-ride/" + ride.getId()).subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    RideReturnedDTO newRide = Globals.gson.fromJson(topicMessage.getPayload(), RideReturnedDTO.class);
+                    (new ReminderDialog(context, newRide)).show();
+                }
+            });
+        });
+
+        if (Globals.userRole.equals("passenger")) {
+            StompManager.stompClient.topic("/topic/scheduled-ride/driver-took-off/" + ride.getId()).subscribe(topicMessage -> {
+                //TODO: dodati ovde ino srdjanovo za storage
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        RideReturnedDTO newRide = Globals.gson.fromJson(topicMessage.getPayload(), RideReturnedDTO.class);
+                        Intent i = new Intent(context, CurrentRideActivity.class);
+                        i.putExtra("ride", newRide);
+                        context.startActivity(i);
+                    }
+                });
+            });
+        }
     }
 }

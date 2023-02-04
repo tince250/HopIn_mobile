@@ -26,13 +26,14 @@ import retrofit2.Response;
 public class RideStateDialog extends Dialog {
 
     private String type;
+    private String scheduledTime;
     private TextView info;
-    public RideStateDialog(@NonNull Context context, String type) {
+    public RideStateDialog(@NonNull Context context, String type, String scheduledTime) {
         super(context);
 
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         this.type = type;
-        setupDialog();
+        this.scheduledTime = scheduledTime;
     }
 
     @Override
@@ -57,8 +58,10 @@ public class RideStateDialog extends Dialog {
             info.setText(R.string.dialogAcceptedRideInfo);
         } else if (type.equals("NOT_FOUND")) {
             info.setText(R.string.dialogRideNotFoundInfo);
-        } else {
+        } else if (type.equals("ARRIVED")) {
             info.setText(R.string.dialogRideFinishedInfo);
+        } else if (type.equals("SCHEDULED")) {
+            info.setText("Ride is successfully scheduled for " + scheduledTime + ". See you then!");
         }
     }
 }
