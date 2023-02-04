@@ -3,8 +3,11 @@ package com.example.uberapp_tim13.fragments;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -14,22 +17,39 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.example.uberapp_tim13.BuildConfig;
+import com.example.uberapp_tim13.activities.AcceptanceRideActivity;
+import com.example.uberapp_tim13.activities.PassengerMainActivity;
 import com.example.uberapp_tim13.dialogs.LocationDialog;
+import com.example.uberapp_tim13.dtos.ActiveVehicleDTO;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.LocationWithVehicleIdDTO;
+import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
+import com.example.uberapp_tim13.dtos.VehicleDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.services.DriverService;
+import com.example.uberapp_tim13.services.UserService;
+import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.maps.android.SphericalUtil;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +58,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -54,19 +75,27 @@ import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.EncodedPolyline;
+import com.google.maps.model.Vehicle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private LocationManager locationManager;
+    StompManager manager;
     private String provider;
     private SupportMapFragment mMapFragment;
     private AlertDialog dialog;
+    private int counter = 0;
     private GoogleMap map;
 
     private Marker pickup;
@@ -77,6 +106,10 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     RideReturnedDTO ride = null;
 
     private String current_type = "pickup";
+
+    private Map<Integer, Marker> vehicleMarkers = new HashMap<Integer, Marker>();
+    private Map<Integer, ActiveVehicleDTO> vehicles = new HashMap<Integer, ActiveVehicleDTO>();
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -99,6 +132,9 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         setHasOptionsMenu(true);
         View v = inflater.inflate(R.layout.fragment_map, container, false);
         createMapFragmentAndInflate();
+        manager = new StompManager();
+        manager.connect();
+
         return v;
     }
 
@@ -294,6 +330,8 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             }
         });
 
+        initializeVehiclesOnMap();
+
     }
 
     private void displayRoute() {
@@ -379,7 +417,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         map.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    public void addMarker(LatLng loc, String type) {
+    public Marker addMarker(LatLng loc, String type) {
 
         Marker marker = null;
         String title = "";
@@ -402,17 +440,236 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             marker.remove();
         }
 
+        BitmapDescriptor markerIcon = null;
+        if (!type.equals("vehicle"))
+            markerIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
+        else
+            markerIcon = getCarIcon("green");
+
         marker = map.addMarker(new MarkerOptions()
                 .title(title)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                .icon(markerIcon)
                 .position(loc));
         marker.setFlat(true);
 
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(loc).zoom(10).build();
+        if (!type.equals("vehicle")) {
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(loc).zoom(10).build();
 
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        } else {
+            marker.setAnchor(0.5f, 0.5f);
+        }
+        return marker;
     }
+
+    private BitmapDescriptor getCarIcon(String color) {
+        switch (color) {
+            case "green":
+                return BitmapDescriptorFactory.fromResource(R.drawable.green_car);
+            case "red":
+                return BitmapDescriptorFactory.fromResource(R.drawable.red_car);
+            case "orange":
+                return BitmapDescriptorFactory.fromResource(R.drawable.orange_car);
+        }
+        return null;
+    }
+
+    public void initializeVehiclesOnMap(){
+        this.setMarkersForActiveVehiclesOnCreate();
+        this.connectToVehiclesOnMapSockets();
+        this.connectToVehiclesRideStatusSockets();
+    }
+
+    public void setMarkersForActiveVehiclesOnCreate(){
+        Call<List<ActiveVehicleDTO>> call = RestUtils.driverAPI.getActiveVehicles();
+        call.enqueue(new Callback<List<ActiveVehicleDTO>>() {
+
+            @Override
+            public void onResponse(Call<List<ActiveVehicleDTO>> call, Response<List<ActiveVehicleDTO>> response){
+                List<ActiveVehicleDTO> activeVehicles = response.body();
+                for (ActiveVehicleDTO vehicle : activeVehicles){
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            vehicles.put(vehicle.getVehicleId(), vehicle);
+                            Marker marker = addMarker(new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude()), "vehicle");
+                            vehicleMarkers.put(vehicle.getVehicleId(), marker);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ActiveVehicleDTO>> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    public void connectToVehiclesRideStatusSockets(){
+        this.connectToRecieveRidePending();
+        this.connectToRecieveRideAccepted();
+        this.connectToRecieveRideCanceled();
+        this.connectToRecieveRideFinished();
+    }
+
+    private void connectToRecieveRidePending(){
+        StompManager.stompClient.topic("/topic/ride-pending").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "orange");
+                }
+            });
+        });
+    }
+
+    private void connectToRecieveRideAccepted(){
+        StompManager.stompClient.topic("/topic/ride-accept").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "red");
+                }
+            });
+        });
+    }
+
+    private void connectToRecieveRideCanceled() {
+        StompManager.stompClient.topic("/topic/ride-cancel").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "green");
+                }
+            });
+        });
+    }
+
+    private void connectToRecieveRideFinished() {
+        StompManager.stompClient.topic("/topic/ride-finish").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "green");
+                }
+            });
+        });
+    }
+
+    public void changeVehicleColor(int driverId, String color) {
+        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
+                driverId);
+        call.enqueue(new Callback<VehicleDTO>() {
+
+            @Override
+            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response) {
+                int id = response.body().getId();
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        vehicleMarkers.get(id).setIcon(getCarIcon(color));
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<VehicleDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    public void connectToVehiclesOnMapSockets(){
+        this.connectToUpdateVehicleLocation();
+        this.connectToVehicleActivation();
+        this.connectToVehicleDeactivation();
+    }
+
+    private void connectToUpdateVehicleLocation(){
+        StompManager.stompClient.topic("/topic/map-updates/update-vehicle-position").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    LocationWithVehicleIdDTO newLocation = Globals.gson.fromJson(topicMessage.getPayload(), LocationWithVehicleIdDTO.class);
+
+                    double heading = SphericalUtil.computeHeading(vehicleMarkers.get(newLocation.getVehicleId()).getPosition(),
+                            new LatLng(newLocation.getLatitude(), newLocation.getLongitude()));
+                    
+                    vehicleMarkers.get(newLocation.getVehicleId()).setPosition(new LatLng(newLocation.getLatitude(), newLocation.getLongitude()));
+
+                    if (heading != 0.0)
+                        vehicleMarkers.get(newLocation.getVehicleId()).setRotation((float) heading);
+                }
+            });
+        });
+    }
+
+    private void connectToVehicleActivation() {
+        StompManager.stompClient.topic("/topic/vehicle/activation").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    setMarkerForVehicleFromSocketIncome(driverId, true);
+                }
+            });
+        });
+    }
+
+    private void connectToVehicleDeactivation(){
+        StompManager manager = new StompManager();
+        manager.connect();
+        StompManager.stompClient.topic("/topic/vehicle/deactivation").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    setMarkerForVehicleFromSocketIncome(driverId, false);
+                }
+            });
+        });
+    }
+
+    private void setMarkerForVehicleFromSocketIncome(int driverId, boolean activation){
+        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
+                driverId);
+        call.enqueue(new Callback<VehicleDTO>() {
+
+            @Override
+            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response){
+                ActiveVehicleDTO vehicle = new ActiveVehicleDTO(response.body(), driverId);
+                if (activation) {
+                    if (vehicles.get(vehicle.getVehicleId()) == null) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                vehicles.put(vehicle.getVehicleId(), vehicle);
+                                Marker marker = addMarker(new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude()), "vehicle");
+                                vehicleMarkers.put(vehicle.getVehicleId(), marker);
+                            }
+                        });
+                    }
+                } else {
+                    vehicles.remove(vehicle.getVehicleId());
+                    vehicleMarkers.get(vehicle.getVehicleId()).remove();
+                    vehicleMarkers.remove(vehicle.getVehicleId());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VehicleDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+
 
 
     @Override

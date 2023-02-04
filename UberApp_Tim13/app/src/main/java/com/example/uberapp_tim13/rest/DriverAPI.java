@@ -1,5 +1,6 @@
 package com.example.uberapp_tim13.rest;
 
+import com.example.uberapp_tim13.dtos.ActiveVehicleDTO;
 import com.example.uberapp_tim13.dtos.AllPassengerRidesDTO;
 import com.example.uberapp_tim13.dtos.RideForReportDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
@@ -58,4 +59,7 @@ public interface DriverAPI {
     Call<WorkingHoursDTO> updateWorkingHours(@Header("Authorization") String token,
                                           @Path("id") int id,
                                           @Body WorkingHoursEndDTO dto);
+
+    @GET("driver/active-vehicles")
+    Call<List<ActiveVehicleDTO>> getActiveVehicles();
 }

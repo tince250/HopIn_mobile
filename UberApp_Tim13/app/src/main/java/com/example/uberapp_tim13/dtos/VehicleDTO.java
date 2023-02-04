@@ -3,6 +3,7 @@ package com.example.uberapp_tim13.dtos;
 import java.io.Serializable;
 
 public class VehicleDTO implements Serializable{
+    private int id;
     private String vehicleType;
     private String model;
     private String licenseNumber;
@@ -11,6 +12,9 @@ public class VehicleDTO implements Serializable{
     private boolean babyTransport;
     private boolean petTransport;
 
+    public int getId() {
+        return id;
+    }
     public String getVehicleType() {
         return vehicleType;
     }
@@ -21,5 +25,9 @@ public class VehicleDTO implements Serializable{
 
     public String getLicenseNumber() {
         return licenseNumber;
+    }
+
+    public LocationNoIdDTO getCurrentLocation() {
+        return currentLocation;
     }
 }
