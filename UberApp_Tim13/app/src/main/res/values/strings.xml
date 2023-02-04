@@ -190,5 +190,6 @@
     <string name="your_scheduled_ride_starts_soon">Your scheduled ride starts soon!</string>
     <string name="estimated_time">Estimated time</string>
     <string name="okay">Okay</string>
+    <string name="time">Scheduled time:</string>
 
 </resources>

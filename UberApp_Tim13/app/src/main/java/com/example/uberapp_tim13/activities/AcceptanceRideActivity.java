@@ -26,6 +26,7 @@ import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
 import com.example.uberapp_tim13.tools.Globals;
 import com.example.uberapp_tim13.tools.StompManager;
+import com.example.uberapp_tim13.tools.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,6 +80,12 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         int size = 0;
         if (ride.getPassengers() != null) {
             size = ride.getPassengers().size();
+        }
+
+        if (ride.getScheduledTime() != null) {
+            ((TextView)findViewById(R.id.scheduledTV)).append("" + Utils.formatDate(ride.getScheduledTime()));
+        } else {
+            ((TextView)findViewById(R.id.scheduledTV)).append("asap");
         }
         ((TextView)findViewById(R.id.passengersTV)).append("" + size);
         ((TextView)findViewById(R.id.durationTV)).append(ride.getDuration() + "");
