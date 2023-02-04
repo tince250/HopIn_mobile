@@ -124,7 +124,12 @@ public class PassengerMainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "go to current ride", Toast.LENGTH_LONG);
-                startActivity(new Intent(PassengerMainActivity.this, CurrentRideActivity.class));
+                if (Globals.currentRide == null) {
+                    return;
+                }
+                Intent i = new Intent(PassengerMainActivity.this, CurrentRideActivity.class);
+                i.putExtra("ride", Globals.currentRide);
+                startActivity(i);
             }
         });
         return true;
