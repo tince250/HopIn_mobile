@@ -67,7 +67,7 @@ public class InviteOthersFragment extends Fragment implements View.OnClickListen
 
         this.addedUsers = new ArrayList<UserReturnedDTO>();
         this.accepted = new ArrayList<Boolean>();
-        this.adapter = new InvitedPassengersAdapter(getActivity(), this.addedUsers, this.accepted);
+        this.adapter = new InvitedPassengersAdapter(getActivity(), this.addedUsers, this.accepted, getContext());
         listView = (ListView) view.findViewById(R.id.list);
         listView.setAdapter(adapter);
 

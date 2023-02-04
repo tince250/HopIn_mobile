@@ -1,6 +1,9 @@
 package com.example.uberapp_tim13.adapters.ride_history;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,10 +23,12 @@ public class PassengerDetailsAdapter extends BaseAdapter {
 
     private Activity activity;
     List<UserReturnedDTO> users;
+    Context context;
 
-    public PassengerDetailsAdapter(Activity activity, List<UserReturnedDTO> users) {
+    public PassengerDetailsAdapter(Activity activity, List<UserReturnedDTO> users, Context context) {
         this.activity = activity;
         this.users = users;
+        this.context = context;
     }
 
     @Override
@@ -58,6 +63,18 @@ public class PassengerDetailsAdapter extends BaseAdapter {
             ImageView profilePic = view_new.findViewById(R.id.ic_profile);
             profilePic.setImageBitmap(Utils.convertBase64ToBitmap(user.getProfilePicture()));
         }
+
+        view_new.findViewById(R.id.callBtn).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String phoneNumber = users.get(i).getTelephoneNumber();
+                intent.setData(Uri.parse("tel:" + phoneNumber));
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                }
+            }
+        });
 
         return view_new;
     }

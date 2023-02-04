@@ -49,7 +49,7 @@ public class PassengerDetailsDialog extends Dialog {
 
     private void setComponents(){
         listView = (ListView) findViewById(android.R.id.list);
-        PassengerDetailsAdapter adapter = new PassengerDetailsAdapter(activity, users);
+        PassengerDetailsAdapter adapter = new PassengerDetailsAdapter(activity, users, getContext());
         listView.setAdapter(adapter);
     }
 

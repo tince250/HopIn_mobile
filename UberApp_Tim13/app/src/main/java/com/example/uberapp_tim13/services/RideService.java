@@ -86,8 +86,10 @@ public class RideService extends Service {
             @Override
             public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
                 returnedRide = response.body();
-                if (response.code() == 200)
+                if (response.code() == 200) {
+                    Globals.currentRide = response.body();
                     sendOrderedRideBroadcast(response.body());
+                }
                 else if (response.code() == 400)
                     Log.d("greska", "greska");
             }

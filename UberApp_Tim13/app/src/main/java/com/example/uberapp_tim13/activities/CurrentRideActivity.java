@@ -201,6 +201,7 @@ public class CurrentRideActivity extends AppCompatActivity {
         View passDetails = findViewById(R.id.passDetailsCardLL);
         switch (Globals.userRole) {
             case "driver":
+                callBtn.setVisibility(View.GONE);
                 driverDetails.setVisibility(View.GONE);
                 inconsistentBtn.setVisibility(View.GONE);
                 subscribeToVehicleArrivalTime();
@@ -217,6 +218,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 });
                 break;
             case "passenger":
+                callBtn.setVisibility(View.VISIBLE);
                 subscribeToStartFinishMessages();
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);

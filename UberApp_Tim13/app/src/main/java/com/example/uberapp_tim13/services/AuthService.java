@@ -15,6 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.activities.DriverMainActivity;
 import com.example.uberapp_tim13.dtos.CredentialsDTO;
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.TokenDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.WorkingHoursDTO;
@@ -82,6 +83,29 @@ public class AuthService extends Service {
 
     }
 
+    private void setCurrentRide() {
+        Call<RideReturnedDTO> call = RestUtils.rideAPI.getPassengerActiveRide(tokenDTO.getAccessToken(), Globals.userId);
+        call.enqueue(new Callback<RideReturnedDTO>() {
+
+            @Override
+            public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response){
+                if (response.isSuccessful()) {
+                    Globals.currentRide = response.body();
+                    sendCurrentRideBroadcast(true);
+                }
+                else {
+                    Globals.currentRide = null;
+                    sendCurrentRideBroadcast(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideReturnedDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
 
     public void setUserGlobalsData() {
         Globals.userRole = "passenger";
@@ -91,6 +115,7 @@ public class AuthService extends Service {
             Globals.userRole = JWTUtils.getUserRoleFromToken(tokenBody);
             Globals.userId = JWTUtils.getUserIdFromToken(tokenBody);
             if (Globals.userRole.equals("driver")) { setDriverActive(); }
+            if (Globals.userRole.equals("passenger")) { setCurrentRide(); }
 
             Call<UserReturnedDTO> call = RestUtils.userApi.doGetUser("", Globals.userId);
             call.enqueue(new Callback<UserReturnedDTO>() {
@@ -113,6 +138,12 @@ public class AuthService extends Service {
         }
     }
 
+    private void sendCurrentRideBroadcast(boolean hasRide) {
+        Intent intent = new Intent("hasCurrentRide");
+        intent.putExtra("hasRide", hasRide);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
     private void sendUserLoginBroadcast(){
         Intent intent = new Intent("userLoggedIn");
         intent.putExtra("done", true);
@@ -129,11 +160,13 @@ public class AuthService extends Service {
                 if (response.isSuccessful()) {
                     DriverMainActivity.workingHours = response.body();
                     Globals.isActive = true;
-                    Log.d("hours", String.valueOf(response.code()));
-                    Log.d("hours", DriverMainActivity.workingHours.toString());
+                    sendActiveResponse(true);
+                    Log.d("hourss", String.valueOf(response.code()));
+                    Log.d("hourss", DriverMainActivity.workingHours.toString());
 
                 } else {
                     Globals.isActive = false;
+                    sendActiveResponse(false);
                     Log.d("hours", String.valueOf(response.code()));
                     Log.d("hours", String.valueOf(response.message()));
                     Log.d("hours", String.valueOf(response));
@@ -146,6 +179,12 @@ public class AuthService extends Service {
                 Log.d("EVOME", t.toString());
             }
         });
+    }
+
+    private void sendActiveResponse(boolean res) {
+        Intent intent = new Intent("isActive");
+        intent.putExtra("active", res);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     @Nullable
