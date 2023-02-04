@@ -1,5 +1,6 @@
 package com.example.uberapp_tim13.tools;
 
+import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.model.User;
 import com.google.gson.Gson;
@@ -11,6 +12,8 @@ public class Globals {
     public static int userId = 0;
     public static User currentUser;
     public static boolean isActive = false;
+
+    public static RideReturnedDTO currentRide = null;
 
     public static UserReturnedDTO user;
 
