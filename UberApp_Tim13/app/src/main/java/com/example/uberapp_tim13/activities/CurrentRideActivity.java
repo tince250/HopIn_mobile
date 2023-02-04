@@ -65,6 +65,8 @@ public class CurrentRideActivity extends AppCompatActivity {
     private Chronometer timePassedTV;
     private TextView arrivalTimeTitleTV;
     private TextView arrivalTimeTV;
+    private StompManager vehicleArrivalTimeSM;
+    private StompManager vehicleArrivedSM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,9 @@ public class CurrentRideActivity extends AppCompatActivity {
         timePassedTV = findViewById(R.id.timePassedTV);
         arrivalTimeTitleTV = findViewById(R.id.arrivalTimeTitleTV);
         arrivalTimeTV = findViewById(R.id.arrivalTimeTV);
+
+        vehicleArrivalTimeSM = new StompManager();
+        vehicleArrivedSM = new StompManager();
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,18 +285,20 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void subscribeToVehicleArrived(){
-        StompManager.stompClient.topic("/topic/vehicle-arrival/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+        vehicleArrivedSM.stompClient.topic("/topic/vehicle-arrival/" + ride.getDriver().getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     arrivalTimeTV.setText("Arrived!");
+                    vehicleArrivalTimeSM.disconnect();
+                    vehicleArrivedSM.disconnect();
                 }
             });
         });
     }
 
     private void subscribeToVehicleArrivalTime(){
-        StompManager.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+        vehicleArrivalTimeSM.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
