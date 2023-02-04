@@ -3,6 +3,9 @@ package com.example.uberapp_tim13.fragments;
 import static com.google.maps.android.Context.getApplicationContext;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -25,12 +28,14 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.activities.CurrentRideActivity;
 import com.example.uberapp_tim13.activities.ReportsActivity;
+import com.example.uberapp_tim13.activities.SplashActivity;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
@@ -334,6 +339,5 @@ public class PassengerHomeFragment extends Fragment {
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("activeRide"));
 
     }
-
 
 }

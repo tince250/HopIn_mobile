@@ -44,4 +44,11 @@ public class Utils {
         btn.setIconTint(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
         btn.setStrokeColor(ColorStateList.valueOf(activity.getResources().getColor(R.color.disabled_gray)));
     }
+
+    public static String formatDate(String dateString) {
+        String[] tokens = dateString.split("T");
+        String[] date = tokens[0].split("-");
+        String[] time = tokens[1].split(":");
+        return time[0] + ":" + time[1] + ", " + date[2] + "." + date[1] + "." + date[0] + ".";
+    }
 }

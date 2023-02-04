@@ -1,10 +1,14 @@
 package com.example.uberapp_tim13.activities;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -13,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
@@ -92,6 +98,7 @@ public class LoginActivity extends Activity {
         startActivity(new Intent(LoginActivity.this, PassengerRegisterActivity.class));
     }
 
+
     private boolean isFormValid(){
         boolean valid = true;
         if (emailET.getText().toString().isEmpty()){
@@ -109,6 +116,7 @@ public class LoginActivity extends Activity {
         }
         return valid;
     }
+
 
     @Override
     protected void onStart() {

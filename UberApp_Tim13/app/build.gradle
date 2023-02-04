@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.google.maps:google-maps-services:2.1.2'
+    implementation 'com.google.maps.android:android-maps-utils:0.6.2'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'com.github.NaikSoftware:StompProtocolAndroid:1.6.3'
@@ -57,4 +58,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'androidx.core:core:1.6.0'
 }
