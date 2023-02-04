@@ -23,6 +23,7 @@ import com.example.uberapp_tim13.dialogs.LocationDialog;
 import com.example.uberapp_tim13.dtos.ActiveVehicleDTO;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.LocationWithVehicleIdDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
@@ -38,6 +39,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.maps.android.SphericalUtil;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -93,6 +95,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     private String provider;
     private SupportMapFragment mMapFragment;
     private AlertDialog dialog;
+    private int counter = 0;
     private GoogleMap map;
 
     private Marker pickup;
@@ -327,13 +330,13 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             }
         });
 
-        pozovi();
+        initializeVehiclesOnMap();
 
     }
 
 
 
-    public void pozovi(){
+    public void initializeVehiclesOnMap(){
         this.setMarkersForActiveVehiclesOnCreate();
         this.connectToVehiclesOnMapSockets();
     }
@@ -461,6 +464,8 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                     .target(loc).zoom(10).build();
 
             map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        } else {
+            marker.setAnchor(0.5f, 0.5f);
         }
         return marker;
     }
@@ -492,8 +497,28 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     }
 
     public void connectToVehiclesOnMapSockets(){
+        this.connectToUpdateVehicleLocation();
         this.connectToVehicleActivation();
         this.connectToVehicleDeactivation();
+    }
+
+    private void connectToUpdateVehicleLocation(){
+        StompManager.stompClient.topic("/topic/map-updates/update-vehicle-position").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    LocationWithVehicleIdDTO newLocation = Globals.gson.fromJson(topicMessage.getPayload(), LocationWithVehicleIdDTO.class);
+
+                    double heading = SphericalUtil.computeHeading(vehicleMarkers.get(newLocation.getVehicleId()).getPosition(),
+                            new LatLng(newLocation.getLatitude(), newLocation.getLongitude()));
+                    
+                    vehicleMarkers.get(newLocation.getVehicleId()).setPosition(new LatLng(newLocation.getLatitude(), newLocation.getLongitude()));
+
+                    if (heading != 0.0)
+                        vehicleMarkers.get(newLocation.getVehicleId()).setRotation((float) heading);
+                }
+            });
+        });
     }
 
     private void connectToVehicleActivation() {
