@@ -197,7 +197,7 @@ public class PassengerHomeFragment extends Fragment {
                 RideService.rideInCreation.setScheduledTime(null);
             }
         });
-
+        mapFragment.setMarkersForActiveVehiclesOnCreate();
         return view;
     }
 

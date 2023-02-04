@@ -15,9 +15,13 @@ import android.os.Bundle;
 
 import com.example.uberapp_tim13.BuildConfig;
 import com.example.uberapp_tim13.dialogs.LocationDialog;
+import com.example.uberapp_tim13.dtos.ActiveVehicleDTO;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.VehicleDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +34,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +44,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.uberapp_tim13.R;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -56,8 +63,13 @@ import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.EncodedPolyline;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
@@ -77,6 +89,10 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     RideReturnedDTO ride = null;
 
     private String current_type = "pickup";
+
+    private Map<Integer, Marker> vehicleMarkers = new HashMap<Integer, Marker>();
+    private Map<Integer, ActiveVehicleDTO> vehicles = new HashMap<Integer, ActiveVehicleDTO>();
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -379,7 +395,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         map.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    public void addMarker(LatLng loc, String type) {
+    public Marker addMarker(LatLng loc, String type) {
 
         Marker marker = null;
         String title = "";
@@ -402,9 +418,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             marker.remove();
         }
 
+        BitmapDescriptor markerIcon = null;
+        if (!type.equals("vehicle"))
+            markerIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
+        else
+            markerIcon = (BitmapDescriptorFactory.fromResource(R.drawable.vehicle));
+
         marker = map.addMarker(new MarkerOptions()
                 .title(title)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                .icon(markerIcon)
                 .position(loc));
         marker.setFlat(true);
 
@@ -412,7 +434,36 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                 .target(loc).zoom(10).build();
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        return marker;
     }
+
+    public void setMarkersForActiveVehiclesOnCreate(){
+        Call<List<ActiveVehicleDTO>> call = RestUtils.driverAPI.getActiveVehicles();
+        call.enqueue(new Callback<List<ActiveVehicleDTO>>() {
+
+            @Override
+            public void onResponse(Call<List<ActiveVehicleDTO>> call, Response<List<ActiveVehicleDTO>> response){
+                List<ActiveVehicleDTO> activeVehicles = response.body();
+                for (ActiveVehicleDTO vehicle : activeVehicles){
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            vehicles.put(vehicle.getVehicleId(), vehicle);
+                            Marker marker = addMarker(new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude()), "vehicle");
+                            vehicleMarkers.put(vehicle.getVehicleId(), marker);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ActiveVehicleDTO>> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+
 
 
     @Override
