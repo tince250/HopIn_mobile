@@ -202,7 +202,6 @@ public class PassengerHomeFragment extends Fragment {
                 RideService.rideInCreation.setScheduledTime(null);
             }
         });
-
         return view;
     }
 

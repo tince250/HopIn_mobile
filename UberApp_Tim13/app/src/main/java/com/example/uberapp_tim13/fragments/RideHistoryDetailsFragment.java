@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,12 +18,17 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.activities.ChatActivity;
+import com.example.uberapp_tim13.activities.CurrentRideActivity;
 import com.example.uberapp_tim13.adapters.ride_history.RatingsAdapter;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
 import com.example.uberapp_tim13.dtos.CompleteRideReviewDTO;
+import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.ReviewReturnedDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.rest.RestUtils;
+import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.ReviewService;
 import com.example.uberapp_tim13.tools.Globals;
 
@@ -34,6 +40,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RideHistoryDetailsFragment extends Fragment{
@@ -80,6 +90,30 @@ public class RideHistoryDetailsFragment extends Fragment{
                 new DriverDetailsDialog(getActivity(), ride).show();
             }
         });
+
+        view.findViewById(R.id.chatBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int otherId = Globals.user.getId() == ride.getDriver().getId()? ride.getPassengers().get(0).getId(): ride.getDriver().getId();
+                Call<InboxReturnedDTO> call = RestUtils.userApi.getRideInbox(AuthService.tokenDTO.getAccessToken(), otherId, ride.getId());
+                call.enqueue(new Callback<InboxReturnedDTO>() {
+                    @Override
+                    public void onResponse(Call<InboxReturnedDTO> call, Response<InboxReturnedDTO> response) {
+                        if (response.isSuccessful()) {
+                            Intent i = new Intent(getActivity(), ChatActivity.class);
+                            i.putExtra("inbox", response.body());
+                            startActivity(i);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<InboxReturnedDTO> call, Throwable t) {
+                        Log.d("ERROR", "Error fetching inbox");
+                    }
+                });
+            }
+        });
+
         return view;
     }
 

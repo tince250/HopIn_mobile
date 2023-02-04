@@ -58,15 +58,14 @@
                         android:id="@+id/routeTV"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/poppinsbold"
                         android:gravity="center_vertical"
                         android:paddingTop="5dp"
                         android:text="@string/routeCities"
                         android:textColor="@color/dark_blue"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
