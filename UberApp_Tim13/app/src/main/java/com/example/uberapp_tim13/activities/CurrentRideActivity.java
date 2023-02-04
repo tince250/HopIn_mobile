@@ -1,11 +1,8 @@
 package com.example.uberapp_tim13.activities;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,14 +30,9 @@ import com.example.uberapp_tim13.dialogs.PanicReasonDialog;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
-import com.example.uberapp_tim13.dtos.PanicRideDTO;
-import com.example.uberapp_tim13.dtos.RideOfferResponseDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.TimerDTO;
-import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.fragments.MapFragment;
-import com.example.uberapp_tim13.model.Ride;
-import com.example.uberapp_tim13.model.User;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
 import com.example.uberapp_tim13.services.RideService;
@@ -48,9 +40,6 @@ import com.example.uberapp_tim13.tools.Globals;
 import com.google.android.material.button.MaterialButton;
 import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -284,7 +273,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Log.d("ORDER_MESSAGE", "FINISH");
-                            addNotification();
+                            addFinishedRideNotification();
                             timer.stop();
                             try {
                                 Thread.sleep(1000);
@@ -308,6 +297,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                     arrivalTimeTV.setText("Arrived!");
                     vehicleArrivalTimeSM.disconnect();
                     vehicleArrivedSM.disconnect();
+                    addVehicleArrivedNotification();
                 }
             });
         });
@@ -410,7 +400,21 @@ public class CurrentRideActivity extends AppCompatActivity {
         });
     }
 
-    private void addNotification() {
+
+    private void addVehicleArrivedNotification() {
+        NotificationManager notificationManager = this.createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Driver has arrived.")
+                .setContentText("Vehicle is waiting at the departure.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setAutoCancel(true);
+
+        notificationManager.notify(0, builder.build());
+    }
+
+    private void addFinishedRideNotification() {
         NotificationManager notificationManager = this.createNotificationChannel();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
                 .setSmallIcon(R.drawable.logo)
