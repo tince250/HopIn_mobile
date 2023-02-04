@@ -1,6 +1,11 @@
 package com.example.uberapp_tim13.activities;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +22,7 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
@@ -215,6 +221,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Log.d("ORDER_MESSAGE", "FINISH");
+                            addNotification();
                             timer.stop();
                             try {
                                 Thread.sleep(1000);
@@ -286,5 +293,28 @@ public class CurrentRideActivity extends AppCompatActivity {
             }
         });
         finish.setEnabled(false);
+    }
+
+    private void addNotification() {
+        NotificationManager notificationManager = this.createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Ride is finished!")
+                .setContentText("You can now rate the ride and order new rides.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setAutoCancel(true);
+
+        notificationManager.notify(0, builder.build());
+    }
+
+
+    private NotificationManager createNotificationChannel() {
+        CharSequence name = "my_channel";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel("0", name, importance);
+        NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+        return notificationManager;
     }
 }
