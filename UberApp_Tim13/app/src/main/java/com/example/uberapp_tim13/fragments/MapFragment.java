@@ -26,6 +26,7 @@ import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
 import com.example.uberapp_tim13.dtos.LocationWithVehicleIdDTO;
 import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
@@ -325,7 +326,8 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                     addMarker(new LatLng(finalLocation.getLatitude(), finalLocation.getLongitude()), "here");
                 } else {
                     if (ride != null)
-                        displayRoute();
+                        displayRideRoute();
+                        displayRouteToPickup();
                 }
             }
         });
@@ -334,7 +336,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
     }
 
-    private void displayRoute() {
+    private void displayRideRoute() {
         LocationDTO loc = ride.getLocations().get(0);
         LocationNoIdDTO pickupLoc = loc.getDeparture();
         LatLng pickup = new LatLng(pickupLoc.getLatitude(), pickupLoc.getLongitude());
@@ -345,6 +347,39 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         addMarker(pickup, "pickup");
         addMarker(destination, "destination");
 
+        getPathAnDisplayOnMap(pickup, destination);
+    }
+
+    private void displayRouteToPickup() {
+        LocationDTO loc = ride.getLocations().get(0);
+        LocationNoIdDTO pickupLoc = loc.getDeparture();
+        LatLng destination = new LatLng(pickupLoc.getLatitude(), pickupLoc.getLongitude());
+        int driverId = ride.getId();
+
+        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
+                driverId);
+        call.enqueue(new Callback<VehicleDTO>() {
+
+            @Override
+            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response){
+                ActiveVehicleDTO vehicle = new ActiveVehicleDTO(response.body(), driverId);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        LatLng departure = new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude());
+                        getPathAnDisplayOnMap(departure, destination);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<VehicleDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    private void getPathAnDisplayOnMap(LatLng pickup, LatLng destination) {
         List<LatLng> path = new ArrayList();
 
         GeoApiContext context = new GeoApiContext.Builder()
@@ -409,13 +444,13 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         LatLngBounds bounds = builder.build();
 
 
-
         int padding = 120; // padding around start and end marker
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         map.animateCamera(cu);
 
         map.getUiSettings().setZoomControlsEnabled(true);
     }
+
 
     public Marker addMarker(LatLng loc, String type) {
 
