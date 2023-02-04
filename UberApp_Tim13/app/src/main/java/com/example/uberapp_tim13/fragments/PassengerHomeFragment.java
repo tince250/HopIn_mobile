@@ -199,6 +199,7 @@ public class PassengerHomeFragment extends Fragment {
         });
         mapFragment.setMarkersForActiveVehiclesOnCreate();
         mapFragment.connectToVehicleActivation();
+        mapFragment.connectToVehicleDeactivation();
         return view;
     }
 

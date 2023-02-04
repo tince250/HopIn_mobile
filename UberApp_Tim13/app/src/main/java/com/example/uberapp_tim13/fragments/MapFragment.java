@@ -481,11 +481,20 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         manager.connect();
         StompManager.stompClient.topic("/topic/vehicle/activation").subscribe(topicMessage -> {
             int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
-            this.getActivatedVehicle(driverId);
+            this.setMarkerForVehicleFromSocketIncome(driverId, true);
         });
     }
 
-    private void getActivatedVehicle(int driverId){
+    public void connectToVehicleDeactivation(){
+        StompManager manager = new StompManager();
+        manager.connect();
+        StompManager.stompClient.topic("/topic/vehicle/deactivation").subscribe(topicMessage -> {
+            int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+            this.setMarkerForVehicleFromSocketIncome(driverId, false);
+        });
+    }
+
+    private void setMarkerForVehicleFromSocketIncome(int driverId, boolean activation){
         Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
                 driverId);
         call.enqueue(new Callback<VehicleDTO>() {
@@ -493,15 +502,21 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             @Override
             public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response){
                 ActiveVehicleDTO vehicle = new ActiveVehicleDTO(response.body(), driverId);
-                if (vehicles.get(vehicle.getVehicleId()) == null){
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            vehicles.put(vehicle.getVehicleId(), vehicle);
-                            Marker marker = addMarker(new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude()), "vehicle");
-                            vehicleMarkers.put(vehicle.getVehicleId(), marker);
-                        }
-                    });
+                if (activation) {
+                    if (vehicles.get(vehicle.getVehicleId()) == null) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                vehicles.put(vehicle.getVehicleId(), vehicle);
+                                Marker marker = addMarker(new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude()), "vehicle");
+                                vehicleMarkers.put(vehicle.getVehicleId(), marker);
+                            }
+                        });
+                    }
+                } else {
+                    vehicles.remove(vehicle.getVehicleId());
+                    vehicleMarkers.get(vehicle.getVehicleId()).remove();
+                    vehicleMarkers.remove(vehicle.getVehicleId());
                 }
             }
 
