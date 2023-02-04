@@ -274,8 +274,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                         timer.setBase(SystemClock.elapsedRealtime());
                         timer.start();
 
-                        finishBtn.setVisibility(View.VISIBLE);
-                        cancelBtn.setVisibility(View.GONE);
+
                     }
                 });
             } else {
@@ -302,7 +301,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void subscribeToVehicleArrived(){
-        vehicleArrivedSM.stompClient.topic("/topic/vehicle-arrival/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+        vehicleArrivedSM.stompClient.topic("/topic/vehicle-arrival/" + ride.getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -315,7 +314,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     }
 
     private void subscribeToVehicleArrivalTime(){
-        vehicleArrivalTimeSM.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+        vehicleArrivalTimeSM.stompClient.topic("/topic/arrival-time/" + ride.getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -342,14 +341,21 @@ public class CurrentRideActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startBtn.setEnabled(false);
-                timer.setBase(SystemClock.elapsedRealtime());
                 finishBtn.setEnabled(true);
+
+                Log.d("ORDER_MESSAGE", "START");
+                arrivalTimeTitleTV.setVisibility(View.GONE);
+                arrivalTimeTV.setVisibility(View.GONE);
+                timePassedTV.setVisibility(View.VISIBLE);
+                timer.setBase(SystemClock.elapsedRealtime());
 
                 Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
                     @Override
                     public void onResponse(Call<RideReturnedDTO> call, Response<RideReturnedDTO> response) {
                         timer.start();
+                        finishBtn.setVisibility(View.VISIBLE);
+                        cancelBtn.setVisibility(View.GONE);
                     }
 
                     @Override
