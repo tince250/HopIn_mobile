@@ -3,6 +3,7 @@ package com.example.uberapp_tim13.activities;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -53,6 +54,7 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private Chronometer timer;
     private ImageView chatBtn;
+    private ImageView callBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,24 @@ public class CurrentRideActivity extends AppCompatActivity {
                 i.putExtra("rideId", ride.getId());
 
                 startActivity(i);
+            }
+        });
+
+        callBtn = findViewById(R.id.callBtn);
+        callBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String phoneNumber = "";
+                if (Globals.userRole.equals("driver")){
+                    phoneNumber = ride.getPassengers().get(0).getTelephoneNumber();
+                } else {
+                    phoneNumber = ride.getDriver().getTelephoneNumber();
+                }
+                intent.setData(Uri.parse("tel:" + phoneNumber));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
 

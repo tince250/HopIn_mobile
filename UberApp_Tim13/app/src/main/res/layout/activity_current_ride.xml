@@ -16,13 +16,26 @@
             android:layout_marginHorizontal="20dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/chatBtn"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/message_square"
-                android:background="@drawable/circle_background"
-                android:layout_gravity="end" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/chatBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/message_square"
+                    android:background="@drawable/circle_background"
+                    android:layout_gravity="end"
+                    android:layout_toLeftOf="@+id/callBtn"/>
+                <ImageView
+                    android:id="@+id/callBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/phone"
+                    android:background="@drawable/circle_background"
+                    android:layout_gravity="end"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/map_container_current"

@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class UserInRideDTO implements Serializable {
 	private int id;
 	private String email;
+	private String telephoneNumber;
 	
 	public UserInRideDTO() {}
 	
@@ -36,5 +37,8 @@ public class UserInRideDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public String getTelephoneNumber() {
+		return telephoneNumber;
+	}
 }
