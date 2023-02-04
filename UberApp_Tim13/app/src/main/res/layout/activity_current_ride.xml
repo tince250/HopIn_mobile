@@ -40,10 +40,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/map_container_current"
-                android:layout_height="180dp"
+                android:layout_height="220dp"
                 android:layout_width="fill_parent"
                 android:scaleType="fitXY"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 app:cardCornerRadius="10dp"/>
 
             <androidx.cardview.widget.CardView

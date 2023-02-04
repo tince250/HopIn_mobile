@@ -173,6 +173,27 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp">
+
+            <TextView
+                android:id="@+id/scheduledTV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/time"
+                app:drawableLeftCompat="@drawable/ic_time_24"
+                android:drawablePadding="2dp"
+                android:textColor="@color/dark_blue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
         <RelativeLayout android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"

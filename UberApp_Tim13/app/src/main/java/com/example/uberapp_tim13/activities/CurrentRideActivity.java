@@ -196,14 +196,12 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private void fitActivityToRole() {
         LinearLayout startFinishBtns = findViewById(R.id.start_finish_buttons);
-        Button inconsistentBtn = findViewById(R.id.inconsistentBtn);
         View driverDetails = findViewById(R.id.driverDetailsCardCV);
         View passDetails = findViewById(R.id.passDetailsCardLL);
         switch (Globals.userRole) {
             case "driver":
                 callBtn.setVisibility(View.GONE);
                 driverDetails.setVisibility(View.GONE);
-                inconsistentBtn.setVisibility(View.GONE);
                 subscribeToVehicleArrivalTime();
                 subscribeToVehicleArrived();
                 startFinishBtns.setVisibility(View.VISIBLE);
@@ -235,7 +233,6 @@ public class CurrentRideActivity extends AppCompatActivity {
                         new DriverDetailsDialog(context, ride).show();
                     }
                 });
-                inconsistentBtn.setVisibility(View.VISIBLE);
                 break;
         }
 
