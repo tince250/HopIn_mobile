@@ -334,13 +334,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
     }
 
-
-
-    public void initializeVehiclesOnMap(){
-        this.setMarkersForActiveVehiclesOnCreate();
-        this.connectToVehiclesOnMapSockets();
-    }
-
     private void displayRoute() {
         LocationDTO loc = ride.getLocations().get(0);
         LocationNoIdDTO pickupLoc = loc.getDeparture();
@@ -451,7 +444,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         if (!type.equals("vehicle"))
             markerIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
         else
-            markerIcon = (BitmapDescriptorFactory.fromResource(R.drawable.vehicle));
+            markerIcon = getCarIcon("green");
 
         marker = map.addMarker(new MarkerOptions()
                 .title(title)
@@ -468,6 +461,24 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             marker.setAnchor(0.5f, 0.5f);
         }
         return marker;
+    }
+
+    private BitmapDescriptor getCarIcon(String color) {
+        switch (color) {
+            case "green":
+                return BitmapDescriptorFactory.fromResource(R.drawable.green_car);
+            case "red":
+                return BitmapDescriptorFactory.fromResource(R.drawable.red_car);
+            case "orange":
+                return BitmapDescriptorFactory.fromResource(R.drawable.orange_car);
+        }
+        return null;
+    }
+
+    public void initializeVehiclesOnMap(){
+        this.setMarkersForActiveVehiclesOnCreate();
+        this.connectToVehiclesOnMapSockets();
+        this.connectToVehiclesRideStatusSockets();
     }
 
     public void setMarkersForActiveVehiclesOnCreate(){
@@ -491,6 +502,84 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
             @Override
             public void onFailure(Call<List<ActiveVehicleDTO>> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    public void connectToVehiclesRideStatusSockets(){
+        this.connectToRecieveRidePending();
+        this.connectToRecieveRideAccepted();
+        this.connectToRecieveRideCanceled();
+        this.connectToRecieveRideFinished();
+    }
+
+    private void connectToRecieveRidePending(){
+        StompManager.stompClient.topic("/topic/ride-pending").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "orange");
+                }
+            });
+        });
+    }
+
+    private void connectToRecieveRideAccepted(){
+        StompManager.stompClient.topic("/topic/ride-accept").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "red");
+                }
+            });
+        });
+    }
+
+    private void connectToRecieveRideCanceled() {
+        StompManager.stompClient.topic("/topic/ride-cancel").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "green");
+                }
+            });
+        });
+    }
+
+    private void connectToRecieveRideFinished() {
+        StompManager.stompClient.topic("/topic/ride-finish").subscribe(topicMessage -> {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+                    changeVehicleColor(driverId, "green");
+                }
+            });
+        });
+    }
+
+    public void changeVehicleColor(int driverId, String color) {
+        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
+                driverId);
+        call.enqueue(new Callback<VehicleDTO>() {
+
+            @Override
+            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response) {
+                int id = response.body().getId();
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        vehicleMarkers.get(id).setIcon(getCarIcon(color));
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<VehicleDTO> call, Throwable t) {
                 Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });
