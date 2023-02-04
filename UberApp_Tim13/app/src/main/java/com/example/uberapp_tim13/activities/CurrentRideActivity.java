@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,6 +61,9 @@ public class CurrentRideActivity extends AppCompatActivity {
     private MaterialButton startBtn;
     private MaterialButton finishBtn;
     private MaterialButton cancelBtn;
+    private Chronometer timePassedTV;
+    private TextView arrivalTimeTitleTV;
+    private TextView arrivalTimeTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,11 @@ public class CurrentRideActivity extends AppCompatActivity {
         finishBtn = findViewById(R.id.finishBtn);
         cancelBtn = findViewById(R.id.cancelBtn);
         chatBtn = findViewById(R.id.chatBtn);
+
+        timePassedTV = findViewById(R.id.timePassedTV);
+        arrivalTimeTitleTV = findViewById(R.id.arrivalTimeTitleTV);
+        arrivalTimeTV = findViewById(R.id.arrivalTimeTV);
+
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,7 +193,7 @@ public class CurrentRideActivity extends AppCompatActivity {
             case "driver":
                 driverDetails.setVisibility(View.GONE);
                 inconsistentBtn.setVisibility(View.GONE);
-
+                subscribeToVehicleArrivalTime();
                 startFinishBtns.setVisibility(View.VISIBLE);
                 addListenersToStartFinishBtns();
 
@@ -200,7 +209,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 subscribeToStartFinishMessages();
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);
-
+                subscribeToVehicleArrivalTime();
                 if (Globals.userId != ride.getPassengers().get(0).getId()) {
                     chatBtn.setEnabled(false);
                 }
@@ -232,8 +241,15 @@ public class CurrentRideActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.d("ORDER_MESSAGE", "START");
+                        arrivalTimeTitleTV.setVisibility(View.GONE);
+                        arrivalTimeTV.setVisibility(View.GONE);
+                        timePassedTV.setVisibility(View.VISIBLE);
+
+                        //TODO: unsubscribe from arrival time sockets using unsubscribe method for stomp manager when driver started the ride. You should set visibility to gone or visible
+
                         timer.setBase(SystemClock.elapsedRealtime());
                         timer.start();
+
                         finishBtn.setVisibility(View.VISIBLE);
                         cancelBtn.setVisibility(View.GONE);
                     }
@@ -260,6 +276,27 @@ public class CurrentRideActivity extends AppCompatActivity {
         });
     }
 
+    private void subscribeToVehicleArrivalTime(){
+        StompManager.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    arrivalTimeTV.setText(formatTime(Integer.parseInt(topicMessage.getPayload())));
+                }
+            });
+        });
+    }
+
+    private String formatTime(int timer){
+        double timerr = Math.floor(timer);
+        double minutes = Math.floor(timerr/60);
+        double seconds = timerr - minutes*60;
+        if (minutes > 0) {
+            return minutes + "min" + " " + seconds + "s";
+        } else {
+            return seconds + "s";
+        }
+    }
     private void addListenersToStartFinishBtns() {
         startBtn.setEnabled(true);
         startBtn.setOnClickListener(new View.OnClickListener() {

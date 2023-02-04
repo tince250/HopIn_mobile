@@ -95,7 +95,33 @@
                             android:layout_toEndOf="@id/timerCardCV"
                             android:textSize="18sp"
                             android:textColor="@color/black"
+                            android:visibility="gone"
                             android:textFontWeight="700"  />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/arrivalTimeTitleTV"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="20dp" android:textSize="14sp"
+                            android:layout_toEndOf="@id/timerCardCV"
+                            android:textColor="@color/black"
+                            android:textFontWeight="700"
+                            android:text="Arriving in:"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/arrivalTimeTV"
+                            android:layout_marginRight="20dp"
+                            android:layout_below="@id/arrivalTimeTitleTV"
+                            android:layout_toEndOf="@id/timerCardCV"
+                            android:textSize="12sp"
+                            android:textColor="@color/dark_gray"
+                            android:text="50s"
+                            android:textStyle="bold"/>
+
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -165,7 +191,7 @@
                             android:layout_toEndOf="@id/passImageCardCV"
                             android:textSize="12sp"
                             android:textColor="@color/dark_gray"
-                            android:text="Details about passangers"
+                            android:text="Details about passengers"
                             android:textStyle="bold"/>
                     </RelativeLayout>
                 </LinearLayout>
