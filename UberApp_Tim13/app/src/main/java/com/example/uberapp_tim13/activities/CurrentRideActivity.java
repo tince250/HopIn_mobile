@@ -3,6 +3,7 @@ package com.example.uberapp_tim13.activities;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,11 +15,13 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uberapp_tim13.R;
+import com.example.uberapp_tim13.dialogs.DeclineReasonDialog;
 import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
 import com.example.uberapp_tim13.dialogs.PanicReasonDialog;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
@@ -26,6 +29,7 @@ import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.TimerDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.fragments.MapFragment;
 import com.example.uberapp_tim13.model.Ride;
@@ -54,6 +58,16 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private Chronometer timer;
     private ImageView chatBtn;
+    private ImageView callBtn;
+
+    private MaterialButton startBtn;
+    private MaterialButton finishBtn;
+    private MaterialButton cancelBtn;
+    private Chronometer timePassedTV;
+    private TextView arrivalTimeTitleTV;
+    private TextView arrivalTimeTV;
+    private StompManager vehicleArrivalTimeSM;
+    private StompManager vehicleArrivedSM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +86,18 @@ public class CurrentRideActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_current_ride);
 
+        startBtn = findViewById(R.id.startBtn);
+        finishBtn = findViewById(R.id.finishBtn);
+        cancelBtn = findViewById(R.id.cancelBtn);
         chatBtn = findViewById(R.id.chatBtn);
+
+        timePassedTV = findViewById(R.id.timePassedTV);
+        arrivalTimeTitleTV = findViewById(R.id.arrivalTimeTitleTV);
+        arrivalTimeTV = findViewById(R.id.arrivalTimeTV);
+
+        vehicleArrivalTimeSM = new StompManager();
+        vehicleArrivedSM = new StompManager();
+
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +118,24 @@ public class CurrentRideActivity extends AppCompatActivity {
                         Log.d("ERROR", "Error fetching inbox");
                     }
                 });
+            }
+        });
+
+        callBtn = findViewById(R.id.callBtn);
+        callBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String phoneNumber = "";
+                if (Globals.userRole.equals("driver")){
+                    phoneNumber = ride.getPassengers().get(0).getTelephoneNumber();
+                } else {
+                    phoneNumber = ride.getDriver().getTelephoneNumber();
+                }
+                intent.setData(Uri.parse("tel:" + phoneNumber));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
 
@@ -164,7 +207,8 @@ public class CurrentRideActivity extends AppCompatActivity {
             case "driver":
                 driverDetails.setVisibility(View.GONE);
                 inconsistentBtn.setVisibility(View.GONE);
-
+                subscribeToVehicleArrivalTime();
+                subscribeToVehicleArrived();
                 startFinishBtns.setVisibility(View.VISIBLE);
                 addListenersToStartFinishBtns();
 
@@ -180,7 +224,8 @@ public class CurrentRideActivity extends AppCompatActivity {
                 subscribeToStartFinishMessages();
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);
-
+                subscribeToVehicleArrivalTime();
+                subscribeToVehicleArrived();
                 if (Globals.userId != ride.getPassengers().get(0).getId()) {
                     chatBtn.setEnabled(false);
                 }
@@ -212,8 +257,17 @@ public class CurrentRideActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.d("ORDER_MESSAGE", "START");
+                        arrivalTimeTitleTV.setVisibility(View.GONE);
+                        arrivalTimeTV.setVisibility(View.GONE);
+                        timePassedTV.setVisibility(View.VISIBLE);
+
+                        //TODO: unsubscribe from arrival time sockets using unsubscribe method for stomp manager when driver started the ride. You should set visibility to gone or visible
+
                         timer.setBase(SystemClock.elapsedRealtime());
                         timer.start();
+
+                        finishBtn.setVisibility(View.VISIBLE);
+                        cancelBtn.setVisibility(View.GONE);
                     }
                 });
             } else {
@@ -238,17 +292,49 @@ public class CurrentRideActivity extends AppCompatActivity {
         });
     }
 
-    private void addListenersToStartFinishBtns() {
-        Button start = findViewById(R.id.startBtn);
-        Button finish = findViewById(R.id.finishBtn);
+    private void subscribeToVehicleArrived(){
+        vehicleArrivedSM.stompClient.topic("/topic/vehicle-arrival/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    arrivalTimeTV.setText("Arrived!");
+                    vehicleArrivalTimeSM.disconnect();
+                    vehicleArrivedSM.disconnect();
+                }
+            });
+        });
+    }
 
-        start.setEnabled(true);
-        start.setOnClickListener(new View.OnClickListener() {
+    private void subscribeToVehicleArrivalTime(){
+        vehicleArrivalTimeSM.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    TimerDTO timerDTO = Globals.gson.fromJson(topicMessage.getPayload(), TimerDTO.class);
+                    arrivalTimeTV.setText(formatTime(timerDTO.timer));
+                }
+            });
+        });
+    }
+
+    private String formatTime(double timer){
+        double timerr = Math.floor(timer);
+        double minutes = Math.floor(timerr/60);
+        double seconds = timerr - minutes*60;
+        if (minutes > 0) {
+            return minutes + "min" + " " + seconds + "s";
+        } else {
+            return seconds + "s";
+        }
+    }
+    private void addListenersToStartFinishBtns() {
+        startBtn.setEnabled(true);
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start.setEnabled(false);
+                startBtn.setEnabled(false);
                 timer.setBase(SystemClock.elapsedRealtime());
-                finish.setEnabled(true);
+                finishBtn.setEnabled(true);
 
                 Call<RideReturnedDTO> call = RestUtils.rideAPI.startRide(AuthService.tokenDTO.getAccessToken(), ride.getId());
                 call.enqueue(new Callback<RideReturnedDTO>() {
@@ -265,7 +351,7 @@ public class CurrentRideActivity extends AppCompatActivity {
             }
         });
 
-        finish.setOnClickListener(new View.OnClickListener() {
+        finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 timer.stop();
@@ -293,6 +379,14 @@ public class CurrentRideActivity extends AppCompatActivity {
                 });
             }
         });
-        finish.setEnabled(false);
+        finishBtn.setEnabled(false);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timer.stop();
+                new DeclineReasonDialog(CurrentRideActivity.this, RideService.returnedRide.getId()).show();
+            }
+        });
     }
 }
