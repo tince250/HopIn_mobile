@@ -59,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
         inbox = (InboxReturnedDTO) extras.get("inbox");
         UserReturnedDTO recipient = inbox.getFirstUser().getId() == Globals.user.getId() ? inbox.getSecondUser() : inbox.getFirstUser();
         String suffix = "";
-        if (inbox.getType().equals("RIDE")) {
+        if (inbox.getType().equals("RIDE") && !Globals.userRole.equals("driver")) {
             suffix = " (driver)";
         }
         if (inbox.getType().equals("SUPPORT"))
@@ -96,6 +96,8 @@ public class ChatActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter message!",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
                 Log.d("PORUKE", "USAO");
                 allMessages.add(0, new Message(messageET.getText().toString(), 1, LocalDateTime.of(LocalDate.now(), LocalTime.now()).toString()));
                 Log.d("PORUKE", allMessages.toString());
@@ -107,6 +109,7 @@ public class ChatActivity extends AppCompatActivity {
                 intentUserService.putExtra("method", "sendMessage");
                 intentUserService.putExtra("message", message);
                 startService(intentUserService);
+                messageET.setText("");
             }
         });
     }
