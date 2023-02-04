@@ -160,11 +160,13 @@ public class AuthService extends Service {
                 if (response.isSuccessful()) {
                     DriverMainActivity.workingHours = response.body();
                     Globals.isActive = true;
-                    Log.d("hours", String.valueOf(response.code()));
-                    Log.d("hours", DriverMainActivity.workingHours.toString());
+                    sendActiveResponse(true);
+                    Log.d("hourss", String.valueOf(response.code()));
+                    Log.d("hourss", DriverMainActivity.workingHours.toString());
 
                 } else {
                     Globals.isActive = false;
+                    sendActiveResponse(false);
                     Log.d("hours", String.valueOf(response.code()));
                     Log.d("hours", String.valueOf(response.message()));
                     Log.d("hours", String.valueOf(response));
@@ -177,6 +179,12 @@ public class AuthService extends Service {
                 Log.d("EVOME", t.toString());
             }
         });
+    }
+
+    private void sendActiveResponse(boolean res) {
+        Intent intent = new Intent("isActive");
+        intent.putExtra("active", res);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     @Nullable

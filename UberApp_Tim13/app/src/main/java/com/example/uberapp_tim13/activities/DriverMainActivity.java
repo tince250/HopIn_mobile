@@ -1,8 +1,12 @@
 package com.example.uberapp_tim13.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -44,6 +48,7 @@ import retrofit2.Response;
 public class DriverMainActivity extends AppCompatActivity {
 
     public static WorkingHoursDTO workingHours;
+    Switch switchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +87,13 @@ public class DriverMainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.driver_upper_menu, menu);
-
+        setBroadcast();
         MenuItem switchItem = menu.findItem(R.id.activeToggle);
         switchItem.setActionView(R.layout.toggle_button_bar);
-        final Switch switchBtn = (Switch) menu.findItem(R.id.activeToggle).getActionView().findViewById(R.id.activeSwitch);
-        if (!Globals.isActive) {
-            switchBtn.setChecked(false);
-        }
+        switchBtn = (Switch) menu.findItem(R.id.activeToggle).getActionView().findViewById(R.id.activeSwitch);
+//        if (!Globals.isActive) {
+//            switchBtn.setChecked(false);
+//        }
         switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -115,7 +120,7 @@ public class DriverMainActivity extends AppCompatActivity {
                             Toast.makeText(DriverMainActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
                         }
                     });
-                    Toast.makeText(getBaseContext(), "You are ready!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "You are ready!", Toast.LENGTH_SHORT).show();
                 } else {
                     WorkingHoursEndDTO end = new WorkingHoursEndDTO(LocalDateTime.now().withNano(0).toString());
                     Call<WorkingHoursDTO> call = RestUtils.driverAPI.updateWorkingHours(AuthService.tokenDTO.getAccessToken(), workingHours.getId(), end);
@@ -137,7 +142,7 @@ public class DriverMainActivity extends AppCompatActivity {
                             Toast.makeText(DriverMainActivity.this, "An error happened while trying to fetch rides :(", Toast.LENGTH_LONG);
                         }
                     });
-                    Toast.makeText(getBaseContext(), "You're inactive, thanks for your effort.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "You're inactive, thanks for your effort.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -145,6 +150,21 @@ public class DriverMainActivity extends AppCompatActivity {
 
         return true;
     }
+
+    public void setBroadcast() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                boolean active = (boolean) intent.getExtras().get("active");
+                if (!active) {
+                    switchBtn.setChecked(true);
+                }
+            }
+        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("isActive"));
+
+    }
+
 
     public void setBottomNavigationBar() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
