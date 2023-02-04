@@ -77,6 +77,15 @@
             android:textColor="@color/dark_blue"
             android:textSize="15sp" />
 
+        <ImageView
+            android:id="@+id/callBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/phone"
+            android:background="@drawable/circle_background"
+            android:layout_alignParentRight="true"/>
+
 
     </RelativeLayout>
 
