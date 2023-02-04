@@ -3,8 +3,11 @@ package com.example.uberapp_tim13.fragments;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -14,14 +17,22 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.example.uberapp_tim13.BuildConfig;
+import com.example.uberapp_tim13.activities.AcceptanceRideActivity;
+import com.example.uberapp_tim13.activities.PassengerMainActivity;
 import com.example.uberapp_tim13.dialogs.LocationDialog;
 import com.example.uberapp_tim13.dtos.ActiveVehicleDTO;
 import com.example.uberapp_tim13.dtos.LocationDTO;
 import com.example.uberapp_tim13.dtos.LocationNoIdDTO;
+import com.example.uberapp_tim13.dtos.RideInviteDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.UserReturnedDTO;
 import com.example.uberapp_tim13.dtos.VehicleDTO;
 import com.example.uberapp_tim13.rest.RestUtils;
 import com.example.uberapp_tim13.services.AuthService;
+import com.example.uberapp_tim13.services.DriverService;
+import com.example.uberapp_tim13.services.UserService;
+import com.example.uberapp_tim13.tools.Globals;
+import com.example.uberapp_tim13.tools.StompManager;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +44,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -61,6 +73,7 @@ import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.EncodedPolyline;
+import com.google.maps.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -433,7 +446,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(loc).zoom(10).build();
 
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        //map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         return marker;
     }
 
@@ -458,6 +471,42 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
             @Override
             public void onFailure(Call<List<ActiveVehicleDTO>> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
+            }
+        });
+    }
+
+    public void connectToVehicleActivation() {
+        StompManager manager = new StompManager();
+        manager.connect();
+        StompManager.stompClient.topic("/topic/vehicle/activation").subscribe(topicMessage -> {
+            int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
+            this.getActivatedVehicle(driverId);
+        });
+    }
+
+    private void getActivatedVehicle(int driverId){
+        Call<VehicleDTO> call = RestUtils.driverAPI.getVehicle(AuthService.tokenDTO.getAccessToken(),
+                driverId);
+        call.enqueue(new Callback<VehicleDTO>() {
+
+            @Override
+            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response){
+                ActiveVehicleDTO vehicle = new ActiveVehicleDTO(response.body(), driverId);
+                if (vehicles.get(vehicle.getVehicleId()) == null){
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            vehicles.put(vehicle.getVehicleId(), vehicle);
+                            Marker marker = addMarker(new LatLng(vehicle.getCurrentLocation().getLatitude(), vehicle.getCurrentLocation().getLongitude()), "vehicle");
+                            vehicleMarkers.put(vehicle.getVehicleId(), marker);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VehicleDTO> call, Throwable t) {
                 Log.d("REZ", t.getMessage() != null ? t.getMessage() : "error");
             }
         });

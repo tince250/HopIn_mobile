@@ -6,6 +6,13 @@ public class ActiveVehicleDTO {
     private LocationNoIdDTO currentLocation;
     private String status;
 
+    public ActiveVehicleDTO(VehicleDTO vehicleDTO, int driverId){
+        this.vehicleId = vehicleDTO.getId();
+        this.driverId = driverId;
+        this.currentLocation = vehicleDTO.getCurrentLocation();
+        this.status = "";
+    }
+
     public ActiveVehicleDTO(int vehicleId, int driverId, LocationNoIdDTO currentLocation, String status) {
         this.vehicleId = vehicleId;
         this.driverId = driverId;
