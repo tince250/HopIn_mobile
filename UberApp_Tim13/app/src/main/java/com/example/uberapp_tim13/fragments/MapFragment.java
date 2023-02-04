@@ -89,6 +89,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private LocationManager locationManager;
+    StompManager manager;
     private String provider;
     private SupportMapFragment mMapFragment;
     private AlertDialog dialog;
@@ -128,6 +129,11 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         setHasOptionsMenu(true);
         View v = inflater.inflate(R.layout.fragment_map, container, false);
         createMapFragmentAndInflate();
+        manager = new StompManager();
+        manager.connect();
+        this.setMarkersForActiveVehiclesOnCreate();
+        this.connectToVehiclesOnMapSockets();
+
         return v;
     }
 
@@ -443,10 +449,12 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                 .position(loc));
         marker.setFlat(true);
 
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(loc).zoom(10).build();
+        if (!type.equals("vehicle")) {
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(loc).zoom(10).build();
 
-        //map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
         return marker;
     }
 
@@ -476,16 +484,19 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         });
     }
 
-    public void connectToVehicleActivation() {
-        StompManager manager = new StompManager();
-        manager.connect();
+    public void connectToVehiclesOnMapSockets(){
+        this.connectToVehicleActivation();
+        this.connectToVehicleDeactivation();
+    }
+
+    private void connectToVehicleActivation() {
         StompManager.stompClient.topic("/topic/vehicle/activation").subscribe(topicMessage -> {
             int driverId = Globals.gson.fromJson(topicMessage.getPayload(), Integer.class);
             this.setMarkerForVehicleFromSocketIncome(driverId, true);
         });
     }
 
-    public void connectToVehicleDeactivation(){
+    private void connectToVehicleDeactivation(){
         StompManager manager = new StompManager();
         manager.connect();
         StompManager.stompClient.topic("/topic/vehicle/deactivation").subscribe(topicMessage -> {
