@@ -82,6 +82,15 @@ public class InboxFragment extends Fragment {
                 })
         );
 
+        view.findViewById(R.id.addInboxFB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("INBOKSI", "KLIK FLOATIING");
+                newChatDialog.show();
+            }
+        });
+
+
         searchET = view.findViewById(R.id.searchET);
         searchET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

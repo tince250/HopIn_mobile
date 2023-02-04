@@ -11,6 +11,7 @@ public class InboxReturnedDTO implements Serializable {
     private String type;
     List<MessageReturnedDTO> messages = new ArrayList<MessageReturnedDTO>();
     private String lastMessage;
+    private int rideId;
 
     public InboxReturnedDTO(int id, UserReturnedDTO firstUser, UserReturnedDTO secondUser, String type, List<MessageReturnedDTO> messages, String lastMessage) {
         this.id = id;
@@ -19,6 +20,16 @@ public class InboxReturnedDTO implements Serializable {
         this.type = type;
         this.messages = messages;
         this.lastMessage = lastMessage;
+    }
+
+    public InboxReturnedDTO(int id, UserReturnedDTO firstUser, UserReturnedDTO secondUser, String type, List<MessageReturnedDTO> messages, String lastMessage, int rideId) {
+        this.id = id;
+        this.firstUser = firstUser;
+        this.secondUser = secondUser;
+        this.type = type;
+        this.messages = messages;
+        this.lastMessage = lastMessage;
+        this.rideId = rideId;
     }
 
     public int getId() {
@@ -67,5 +78,13 @@ public class InboxReturnedDTO implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getRideId() {
+        return rideId;
+    }
+
+    public void setRideId(int rideId) {
+        this.rideId = rideId;
     }
 }

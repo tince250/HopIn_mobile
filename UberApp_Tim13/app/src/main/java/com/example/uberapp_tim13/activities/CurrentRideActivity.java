@@ -23,6 +23,7 @@ import com.example.uberapp_tim13.dialogs.DriverDetailsDialog;
 import com.example.uberapp_tim13.dialogs.PanicReasonDialog;
 import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
+import com.example.uberapp_tim13.dtos.InboxReturnedDTO;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
@@ -75,16 +76,23 @@ public class CurrentRideActivity extends AppCompatActivity {
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(CurrentRideActivity.this, ChatActivity.class);
-                if(Globals.userRole.equals("driver")) {
-                    i.putExtra("receiverId", ride.getPassengers().get(0).getId());
-                } else {
-                    i.putExtra("receiverId", ride.getDriver().getId());
-                }
+                int otherId = Globals.user.getId() == ride.getDriver().getId()? ride.getPassengers().get(0).getId(): ride.getDriver().getId();
+                Call<InboxReturnedDTO> call = RestUtils.userApi.getRideInbox(AuthService.tokenDTO.getAccessToken(), otherId, ride.getId());
+                call.enqueue(new Callback<InboxReturnedDTO>() {
+                    @Override
+                    public void onResponse(Call<InboxReturnedDTO> call, Response<InboxReturnedDTO> response) {
+                        if (response.isSuccessful()) {
+                            Intent i = new Intent(CurrentRideActivity.this, ChatActivity.class);
+                            i.putExtra("inbox", response.body());
+                            startActivity(i);
+                        }
+                    }
 
-                i.putExtra("rideId", ride.getId());
-
-                startActivity(i);
+                    @Override
+                    public void onFailure(Call<InboxReturnedDTO> call, Throwable t) {
+                        Log.d("ERROR", "Error fetching inbox");
+                    }
+                });
             }
         });
 
