@@ -85,7 +85,7 @@ public class AcceptanceRideActivity extends AppCompatActivity {
         if (ride.getScheduledTime() != null) {
             ((TextView)findViewById(R.id.scheduledTV)).append("" + Utils.formatDate(ride.getScheduledTime()));
         } else {
-            ((TextView)findViewById(R.id.scheduledTV)).append("asap");
+            ((TextView)findViewById(R.id.scheduledTV)).append(" asap");
         }
         ((TextView)findViewById(R.id.passengersTV)).append("" + size);
         ((TextView)findViewById(R.id.durationTV)).append(ride.getDuration() + "");
