@@ -28,6 +28,7 @@ import com.example.uberapp_tim13.dialogs.PassengerDetailsDialog;
 import com.example.uberapp_tim13.dialogs.RateRideDialog;
 import com.example.uberapp_tim13.dtos.PanicRideDTO;
 import com.example.uberapp_tim13.dtos.RideReturnedDTO;
+import com.example.uberapp_tim13.dtos.TimerDTO;
 import com.example.uberapp_tim13.dtos.UserInRideDTO;
 import com.example.uberapp_tim13.fragments.MapFragment;
 import com.example.uberapp_tim13.model.Ride;
@@ -194,6 +195,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 driverDetails.setVisibility(View.GONE);
                 inconsistentBtn.setVisibility(View.GONE);
                 subscribeToVehicleArrivalTime();
+                subscribeToVehicleArrived();
                 startFinishBtns.setVisibility(View.VISIBLE);
                 addListenersToStartFinishBtns();
 
@@ -210,6 +212,7 @@ public class CurrentRideActivity extends AppCompatActivity {
                 passDetails.setVisibility(View.GONE);
                 startFinishBtns.setVisibility(View.GONE);
                 subscribeToVehicleArrivalTime();
+                subscribeToVehicleArrived();
                 if (Globals.userId != ride.getPassengers().get(0).getId()) {
                     chatBtn.setEnabled(false);
                 }
@@ -276,18 +279,30 @@ public class CurrentRideActivity extends AppCompatActivity {
         });
     }
 
-    private void subscribeToVehicleArrivalTime(){
-        StompManager.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+    private void subscribeToVehicleArrived(){
+        StompManager.stompClient.topic("/topic/vehicle-arrival/" + ride.getDriver().getId()).subscribe(topicMessage -> {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    arrivalTimeTV.setText(formatTime(Integer.parseInt(topicMessage.getPayload())));
+                    arrivalTimeTV.setText("Arrived!");
                 }
             });
         });
     }
 
-    private String formatTime(int timer){
+    private void subscribeToVehicleArrivalTime(){
+        StompManager.stompClient.topic("/topic/arrival-time/" + ride.getDriver().getId()).subscribe(topicMessage -> {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    TimerDTO timerDTO = Globals.gson.fromJson(topicMessage.getPayload(), TimerDTO.class);
+                    arrivalTimeTV.setText(formatTime(timerDTO.timer));
+                }
+            });
+        });
+    }
+
+    private String formatTime(double timer){
         double timerr = Math.floor(timer);
         double minutes = Math.floor(timerr/60);
         double seconds = timerr - minutes*60;
