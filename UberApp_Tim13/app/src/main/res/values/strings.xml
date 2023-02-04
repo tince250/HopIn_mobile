@@ -181,5 +181,10 @@
     <string name="newChat">Compose new message</string>
     <string name="composeMessage">Message...</string>
     <string name="emailRecipient">Recipient email...</string>
+    <string name="ride">RIDE</string>
+    <string name="close">close</string>
+    <string name="dialogAcceptedRideInfo">Ride is accepted. Redirecting to the current ride page.</string>
+    <string name="dialogRideNotFoundInfo">Sorry, we didn\'t find proper ride for you. Please, try again later.</string>
+    <string name="dialogRideFinishedInfo">You have arrived at your destination. Thank you for HoppingIn.</string>
 
 </resources>
