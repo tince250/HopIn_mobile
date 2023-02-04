@@ -1,6 +1,9 @@
 package com.example.uberapp_tim13.adapters.invited_passengers;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,20 +11,24 @@ import android.widget.TextView;
 
 import com.example.uberapp_tim13.R;
 import com.example.uberapp_tim13.dtos.UserReturnedDTO;
+import com.example.uberapp_tim13.tools.Globals;
 
 import java.util.List;
 
 public class InvitedPassengersAdapter extends BaseAdapter {
+
+    private Context context;
 
     private Activity activity;
     private List<UserReturnedDTO> users;
     private TextView pressedName;
     private List<Boolean> accepted;
 
-    public InvitedPassengersAdapter(Activity activity, List<UserReturnedDTO> users, List<Boolean> accepted) {
+    public InvitedPassengersAdapter(Activity activity, List<UserReturnedDTO> users, List<Boolean> accepted, Context context) {
         this.activity = activity;
         this.users = users;
         this.accepted = accepted;
+        this.context = context;
     }
 
     @Override
@@ -63,6 +70,18 @@ public class InvitedPassengersAdapter extends BaseAdapter {
             view_new.findViewById(R.id.deleteItemBtn).setVisibility(View.GONE);
             view_new.findViewById(R.id.declinedItemBtn).setVisibility(View.VISIBLE);
         }
+
+        view_new.findViewById(R.id.callBtn).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String phoneNumber = users.get(i).getTelephoneNumber();
+                intent.setData(Uri.parse("tel:" + phoneNumber));
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                }
+            }
+        });
 
         return view_new;
     }
